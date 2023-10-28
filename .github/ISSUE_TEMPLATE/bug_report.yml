@@ -37,10 +37,12 @@ body:
       value: |
         ### Screenshots or Logs
         If applicable, add screenshots or logs to help explain the problem.
-  - type: input
+  - type: textarea
     id: screenshots
     attributes:
       label: Attach Screenshots or Logs
+      description: |
+        You can drag and drop images or paste logs directly into the text area.
       placeholder: "Upload any relevant screenshots or paste logs here."
     validations:
       required: false
@@ -56,16 +58,10 @@ body:
         - Safari
     validations:
       required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ### Additional Information
-        Provide any additional information that might be relevant.
   - type: textarea
     id: additional-info
     attributes:
-      label: Additional Context
+      label: Additional Informatiom
       placeholder: "Any additional information that might be helpful in resolving the bug."
     validations:
       required: false

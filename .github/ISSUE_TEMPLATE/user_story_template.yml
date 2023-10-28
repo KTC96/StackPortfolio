@@ -6,15 +6,13 @@ projects: ["stephendawsondev/5"]
 assignees:
   - stephendawsondev
 body:
-  - type: markdown
+  - type: textarea
+    id: user-story
     attributes:
-      value: |
-        ### Story
-        As a **user**, I can **do some action** so that I can **achieve some goal**.
-  - type: markdown
-    attributes:
-      value: |
-        ### Acceptance Criteria
+      label: User Story
+      placeholder: "As a **user**, I can **do some action** so that I can **achieve some goal**."
+    validations:
+      required: true
   - type: textarea
     id: acceptance-criteria
     attributes:
