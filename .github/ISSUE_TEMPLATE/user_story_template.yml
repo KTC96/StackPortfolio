@@ -1,0 +1,45 @@
+name: User story issue template
+description: The standard user story issue template for the project
+title: "User story - <Brief description of story>"
+labels: ["user story"]
+projects: ["stephendawsondev/5"]
+assignees:
+  - stephendawsondev
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Story
+        As a **user**, I can **do some action** so that I can **achieve some goal**.
+  - type: markdown
+    attributes:
+      value: |
+        ### Acceptance Criteria
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: |
+        List the criteria that must be achieved for the story to be considered complete.
+        For example: 
+        - This is an example of something that must be achieved for the story to be considered complete
+      placeholder: "List the acceptance criteria here."
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ### Standard Tasks Checklist
+  - type: textarea
+    id: standard-tasks
+    attributes:
+      label: Please ensure you've completed these tasks before marking the issue as done.
+      value: |
+        - [ ] Reviewed the user story for clarity and completeness.
+        - [ ] Identified and linked related issues or epics.
+        - [ ] Assessed if the story can be broken down into more granular, actionable tasks.
+        - [ ] Created or updated the necessary documentation.
+        - [ ] Written unit and/or integration tests for functionality.
+        - [ ] All code changes have been manually tested to ensure they meet the acceptance criteria.
+        - [ ] Updated the issue with any relevant notes or feedback (to date).
+        - [ ] Merged into the main branch and deployed to production (if applicable).
