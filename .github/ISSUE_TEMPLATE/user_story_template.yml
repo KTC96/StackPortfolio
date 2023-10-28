@@ -19,8 +19,6 @@ body:
       label: Acceptance Criteria
       description: |
         List the criteria that must be achieved for the story to be considered complete.
-        For example: 
-        - This is an example of something that must be achieved for the story to be considered complete
       placeholder: "List the acceptance criteria here."
     validations:
       required: true
