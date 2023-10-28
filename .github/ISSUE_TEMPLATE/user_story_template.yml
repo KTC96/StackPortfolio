@@ -33,7 +33,6 @@ body:
       value: |
         - [ ] Reviewed the user story for clarity and completeness.
         - [ ] Identified and linked related issues or epics.
-        - [ ] Assessed if the story can be broken down into more granular, actionable tasks.
         - [ ] Created or updated the necessary documentation.
         - [ ] Written unit and/or integration tests for functionality.
         - [ ] All code changes have been manually tested to ensure they meet the acceptance criteria.
