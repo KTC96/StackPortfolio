@@ -6,11 +6,14 @@ projects: ["stephendawsondev/5"]
 assignees:
   - stephendawsondev
 body:
+  - type: markdown
+    attributes:
+      value: "Epic: <Link epic if applicable>\n"
   - type: textarea
     id: user-story
     attributes:
       label: User Story
-      value: "Epic: <Link epic if applicable>\n\nAs a **user**, I can **do some action** so that I can **achieve some goal**."
+      value: "As a **user**, I can **do some action** so that I can **achieve some goal**."
     validations:
       required: true
   - type: textarea
@@ -38,3 +41,11 @@ body:
         - [ ] All code changes have been manually tested to ensure they meet the acceptance criteria.
         - [ ] Updated the issue with any relevant notes or feedback (to date).
         - [ ] Merged into the main branch and deployed to production (if applicable).
+  - type: markdown
+    attributes:
+      value: |
+        ### Further tasks
+  - type: markdown
+    attributes:
+      value: |
+        - [ ]
