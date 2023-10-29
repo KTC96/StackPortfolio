@@ -6,9 +6,11 @@ projects: ["stephendawsondev/5"]
 assignees:
   - stephendawsondev
 body:
-  - type: markdown
+  - type: textarea
+    id: related-epic
     attributes:
-      value: "Epic: <Link epic if applicable>\n"
+      label: If applicable, add a related Epic.
+      value: "Epic: <Link epic if applicable>"
   - type: textarea
     id: user-story
     attributes:
@@ -45,7 +47,9 @@ body:
     attributes:
       value: |
         ### Further tasks
-  - type: markdown
+  - type: textarea
+    id: further-tasks
     attributes:
+      label: Please add any further tasks that need to be completed before the issue can be marked as done.
       value: |
         - [ ]
