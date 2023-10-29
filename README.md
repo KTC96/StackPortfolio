@@ -88,3 +88,5 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Database Design playlist by Caleb Curry](https://www.youtube.com/playlist?list=PL_c9BZzLwBRK0Pc28IdvPQizD2mJlgoID)
 - [Draw.io](https://app.diagrams.net/) - Creation of the database Entity Relationship Diagram
 - [MoSCoW method - P3 Mastery](https://www.youtube.com/watch?v=j2Fpx1Yj9EQ)
+- [Gunicorn documentation](https://docs.gunicorn.org/en/stable/) - Used to deploy the application to Heroku
+- [Heroku](https://www.heroku.com/) - Hosting for deployed application
