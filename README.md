@@ -62,22 +62,95 @@ Being a Developer myself, I have a lot of feature ideas for the Stackportfol.io 
 | Skills for user and project     | 2          | 5          | Won't have       |
 | Company creation                | 1          | 5          | Won't have       |
 
-<details><summary>Click here to expand the priority descriptions and percentages</summary>
+<details>
+  <summary>Click here to expand the priority descriptions and percentages</summary>
 
 | Priority    | Percentage                | Description                                                                                                                                                            |
 | ----------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Must have   | 60%                       | These are the features that are essential for the site to be usable. If any of these features are missing, the site will not be usable.                                |
 | Should have | 16%                       | These are the features that are important, but not essential. If any of these features are missing, the site will still be usable.                                     |
-| Could have  | 14%                       | These are the features that are nice to have, but not essential. If any of these features are missing, the site will still be usable.                                  |
+| Could have  | 24%                       | These are the features that are nice to have, but not essential. If any of these features are missing, the site will still be usable.                                  |
 | Won't have  | Excluded from calculation | These are the features that are not essential and will not be implemented in the current project. If any of these features are missing, the site will still be usable. |
 
 </details>
+
+### Scope
+
+Since there are a quite a few features that I would like to implement, I have decided to focus on the core features of the site. The core features are the features that are essential for the site to be usable. The core features are:
+
+- Account management
+  - Account creation, updating, and deletion
+  - Account login and logout
+- User profiles
+  - User profiles are created when an account is created
+  - User profiles can be updated and deleted
+- Project management
+  - Projects can be created, updated, and deleted
+  - Projects can be associated with a tech user
+- Technology management
+  - Technologies can be created, but only the Admin should be able to update and delete them
+  - Multiple technologies can be associated with a project/job post
+- Job post management
+  - Job posts can be created, updated, and deleted
+  - Job posts can be associated with a recruiter user
+
+There is also a few features that use search, but I don't feel the functionality is fully required for the Minimum Viable Product (MVP). I have marked many of them as could have and will added user stories to address if time permits near the end of the project.
+
+### User stories and Epics
+
+I have created Epics for each of the core features mentioned in my scope. Here are the planned user stories within each one:
+
+#### Account management
+
+- As a **user**, I can **create an account** so that I can **have my preferences saved**.
+- As a **user**, I can **update my personal details** so that I can **ensure my data is accurate and displayed correctly**.
+- As a **user**, I can **delete my account** so that I can **have peace of mind that my data is no longer being retained unncessarily**.
+- As a **user**, I can **sign up as a tech user or a recruiter** so that I can **use the platform based on my role**.
+- As a **user**, I can **log out of my account** so that I can **feel secure when not using my account**.
+- As a **user**, I can **choose update by account preferences** so that I can **have more control into how my profile is view and what information is shared**.
+- As a **user**, I can **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**.
+
+#### User profiles
+
+- As a **user**, I can **have a profile page** so that I can **display my details and projects/jobs**.
+- As a **user**, I can **create a unique profile URL** so that I can **easily share my profile with others**.
+- As a **user**, I can **search user profiles** so that I can **find friends, colleagues or potential candidates to connect with**.
+
+#### Project management
+
+- As a **tech user**, I can **create a project** so that I can **display it in my portfolio**.
+- As a **tech user**, I can **update my project details** so that I can **keep my project relevant to views**.
+- As a **tech user**, I can **delete a project** so that I can **keep focus on my most relevant projects**.
+- As a **user**, I can **add different technologies to my job posts, projects or profile (tech user)** so that I can **use them for postings or to be associated with those skills**.
+- As a **user**, I can **search for projects** so that I can **find a project relevant to my interest or job post**.
+- As a **user**, I can **search for projects** so that I can **find a project relevant to my interest or job post**.
+
+#### Job post management
+
+- As a **recruiter user**, I can **create a job post** so that I can **to attract the attention of potential applicants**.
+- As a **recruiter user**, I can **update the details of my job post** so that I can **ensure the most up-to-date information about the post is provided**.
+- As a **recruiter user**, I can **delete a job post** so that I can **remove out-of-date posts**.
+- As a **recruiter user**, I can **specify the job location type** so that I can **ensure only those who match the job location, such as on-site, hybrid or remote show interest in the job**.
+- As a **user**, I can **see a job position's salary range** so that I can **decide whether to apply or not**.
+- As a **user**, I can **view a list of created job posts** so that I can **view open positions**.
+- As a **user**, I can **search jobs** so that I can **find the most relevant job to me**.
+
+#### Technology management
+
+- As a **user**, I can **search for specific technologies** so that I can **see associated job posts or projects with those technologies**.
+- As a **tech user**, I can **order the tech on my projects** so that I can **give importance to that tech**.
 
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.diagrams.net/). The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables.
 
-![Entity Relationship Diagram](./documentation/diagrams/entity_relationship_diagram_database_first.png)
+![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-database-first.png)
+
+### User flowchart
+
+The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
+
+![User flowchart](./documentation/diagrams/user-flowchart.png)
 
 ## Resources
 
@@ -90,3 +163,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [MoSCoW method - P3 Mastery](https://www.youtube.com/watch?v=j2Fpx1Yj9EQ)
 - [Gunicorn documentation](https://docs.gunicorn.org/en/stable/) - Used to deploy the application to Heroku
 - [Heroku](https://www.heroku.com/) - Hosting for deployed application
+- [dj_database_url](https://pypi.org/project/dj-database-url/0.4.2/)
