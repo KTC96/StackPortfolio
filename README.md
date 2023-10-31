@@ -140,11 +140,36 @@ I have created Epics for each of the core features mentioned in my scope. Here a
 - As a **user**, I can **search for specific technologies** so that I can **see associated job posts or projects with those technologies**.
 - As a **tech user**, I can **order the tech on my projects** so that I can **give importance to that tech**.
 
+###  Wireframes
+
+I have created wireframes for the main pages of the site. I have used [Balsamique](https://balsamiq.com/) to create the wireframes. Here are the wireframes for the main pages:
+
+<details>
+  <summary>Homepage - Desktop (click to expand)</summary>
+
+![Homepage - Desktop](./documentation/wireframes/homepage-desktop.png)
+
+</details>
+
+<details>
+  <summary>Homepage - Mobile (click to expand)</summary>
+
+![Homepage - Mobile](./documentation/wireframes/homepage-mobile.png)
+
+</details>
+
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.diagrams.net/). The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables.
 
-![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-database-first.png)
+![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-second.png)
+
+<details>
+  <summary>Click here to expand and see the first ERD draft</summary>
+
+![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-first.png)
+
+</details>
 
 ### User flowchart
 
@@ -164,3 +189,4 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Gunicorn documentation](https://docs.gunicorn.org/en/stable/) - Used to deploy the application to Heroku
 - [Heroku](https://www.heroku.com/) - Hosting for deployed application
 - [dj_database_url](https://pypi.org/project/dj-database-url/0.4.2/)
+- [Balsamique](https://balsamiq.com/) - Used to create wireframes
