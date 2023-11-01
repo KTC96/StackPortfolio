@@ -157,6 +157,34 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 ![Homepage - Mobile](./documentation/wireframes/homepage-mobile.png)
 
 </details>
+<br>
+<details>
+  <summary>Forms - Desktop (click to expand)</summary>
+
+![Sign up page - Desktop](./documentation/wireframes/sign-up-desktop.png)
+
+</details>
+
+<details>
+  <summary>Forms - Mobile (click to expand)</summary>
+
+![Sign up page - Mobile](./documentation/wireframes/sign-up-mobile.png)
+
+</details>
+<br>
+<details>
+  <summary>Tech user profile - Desktop (click to expand)</summary>
+
+![Tech user profile - Desktop](./documentation/wireframes/tech-user-profile-desktop.png)
+
+</details>
+
+<details>
+  <summary>Tech user profile - Mobile (click to expand)</summary>
+
+![Tech user profile - Mobile](./documentation/wireframes/tech-user-profile-mobile.png)
+
+</details>
 
 ### Entity Relationship Diagram
 
