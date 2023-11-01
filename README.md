@@ -49,18 +49,19 @@ Being a Developer myself, I have a lot of feature ideas for the Stackportfol.io 
 | Job search                      | 2          | 4          | Could have       |
 | Job list                        | 4          | 3          | Should have      |
 | Job post tech                   | 5          | 3          | Must have        |
-| Job remote/on-site/hybrid       | 5          | 2          | Must have        |
+| Job remote/on-site/hybrid       | 4          | 2          | Should have      |
 | Job post benefits               | 2          | 4          | Won't have       |
 | Job post salary                 | 3          | 2          | Should have      |
 | Job post application            | 2          | 5          | Won't have       |
 | Associate company with job post | 1          | 4          | Won't have       |
 | **Tech Features**               |            |            |                  |
-| Tech search                     | 4          | 4          | Should have      |
+| Tech search                     | 3          | 4          | Could have       |
 | Tech Aliases                    | 2          | 4          | Won't have       |
 | Tech position                   | 1          | 2          | Could have       |
 | **Miscellaneous Features**      |            |            |                  |
 | Skills for user and project     | 2          | 5          | Won't have       |
 | Company creation                | 1          | 5          | Won't have       |
+| Expected UI/UX                  | 5          | 2          | Must have        |
 
 <details>
   <summary>Click here to expand the priority descriptions and percentages</summary>
@@ -93,6 +94,8 @@ Since there are a quite a few features that I would like to implement, I have de
 - Job post management
   - Job posts can be created, updated, and deleted
   - Job posts can be associated with a recruiter user
+
+Apart from the above, there is also the more general user story of the expected User Experience and User Interface of the site, which I have also included in the scope.
 
 There is also a few features that use search, but I don't feel the functionality is fully required for the Minimum Viable Product (MVP). I have marked many of them as could have and will added user stories to address if time permits near the end of the project.
 
@@ -140,6 +143,10 @@ I have created Epics for each of the core features mentioned in my scope. Here a
 - As a **user**, I can **search for specific technologies** so that I can **see associated job posts or projects with those technologies**.
 - As a **tech user**, I can **order the tech on my projects** so that I can **give importance to that tech**.
 
+#### Miscellaneous
+
+- As a **user**, I can **see pages that I expect on a website** so that I can **have a familiar user experience**.
+
 ###  Wireframes
 
 I have created wireframes for the main pages of the site. I have used [Balsamique](https://balsamiq.com/) to create the wireframes. Here are the wireframes for the main pages:
@@ -183,6 +190,22 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
   <summary>Tech user profile - Mobile (click to expand)</summary>
 
 ![Tech user profile - Mobile](./documentation/wireframes/tech-user-profile-mobile.png)
+
+</details>
+
+<br>
+
+<details>
+  <summary>Project Page - Desktop (click to expand)</summary>
+
+![Project Page - Desktop](./documentation/wireframes/project-page-desktop.png)
+
+</details>
+
+<details>
+  <summary>Project Page - Mobile (click to expand)</summary>
+
+![Project Page - Mobile](./documentation/wireframes/project-page-mobile.png)
 
 </details>
 
