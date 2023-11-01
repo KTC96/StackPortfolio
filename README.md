@@ -209,6 +209,22 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 
 </details>
 
+<br>
+
+<details>
+  <summary>Job Board - Desktop (click to expand)</summary>
+
+![Job Board - Desktop](./documentation/wireframes/job-board-desktop.png)
+
+</details>
+
+<details>
+  <summary>Job Board - Mobile (click to expand)</summary>
+
+![Job Board - Mobile](./documentation/wireframes/job-board-mobile.png)
+
+</details>
+
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.diagrams.net/). The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables.
