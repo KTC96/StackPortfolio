@@ -178,6 +178,7 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 ![Sign up page - Mobile](./documentation/wireframes/sign-up-mobile.png)
 
 </details>
+
 <br>
 <details>
   <summary>Tech user profile - Desktop (click to expand)</summary>
@@ -190,6 +191,22 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
   <summary>Tech user profile - Mobile (click to expand)</summary>
 
 ![Tech user profile - Mobile](./documentation/wireframes/tech-user-profile-mobile.png)
+
+</details>
+
+<br>
+
+<details>
+  <summary>Project List Page - Desktop (click to expand)</summary>
+
+![Project List Page - Desktop](./documentation/wireframes/project-list-mosaic-desktop.png)
+
+</details>
+
+<details>
+  <summary>Project List Page - Mobile (click to expand)</summary>
+
+![Project List Page - Mobile](./documentation/wireframes/project-list-mosaic-mobile.png)
 
 </details>
 
@@ -210,6 +227,21 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 </details>
 
 <br>
+<details>
+  <summary>Recruiter user profile - Desktop (click to expand)</summary>
+
+![Recruiter user profile - Desktop](./documentation/wireframes/recruiter-profile-desktop.png)
+
+</details>
+
+<details>
+  <summary>Recruiter user profile - Mobile (click to expand)</summary>
+
+![Recruiter user profile - Mobile](./documentation/wireframes/recruiter-profile-mobile.png)
+
+</details>
+
+<br>
 
 <details>
   <summary>Job Board - Desktop (click to expand)</summary>
@@ -222,6 +254,22 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
   <summary>Job Board - Mobile (click to expand)</summary>
 
 ![Job Board - Mobile](./documentation/wireframes/job-board-mobile.png)
+
+</details>
+
+<br>
+
+<details>
+  <summary>Job Page - Desktop (click to expand)</summary>
+
+![Job Page - Desktop](./documentation/wireframes/job-page-desktop.png)
+
+</details>
+
+<details>
+  <summary>Job Page - Mobile (click to expand)</summary>
+
+![Job Page - Mobile](./documentation/wireframes/job-page-mobile.png)
 
 </details>
 
@@ -257,3 +305,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Heroku](https://www.heroku.com/) - Hosting for deployed application
 - [dj_database_url](https://pypi.org/project/dj-database-url/0.4.2/)
 - [Balsamique](https://balsamiq.com/) - Used to create wireframes
+- [Ssali Jonathan playlist on test-driven development with Django](https://www.youtube.com/playlist?list=PLEt8Tae2spYlWWMN5azuYjvoItXDkQ1DQ)
+- [Django documentation](https://docs.djangoproject.com/en/3.2/)
