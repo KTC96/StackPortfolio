@@ -1,7 +1,10 @@
+"""
+Account app tests.
+"""
 from django.db import IntegrityError
 from django.test import TestCase
 from django.apps import apps
-from custom_account.models import ParentUser
+from custom_account.models import ParentUser, TechUser
 
 
 class AccountTests(TestCase):
@@ -13,7 +16,7 @@ class AccountTests(TestCase):
     def test_check_create_user_view_exists(self):
         """Test case to check if model is not none"""
         try:
-            UserModel = apps.get_model('custom_account', 'ParentUser')
+            apps.get_model('custom_account', 'ParentUser')
         except LookupError as e:
             self.fail(f"Failed to get User model. Error: {e}")
 
@@ -95,3 +98,25 @@ class AccountTests(TestCase):
         self.assertEqual(existing_user.company, 'test company')
         self.assertEqual(existing_user.linkedin_username, 'testuser22')
         self.assertEqual(existing_user.twitter_handle, 'testuser22')
+
+
+class AccountRoleTests(TestCase):
+    """
+    Tests for the Tech and Recruiter user roles.
+    Both should inherit from the ParentUser model.
+    """
+
+    def test_tech_user_creation(self):
+        """Test to create a TechUser."""
+        try:
+            # Create a user with dummy data
+            user = TechUser.objects.create(
+                email='test@test.com',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123'
+            )
+
+        except IntegrityError as e:
+            self.fail(f"Failed to create user. Error: {e}")

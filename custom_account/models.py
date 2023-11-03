@@ -119,3 +119,11 @@ class ParentUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = ParentUserManager()
+
+
+class TechUser(ParentUser):
+    """
+    A tech user is a custom user model
+    that inherits from the ParentUser model.
+    """
+    pass
