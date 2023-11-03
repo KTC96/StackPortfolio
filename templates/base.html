@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="h-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackportfolio</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div>
+          <ul >
+            <li >
+                <a aria-current="page" href="{% url 'homepage' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'account_logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'account_signup' %}">Register</a>
+            </li>
+            <li>
+                <a href="{% url 'account_login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+        </div>
+    </nav>
+    <main>
+        <h2>main before content</h2>
+        {% block content %}
+        <!-- Content Goes here -->
+        {% endblock content %}
+        <h2>main after content</h2>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <h2>This is the footer</h2>
+    </footer>
+
+</body>
+
+</html>
