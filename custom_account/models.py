@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import (AbstractBaseUser,
+                                        PermissionsMixin,
+                                        BaseUserManager)
 
 
 class ParentUserManager(BaseUserManager):
@@ -48,19 +50,33 @@ class ParentUserManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
+            town_city=town_city,
+            display_town_city=display_town_city,
+            country=country,
+            display_email=display_email,
+            website=website,
+            phone_number=phone_number,
+            display_phone_number=display_phone_number,
+            profile_image=profile_image,
+            bio=bio,
+            work_title=work_title,
+            company=company,
+            linkedin_username=linkedin_username,
+            twitter_handle=twitter_handle,
         )
         user.set_password(password)
         user.save()
         return user
 
     def create_superuser(
-            self,
-            email,
-            username,
-            first_name,
-            last_name,
-            password=None):
+        self,
+        email,
+        username,
+        first_name,
+        last_name,
+        password=None
+    ):
         """
         Create and return a `ParentUser` with superuser (admin) permissions.
         """
