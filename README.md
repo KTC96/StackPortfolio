@@ -308,3 +308,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Ssali Jonathan playlist on test-driven development with Django](https://www.youtube.com/playlist?list=PLEt8Tae2spYlWWMN5azuYjvoItXDkQ1DQ)
 - [Django documentation](https://docs.djangoproject.com/en/3.2/)
 - [Geeks for Geeks docs for Python testing](https://www.geeksforgeeks.org/python-unittest-assertisnotnone-function/)
+- [Autopep8](https://pypi.org/project/autopep8/) - Used to format Python code
+- [Django Allauth](https://docs.allauth.org/en/latest/) - Used for authentication and additional form templates
