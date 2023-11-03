@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stackportfolio-1340b88e89e7.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['stackportfolio-1340b88e89e7.herokuapp.com',
+                 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -43,12 +44,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'cloudinary',
     'custom_account',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
