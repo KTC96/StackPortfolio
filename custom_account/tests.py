@@ -4,7 +4,7 @@ Account app tests.
 from django.db import IntegrityError
 from django.test import TestCase
 from django.apps import apps
-from custom_account.models import ParentUser, TechUser
+from custom_account.models import ParentUser, TechUser, RecruiterUser
 
 
 class AccountTests(TestCase):
@@ -119,4 +119,38 @@ class AccountRoleTests(TestCase):
             )
 
         except IntegrityError as e:
-            self.fail(f"Failed to create user. Error: {e}")
+            self.fail(f"Failed to create user using TechUser. Error: {e}")
+
+    def test_tech_user_additional_fields(self):
+        """Test the additional fields in the TechUser model"""
+        try:
+            tech_user = TechUser.objects.create(
+                email='techuser@example.com',
+                username='techuser',
+                first_name='Tech',
+                last_name='User',
+                password='techuserpassword',
+                github_username='techuser123',
+                seeking_employment=True
+            )
+        except IntegrityError as e:
+            self.fail(
+                f"Failed to create TechUser with additional fields. Error: {e}")
+
+        # Check if the fields are saved correctly
+        self.assertEqual(tech_user.github_username, 'techuser123')
+        self.assertEqual(tech_user.seeking_employment, True)
+
+    def test_recruiter_user_creation(self):
+        """Test to create a RecruiterUser."""
+        try:
+            # Create a user with dummy data
+            user = RecruiterUser.objects.create(
+                email='test@test.com',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+        except IntegrityError as e:
+            self.fail(f"Failed to create user using RecruiterUser. Error: {e}")

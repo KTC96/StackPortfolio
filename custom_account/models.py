@@ -126,4 +126,9 @@ class TechUser(ParentUser):
     A tech user is a custom user model
     that inherits from the ParentUser model.
     """
+    github_username = models.CharField(max_length=40, blank=True, null=True)
+    seeking_employment = models.BooleanField(default=False)
+
+
+class RecruiterUser(ParentUser):
     pass
