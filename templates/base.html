@@ -1,42 +1,78 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html class="h-100">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stackportfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+    <title>Stackportfolio</title>
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div>
-          <ul >
-            <li >
-                <a aria-current="page" href="{% url 'homepage' %}">Home</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li>
-                <a href="{% url 'account_logout' %}">Logout</a>
-            </li>
-            {% else %}
-            <li>
-                <a href="{% url 'account_signup' %}">Register</a>
-            </li>
-            <li>
-                <a href="{% url 'account_login' %}">Login</a>
-            </li>
-            {% endif %}
-        </ul>
+    <header>
+        <!-- Navigation -->
+        <div class="navbar bg-base-100 container mx-auto">
+            <div class="navbar-start">
+                <a class="text-lg font-bold" href="{% url 'homepage' %}">Stackportfolio</a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a>See projects</a></li>
+                    <li><a>See job posts</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>See projects</a></li>
+                    <li><a>See job posts</a></li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <ul class="navbar-end menu menu-horizontal px-1 hidden md:flex">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'account_signup' %}">Register</a>
+                </li>
+                <li>
+                    <a href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
+    </header>
+
+
     <main>
-        <h2>main before content</h2>
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
-        <h2>main after content</h2>
     </main>
 
     <!-- Footer -->
