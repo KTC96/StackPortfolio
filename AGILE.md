@@ -49,4 +49,4 @@ I enabled three of the set workflows on the project (two were already enabled):
 
 - [Automatically move project cards to the done column when issues are closed](https://github.com/users/stephendawsondev/projects/5/workflows/13068501)
 
-- [Authomatically add any reopened issues to the Todo column](https://github.com/users/stephendawsondev/projects/5/workflows/13073840)
+- [Automatically add any reopened issues to the Todo column](https://github.com/users/stephendawsondev/projects/5/workflows/13073840)

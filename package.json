@@ -1,0 +1,30 @@
+{
+  "name": "stackportfolio",
+  "version": "1.0.0",
+  "description": "A platform where developers can add their technical portfolio to showcase their skills.",
+  "main": "manage.py",
+  "scripts": {
+    "test": "jest",
+    "build": "tailwindcss build src/styles/tailwind.css -o static/css/tailwind.css",
+    "watch": "npx tailwindcss build src/styles/tailwind.css -o static/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephendawsondev/StackPortfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "tech",
+    "developer"
+  ],
+  "author": "Stephen Dawson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephendawsondev/StackPortfolio/issues"
+  },
+  "homepage": "https://github.com/stephendawsondev/StackPortfolio#readme",
+  "dependencies": {
+    "daisyui": "^3.9.4",
+    "tailwindcss": "^3.3.5"
+  }
+}

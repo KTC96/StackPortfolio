@@ -1,7 +1,10 @@
+"""
+Account app tests.
+"""
 from django.db import IntegrityError
 from django.test import TestCase
 from django.apps import apps
-from custom_account.models import ParentUser
+from custom_account.models import ParentUser, TechUser, RecruiterUser
 
 
 class AccountTests(TestCase):
@@ -13,7 +16,7 @@ class AccountTests(TestCase):
     def test_check_create_user_view_exists(self):
         """Test case to check if model is not none"""
         try:
-            UserModel = apps.get_model('custom_account', 'ParentUser')
+            apps.get_model('custom_account', 'ParentUser')
         except LookupError as e:
             self.fail(f"Failed to get User model. Error: {e}")
 
@@ -95,3 +98,59 @@ class AccountTests(TestCase):
         self.assertEqual(existing_user.company, 'test company')
         self.assertEqual(existing_user.linkedin_username, 'testuser22')
         self.assertEqual(existing_user.twitter_handle, 'testuser22')
+
+
+class AccountRoleTests(TestCase):
+    """
+    Tests for the Tech and Recruiter user roles.
+    Both should inherit from the ParentUser model.
+    """
+
+    def test_tech_user_creation(self):
+        """Test to create a TechUser."""
+        try:
+            # Create a user with dummy data
+            user = TechUser.objects.create(
+                email='test@test.com',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123'
+            )
+
+        except IntegrityError as e:
+            self.fail(f"Failed to create user using TechUser. Error: {e}")
+
+    def test_tech_user_additional_fields(self):
+        """Test the additional fields in the TechUser model"""
+        try:
+            tech_user = TechUser.objects.create(
+                email='techuser@example.com',
+                username='techuser',
+                first_name='Tech',
+                last_name='User',
+                password='techuserpassword',
+                github_username='techuser123',
+                seeking_employment=True
+            )
+        except IntegrityError as e:
+            self.fail(
+                f"Failed to create TechUser with additional fields. Error: {e}")
+
+        # Check if the fields are saved correctly
+        self.assertEqual(tech_user.github_username, 'techuser123')
+        self.assertEqual(tech_user.seeking_employment, True)
+
+    def test_recruiter_user_creation(self):
+        """Test to create a RecruiterUser."""
+        try:
+            # Create a user with dummy data
+            user = RecruiterUser.objects.create(
+                email='test@test.com',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+        except IntegrityError as e:
+            self.fail(f"Failed to create user using RecruiterUser. Error: {e}")
