@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
 
     <title>Stackportfolio</title>
 </head>
@@ -16,7 +16,7 @@
 <body>
     <header>
         <!-- Navigation -->
-        <div class="navbar bg-base-100 container mx-auto">
+        <div class="navbar bg-base-100 container mx-auto justify-between">
             <div class="navbar-start">
                 <a class="text-lg font-bold" href="{% url 'homepage' %}">Stackportfolio</a>
             </div>
@@ -34,7 +34,7 @@
                             d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
                 <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
                     <li><a>See projects</a></li>
                     <li><a>See job posts</a></li>
                     {% if user.is_authenticated %}

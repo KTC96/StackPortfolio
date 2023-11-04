@@ -5,8 +5,8 @@
   "main": "manage.py",
   "scripts": {
     "test": "jest",
-    "build": "tailwindcss build src/styles/tailwind.css -o static/css/tailwind.css",
-    "watch": "npx tailwindcss build src/styles/tailwind.css -o static/css/tailwind.css --watch"
+    "build": "tailwindcss build ./src/styles/tailwind.css -o ./static/css/tailwind.css",
+    "watch": "npx tailwindcss build ./src/styles/tailwind.css -o ./static/css/tailwind.css --watch"
   },
   "repository": {
     "type": "git",
