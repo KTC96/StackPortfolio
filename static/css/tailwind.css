@@ -1624,6 +1624,10 @@ html {
   position: static;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .z-\[1\] {
   z-index: 1;
 }
@@ -1655,6 +1659,10 @@ html {
 
 .w-52 {
   width: 13rem;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .bg-base-100 {
