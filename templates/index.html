@@ -1,3 +1,10 @@
 {% extends "base.html" %} {% block content %}
-  <h1>Hello world</h1>
+
+{{ users|length }} user(s) found.
+
+{% for user in users %}
+<a href="{% url 'user_profile' slug=user.slug %}">{{ user.username }}</a><br />
+{% empty %}
+No users found.
+{% endfor %}
 {% endblock %}
