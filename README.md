@@ -314,3 +314,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [DaisyUI Plugin](https://daisyui.com/) - Used for styling on top of Tailwind
 - [Whitenoise](http://whitenoise.evans.io/en/stable/) - Used to serve static files reliably
 - [Documentation on extending allauth forms](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/)
+- [Slugify Django username](https://www.fullstackpython.com/django-utils-text-slugify-examples.html)
+- [LoginRequiredMixin](https://docs.djangoproject.com/en/4.2/topics/auth/default/) - Ensures that the view is only accessible to logged in users
