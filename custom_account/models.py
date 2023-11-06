@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser,
                                         PermissionsMixin,
                                         BaseUserManager)
+from django.utils.text import slugify
 
 
 class CustomUserManager(BaseUserManager):
@@ -115,17 +116,24 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     twitter_handle = models.CharField(max_length=80, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True, blank=True)
 
     USERNAME_FIELD = 'email'
 
     objects = CustomUserManager()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.username)
+        super().save(*args, **kwargs)
 
 
 class TechUserProfile(models.Model):
     """
     The tech user profile model.
     """
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name='tech_profile')
     github_username = models.CharField(max_length=40, blank=True, null=True)
     seeking_employment = models.BooleanField(default=False)
 
@@ -134,4 +142,5 @@ class RecruiterUserProfile(models.Model):
     """
     The recruiter user profile model.
     """
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name='recruiter_profile')
