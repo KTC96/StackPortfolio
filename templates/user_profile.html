@@ -1,18 +1,23 @@
 {% extends "base.html" %} {% block content %}
 <div class="lg:flex">
   <div class="profile-area">
-    {% if  profile.profile_image %}
+    {% if profile.profile_image %}
     <img src="{{ profile.profile_image }}" alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
     {% else %}
     <div>{{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
     {% endif %}
+    {% if profile.is_authenticated and user == profile %}
+    <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
+      profile</a>
+    {% endif %}
+    {% if profile.twitter_handle or profile.tech_profile.github_username or profile.linkedin_username %}
     <ul class="social-icons flex">
       {% if profile.twitter_handle %}
       <li class="list-none">
         <a href="https://twitter.com/{{ profile.twitter_handle }}" target="_blank"
           aria-label="Opens Twitter profile in new tab">
           <span class="svg-container inline-block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1227" viewBox="0 0 1200 1227" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
               <path
                 d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
                 fill="black" />
@@ -48,6 +53,7 @@
       </li>
       {% endif %}
     </ul>
+    {% endif %}
 
     <div class="mobile-user-details lg:hidden">
       <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>

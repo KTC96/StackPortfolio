@@ -11,7 +11,7 @@
     <title>Stackportfol.io</title>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <header>
         <!-- Navigation -->
         <div class="navbar bg-base-100 container mx-auto justify-between">
@@ -37,6 +37,7 @@
                     <li><a>See projects</a></li>
                     <li><a>See job posts</a></li>
                     {% if user.is_authenticated %}
+                    <hr class="my-2">
                     <li>
                         <a href="{% url 'account_logout' %}">Logout</a>
                     </li>
@@ -52,9 +53,32 @@
             </div>
             <ul class="navbar-end menu menu-horizontal px-1 hidden md:flex">
                 {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'account_logout' %}">Logout</a>
-                </li>
+                <div class="flex-none">
+                    <ul class="menu menu-horizontal px-1">
+                        <li>
+                            <details>
+                                <summary>
+                                    Account
+                                </summary>
+                                <ul class="p-2 bg-base-100">
+                                    <li>
+                                        <a href="{% url 'user_profile' slug=user.slug %}"
+                                            aria-label="Navigates to your profile page">My profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
+                                            aria-label="Edit profile">Edit profile</a>
+                                    </li>
+                                    <hr class="my-2">
+                                    <li>
+                                        <a href="{% url 'account_logout' %}">Logout</a>
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+
+                    </ul>
+                </div>
                 {% else %}
                 <li>
                     <a href="{% url 'account_signup' %}tech">Register</a>
@@ -77,7 +101,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class=" md:p-10 bg-aliceblue">
+    <footer class=" md:p-10 mt-auto bg-aliceblue">
         <div class="container mx-auto text-base-content footer">
             <div>
                 <header class="footer-title">Company</header>
