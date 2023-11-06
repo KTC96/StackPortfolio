@@ -4,7 +4,7 @@ from django.contrib.auth.models import (AbstractBaseUser,
                                         BaseUserManager)
 
 
-class ParentUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     """
     Create a custom user manager class that
     extends BaseUserManager.
@@ -32,7 +32,7 @@ class ParentUserManager(BaseUserManager):
             twitter_handle=None,
     ):
         """
-        Create and return a `ParentUser` with an email, username,
+        Create and return a `CustomUser` with an email, username,
         first name, last name, and password.
         """
         if email is None:
@@ -72,13 +72,13 @@ class ParentUserManager(BaseUserManager):
     def create_superuser(
         self,
         email,
-        username,
-        first_name,
-        last_name,
+        username="default_username",
+        first_name="default_firstname",
+        last_name="default_lastname",
         password=None
     ):
         """
-        Create and return a `ParentUser` with superuser (admin) permissions.
+        Create and return a `CustomUser` with superuser (admin) permissions.
         """
         if password is None:
             raise TypeError('Superusers must have a password.')
@@ -91,7 +91,7 @@ class ParentUserManager(BaseUserManager):
         return user
 
 
-class ParentUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     Create a custom user model that uses
     Django's User model as a base.
@@ -118,17 +118,20 @@ class ParentUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    objects = ParentUserManager()
+    objects = CustomUserManager()
 
 
-class TechUser(ParentUser):
+class TechUserProfile(models.Model):
     """
-    A tech user is a custom user model
-    that inherits from the ParentUser model.
+    The tech user profile model.
     """
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     github_username = models.CharField(max_length=40, blank=True, null=True)
     seeking_employment = models.BooleanField(default=False)
 
 
-class RecruiterUser(ParentUser):
-    pass
+class RecruiterUserProfile(models.Model):
+    """
+    The recruiter user profile model.
+    """
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
