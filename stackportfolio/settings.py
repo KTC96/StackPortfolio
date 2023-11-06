@@ -124,7 +124,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'custom_account.ParentUser'
+AUTH_USER_MODEL = 'custom_account.CustomUser'
+ACCOUNT_FORMS = {
+    'tech_signup': 'custom_account.forms.TechUserForm',
+    'recruiter_signup': 'custom_account.forms.RecruiterUserForm',
+}
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
