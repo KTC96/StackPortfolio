@@ -310,3 +310,7 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Geeks for Geeks docs for Python testing](https://www.geeksforgeeks.org/python-unittest-assertisnotnone-function/)
 - [Autopep8](https://pypi.org/project/autopep8/) - Used to format Python code
 - [Django Allauth](https://docs.allauth.org/en/latest/) - Used for authentication and additional form templates
+- [Tailwind CSS](https://tailwindcss.com/) - Used for styling
+- [DaisyUI Plugin](https://daisyui.com/) - Used for styling on top of Tailwind
+- [Whitenoise](http://whitenoise.evans.io/en/stable/) - Used to serve static files reliably
+- [Documentation on extending allauth forms](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/)
