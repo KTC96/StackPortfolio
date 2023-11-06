@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Profile</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if tech_profile_form %}
+  {{ tech_profile_form.as_p }}
+  {% elif recruiter_profile_form %}
+  {{ recruiter_profile_form.as_p }}
+  {% endif %}
+  <button type="submit">Save changes</button>
+</form>
+{% endblock %}
