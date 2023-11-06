@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from custom_account.views import (
-    TechUserSignupView, RecruiterUserSignupView, UserProfileDetailView, IndexView)
+    TechUserSignupView,
+    RecruiterUserSignupView,
+    UserProfileDetailView,
+    IndexView,
+    UserProfileEditView)
 
 
 urlpatterns = [
@@ -27,6 +31,8 @@ urlpatterns = [
          TechUserSignupView.as_view(), name='tech_user_signup'),
     path('accounts/signup/recruiter/',
          RecruiterUserSignupView.as_view(), name='recruiter_user_signup'),
+    path('user/<slug:slug>/edit/',
+         UserProfileEditView.as_view(), name='profile_edit'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
 
 ]

@@ -1,6 +1,6 @@
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import TechUserProfile, RecruiterUserProfile
+from .models import TechUserProfile, RecruiterUserProfile, CustomUser
 
 
 class CustomUserForm(SignupForm):
@@ -93,3 +93,55 @@ class RecruiterUserForm(CustomUserForm):
         recruiter_user_profile.save()
 
         return user
+
+
+class CustomUserEditForm(forms.ModelForm):
+    """
+    This form is required to edit the user profile.
+    """
+    class Meta:
+        """
+        Meta to specify the model and fields to be used.
+        """
+        model = CustomUser
+        fields = [
+            'first_name',
+            'last_name',
+            'town_city',
+            'display_town_city',
+            'country',
+            'display_email',
+            'website',
+            'phone_number',
+            'display_phone_number',
+            'profile_image',
+            'bio',
+            'work_title',
+            'company',
+            'linkedin_username',
+            'twitter_handle'
+        ]
+
+
+class TechUserProfileEditForm(forms.ModelForm):
+    """
+    TechUser update form.
+    """
+    class Meta:
+        """
+        Meta to specify the model and fields to be used.
+        """
+        model = TechUserProfile
+        fields = ['github_username', 'seeking_employment']
+
+
+class RecruiterUserProfileEditForm(forms.ModelForm):
+    """
+    RecruiterUser update form.
+    """
+    class Meta:
+        """
+        Meta to specify the model and fields to be used.
+        """
+        model = RecruiterUserProfile
+        fields = []

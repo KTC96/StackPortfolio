@@ -98,3 +98,78 @@ class AccountTests(TestCase):
         self.assertEqual(existing_user.company, 'test company')
         self.assertEqual(existing_user.linkedin_username, 'testuser22')
         self.assertEqual(existing_user.twitter_handle, 'testuser22')
+
+
+class AccountUpdateTests(TestCase):
+    """
+    Tests for updating users in the custom_account app.
+    """
+
+    def setUp(self):
+        """
+        Initial setup for the tests, creating a user to update.
+        """
+        self.user = CustomUser.objects.create(
+            email='update_test@test.com',
+            username='updatetestuser',
+            first_name='UpdateTest',
+            last_name='User',
+            password='testpassword123',
+            town_city='Update City',
+            country='Update Country',
+            phone_number='987654321',
+            bio='update bio',
+            work_title='update work title',
+            company='update company',
+            linkedin_username='updateuser22',
+            twitter_handle='updateuser22',
+        )
+
+    def test_update_user_email(self):
+        """
+        Test to update a user's email address.
+        """
+        # Change the email of the existing user
+        self.user.email = 'updated_email@test.com'
+        self.user.save()
+
+        updated_user = CustomUser.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.email, 'updated_email@test.com')
+
+    def test_update_user_phone_number(self):
+        """
+        Test to update a user's phone number.
+        """
+        # Change the phone number of the existing user
+        self.user.phone_number = '123456789'
+        self.user.save()
+
+        updated_user = CustomUser.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.phone_number, '123456789')
+
+    def test_toggle_user_email_display(self):
+        """
+        Test to toggle the user's preference for displaying their email.
+        """
+        original_display_email = self.user.display_email
+        self.user.display_email = not self.user.display_email
+        self.user.save()
+
+        updated_user = CustomUser.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.display_email,
+                         not original_display_email)
+
+    def test_update_multiple_fields(self):
+        """
+        Test to update multiple fields of a user at once.
+        """
+        # Update multiple fields of the user
+        self.user.bio = 'New updated bio'
+        self.user.work_title = 'New updated title'
+        self.user.company = 'New updated company'
+        self.user.save()
+
+        updated_user = CustomUser.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.bio, 'New updated bio')
+        self.assertEqual(updated_user.work_title, 'New updated title')
+        self.assertEqual(updated_user.company, 'New updated company')
