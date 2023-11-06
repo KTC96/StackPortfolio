@@ -8,8 +8,12 @@
 <h1>{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<ul class="steps">
+  <li class="step step-primary">Details</li>
+  <li class="step">Profile</li>
+  <li class="step">Summary</li>
+</ul>
+<form class="signup" id="signup_form" method="post" action="{% url 'recruiter_user_signup' %}">
   {% csrf_token %}
   {{ form.as_p }}
   {% if redirect_field_value %}
