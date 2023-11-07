@@ -173,3 +173,38 @@ class AccountUpdateTests(TestCase):
         self.assertEqual(updated_user.bio, 'New updated bio')
         self.assertEqual(updated_user.work_title, 'New updated title')
         self.assertEqual(updated_user.company, 'New updated company')
+
+
+class AccountDeleteTests(TestCase):
+    """
+    Tests for deleting users in the custom_account app.
+    """
+
+    def setUp(self):
+        """
+        Initial setup for the tests, creating a user to delete.
+        """
+        self.user = CustomUser.objects.create(
+            email='delete_test@test.com',
+            username='deletetestuser',
+            first_name='DeleteTest',
+            last_name='User',
+            password='testpassword123',
+            town_city='Delete City',
+            country='Delete Country',
+            phone_number='123456789',
+            bio='delete bio',
+            work_title='delete work title',
+            company='delete company',
+            linkedin_username='deleteuser22',
+            twitter_handle='deleteuser22',
+        )
+
+    def test_user_deletion(self):
+        """
+        Test to ensure a user is correctly deleted.
+        """
+        user_id = self.user.id
+        self.user.delete()
+        with self.assertRaises(CustomUser.DoesNotExist):  # pylint: disable=no-member
+            CustomUser.objects.get(id=user_id)

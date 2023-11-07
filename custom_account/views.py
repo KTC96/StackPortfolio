@@ -1,8 +1,12 @@
 from allauth.account.views import SignupView
-from django.views.generic import TemplateView, UpdateView
-from django.shortcuts import render, reverse
+from django.views.generic import TemplateView, UpdateView, DeleteView
+from django.shortcuts import render, reverse, redirect
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
                     RecruiterUserProfileEditForm)
@@ -96,3 +100,36 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'slug': self.object.slug})
+
+
+class UserDeleteView(UserPassesTestMixin, DeleteView):
+    """
+    Handling the deletion of the user profile.
+    """
+    model = CustomUser
+    slug_field = 'slug'
+    success_url = reverse_lazy('homepage')
+
+    def test_func(self):
+        return self.get_object() == self.request.user
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(id=self.request.user.id)
+
+
+@login_required
+@require_POST
+def delete_user(request, slug):
+    """
+    Handles user deletion.
+    """
+    user = request.user
+    if user.slug == slug:
+        user.delete()
+        messages.success(
+            request, "Your profile has been successfully deleted.")
+        return redirect(reverse('homepage'))
+
+    messages.error(request, "You cannot delete this profile.")
+    return redirect(reverse('user_profile', kwargs={'slug': slug}))

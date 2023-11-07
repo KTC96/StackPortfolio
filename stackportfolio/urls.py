@@ -20,7 +20,8 @@ from custom_account.views import (
     RecruiterUserSignupView,
     UserProfileDetailView,
     IndexView,
-    UserProfileEditView)
+    UserProfileEditView,
+    delete_user)
 
 
 urlpatterns = [
@@ -33,6 +34,7 @@ urlpatterns = [
          RecruiterUserSignupView.as_view(), name='recruiter_user_signup'),
     path('user/<slug:slug>/edit/',
          UserProfileEditView.as_view(), name='profile_edit'),
+    path('user/<slug:slug>/delete/', delete_user, name='delete_user'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
 
 ]
