@@ -4,3 +4,9 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Handles toast disappearing with Tailwind */
+.toast.opacity-0 {
+  opacity: 0;
+  transition: opacity 0.3s;
+}

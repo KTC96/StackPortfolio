@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="lg:flex">
-  <div class="profile-area">
+  <div class="profile-area lg:w-1/4">
     {% if profile.profile_image %}
     <img src="{{ profile.profile_image }}" alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
     {% else %}
@@ -9,6 +9,23 @@
     {% if profile.is_authenticated and user == profile %}
     <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
       profile</a>
+    <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
+      {% csrf_token %}
+      <a href=" #" class="delete-profile-link" aria-label="Delete profile">
+        Delete profile
+      </a>
+    </form>
+    <dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Are you sure you want to delete your profile? This cannot be undone.</h3>
+        <div class="w-full">
+          <div class="flex pt-4">
+            <button type="submit" class="btn btn-info grow delete-user-confirm-button">Yes</button>
+            <button type="button" class="btn btn-error grow ms-1 delete-user-cancel-button">No</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
     {% endif %}
     {% if profile.twitter_handle or profile.tech_profile.github_username or profile.linkedin_username %}
     <ul class="social-icons flex">
@@ -72,22 +89,26 @@
       <a href="{{ profile.website }}" target="_blank" class="user-website">{{ profile.website }}</a>
     </div>
     {% endif %}
+    {% if profile.phone_number and profile.display_phone_number %}
+    <div class="website-container">
+      <span class="svg-container"></span>
+      <a href="tel:{{ profile.phone_number }}" class="user-phone">{{ profile.phone_number }}</a>
+    </div>
+    {% endif %}
     <p class="prose">
       {{ profile.bio }}
     </p>
 
     <div class="user-tech">
       <ul class="user-tech__list">
-
         <li class="user-tech__item">HTML</li>
         <li class="user-tech__item">CSS</li>
         <li class="user-tech__item">JavaScript</li>
-
       </ul>
     </div>
 
   </div>
-  <div class="profile__title-and-portfolio lg:w-11/12">
+  <div class="profile__title-and-portfolio lg:w-3/4">
     <div class="user-details-desktop hidden lg:block">
       <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>
       <p class="user-work_title">{{ profile.work_title }}</p>

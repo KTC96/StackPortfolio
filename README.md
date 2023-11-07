@@ -316,3 +316,4 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Documentation on extending allauth forms](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/)
 - [Slugify Django username](https://www.fullstackpython.com/django-utils-text-slugify-examples.html)
 - [LoginRequiredMixin](https://docs.djangoproject.com/en/4.2/topics/auth/default/) - Ensures that the view is only accessible to logged in users
+- [Django decorators](https://docs.djangoproject.com/en/4.2/topics/http/decorators/) - using decorators such as `@login_required` and `@require_POST`
