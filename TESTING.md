@@ -22,3 +22,7 @@ In my Account tests, I test for the creation, updating and deletion of accounts.
 2. Test that the phone number gets updated with `test_update_user_phone_number`.
 3. Test that the email display gets toggled with `test_toggle_user_email_display`.
 4. Test that multiple fields get updated with `test_update_multiple_fields`.
+
+#### Delete Account
+
+1. Test that the user gets deleted with `test_delete_user` - this test requires that the `self.user.delete()` line in the test is commented out for the test to fail.
