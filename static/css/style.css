@@ -5,8 +5,37 @@ body {
   padding: 0;
 }
 
+@font-face {
+  font-family: "Hind";
+  src: url("/static/fonts/Hind-Regular.ttf") format("truetype"),
+    url("/static/fonts/Hind-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MartelSans";
+  src: url("/static/fonts/MartelSans-Regular.ttf") format("truetype"),
+    url("/static/fonts/MartelSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MavenPro";
+  src: url("/static/fonts/MavenPro-Regular.ttf") format("truetype"),
+    url("/static/fonts/MavenPro-Bold.ttf") format("truetype");
+}
+
 /* Handles toast disappearing with Tailwind */
 .toast.opacity-0 {
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+/* Form errors */
+.input-invalid {
+  border-color: #e53e3e;
+  background-color: #f7afaf;
+}
+
+.input-valid {
+  border-color: #0166ff;
+  background-color: #eff7ff;
 }

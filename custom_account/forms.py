@@ -7,30 +7,238 @@ class CustomUserForm(SignupForm):
     """
     Create a custom signup form that extends SignupForm.
     """
-    first_name = forms.CharField(max_length=40, label='First Name')
-    last_name = forms.CharField(max_length=40, label='Last Name')
-    town_city = forms.CharField(
-        max_length=85, label='Town/City', required=False)
-    display_town_city = forms.BooleanField(
-        required=False, label='Display Town/City', initial=False)
-    country = forms.CharField(max_length=60, label='Country', required=False)
+    first_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='First Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    last_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='Last Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    email = (
+        forms.EmailField(
+            max_length=60,
+            label='Email',
+            required=True,
+            help_text='Required',
+            widget=forms.EmailInput(
+                attrs={
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+
     display_email = forms.BooleanField(
-        required=False, label='Display Email', initial=False)
-    website = forms.URLField(required=False, label='Website')
+        required=False,
+        label='Display Email',
+        initial=False,
+        help_text='Email will be displayed on your profile',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
+                'checked': ''}
+        ))
+    username = (
+        forms.CharField(
+            max_length=40,
+            min_length=5,
+            label='Username',
+            required=True,
+            help_text='This will be for your profile URL',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    password1 = (
+        forms.CharField(
+            max_length=40,
+            min_length=8,
+            label='Password',
+            required=True,
+            help_text='Required',
+            widget=forms.PasswordInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+
+    password2 = (
+        forms.CharField(
+            max_length=40,
+            min_length=8,
+            label='Confirm Password',
+            required=True,
+            help_text='Required',
+            widget=forms.PasswordInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+
+    town_city = forms.CharField(
+        max_length=85,
+        label='Town/City',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        ))
+
+    display_town_city = forms.BooleanField(
+        required=False, label='Display Town/City',
+        initial=False,
+        help_text='Town/City will be displayed on your profile',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'checked': ''
+            }
+        ))
+
+    country = forms.CharField(
+        max_length=60,
+        label='Country',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    website = forms.URLField(
+        required=False,
+        label='Website',
+        help_text='e.g. https://www.stackportfolio.com',
+        widget=forms.URLInput(
+            attrs={
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     phone_number = forms.CharField(
-        max_length=20, required=False, label='Phone Number')
+        max_length=20,
+        required=False,
+        label='Phone Number',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     display_phone_number = forms.BooleanField(
-        required=False, initial=False, label='Display Phone Number')
-    profile_image = forms.URLField(required=False, label='Profile Image')
-    bio = forms.CharField(widget=forms.Textarea,
-                          required=False, label='Bio', max_length=500)
+        required=False,
+        initial=False,
+        label='Display Phone Number',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'checked': ''
+            }
+        )
+    )
+
+    profile_image = forms.ImageField(
+        required=False,
+        label='Profile Image',
+        help_text='Upload a profile image',
+        widget=forms.FileInput(
+            attrs={
+                'class': """
+                file-input file-input-bordered
+                file-input-primary w-full mt-3
+                """
+            }
+        )
+    )
+
+    bio = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'class': 'textarea textarea-bordered textarea-secondary w-full',
+            'placeholder': 'Write a short bio for your profile'
+        }
+    ),
+        required=False,
+        label='Bio',
+        max_length=500
+    )
+
     work_title = forms.CharField(
-        max_length=80, required=False, label='Title', help_text='e.g. Software Engineer')
-    company = forms.CharField(max_length=80, required=False, label='Company')
+        max_length=80,
+        required=False,
+        label='Title',
+        help_text='e.g. Software Engineer',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    company = forms.CharField(
+        max_length=80,
+        required=False,
+        label='Company',
+        help_text='e.g. Stack Portfolio',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     linkedin_username = forms.CharField(
-        max_length=80, required=False, label='LinkedIn Username')
+        max_length=80,
+        required=False,
+        label='LinkedIn Username',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     twitter_handle = forms.CharField(
-        max_length=80, required=False, label='Twitter Handle')
+        max_length=80,
+        required=False,
+        label='Twitter Handle',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
 
     def save(self, request):
         user = super(CustomUserForm, self).save(request)
@@ -62,9 +270,28 @@ class TechUserForm(CustomUserForm):
     This form is for users who are signing up as tech users.
     """
     github_username = forms.CharField(
-        max_length=40, required=False, label='GitHub Username')
+        max_length=40,
+        required=False,
+        label='GitHub Username',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     seeking_employment = forms.BooleanField(
-        required=False, initial=False, label='Seeking Employment')
+        required=False,
+        initial=False,
+        label='Seeking Employment',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'checked': ''
+            }
+        )
+    )
 
     def save(self, request):
 

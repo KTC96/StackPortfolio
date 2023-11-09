@@ -42,16 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
-    'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
     'cloudinary',
     'custom_account',
 ]
-
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
@@ -129,7 +128,9 @@ ACCOUNT_FORMS = {
     'tech_signup': 'custom_account.forms.TechUserForm',
     'recruiter_signup': 'custom_account.forms.RecruiterUserForm',
 }
+
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -150,7 +151,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 

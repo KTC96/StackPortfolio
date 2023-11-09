@@ -1,11 +1,21 @@
 {% extends "base.html" %} {% block content %}
+{% load cloudinary %}
 <div class="lg:flex">
   <div class="profile-area lg:w-1/4">
-    {% if profile.profile_image %}
-    <img src="{{ profile.profile_image }}" alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
-    {% else %}
-    <div>{{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
-    {% endif %}
+    <div class="w-full mb-5">
+      <div class="w-full">
+        {% if profile.profile_image %}
+        <img class="w-full" src="{{ profile.profile_image.url }}"
+          alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
+        {% else %}
+        <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
+          {{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+
+
     {% if profile.is_authenticated and user == profile %}
     <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
       profile</a>
