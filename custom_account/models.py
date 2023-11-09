@@ -3,6 +3,7 @@ from django.contrib.auth.models import (AbstractBaseUser,
                                         PermissionsMixin,
                                         BaseUserManager)
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 
 class CustomUserManager(BaseUserManager):
@@ -108,7 +109,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     website = models.URLField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     display_phone_number = models.BooleanField(default=False)
-    profile_image = models.URLField(blank=True, null=True)
+    profile_image = CloudinaryField(
+        'image', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     work_title = models.CharField(max_length=80, blank=True, null=True)
     company = models.CharField(max_length=80, blank=True, null=True)

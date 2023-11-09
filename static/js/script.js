@@ -1,7 +1,10 @@
-// Run when the DOM is loaded
+import { runSignupStepper } from "./formValidation.js";
+
+// Run functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
   handleDeleteProfileButton();
   displayToasts();
+  runSignupStepper();
 });
 
 /**
