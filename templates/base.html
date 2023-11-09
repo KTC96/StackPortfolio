@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html data-theme="stackportfolio-default-theme">
 
 <head>
     <meta charset="UTF-8">
@@ -12,11 +12,21 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="toast fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="bg-green-500 text-white font-semibold px-4 py-2 rounded shadow">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
     <header>
         <!-- Navigation -->
         <div class="navbar bg-base-100 container mx-auto justify-between">
             <div class="navbar-start">
-                <a class="text-lg font-bold" href="{% url 'homepage' %}">Stackportfol.io</a>
+                <a class="text-lg font-bold text-primary" href="{% url 'homepage' %}">Stackportfol.io</a>
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
@@ -24,7 +34,7 @@
                     <li><a>See job posts</a></li>
                 </ul>
             </div>
-            <div class="dropdown">
+            <div class="dropdown z-50">
                 <label tabindex="0" class="btn btn-ghost md:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -36,8 +46,8 @@
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
                     <li><a>See projects</a></li>
                     <li><a>See job posts</a></li>
-                    {% if user.is_authenticated %}
                     <hr class="my-2">
+                    {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'account_logout' %}">Logout</a>
                     </li>
@@ -92,7 +102,7 @@
     </header>
 
 
-    <main>
+    <main class="py-8">
         <div class="container mx-auto">
             {% block content %}
             <!-- Content Goes here -->
@@ -101,8 +111,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class=" md:p-10 mt-auto bg-aliceblue">
-        <div class="container mx-auto text-base-content footer">
+    <footer class=" md:p-10 bg-secondary text-base-100 mt-auto">
+        <div class="container mx-auto footer my-8">
             <div>
                 <header class="footer-title">Company</header>
                 <a class="link link-hover">About us</a>
