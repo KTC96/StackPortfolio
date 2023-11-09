@@ -317,3 +317,8 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Slugify Django username](https://www.fullstackpython.com/django-utils-text-slugify-examples.html)
 - [LoginRequiredMixin](https://docs.djangoproject.com/en/4.2/topics/auth/default/) - Ensures that the view is only accessible to logged in users
 - [Django decorators](https://docs.djangoproject.com/en/4.2/topics/http/decorators/) - using decorators such as `@login_required` and `@require_POST`
+- [Issue with Tailwind Styles not applying to form elements on Stackoverflow](https://stackoverflow.com/questions/76729480/django-tailwind-styling-not-applied-to-template-variables-with-widget-attribut)
+- [django-cloundinary-storage for working with Cloudinary](https://pypi.org/project/django-cloudinary-storage/)
+- [Cloudinary](https://cloudinary.com/) - Used to store and transform images
+- [TailwindCSS Form Validation tutorial](https://dev.to/deyemiobaa/adding-custom-validation-to-a-form-with-tailwindcss-1e7d) - Referenced as part of research, but I ended up not using it because of the Pep8 requirements
+- [Jest Documentation](https://jestjs.io/docs/getting-started) - Used for testing JavaScript forms
