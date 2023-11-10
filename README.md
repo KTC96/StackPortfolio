@@ -325,3 +325,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [404 Page template code from HyperUI Components](https://www.hyperui.dev/components/application-ui/error-pages#component-2) - Used for 404 and 500 error pages
 - [Django documentation on custom error pages](https://docs.djangoproject.com/en/3.2/topics/http/views/#customizing-error-views)
 - [Contact form component from Tailwind components](https://tailwindcomponents.com/component/basic-contact-form)
+- [Disabling intermediate logout step in allauth](https://stackoverflow.com/questions/18134807/how-to-disable-intermediate-signout-page-in-django-allauth)
+- [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
