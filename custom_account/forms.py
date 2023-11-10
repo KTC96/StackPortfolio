@@ -53,7 +53,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
-                'checked': ''}
+            }
         ))
     username = (
         forms.CharField(
@@ -114,7 +114,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         ))
 
@@ -160,7 +160,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
@@ -288,7 +288,7 @@ class TechUserForm(CustomUserForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
@@ -358,6 +358,7 @@ class CustomUserEditForm(forms.ModelForm):
             label='Email',
             required=True,
             help_text='Required',
+
             widget=forms.EmailInput(
                 attrs={
                     'class': 'input input-bordered input-secondary w-full'
@@ -371,7 +372,7 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
-                'checked': ''}
+            }
         ))
     username = (
         forms.CharField(
@@ -386,32 +387,7 @@ class CustomUserEditForm(forms.ModelForm):
                     'class': 'input input-bordered input-secondary w-full'
                 }
             )))
-    password1 = (
-        forms.CharField(
-            max_length=40,
-            min_length=8,
-            label='Password',
-            required=True,
-            help_text='Required',
-            widget=forms.PasswordInput(
-                attrs={
-                    'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
-    password2 = (
-        forms.CharField(
-            max_length=40,
-            min_length=8,
-            label='Confirm Password',
-            required=True,
-            help_text='Required',
-            widget=forms.PasswordInput(
-                attrs={
-                    'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
+
     town_city = forms.CharField(
         max_length=85,
         label='Town/City',
@@ -429,7 +405,7 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         ))
     country = forms.CharField(
@@ -471,7 +447,7 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
@@ -559,6 +535,8 @@ class CustomUserEditForm(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
+            'email',
+            'username',
             'town_city',
             'display_town_city',
             'country',
@@ -599,7 +577,7 @@ class TechUserProfileEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
