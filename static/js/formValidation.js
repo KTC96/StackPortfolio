@@ -77,7 +77,7 @@ const validateInput = (input) => {
 
   // check if input is textarea
   if (input.tagName === "TEXTAREA") {
-    if (input.value.length < 10) {
+    if (input.value.length > 0 && input.value.length < 10) {
       input.classList.add("input-invalid");
       errorSpan.classList.remove("hidden");
       errorSpan.textContent = "Bio must be at least 10 characters long.";
@@ -487,4 +487,25 @@ const runSignupStepper = () => {
   }
 };
 
-export { validateInput, runSignupStepper };
+const profileEditValidation = () => {
+  // click class edit-profile-step to show id edit_form_profile form
+  // click class edit-details-step to show id edit_form_details
+
+  const editProfileStep = document.querySelector(".edit-profile-step");
+  const editDetailsStep = document.querySelector(".edit-details-step");
+
+  const editProfileForm = document.querySelector("#edit_form_profile");
+  const editDetailsForm = document.querySelector("#edit_form_details");
+
+  editProfileStep.addEventListener("click", (event) => {
+    editProfileForm.classList.remove("hidden");
+    editDetailsForm.classList.add("hidden");
+  });
+
+  editDetailsStep.addEventListener("click", (event) => {
+    editProfileForm.classList.add("hidden");
+    editDetailsForm.classList.remove("hidden");
+  });
+};
+
+export { validateInput, runSignupStepper, profileEditValidation };
