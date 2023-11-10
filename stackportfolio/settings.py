@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['stackportfolio-1340b88e89e7.herokuapp.com',
-                 'localhost', '127.0.0.1']
+                 'localhost', '127.0.0.1', 'stackportfol.io', 'www.stackportfol.io']
 
 
 # Application definition
