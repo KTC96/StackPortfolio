@@ -358,8 +358,10 @@ const displaySummaryDetails = () => {
     storedFormData.work_title || "";
   document.querySelector(".company-field").textContent =
     storedFormData.company || "";
-  document.querySelector(".github-username-field").textContent =
-    storedFormData.github_username || "";
+  if (document.querySelector(".github-username-field")) {
+    document.querySelector(".github-username-field").textContent =
+      storedFormData.github_username || "";
+  }
   document.querySelector(".linkedin-username-field").textContent =
     storedFormData.linkedin_username || "";
   document.querySelector(".twitter-handle-field").textContent =
