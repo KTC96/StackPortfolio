@@ -487,25 +487,50 @@ const runSignupStepper = () => {
   }
 };
 
-const profileEditValidation = () => {
-  // click class edit-profile-step to show id edit_form_profile form
-  // click class edit-details-step to show id edit_form_details
+// const profileEditValidation = () => {
+//   // click class edit-profile-step to show id edit_form_profile form
+//   // click class edit-details-step to show id edit_form_details
 
-  const editProfileStep = document.querySelector(".edit-profile-step");
-  const editDetailsStep = document.querySelector(".edit-details-step");
+//   const editProfileStep = document.querySelector(".edit-profile-step");
+//   const editDetailsStep = document.querySelector(".edit-details-step");
 
-  const editProfileForm = document.querySelector("#edit_form_profile");
-  const editDetailsForm = document.querySelector("#edit_form_details");
+//   const editProfileStepNumber = editProfileStep.children[0];
+//   const editDetailsStepNumber = editDetailsStep.children[0];
 
-  editProfileStep.addEventListener("click", (event) => {
-    editProfileForm.classList.remove("hidden");
-    editDetailsForm.classList.add("hidden");
-  });
+//   const editProfileForm = document.querySelector("#edit_form_profile");
+//   const editDetailsForm = document.querySelector("#edit_form_details");
 
-  editDetailsStep.addEventListener("click", (event) => {
-    editProfileForm.classList.add("hidden");
-    editDetailsForm.classList.remove("hidden");
-  });
-};
+//   // Function to toggle visibility of forms
+//   const toggleFormVisibility = (showProfileForm) => {
+//     if (showProfileForm) {
+//       editProfileForm.classList.remove("hidden");
+//       editDetailsForm.classList.add("hidden");
 
-export { validateInput, runSignupStepper, profileEditValidation };
+//       editProfileStep.classList.add("text-primary");
+//       editDetailsStep.classList.remove("text-primary");
+
+//       editProfileStepNumber.classList.add("bg-primary");
+//       editProfileStepNumber.classList.remove("bg-secondary");
+//       editDetailsStepNumber.classList.remove("bg-primary");
+//       editDetailsStepNumber.classList.add("bg-secondary");
+//     } else {
+//       editProfileForm.classList.add("hidden");
+//       editDetailsForm.classList.remove("hidden");
+
+//       editProfileStep.classList.remove("text-primary");
+//       editDetailsStep.classList.add("text-primary");
+
+//       editProfileStepNumber.classList.remove("bg-primary");
+//       editProfileStepNumber.classList.add("bg-secondary");
+//       editDetailsStepNumber.classList.add("bg-primary");
+//       editDetailsStepNumber.classList.remove("bg-secondary");
+//     }
+//   };
+
+//   editProfileStep.addEventListener("click", () => toggleFormVisibility(true));
+//   editDetailsStep.addEventListener("click", () => toggleFormVisibility(false));
+
+//   toggleFormVisibility(false);
+// };
+
+export { validateInput, runSignupStepper };
