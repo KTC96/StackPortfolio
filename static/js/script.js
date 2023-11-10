@@ -4,7 +4,10 @@ import { runSignupStepper } from "./formValidation.js";
 document.addEventListener("DOMContentLoaded", () => {
   handleDeleteProfileButton();
   displayToasts();
-  runSignupStepper();
+
+  if (window.location.href.indexOf("signup") > -1) {
+    runSignupStepper();
+  }
 });
 
 /**
