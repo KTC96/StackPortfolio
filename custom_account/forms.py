@@ -53,7 +53,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
-                'checked': ''}
+            }
         ))
     username = (
         forms.CharField(
@@ -114,7 +114,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         ))
 
@@ -160,7 +160,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
@@ -288,7 +288,7 @@ class TechUserForm(CustomUserForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary mt-3 lg:mt-0',
-                'checked': ''
+
             }
         )
     )
@@ -326,6 +326,207 @@ class CustomUserEditForm(forms.ModelForm):
     """
     This form is required to edit the user profile.
     """
+    first_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='First Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    last_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='Last Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    email = (
+        forms.EmailField(
+            max_length=60,
+            label='Email',
+            required=True,
+            help_text='Required',
+
+            widget=forms.EmailInput(
+                attrs={
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    display_email = forms.BooleanField(
+        required=False,
+        label='Display Email',
+        initial=False,
+        help_text='Email will be displayed on your profile',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
+            }
+        ))
+    username = (
+        forms.CharField(
+            max_length=40,
+            min_length=5,
+            label='Username',
+            required=True,
+            help_text='This will be for your profile URL',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+
+    town_city = forms.CharField(
+        max_length=85,
+        label='Town/City',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        ))
+    display_town_city = forms.BooleanField(
+        required=False, label='Display Town/City',
+        initial=False,
+        help_text='Town/City will be displayed on your profile',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+
+            }
+        ))
+    country = forms.CharField(
+        max_length=60,
+        label='Country',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+    website = forms.URLField(
+        required=False,
+        label='Website',
+        help_text='e.g. https://www.stackportfolio.com',
+        widget=forms.URLInput(
+            attrs={
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+    phone_number = forms.CharField(
+        max_length=20,
+        required=False,
+        label='Phone Number',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+    display_phone_number = forms.BooleanField(
+        required=False,
+        initial=False,
+        label='Display Phone Number',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+
+            }
+        )
+    )
+
+    profile_image = forms.ImageField(
+        required=False,
+        label='Profile Image',
+        help_text='Upload a profile image',
+        widget=forms.FileInput(
+            attrs={
+                'class': """
+                file-input file-input-bordered
+                file-input-primary w-full mt-3
+                """
+            }
+        )
+    )
+
+    bio = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'class': 'textarea textarea-bordered textarea-secondary w-full',
+            'placeholder': 'Write a short bio for your profile'
+        }
+    ),
+        required=False,
+        label='Bio',
+        max_length=500
+    )
+
+    work_title = forms.CharField(
+        max_length=80,
+        required=False,
+        label='Title',
+        help_text='e.g. Software Engineer',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    company = forms.CharField(
+        max_length=80,
+        required=False,
+        label='Company',
+        help_text='e.g. Stack Portfolio',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    linkedin_username = forms.CharField(
+        max_length=80,
+        required=False,
+        label='LinkedIn Username',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    twitter_handle = forms.CharField(
+        max_length=80,
+        required=False,
+        label='Twitter Handle',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
     class Meta:
         """
         Meta to specify the model and fields to be used.
@@ -334,6 +535,8 @@ class CustomUserEditForm(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
+            'email',
+            'username',
             'town_city',
             'display_town_city',
             'country',
@@ -354,6 +557,31 @@ class TechUserProfileEditForm(forms.ModelForm):
     """
     TechUser update form.
     """
+    github_username = forms.CharField(
+        max_length=40,
+        required=False,
+        label='GitHub Username',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '',
+                'class': 'input input-bordered input-secondary w-full'
+            }
+        )
+    )
+
+    seeking_employment = forms.BooleanField(
+        required=False,
+        initial=False,
+        label='Seeking Employment',
+        help_text='Are you currently seeking a new role?',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+
+            }
+        )
+    )
+
     class Meta:
         """
         Meta to specify the model and fields to be used.

@@ -17,14 +17,16 @@
 
 
     {% if profile.is_authenticated and user == profile %}
-    <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
-      profile</a>
-    <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
-      {% csrf_token %}
-      <a href=" #" class="delete-profile-link" aria-label="Delete profile">
-        Delete profile
-      </a>
-    </form>
+    <div class="flex flex-row justify-around">
+      <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
+        profile</a>
+      <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
+        {% csrf_token %}
+        <a href=" #" class="delete-profile-link" aria-label="Delete profile">
+          Delete profile
+        </a>
+      </form>
+    </div>
     <dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Are you sure you want to delete your profile? This cannot be undone.</h3>
@@ -88,7 +90,7 @@
       <a href="#portfolio" class="portfolio-link" aria-label="Scrolls to portfolio section">See my portfolio ></a>
     </div>
     {% if profile.display_email %}
-    <div class=" email-container">
+    <div class="email-container">
       <span class="svg-container"></span>
       <p class="user-email">{{ profile.email}}</p>
     </div>
@@ -105,10 +107,19 @@
       <a href="tel:{{ profile.phone_number }}" class="user-phone">{{ profile.phone_number }}</a>
     </div>
     {% endif %}
+    {% if profile.town_city and profile.display_town_city %}
+    <div class="location-container">
+      <span class="town-city">{{ profile.town_city }}</span>
+    </div>
+    {% endif %}
+
+    {% if profile.bio %}
     <p class="prose">
       {{ profile.bio }}
     </p>
+    {% endif %}
 
+    {% if user.tech_profile %}
     <div class="user-tech">
       <ul class="user-tech__list">
         <li class="user-tech__item">HTML</li>
@@ -116,6 +127,7 @@
         <li class="user-tech__item">JavaScript</li>
       </ul>
     </div>
+    {% endif %}
 
   </div>
   <div class="profile__title-and-portfolio lg:w-3/4">

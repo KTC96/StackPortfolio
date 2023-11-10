@@ -77,7 +77,7 @@ const validateInput = (input) => {
 
   // check if input is textarea
   if (input.tagName === "TEXTAREA") {
-    if (input.value.length < 10) {
+    if (input.value.length > 0 && input.value.length < 10) {
       input.classList.add("input-invalid");
       errorSpan.classList.remove("hidden");
       errorSpan.textContent = "Bio must be at least 10 characters long.";
@@ -486,5 +486,51 @@ const runSignupStepper = () => {
     updateButtonState(button, isStepValid(steps, index));
   }
 };
+
+// const profileEditValidation = () => {
+//   // click class edit-profile-step to show id edit_form_profile form
+//   // click class edit-details-step to show id edit_form_details
+
+//   const editProfileStep = document.querySelector(".edit-profile-step");
+//   const editDetailsStep = document.querySelector(".edit-details-step");
+
+//   const editProfileStepNumber = editProfileStep.children[0];
+//   const editDetailsStepNumber = editDetailsStep.children[0];
+
+//   const editProfileForm = document.querySelector("#edit_form_profile");
+//   const editDetailsForm = document.querySelector("#edit_form_details");
+
+//   // Function to toggle visibility of forms
+//   const toggleFormVisibility = (showProfileForm) => {
+//     if (showProfileForm) {
+//       editProfileForm.classList.remove("hidden");
+//       editDetailsForm.classList.add("hidden");
+
+//       editProfileStep.classList.add("text-primary");
+//       editDetailsStep.classList.remove("text-primary");
+
+//       editProfileStepNumber.classList.add("bg-primary");
+//       editProfileStepNumber.classList.remove("bg-secondary");
+//       editDetailsStepNumber.classList.remove("bg-primary");
+//       editDetailsStepNumber.classList.add("bg-secondary");
+//     } else {
+//       editProfileForm.classList.add("hidden");
+//       editDetailsForm.classList.remove("hidden");
+
+//       editProfileStep.classList.remove("text-primary");
+//       editDetailsStep.classList.add("text-primary");
+
+//       editProfileStepNumber.classList.remove("bg-primary");
+//       editProfileStepNumber.classList.add("bg-secondary");
+//       editDetailsStepNumber.classList.add("bg-primary");
+//       editDetailsStepNumber.classList.remove("bg-secondary");
+//     }
+//   };
+
+//   editProfileStep.addEventListener("click", () => toggleFormVisibility(true));
+//   editDetailsStep.addEventListener("click", () => toggleFormVisibility(false));
+
+//   toggleFormVisibility(false);
+// };
 
 export { validateInput, runSignupStepper };
