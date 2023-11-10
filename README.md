@@ -322,3 +322,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Cloudinary](https://cloudinary.com/) - Used to store and transform images
 - [TailwindCSS Form Validation tutorial](https://dev.to/deyemiobaa/adding-custom-validation-to-a-form-with-tailwindcss-1e7d) - Referenced as part of research, but I ended up not using it because of the Pep8 requirements
 - [Jest Documentation](https://jestjs.io/docs/getting-started) - Used for testing JavaScript forms
+- [404 Page template code from HyperUI Components](https://www.hyperui.dev/components/application-ui/error-pages#component-2) - Used for 404 and 500 error pages
+- [Django documentation on custom error pages](https://docs.djangoproject.com/en/3.2/topics/http/views/#customizing-error-views)
