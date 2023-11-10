@@ -36,3 +36,10 @@ Jest
 #### Delete Account
 
 1. Test that the user gets deleted with `test_delete_user` - this test requires that the `self.user.delete()` line in the test is commented out for the test to fail.
+
+### Project
+
+#### Create Project
+
+1. Test that the Project model is not none with `test_check_model_is_not_none`.
+2. Test that a project can be created with `test_create_project`.

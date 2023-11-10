@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'widget_tweaks',
     'custom_account',
+    'project',
 ]
 SITE_ID = 1
 
