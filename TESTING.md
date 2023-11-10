@@ -43,3 +43,6 @@ Jest
 
 1. Test that the Project model is not none with `test_check_model_is_not_none`.
 2. Test that a project can be created with `test_create_project`.
+3. Test that a project cannot be created without a project name with `test_project_without_project_name`.
+4. Test that a project cannot be created without a user with `test_project_without_user`.
+5. Test that a project cannot be created with a project name with more than 100 characters with `test_project_name_fewer_than_100_characters`.
