@@ -1,5 +1,35 @@
 {% extends "base.html" %} {% block content %}
 
+<div class="text-center lg:text-left lg:w-1/3 mx-auto  hero-container mb-12 lg:my-12 lg:mb-24">
+  <h1 class="text-3xl lg:text-5xl">Showcase your <strong>code</strong>, elevate your <strong><span
+        class="text-primary">Impact</span></strong>. 🚀</h1>
+  <a class="btn btn-primary mx-auto my-3 lg:my-5 mt-5 lg:mt-7 flex lg:w-2/3 lg:ml-0"
+    href="{% url 'account_signup' %}tech" role="button">Start
+    stacking your
+    success</a>
+
+  <p class="text-sm prose inline-block">Searching for proven talent?</p>
+  <a href="{% url 'account_signup' %}recruiter" class="link text-sm link-primary block lg:inline">Sign up as a
+    recruiter</a>
+</div>
+<div class="featured-projects lg:my-12">
+  <h2 class="text-2xl text-center">Featured Projects</h2>
+  <ul class="list-none carousel carousel-center mx-auto mt-5 w-full justify-center">
+    <li class="project carousel-item w-150">
+      Example project
+    </li>
+    <li class="project carousel-item w-150">
+      Example project
+    </li>
+    <li class="project carousel-item w-150">
+      Example project
+    </li>
+    <li class="project carousel-item w-150">
+      Example project
+    </li>
+    <li class="project carousel-item w-150">Example project</li>
+  </ul>
+</div>
 {{ users|length }} user(s) found.
 
 {% for user in users %}
