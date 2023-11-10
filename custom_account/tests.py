@@ -67,7 +67,6 @@ class AccountTests(TestCase):
                 website='',
                 phone_number='123456789',
                 display_phone_number=False,
-                profile_image='testprofileimageurl.com',
                 bio='test bio',
                 work_title='test work title',
                 company='test company',
@@ -91,8 +90,6 @@ class AccountTests(TestCase):
         self.assertEqual(existing_user.website, '')
         self.assertEqual(existing_user.phone_number, '123456789')
         self.assertEqual(existing_user.display_phone_number, False)
-        self.assertEqual(existing_user.profile_image,
-                         'testprofileimageurl.com')
         self.assertEqual(existing_user.bio, 'test bio')
         self.assertEqual(existing_user.work_title, 'test work title')
         self.assertEqual(existing_user.company, 'test company')
