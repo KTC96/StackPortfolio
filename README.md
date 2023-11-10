@@ -327,3 +327,4 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Contact form component from Tailwind components](https://tailwindcomponents.com/component/basic-contact-form)
 - [Disabling intermediate logout step in allauth](https://stackoverflow.com/questions/18134807/how-to-disable-intermediate-signout-page-in-django-allauth)
 - [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
+- [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
