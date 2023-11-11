@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'custom_account',
     'project',
+    'technology',
 ]
 SITE_ID = 1
 
