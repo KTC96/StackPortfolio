@@ -3,9 +3,10 @@
 <h1 class="text-3xl my-8">Projects</h1>
 
 
-<div class="flex flex-wrap justify-between">
+<div class="flex flex-wrap lg:justify-between">
   {% for project in projects %}
-  <a href="{{ project.get_absolute_url }}" class="card w-1/3 h-64 :before:bg-secondary text-white shadow-xl image-full"
+  <a href="{{ project.get_absolute_url }}"
+    class="card lg:w-1/3 h-64 :before:bg-secondary text-white shadow-xl image-full"
     aria-label="Opens the {{ project.project_name }} project">
     <figure><img src="{{ project.project_image.url }}" alt="Screenshot of the {{ project.project_name }} project" />
     </figure>
@@ -13,9 +14,9 @@
       <h2 class="card-title text-white text-xl"><strong>{{ project.project_name }}</strong></h2>
       <p class="prose text-white">{{ project.project_description }}</p>
       <div class="techs-used mt-auto">
-        <ul class="flex flex-wrap justify-between list-none">
+        <ul class="flex flex-wrap justify-center lg:justify-between list-none">
           {% for tech in project.technologies.all|slice:":5" %}
-          <li class="text-sm bg-primary text-white px-5 py-1 mr-2 mb-2">{{ tech }}</li>
+          <li class="text-sm bg-primary text-white px-5 py-1 mb-2 ml-1">{{ tech }}</li>
           {% endfor %}
         </ul>
       </div>

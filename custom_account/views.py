@@ -1,4 +1,5 @@
 from allauth.account.views import SignupView
+from django.http import HttpResponseForbidden
 from django.views.generic import TemplateView, UpdateView
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import DetailView
@@ -74,6 +75,12 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'account/user_edit_profile.html'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden("You are not allowed to view this page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

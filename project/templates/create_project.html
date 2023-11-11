@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+{% load widget_tweaks %}
+<h1 class="text-2xl lg:text-3xl mt-8">Create a project</h1>
+
+<div class="form-container py-8">
+  <form action="{% url 'project:create_project' slug=request.user.slug %}" method="post" class="flex flex-col w-full"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    {% if field.name == "project_active" %}
+    <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
+      <div class="w-50 me-5">
+        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+        <span class="text-xs text-secondary italic mb-1 help-text">{{ field.help_text }}</span>
+      </div>
+      {% render_field field class="toggle toggle-secondary mt-3 lg:mt-0 checked:bg-primary" %}
+      {% if field.errors %}
+      <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
+      {% endif %}
+    </div>
+    {% elif field.field.widget.input_type == "file" %}
+    <div class="form-control w-full my-3">
+      <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
+        {{ field.label }}
+      </label>
+      {% render_field field class="file-input file-input-bordered file-input-primary w-full mt-3" %}
+      <span class="error-span text-error text-sm mt-2 hidden"></span>
+      {% if field.errors %}
+      <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
+      {% endif %}
+    </div>
+    {% comment %} Check if type is textarea {% endcomment %}
+    {% elif field.name == "project_description" or field.name == "technologies" %}
+    <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
+      {{ field.label }}
+    </label>
+    {% render_field field class="textarea textarea-bordered textarea-secondary w-full" %}
+    {% if field.help_text %}
+    <p class="text-sm text-grey-dark">{{ field.help_text }}</p>
+    {% endif %}
+    {% for error in field.errors %}
+    <p class="text-red-500 text-sm mt-2">{{ error }}</p>
+    {% endfor %}
+    {% else %}
+    <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
+      {{ field.label }}
+    </label>
+    {% render_field field class="input input-bordered input-secondary w-full" %}
+    {% if field.help_text %}
+    <p class="text-sm text-grey-dark">{{ field.help_text }}</p>
+    {% endif %}
+    {% for error in field.errors %}
+    <p class="text-red-500 text-sm mt-2">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+    {% endfor %}
+    <button class="primaryAction btn btn-primary block mx-auto lg:mx-0 lg:ml-auto mt-8" role="button"
+      type="submit">Create
+      project</button>
+  </form>
+</div>
+{% endblock content %}
