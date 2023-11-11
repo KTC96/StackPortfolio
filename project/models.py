@@ -15,11 +15,11 @@ class Project(models.Model):
         "custom_account.CustomUser", on_delete=models.CASCADE, related_name="projects")
     technologies = models.ManyToManyField(Tech)
     project_name = models.CharField(max_length=100, blank=False, null=False)
-    github_repo_url = models.URLField(max_length=255)
-    deployed_url = models.URLField(max_length=255)
+    github_repo_url = models.URLField(max_length=255, blank=True, null=True)
+    deployed_url = models.URLField(max_length=255, blank=True, null=True)
     project_active = models.BooleanField(default=True)
-    project_description = models.TextField()
-    project_image = CloudinaryField('image')
+    project_description = models.TextField(blank=True, null=True)
+    project_image = CloudinaryField('image', blank=True, null=True)
     project_view_count = models.IntegerField(default=0)
     project_slug = models.SlugField(blank=True, null=True)
     project_date_created = models.DateTimeField(auto_now_add=True)
@@ -30,6 +30,7 @@ class Project(models.Model):
         Meta class for the project model.
         """
         ordering = ["-project_date_created"]
+        unique_together = ["user", "project_name"]
 
     def __str__(self):
         """
