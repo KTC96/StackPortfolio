@@ -23,6 +23,7 @@ from custom_account.views import (
     IndexView,
     UserProfileEditView,
     delete_user)
+from project.views import ProjectListView
 
 
 urlpatterns = [
@@ -43,5 +44,6 @@ urlpatterns = [
     path('user/<slug:slug>/delete/', delete_user, name='delete_user'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
     path('user/', include('project.urls')),
+    path('projects/', ProjectListView.as_view(), name='view_all_projects'),
 
 ]

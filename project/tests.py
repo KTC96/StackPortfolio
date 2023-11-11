@@ -104,3 +104,33 @@ class ProjectDetailTests(TestCase):
         """
         response = self.client.get('/user/testuser/project/test-project')
         self.assertEqual(response.status_code, 200)
+
+
+class ProjectListTests(TestCase):
+    """
+    Tests for the ProjectListView.
+    """
+
+    def setUp(self):
+        """Create a user to associate with the project."""
+        self.user = CustomUser.objects.create_user(
+            username='testuser',
+            first_name='Test',
+            last_name='User',
+            email='testuser@example.com',
+            password='password',
+        )
+
+        project = Project.objects.create(
+            project_name='Test Project',
+            user=self.user,
+            github_repo_url=''
+        )
+
+    def test_project_list_view_exists(self):
+        """
+        Test to check if project list view exists
+        by returning a 200 response.
+        """
+        response = self.client.get('/projects/')
+        self.assertEqual(response.status_code, 200)

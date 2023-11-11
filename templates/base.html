@@ -30,7 +30,7 @@
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a>See projects</a></li>
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
                     <li><a>See job posts</a></li>
                 </ul>
             </div>
@@ -44,12 +44,12 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
-                    <li><a>See projects</a></li>
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
                     <li><a>See job posts</a></li>
                     <hr class="my-2">
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'account_logout' %}">Logout</a>
+                        <a href=" {% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li>
@@ -111,23 +111,45 @@
     </main>
 
     <!-- Footer -->
-    <footer class=" md:p-10 bg-secondary text-base-100 mt-auto">
-        <div class="container mx-auto footer my-8">
-            <div>
-                <header class="footer-title">Company</header>
-                <a href="{% url 'about' %}" class="link link-hover">About us</a>
-                <a href="{% url 'careers' %}" class="link link-hover">Careers</a>
-            </div>
-            <div>
-                <header class="footer-title">Offerings</header>
-                <a class="link link-hover">Developer Portfolio</a>
-                <a class="link link-hover">Job board</a>
-            </div>
-            <div>
-                <header class="footer-title">Support</header>
-                <a href="{% url 'contact' %}" class="link link-hover">Contact</a>
+
+    <footer class="mt-auto">
+        {% if page_obj %}
+        <div class="pagination mb-8">
+            <div class="join w-full justify-center">
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="join-item btn">&laquo; First</a>
+                {% endif %}
+
+                {% for page_num in page_obj.paginator.page_range %}
+                <a href="?page={{ page_num }}"
+                    class="join-item btn {% if page_num == page_obj.number %}btn-active{% endif %}">{{ page_num }}</a>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="join-item btn">Last &raquo;</a>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
+        <div class="footer-menus md:p-10 bg-secondary text-base-100 ">
+            <div class="container mx-auto footer my-8">
+                <div>
+                    <header class="footer-title">Company</header>
+                    <a href="{% url 'about' %}" class="link link-hover">About us</a>
+                    <a href="{% url 'careers' %}" class="link link-hover">Careers</a>
+                </div>
+                <div>
+                    <header class="footer-title">Offerings</header>
+                    <a class="link link-hover">Developer Portfolio</a>
+                    <a class="link link-hover">Job board</a>
+                </div>
+                <div>
+                    <header class="footer-title">Support</header>
+                    <a href="{% url 'contact' %}" class="link link-hover">Contact</a>
+                </div>
+            </div>
+        </div>
+
     </footer>
     <script type="module" src="{% static 'js/script.js' %}"></script>
 </body>

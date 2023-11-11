@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 from technology.models import Tech
@@ -24,8 +25,29 @@ class Project(models.Model):
     project_date_created = models.DateTimeField(auto_now_add=True)
     project_date_updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        """
+        Meta class for the project model.
+        """
+        ordering = ["-project_date_created"]
+
     def __str__(self):
+        """
+        Returns the project name as a string.
+        """
         return str(self.project_name)
+
+    def num_view_count(self):
+        """
+        Returns the number of views a project has.
+        """
+        return self.project_view_count
+
+    def get_absolute_url(self):
+        """
+        Returns the absolute url for a project.
+        """
+        return reverse("project:view_project", kwargs={"slug": self.user.slug, "project_slug": self.project_slug})
 
     def save(self, *args, **kwargs):
         """
