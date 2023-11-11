@@ -329,3 +329,4 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
 - [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
 - [Django documentation on the testing client](https://docs.djangoproject.com/en/4.2/topics/testing/tools/#the-test-client)
+- [Render - potentially used for hosting](https://render.com)

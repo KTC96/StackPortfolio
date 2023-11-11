@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
+from technology.models import Tech
 
 
 class Project(models.Model):
@@ -11,6 +12,7 @@ class Project(models.Model):
     """
     user = models.ForeignKey(
         "custom_account.CustomUser", on_delete=models.CASCADE, related_name="projects")
+    technologies = models.ManyToManyField(Tech)
     project_name = models.CharField(max_length=100, blank=False, null=False)
     github_repo_url = models.URLField(max_length=255)
     deployed_url = models.URLField(max_length=255)

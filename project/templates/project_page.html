@@ -2,5 +2,12 @@
 <h1 class="text-3xl">{{ project.project_name }}</h1>
 <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" />
 
+<ul>
+  {% for tech in project.technologies.all %}
+  <li>
+    {{ tech.tech_name }}
+  </li>
+  {% endfor %}
+</ul>
 <p class="prose">{{ project.project_description }}</p>
 {% endblock %}
