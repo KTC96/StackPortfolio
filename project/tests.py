@@ -61,7 +61,10 @@ class ProjectCreationTests(TestCase):
             )
 
     def test_project_name_fewer_than_100_characters(self):
-        """Test to prevent project creation with a project name longer than 100 characters."""
+        """
+        Test to prevent project creation with a
+        project name longer than 100 characters.
+        """
         project = Project.objects.create(
             project_name='a' * 101,
             user=self.user,
@@ -70,3 +73,34 @@ class ProjectCreationTests(TestCase):
 
         with self.assertRaises(ValidationError):
             project.full_clean()
+
+
+class ProjectDetailTests(TestCase):
+    """
+    Tests for project detail view.
+    """
+
+    def setUp(self):
+        """Create a user to associate with the project."""
+        self.user = CustomUser.objects.create_user(
+            username='testuser',
+            first_name='Test',
+            last_name='User',
+            email='testingemail@test.com',
+            password='testingpassword123!',
+        )
+
+        # Create a project with dummy data
+        project = Project.objects.create(
+            project_name='Test Project',
+            user=self.user,
+            github_repo_url=''
+        )
+
+    def test_project_detail_view_exists(self):
+        """
+        Test to check if project detail view exists
+        by returning a 200 response.
+        """
+        response = self.client.get('/user/testuser/project/test-project')
+        self.assertEqual(response.status_code, 200)
