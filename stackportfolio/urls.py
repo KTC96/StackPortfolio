@@ -42,5 +42,6 @@ urlpatterns = [
          UserProfileEditView.as_view(), name='profile_edit'),
     path('user/<slug:slug>/delete/', delete_user, name='delete_user'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
+    path('user/', include('project.urls')),
 
 ]

@@ -328,3 +328,4 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Disabling intermediate logout step in allauth](https://stackoverflow.com/questions/18134807/how-to-disable-intermediate-signout-page-in-django-allauth)
 - [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
 - [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
+- [Django documentation on the testing client](https://docs.djangoproject.com/en/4.2/topics/testing/tools/#the-test-client)

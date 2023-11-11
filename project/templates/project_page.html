@@ -1,0 +1,6 @@
+{% extends "base.html" %} {% block content %}
+<h1 class="text-3xl">{{ project.project_name }}</h1>
+<img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" />
+
+<p class="prose">{{ project.project_description }}</p>
+{% endblock %}
