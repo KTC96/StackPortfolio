@@ -50,3 +50,7 @@ Jest
 #### Project Detail
 
 1. Test that the Project Detail view exists with `test_project_detail_view_exists`.
+
+#### Project List
+
+1. Test that the Project List view exists with `test_project_list_view_exists`.
