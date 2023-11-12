@@ -273,11 +273,17 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 
 </details>
 
+### User flowchart
+
+The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
+
+![User flowchart](./documentation/diagrams/user-flowchart.png)
+
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.diagrams.net/). The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables.
 
-![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-second.png)
+![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-third.png)
 
 <details>
   <summary>Click here to expand and see the first ERD draft</summary>
@@ -286,11 +292,12 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 
 </details>
 
-### User flowchart
+<details>
+  <summary>Click here to expand and see the second ERD draft</summary>
 
-The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
+![Entity Relationship Diagram](./documentation/diagrams/entity-relationship-diagram-second.png)
 
-![User flowchart](./documentation/diagrams/user-flowchart.png)
+</details>
 
 ## Resources
 
@@ -330,3 +337,5 @@ The user flowchart was created using [Draw.io](https://app.diagrams.net/). The f
 - [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
 - [Django documentation on the testing client](https://docs.djangoproject.com/en/4.2/topics/testing/tools/#the-test-client)
 - [Render - potentially used for hosting](https://render.com)
+- [FontJoy for Font pairings](https://fontjoy.com/)
+- [Cooolors for colour palette](https://coolors.co/)
