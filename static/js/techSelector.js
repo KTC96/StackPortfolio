@@ -22,6 +22,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /**
+   * Updates the focus state of the list items based on the focusedListItemIndex
+   * variable. This runs when the user is on the tech input field and presses the
+   * up or down arrow keys, and if the list is visible.
+   *
+   * @returns {void}
+   */
+  const updateListItemFocus = () => {
+    const visibleItems = techListItems.filter(
+      (item) => !item.classList.contains("hidden")
+    );
+    for (const [index, item] of visibleItems.entries()) {
+      item.classList.toggle("bg-primary", index === focusedListItemIndex);
+      item.classList.toggle("text-white", index === focusedListItemIndex);
+    }
+  };
+
   // prevent form submission when enter is pressed
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -44,6 +61,29 @@ document.addEventListener("DOMContentLoaded", () => {
         : item.classList.add("hidden");
     });
     dropdownVisible = techInput.value.length > 0;
+  });
+
+  techInput.addEventListener("keydown", (e) => {
+    if (!dropdownVisible) return;
+
+    // filter out items that aren't visible
+    const visibleItems = techListItems.filter(
+      (item) => !item.classList.contains("hidden")
+    );
+
+    const visibleItemsCount = visibleItems.length;
+
+    // add functionality to up and down arrows to navigate the list
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      focusedListItemIndex = (focusedListItemIndex + 1) % visibleItemsCount;
+      updateListItemFocus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (focusedListItemIndex <= 0) focusedListItemIndex = visibleItemsCount;
+      focusedListItemIndex = (focusedListItemIndex - 1) % visibleItemsCount;
+      updateListItemFocus();
+    }
   });
 
   submitButton.addEventListener("click", (e) => {

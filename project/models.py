@@ -13,7 +13,8 @@ class Project(models.Model):
     """
     user = models.ForeignKey(
         "custom_account.CustomUser", on_delete=models.CASCADE, related_name="projects")
-    technologies = models.ManyToManyField(Tech)
+    technologies = models.ManyToManyField(
+        Tech, blank=True, related_name="projects")
     project_name = models.CharField(max_length=100, blank=False, null=False)
     github_repo_url = models.URLField(max_length=255, blank=True, null=True)
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
