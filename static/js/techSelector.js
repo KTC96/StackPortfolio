@@ -8,4 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedTechContainer = document.getElementById("selectedTechnologies"); // input field to send tech to backend
   const form = document.querySelector(".create-project-form");
   const submitButton = document.querySelector("button[type='submit']");
+  const selectedTech = [];
+  const allActiveTech = [];
+  let focusedListItemIndex = -1;
+  let dropdownVisible = false;
+
+  // loop though techListItems output on DOM
+  // add item and id to the allActiveTech array
+  for (const item of techListItems) {
+    allActiveTech.push({
+      id: item.dataset.techid, // added this to the list item in the html
+      name: item.textContent.trim(),
+    });
+  }
+
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
 });
