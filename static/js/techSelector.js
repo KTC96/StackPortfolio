@@ -308,6 +308,21 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
+  addedTechContainer.addEventListener("click", (e) => {
+    const techButton = e.target.closest(".added-tech-button");
+    if (techButton) {
+      const techName = techButton
+        .querySelector(".added-tech strong")
+        .textContent.trim();
+      const index = selectedTech.indexOf(techName);
+      if (index !== -1) {
+        selectedTech.splice(index, 1);
+        techButton.remove();
+        updateHiddenTechInputs();
+      }
+    }
+  });
+
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     updateHiddenTechInputs();
