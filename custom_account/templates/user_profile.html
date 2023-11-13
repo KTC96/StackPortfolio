@@ -22,7 +22,7 @@
         profile</a>
       <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
         {% csrf_token %}
-        <a href=" #" class="delete-profile-link" aria-label="Delete profile">
+        <a href="#" class="delete-profile-link" aria-label="Delete profile">
           Delete profile
         </a>
       </form>
@@ -136,8 +136,14 @@
       <p class="user-work_title">{{ profile.work_title }}</p>
     </div>
     <div id="portfolio">
-      Projects will go here
+      {% for project in user_projects %}
+      {{ project.project_name }}<br>
+      {% endfor %}
     </div>
+
+    {% if profile.is_authenticated and user == profile %}
+    <a href="{% url 'project:create_project' slug=request.user.slug %}" class="btn btn-success btn-sm">Add project</a>
+    {% endif %}
   </div>
 
 </div>
