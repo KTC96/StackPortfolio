@@ -65,6 +65,12 @@ class UserProfileDetailView(DetailView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.object, 'tech_profile'):
+            context['user_projects'] = self.object.projects.all()
+        return context
+
 
 class UserProfileEditView(LoginRequiredMixin, UpdateView):
     """
@@ -92,6 +98,8 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             context['recruiter_profile_form'] = RecruiterUserProfileEditForm(
                 instance=self.object.recruiter_profile
             )
+
+        context['user_projects'] = self.object.projects.all()
         return context
 
     def form_valid(self, form):

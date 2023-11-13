@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
 from .models import Project
 from .forms import ProjectForm
 from custom_account.models import CustomUser
+from technology.models import Tech
 
 
 class ProjectDetailView(DetailView):
@@ -65,9 +67,35 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         else:
             return redirect('account_login')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_technologies'] = Tech.objects.all().filter(
+            is_approved=True)
+        return context
+
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        project = form.save(commit=False)
+        project.user = self.request.user
+        project.save()
+
+        # Add existing technologies
+        existing_tech_ids = form.cleaned_data.get('technologies')
+        for tech_id in existing_tech_ids:
+            project.technologies.add(tech_id)
+
+        # If a tech is submitting and it's not
+        # in the database, add it to the database
+        # as unapproved.
+        new_tech_names = self.request.POST.get(
+            'new_technologies', '').split(',')
+        for tech_name in new_tech_names:
+            tech_name = tech_name.strip()
+            if tech_name:
+                tech, created = Tech.objects.get_or_create(
+                    tech_name=tech_name, defaults={'is_approved': False})
+                project.technologies.add(tech)
+
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'slug': self.request.user.slug})
