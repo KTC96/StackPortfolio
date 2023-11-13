@@ -1,10 +1,13 @@
 {% extends "base.html" %} {% block content %}
 {% load widget_tweaks %}
+{% load static %}
 <h1 class="text-2xl lg:text-3xl mt-8">Create a project</h1>
 
+<div class="hidden bg-neutral text-neutral border-neutral">
+</div>
 <div class="form-container py-8">
-  <form action="{% url 'project:create_project' slug=request.user.slug %}" method="post" class="flex flex-col w-full"
-    enctype="multipart/form-data">
+  <form action="{% url 'project:create_project' slug=request.user.slug %}" method="post"
+    class="flex flex-col w-full create-project-form" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form.visible_fields %}
     {% if field.name == "project_active" %}
@@ -30,7 +33,7 @@
       {% endif %}
     </div>
     {% comment %} Check if type is textarea {% endcomment %}
-    {% elif field.name == "project_description" or field.name == "technologies" %}
+    {% elif field.name == "project_description"%}
     <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
       {{ field.label }}
     </label>
@@ -41,6 +44,51 @@
     {% for error in field.errors %}
     <p class="text-red-500 text-sm mt-2">{{ error }}</p>
     {% endfor %}
+    {% elif field.name == "technologies" %}
+
+    <div class="w-full flex flex-col items-center mx-auto my-5">
+      <input type="hidden" name="selectedTechnologies" id="selectedTechnologies">
+      <label for="{{ field.id_for_label }}" class="block w-full text-sm font-medium text-gray-700">
+        Project technologies
+      </label>
+      <div class="w-full">
+        <div class="flex flex-col items-center relative">
+          <div class="w-full">
+            <div class="my-2 p-1 flex">
+              <div class="flex flex-auto flex-wrap added-tech-container"></div>
+            </div>
+            <div class="relative">
+              <div class="flex-1">
+                <input placeholder="The tech that is used on this project"
+                  class="input input-bordered input-secondary w-full tech-input">
+              </div>
+              <div
+                class="absolute hidden shadow top-14 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto tech-dropdown">
+                <ul class="flex flex-col w-full border-1 border-secondary bordered tech-list">
+                  {% for tech in all_technologies %}
+                  <li
+                    class="cursor-pointer w-full border-gray-100 rounded-b hover:bg-primary hover:text-white tech-list__item"
+                    data-techid="{{ tech.id }}">
+                    <button
+                      class="flex w-full items-center p-3 border-transparent border-l-2 relative focus:bg-primary focus:text-white">
+                      <div class="w-full items-center flex">
+                        <span class="mx-2 leading-6">{{tech.tech_name}}</span>
+                      </div>
+                    </button>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for error in field.errors %}
+    <p class="text-red-500 text-sm mt-2">{{ error }}</p>
+    {% endfor %}
+
     {% else %}
     <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
       {{ field.label }}
@@ -60,4 +108,5 @@
       project</button>
   </form>
 </div>
+<script src="{% static 'js/techSelector.js' %}"></script>
 {% endblock content %}

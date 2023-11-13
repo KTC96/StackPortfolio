@@ -339,3 +339,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Render - potentially used for hosting](https://render.com)
 - [FontJoy for Font pairings](https://fontjoy.com/)
 - [Cooolors for colour palette](https://coolors.co/)
+- [Tailwind Multiselect component from Tailwind Components](https://tailwindcomponents.com/component/multi-select)
