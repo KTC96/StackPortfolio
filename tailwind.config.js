@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./templates/*.html", "./templates/**/*.html"],
+  content: [
+    "./templates/*.html",
+    "./templates/**/*.html",
+    "./custom_account/templates/*.html",
+    "./project/templates/*.html",
+  ],
   theme: {
     extend: {
       container: {
@@ -9,7 +14,7 @@ module.exports = {
         sm: ".5em",
       },
       colors: {
-        aliceblue: "#eff7ff",
+        aliceblue: "#f4f9ff",
       },
       fontFamily: {
         hind: ["Hind", "sans-serif"],
