@@ -340,3 +340,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [FontJoy for Font pairings](https://fontjoy.com/)
 - [Cooolors for colour palette](https://coolors.co/)
 - [Tailwind Multiselect component from Tailwind Components](https://tailwindcomponents.com/component/multi-select)
+- [Form Input Validity Docs on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) - Getting a better understanding of form validation and error messages

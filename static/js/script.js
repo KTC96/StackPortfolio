@@ -1,4 +1,5 @@
-import { runSignupStepper } from "./formValidation.js";
+//@ts-check
+import { runSignupStepper } from "./stepperForm.js";
 
 // Run functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,17 +50,26 @@ const handleDeleteProfileButton = () => {
     ".delete-user-cancel-button"
   );
 
-  deleteProfileButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    deleteProfileModal.showModal();
-  });
+  if (deleteProfileButton && deleteProfileModal) {
+    deleteProfileButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      deleteProfileModal.showModal();
+    });
+  }
+  if (deleteProfileConfirmButton && deleteUserForm) {
+    deleteProfileConfirmButton.addEventListener("click", () => {
+      if (deleteUserForm instanceof HTMLFormElement) {
+        deleteUserForm.submit();
+      }
+    });
+  }
 
-  deleteProfileConfirmButton.addEventListener("click", () => {
-    deleteUserForm.submit();
-  });
-
-  deleteProfileCancelButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    deleteProfileModal.close();
-  });
+  if (deleteProfileCancelButton && deleteProfileModal) {
+    deleteProfileCancelButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      deleteProfileModal.close();
+    });
+  }
 };
