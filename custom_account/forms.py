@@ -41,7 +41,8 @@ class CustomUserForm(SignupForm):
             help_text='Required',
             widget=forms.EmailInput(
                 attrs={
-                    'class': 'input input-bordered input-secondary w-full'
+                    'class': 'input input-bordered input-secondary w-full',
+                    'pattern': '^[^@]+@[^@]+\.[^@]+$',
                 }
             )))
 
@@ -65,6 +66,7 @@ class CustomUserForm(SignupForm):
             widget=forms.TextInput(
                 attrs={
                     'placeholder': '',
+                    'pattern': '^[a-zA-Z0-9]{5,}$',
                     'class': 'input input-bordered input-secondary w-full'
                 }
             )))
@@ -78,7 +80,8 @@ class CustomUserForm(SignupForm):
             widget=forms.PasswordInput(
                 attrs={
                     'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
+                    'class': 'input input-bordered input-secondary w-full',
+                    'pattern': '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
                 }
             )))
 
@@ -92,7 +95,8 @@ class CustomUserForm(SignupForm):
             widget=forms.PasswordInput(
                 attrs={
                     'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
+                    'class': 'input input-bordered input-secondary w-full',
+                    'pattern': '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
                 }
             )))
 
@@ -145,9 +149,12 @@ class CustomUserForm(SignupForm):
         max_length=20,
         required=False,
         label='Phone Number',
+
         widget=forms.TextInput(
             attrs={
                 'placeholder': '',
+                'type': 'tel',
+                'pattern': '^[0-9]{10,15}$',
                 'class': 'input input-bordered input-secondary w-full'
             }
         )
