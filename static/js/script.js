@@ -1,5 +1,6 @@
 //@ts-check
 import { runSignupStepper } from "./stepperForm.js";
+import { validateInput, generateErrorSpan } from "./formValidation.js";
 
 // Run functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (window.location.href.indexOf("signup") > -1) {
     runSignupStepper();
+  } else if (
+    window.location.href.indexOf("project/create") > -1 ||
+    window.location.href.indexOf("project/edit") > -1
+  ) {
+    handleProjectForm();
   }
 });
 
@@ -72,4 +78,56 @@ const handleDeleteProfileButton = () => {
       deleteProfileModal.close();
     });
   }
+};
+
+/**
+ * Hanlde profile creation and edit forms
+ * @returns {void}
+ */
+
+const handleProjectForm = () => {
+  const projectFormInputs = [
+    ...document.querySelectorAll(
+      "input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='hidden']:not([name='tech_input']), textarea"
+    ),
+  ];
+  const submitButton = document.querySelector("button[type='submit']");
+
+  for (const input of projectFormInputs) {
+    input.addEventListener("input", () => {
+      if (input instanceof HTMLInputElement) {
+        input.dataset.touched = "true";
+        if (input.name == "project_name") {
+          validateInput({
+            input,
+            customMinLength: 3,
+            customPattern: "^(?=.*[A-Za-z])[A-Za-z\\d\\s]{3,100}$",
+            customValidationMessage:
+              "Project name must be at least 3 characters long and can't contain symbols.",
+          });
+        } else {
+          validateInput({ input });
+        }
+      }
+      checkAllInputs();
+    });
+  }
+
+  const checkAllInputs = () => {
+    // @ts-ignore
+    if (projectFormInputs.every((input) => input.checkValidity())) {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.ariaDisabled = "false";
+        submitButton.classList.remove("opacity-50", "cursor-not-allowed");
+      }
+    } else {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.ariaDisabled = "true";
+        submitButton.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    }
+  };
+  checkAllInputs();
 };
