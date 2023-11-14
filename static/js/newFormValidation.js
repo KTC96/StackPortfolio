@@ -19,7 +19,7 @@
  * @param {number} [inputDetailsObj.customMinLength=0] - The minimum length of the input
  * @param {number} [inputDetailsObj.customMaxLength=Infinity] - The maximum length of the input
  * @param {string} [inputDetailsObj.customPattern=''] - A regex pattern to validate the input against
- * @returns {boolean} - The result of the validation, including validity and error message.
+ * @returns {void}
  *
  * @example validateInput({ input, required: true, validationMessage: "Please enter a valid first name.", minLength: 0, maxLength: 40, pattern: "^[a-zA-Z]+$" })
  * @example validateInput({ input, required: true, validationMessage: "Please enter a valid last name.", minLength: 0 })
@@ -61,13 +61,14 @@ const validateInput = (inputDetailsObj) => {
   }
 
   if (input.value && !RegExp(pattern).test(input.value)) {
-    errorMessage = customValidationMessage || input.validationMessage || "";
+    errorMessage = customValidationMessage || input.validationMessage;
     isValid = false;
   }
 
   input.setCustomValidity(errorMessage);
+  isValid = input.checkValidity();
 
-  return isValid;
+  isValid ? removeErrorSpan(input) : generateErrorSpan(input);
 };
 
 /**
@@ -84,15 +85,11 @@ const generateErrorSpan = (input) => {
       ? input.nextElementSibling
       : document.createElement("span");
 
-  if (errorSpan.classList.contains("error-span")) {
-    errorSpan.textContent = input.validationMessage;
-    return;
-  } else {
-    errorSpan.setAttribute("role", "alert");
-    errorSpan.setAttribute("aria-live", "assertive");
-    errorSpan.classList.add("error-span", "text-error", "text-sm", "mt-2");
-    input.insertAdjacentElement("afterend", errorSpan);
-  }
+  errorSpan.textContent = input.validationMessage;
+  errorSpan.setAttribute("role", "alert");
+  errorSpan.setAttribute("aria-live", "assertive");
+  errorSpan.classList.add("error-span", "text-error", "text-sm", "mt-2");
+  input.insertAdjacentElement("afterend", errorSpan);
 };
 
 /**
