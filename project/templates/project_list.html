@@ -1,31 +1,31 @@
 {% extends "base.html" %} {% block content %}
 
-<h1 class="text-3xl my-8">Projects</h1>
-
-
-<div class="flex flex-wrap lg:justify-between">
-  {% for project in projects %}
-  <a href="{{ project.get_absolute_url }}"
-    class="card lg:w-1/3 h-64 :before:bg-secondary text-white shadow-xl image-full"
-    aria-label="Opens the {{ project.project_name }} project">
-    <figure><img src="{{ project.project_image.url }}" alt="Screenshot of the {{ project.project_name }} project" />
-    </figure>
-    <div class="card-body px-5 pt-5 pb-1 flex flex-col">
-      <h2 class="card-title text-white text-xl"><strong>{{ project.project_name }}</strong></h2>
-      <p class="prose text-white">{{ project.project_description }}</p>
-      <div class="techs-used mt-auto">
-        <ul class="flex flex-wrap justify-center lg:justify-between list-none">
-          {% for tech in project.technologies.all|slice:":5" %}
-          <li class="text-sm bg-primary text-white px-5 py-1 mb-2 ml-1">{{ tech }}</li>
-          {% endfor %}
-        </ul>
+<section id="project-list" class="py-12">
+  <h1 class="text-3xl my-8">Projects</h1>
+  <div class="flex flex-wrap w-100 gap-1">
+    {% for project in projects %}
+    <a href="{{ project.get_absolute_url }}" class="relative sd-card w-full lg:w-[calc(33%-2px)] h-64 text-white"
+      aria-label="Opens the {{ project.project_name }} project">
+      {% if project.project_image.url %}
+      <figure class="absolute w-full h-full -z-10"><img src="{{ project.project_image.url }}"
+          class="h-full w-full object-cover" alt="Screenshot of the {{ project.project_name }} project" /></figure>
+      {% endif %}
+      <div class="sd-card-body relative px-5 pt-5 pb-1 flex flex-col w-full h-full z-3 bg-black/60 hover:bg-black/80">
+        <h2 class="sd-card-title text-aliceblue text-lg"><strong>{{ project.project_name }}</strong>
+        </h2>
+        <p class="prose text-white mt-2">
+          {{ project.project_description|truncatechars:175 }}{% if project.project_description|length >= 175 %}<span
+            class="text-aliceblue underline"> Click to read more</span>{% endif %}</p>
+        <div class="techs-used mt-auto">
+          <ul class="flex flex-wrap justify-center lg:justify-start list-none">
+            {% for tech in project.technologies.all|slice:":5" %}
+            <li class="text-sm bg-primary text-white px-5 py-1 mb-2 mr-3 rounded-sm">{{ tech }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-    </div>
-  </a>
-  {% endfor %}
-</div>
-
-
-
-
+    </a>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}
