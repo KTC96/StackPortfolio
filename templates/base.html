@@ -12,16 +12,20 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
+
+    {% comment %} Toast messages {% endcomment %}
     {% if messages %}
     {% for message in messages %}
-    <div class="toast fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="bg-green-500 text-white font-semibold px-4 py-2 rounded shadow">
+    <div class="toast fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50 w-1/3" role="alert"
+        aria-live="assertive" aria-atomic="true">
+        <div class="bg-primary text-white font-semibold px-4 py-2 rounded shadow">
             {{ message }}
         </div>
     </div>
     {% endfor %}
     {% endif %}
+
+    {% comment %} Header {% endcomment %}
     <header>
         <!-- Navigation -->
         <div class="navbar bg-base-100 container mx-auto justify-between">
@@ -30,7 +34,7 @@
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See all projects</a></li>
                     <li><a>See job posts</a></li>
                 </ul>
             </div>
@@ -44,9 +48,20 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
-                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
+                    <li>
+                        <a href="{% url 'user_profile' slug=user.slug %}" aria-label="Navigates to your profile page">My
+                            profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
+                            aria-label="Edit profile">Edit profile</a>
+                    </li>
+                    <hr class="my-2">
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See all projects</a></li>
                     <li><a>See job posts</a></li>
                     <hr class="my-2">
+
+
                     {% if user.is_authenticated %}
                     <li>
                         <a href=" {% url 'account_logout' %}">Logout</a>
@@ -101,17 +116,16 @@
         </div>
     </header>
 
-
-    <main class="py-8">
+    {% comment %} Main content {% endcomment %}
+    <main>
         <div class="container mx-auto">
             {% block content %}
-            <!-- Content Goes here -->
+
             {% endblock content %}
         </div>
     </main>
 
-    <!-- Footer -->
-
+    {% comment %} Footer {% endcomment %}
     <footer class="mt-auto">
         {% if page_obj %}
         <div class="pagination mb-8">

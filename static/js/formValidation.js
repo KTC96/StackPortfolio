@@ -31,7 +31,7 @@ const validateInput = (inputDetailsObj) => {
     customRequired = false,
     customValidationMessage = "",
     customMinLength = 0,
-    customMaxLength = Infinity,
+    customMaxLength,
     customPattern = "",
   } = inputDetailsObj;
 
@@ -42,7 +42,10 @@ const validateInput = (inputDetailsObj) => {
   const maxLength = customMaxLength || input.maxLength || Infinity;
   const pattern = customPattern || input.pattern || "";
 
-  if (customMaxLength) input.maxLength = customMaxLength;
+  if (typeof customMaxLength !== "undefined") {
+    input.maxLength = customMaxLength;
+  }
+
   let isValid = input.checkValidity();
   let errorMessage = "";
 

@@ -1,3 +1,5 @@
+
+import random
 from allauth.account.views import SignupView
 from django.http import HttpResponseForbidden
 from django.views.generic import TemplateView, UpdateView
@@ -11,27 +13,27 @@ from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
                     RecruiterUserProfileEditForm)
 from .models import CustomUser
-
-
-def index(request):
-    """
-    To output users for testing on the homepage.
-    TODO: Remove this view.
-    """
-    users = CustomUser.objects.all()
-    return render(request, 'index.html', {'users': users})
+from project.models import Project
 
 
 class IndexView(TemplateView):
     """
     To output users for testing on the homepage.
-    TODO: Remove this view.
     """
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        valid_projects_id_list = Project.objects.filter(
+            project_active=True, project_image__isnull=False).values_list('id', flat=True)
+
+        random_projects_id_list = random.sample(
+            list(valid_projects_id_list), min(len(valid_projects_id_list), 6))
+
+        query_set = Project.objects.filter(id__in=random_projects_id_list)
+
         context['users'] = CustomUser.objects.all()
+        context['randomProjects'] = query_set
         return context
 
 
@@ -69,6 +71,7 @@ class UserProfileDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if hasattr(self.object, 'tech_profile'):
             context['user_projects'] = self.object.projects.all()
+
         return context
 
 

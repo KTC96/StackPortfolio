@@ -23,6 +23,18 @@ body {
     url("/static/fonts/MavenPro-Bold.ttf") format("truetype");
 }
 
+h1,
+h2 {
+  font-family: "Hind", sans-serif;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: "MartelSans", sans-serif;
+}
+
 /* Handles toast disappearing with Tailwind */
 .toast.opacity-0 {
   opacity: 0;
@@ -38,4 +50,15 @@ body {
 .input-valid {
   border-color: #0166ff;
   background-color: #eff7ff;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

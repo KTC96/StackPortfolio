@@ -341,3 +341,6 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Cooolors for colour palette](https://coolors.co/)
 - [Tailwind Multiselect component from Tailwind Components](https://tailwindcomponents.com/component/multi-select)
 - [Form Input Validity Docs on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) - Getting a better understanding of form validation and error messages
+- [Stackoverflow post on populating objects in template](https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys)
+- [Adapted carousel from Kindacode](https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/)
+- [Heroicons](https://heroicons.com/) - Used for SVGs
