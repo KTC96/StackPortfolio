@@ -166,6 +166,13 @@ const setupInputListeners = (steps, nextButtons) => {
       if (input instanceof HTMLInputElement) {
         input.dataset.touched = "true";
 
+        if (input.name === "first_name" || input.name === "last_name") {
+          validateInput({
+            input,
+            customMaxLength: 40,
+          });
+        }
+
         if (input.type === "tel") {
           validateInput({
             input,
@@ -175,6 +182,7 @@ const setupInputListeners = (steps, nextButtons) => {
         } else if (input.name === "username") {
           validateInput({
             input,
+            customMaxLength: 20,
             customValidationMessage:
               "Username must contain 5 characters and it can't contain symbols or spaces.",
           });
@@ -302,13 +310,6 @@ const runSignupStepper = () => {
 
   setupInputListeners(steps, nextButtons);
   setupPreviousButtonListeners(steps, prevButtons);
-  for (const button of nextButtons) {
-    if (button instanceof HTMLButtonElement) {
-      button.disabled = true;
-    }
-    button.classList.add("btn-disabled");
-    button.classList.remove("btn-primary");
-  }
 
   for (const [index, step] of steps.entries()) {
     const currentStepIsValid = isStepValid(steps, index);
@@ -317,10 +318,17 @@ const runSignupStepper = () => {
   }
 
   for (const [index, button] of nextButtons.entries()) {
+    if (button instanceof HTMLButtonElement) {
+      button.disabled = true;
+    }
+    button.classList.add("btn-disabled");
+    button.classList.remove("btn-primary");
     button.addEventListener("click", (event) => {
       if (isFinalStep(index, steps)) {
         clearLocalStorage();
       } else {
+        // validates inputs before moving to the next step
+        if (!isStepValid(steps, index)) return;
         event.preventDefault();
         showStep(steps, index + 1);
         updateStepCounter(index + 1);

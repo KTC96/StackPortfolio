@@ -58,7 +58,7 @@ class CustomUserForm(SignupForm):
         ))
     username = (
         forms.CharField(
-            max_length=40,
+            max_length=20,
             min_length=5,
             label='Username',
             required=True,

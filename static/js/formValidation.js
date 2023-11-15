@@ -42,6 +42,7 @@ const validateInput = (inputDetailsObj) => {
   const maxLength = customMaxLength || input.maxLength || Infinity;
   const pattern = customPattern || input.pattern || "";
 
+  if (customMaxLength) input.maxLength = customMaxLength;
   let isValid = input.checkValidity();
   let errorMessage = "";
 

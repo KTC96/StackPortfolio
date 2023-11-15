@@ -100,7 +100,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Django's User model as a base.
     """
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=60, unique=True)
+    username = models.CharField(max_length=20, unique=True)
     first_name = models.CharField(max_length=40, blank=False, null=False)
     last_name = models.CharField(max_length=40, blank=False, null=False)
     town_city = models.CharField(max_length=85, blank=True, null=True)

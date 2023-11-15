@@ -21,10 +21,9 @@ Unittest
 Jest
 
 1. Test that the validate input function exists with `function exists`.
-2. Check that an empty input is invalid with `returns false if input is empty`.
-3. Check that an input cannot be filled with blank spaces with `returns false if input multiple spaces`.
-4. Check that a text input cannot have fewer than 2 characters with `returns false if input is less than 2 characters`.
-5. Check that first_name and last_name cannot have more than 40 characters with `returns false if first_name or last_name is more than 41 characters`.
+2. Check that an empty input is invalid with `shows error if input is empty, touched and required`.
+3. Check that an input cannot be filled with blank spaces with `shows error if input is multiple spaces`.
+4. Check that a text input cannot have fewer than 2 characters with `shows error if input is less than 2 characters`.
 
 #### Update Account
 
@@ -40,6 +39,8 @@ Jest
 ### Project
 
 #### Create Project
+
+Unittest
 
 1. Test that the Project model is not none with `test_check_model_is_not_none`.
 2. Test that a project can be created with `test_create_project`.
