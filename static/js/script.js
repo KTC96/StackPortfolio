@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     runSignupStepper();
   } else if (
     window.location.href.indexOf("project/create") > -1 ||
-    window.location.href.indexOf("project/edit") > -1
+    (window.location.href.indexOf("project/") > -1 &&
+      window.location.href.indexOf("edit") > -1)
   ) {
     handleProjectForm();
   }
@@ -50,10 +51,10 @@ const handleDeleteProfileButton = () => {
   const deleteProfileModal = document.getElementById("delete-profile-modal");
   const deleteUserForm = document.querySelector(".delete-user-form");
   const deleteProfileConfirmButton = document.querySelector(
-    ".delete-user-confirm-button"
+    ".delete-confirm-button"
   );
   const deleteProfileCancelButton = document.querySelector(
-    ".delete-user-cancel-button"
+    ".delete-cancel-button"
   );
 
   if (deleteProfileButton && deleteProfileModal) {

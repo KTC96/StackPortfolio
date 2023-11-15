@@ -1,7 +1,31 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="text-3xl">{{ project.project_name }}</h1>
-<img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" />
-
+<img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" class="mb-3" />
+<p class="text-sm mb-5">Created by {{ project.user.get_full_name }}</p>
+{% if request.user.is_authenticated and request.user == project.user %}
+<div class="flex flex-row flex-start mb-5">
+  <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.project_slug %}"
+    class="edit-project-link btn btn-primary" aria-label="Edit project">Edit
+    project</a>
+  <form method="post" class="delete-project-form ml-5 btn btn-error" action="">
+    {% csrf_token %}
+    <a href="#" class="delete-project-link" aria-label="Delete project">
+      Delete project
+    </a>
+  </form>
+</div>
+<dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Are you sure you want to delete this project? This cannot be undone.</h3>
+    <div class="w-full">
+      <div class="flex pt-4">
+        <button type="submit" class="btn btn-info grow delete-confirm-button">Yes</button>
+        <button type="button" class="btn btn-error grow ms-1 delete-cancel-button">No</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+{% endif %}
 <ul>
   {% for tech in project.technologies.all %}
   <li>

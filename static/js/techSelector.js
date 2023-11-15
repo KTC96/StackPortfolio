@@ -85,6 +85,16 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedTechContainer.appendChild(newTechInput);
   };
 
+  // if addedTechContainer has children, add them to the selectedTech array
+  if (addedTechContainer.children.length > 0) {
+    for (const child of addedTechContainer.children) {
+      selectedTech.push(child.querySelector(".added-tech strong").textContent);
+    }
+
+    // update the hidden inputs
+    updateHiddenTechInputs();
+  }
+
   /**
    * Creates the HTML for the added tech button, including
    * the little `x` svg icon.
