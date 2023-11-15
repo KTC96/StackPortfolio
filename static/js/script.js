@@ -6,6 +6,7 @@ import { validateInput, generateErrorSpan } from "./formValidation.js";
 document.addEventListener("DOMContentLoaded", () => {
   handleDeleteProfileButton();
   displayToasts();
+  runSlider();
 
   if (window.location.href.indexOf("signup") > -1) {
     runSignupStepper();
@@ -131,4 +132,57 @@ const handleProjectForm = () => {
     }
   };
   checkAllInputs();
+};
+
+/**
+ * Run slider on the home page
+ * Adapted from kindacode:
+ * https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/
+ * @returns {void}
+ */
+
+const runSlider = () => {
+  let slideIndex = 1;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  const prevButton = document.querySelector(".carousel-prev");
+  const nextButton = document.querySelector(".carousel-next");
+
+  if (!prevButton || !nextButton) {
+    return;
+  } else {
+    prevButton.addEventListener("click", () => moveSlide(-1));
+    nextButton.addEventListener("click", () => moveSlide(1));
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => currentSlide(index + 1));
+  });
+
+  function moveSlide(moveStep) {
+    showSlide((slideIndex += moveStep));
+  }
+
+  function currentSlide(index) {
+    showSlide((slideIndex = index));
+  }
+
+  function showSlide(index) {
+    if (index > slides.length) {
+      slideIndex = 1;
+    }
+    if (index < 1) {
+      slideIndex = slides.length;
+    }
+
+    slides.forEach((slide) => slide.classList.add("hidden"));
+    dots.forEach((dot) => dot.classList.replace("bg-primary", "bg-secondary"));
+
+    slides[slideIndex - 1].classList.remove("hidden");
+    dots[slideIndex - 1].classList.replace("bg-secondary", "bg-primary");
+  }
+
+  // Initially show the first slide
+  showSlide(slideIndex);
 };

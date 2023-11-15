@@ -1,40 +1,58 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="text-center lg:text-left lg:w-1/3 mx-auto  hero-container mb-12 lg:my-12 lg:mb-24">
-  <h1 class="text-3xl lg:text-5xl">Showcase your <strong>code</strong>, elevate your <strong><span
-        class="text-primary">Impact</span></strong>. 🚀</h1>
-  <a class="btn btn-primary mx-auto my-3 lg:my-5 mt-5 lg:mt-7 flex lg:w-3/5 lg:ml-0"
-    href="{% url 'account_signup' %}tech" role="button">Start
-    stacking your
-    success</a>
+<section id="hero" class="py-14">
+  <div class="text-center lg:text-left lg:w-1/3 mx-auto hero-container lg:py-28">
+    <h1 class="text-3xl lg:text-5xl">Showcase your <strong>code</strong>, elevate your <strong><span
+          class="text-primary">Impact</span></strong>. 🚀</h1>
+    <a class="btn btn-primary mx-auto my-3 lg:my-5 mt-5 lg:mt-7 flex lg:w-3/5 lg:ml-0"
+      href="{% url 'tech_user_signup' %}" role="button">
+      Start stacking your success</a>
 
-  <p class="text-sm prose inline-block">Searching for proven talent?</p>
-  <a href="{% url 'account_signup' %}recruiter" class="link text-sm link-primary block lg:inline">Sign up as a
-    recruiter</a>
-</div>
-<div class="featured-projects lg:my-12">
-  <h2 class="text-2xl text-center">Featured Projects</h2>
-  <ul class="list-none carousel carousel-center mx-auto mt-5 w-full justify-center">
-    <li class="project carousel-item w-150">
-      Example project
-    </li>
-    <li class="project carousel-item w-150">
-      Example project
-    </li>
-    <li class="project carousel-item w-150">
-      Example project
-    </li>
-    <li class="project carousel-item w-150">
-      Example project
-    </li>
-    <li class="project carousel-item w-150">Example project</li>
-  </ul>
-</div>
-{{ users|length }} user(s) found.
+    <p class="text-sm prose inline-block">Searching for proven talent?</p>
+    <a href="{% url 'recruiter_user_signup' %}" class="link text-sm link-primary block lg:inline">Sign up as a
+      recruiter</a>
+  </div>
+</section>
+<section id="featured-projects" class="w-full bg-aliceblue py-14">
+  <h2 class="text-2xl text-center mb-5">Featured Projects</h2>
+  <div class="featured-projects lg:w-3/5 mx-auto mb-8">
+    {% comment %}
+    Adapted carousel from https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/
+    {% endcomment %}
 
-{% for user in users %}
-<a href="{% url 'user_profile' slug=user.slug %}">{{ user.username }}</a><br />
-{% empty %}
-No users found.
-{% endfor %}
+    {% comment %} Carousel Container {% endcomment %}
+    <div class="relative w-full mx-auto h-[300px] lg:h-[400px]">
+      {% for project in randomProjects %}
+      <a href="{% url 'project:view_project' project_slug=project.project_slug slug=project.user.slug %}">
+        <div class="slide relative hidden">
+          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.project_image.url }}">
+          <div class="absolute bottom-0 w-full px-5 py-3 bg-black/80 text-center text-white">
+            {{ project.project_name }} - {{ project.user.username }}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+
+      {% comment %} Previous button {% endcomment %}
+      <button class=" carousel-prev absolute left-0 lg:text-2xl top-1/2 p-4 -translate-y-1/2 bg-secondary/50
+        hover:bg-primary/80 text-white hover:text-white cursor-pointer">❮</button>
+
+      {% comment %} Next button {% endcomment %}
+      <button
+        class="carousel-next absolute right-0 lg:text-2xl top-1/2 p-4 -translate-y-1/2 bg-secondary/50 hover:bg-primary/80 text-white hover:text-white cursor-pointer">
+        ❯
+      </button>
+    </div>
+
+    {% comment %} Dots {% endcomment %}
+    <div class="flex justify-center items-center space-x-3 py-5 px-2">
+      {% for project in randomProjects %}
+      <button class="dot w-4 h-4 rounded-full cursor-pointer bg-secondary" data-slide="{{ forloop.counter }}"
+        role="button" aria-label="Switches to slide {{forloop.counter}}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
 {% endblock %}

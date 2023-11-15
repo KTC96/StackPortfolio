@@ -102,6 +102,9 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProjectEditView(LoginRequiredMixin, UpdateView):
+    """
+    This class handles making updates to the project.
+    """
     model = Project
     form_class = ProjectForm
     template_name = 'edit_project.html'
@@ -150,6 +153,3 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                 project.technologies.add(tech)
 
         return HttpResponseRedirect(self.get_success_url())
-
-    def remove_tech_from_project(self, project, tech):
-        project.technologies.remove(tech)
