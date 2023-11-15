@@ -125,6 +125,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    def get_full_name(self):
+        """
+        Return the full name of a user.
+        """
+        return f'{self.first_name} {self.last_name}'
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.username)

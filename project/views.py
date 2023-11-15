@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from .models import Project
 from .forms import ProjectForm
 from custom_account.models import CustomUser
@@ -99,3 +99,57 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'slug': self.request.user.slug})
+
+
+class ProjectEditView(LoginRequiredMixin, UpdateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'edit_project.html'
+    slug_field = 'project_slug'  # Use the correct field name here
+    slug_url_kwarg = 'project_slug'  # And here
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden("You are not allowed to view this page")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_technologies'] = Tech.objects.all().filter(
+            is_approved=True)
+        context['project_technologies'] = self.object.technologies.all()
+
+        return context
+
+    def form_valid(self, form):
+        project = form.save(commit=False)
+        project.user = self.request.user
+        project.save()
+
+        # Add existing technologies and remove any that
+        # were removed on the frontend
+        existing_tech_ids = form.cleaned_data.get('technologies')
+        project_tech_ids = project.technologies.values_list('id', flat=True)
+        tech_to_remove = set(project_tech_ids) - set(existing_tech_ids)
+        for tech in tech_to_remove:
+            self.remove_tech_from_project(project, tech)
+        for tech_id in existing_tech_ids:
+            project.technologies.add(tech_id)
+
+        # If a tech is submitting and it's not
+        # in the database, add it to the database
+        # as unapproved.
+        new_tech_names = self.request.POST.get(
+            'new_technologies', '').split(',')
+        for tech_name in new_tech_names:
+            tech_name = tech_name.strip()
+            if tech_name:
+                tech, created = Tech.objects.get_or_create(
+                    tech_name=tech_name, defaults={'is_approved': False})
+                project.technologies.add(tech)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def remove_tech_from_project(self, project, tech):
+        project.technologies.remove(tech)
