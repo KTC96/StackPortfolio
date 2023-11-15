@@ -71,6 +71,7 @@ class UserProfileDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if hasattr(self.object, 'tech_profile'):
             context['user_projects'] = self.object.projects.all()
+
         return context
 
 

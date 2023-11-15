@@ -1,150 +1,181 @@
 {% extends "base.html" %} {% block content %}
 {% load cloudinary %}
-<div class="lg:flex">
-  <div class="profile-area lg:w-1/4">
-    <div class="w-full mb-5">
-      <div class="w-full">
-        {% if profile.profile_image %}
-        <img class="w-full" src="{{ profile.profile_image.url }}"
-          alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
-        {% else %}
-        <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
-          {{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
-        {% endif %}
-      </div>
-    </div>
 
-
-
-    {% if profile.is_authenticated and user == profile %}
-    <div class="flex flex-row justify-around">
-      <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link" aria-label="Edit profile">Edit
-        profile</a>
-      <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
-        {% csrf_token %}
-        <a href="#" class="delete-profile-link" aria-label="Delete profile">
-          Delete profile
-        </a>
-      </form>
-    </div>
-    <dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg">Are you sure you want to delete your profile? This cannot be undone.</h3>
+<section id="user-profile" class="py-6 pb-12 lg:py-14">
+  <div class="lg:flex">
+    <div class="profile-area lg:w-1/4">
+      <div class="w-full mb-5">
         <div class="w-full">
-          <div class="flex pt-4">
-            <button type="submit" class="btn btn-info grow delete-confirm-button">Yes</button>
-            <button type="button" class="btn btn-error grow ms-1 delete-cancel-button">No</button>
-          </div>
+          {% if profile.profile_image %}
+          <img class="w-full" src="{{ profile.profile_image.url }}"
+            alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
+          {% else %}
+          <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
+            {{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
+          {% endif %}
         </div>
       </div>
-    </dialog>
-    {% endif %}
-    {% if profile.twitter_handle or profile.tech_profile.github_username or profile.linkedin_username %}
-    <ul class="social-icons flex">
-      {% if profile.twitter_handle %}
-      <li class="list-none">
-        <a href="https://twitter.com/{{ profile.twitter_handle }}" target="_blank"
-          aria-label="Opens Twitter profile in new tab">
-          <span class="svg-container inline-block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
-              <path
-                d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                fill="black" />
-            </svg>
-          </span>
-      </li>
-      {% endif %}
-      {% if profile.tech_profile.github_username %}
-      <li class="list-none">
-        <a href="https://github.com/{{ profile.tech_profile.github_username }}" target="_blank"
-          aria-label="Opens Github profile in new tab">
-          <span class="svg-container inline-block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.707 97.707">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
-                fill="#24292f" /></svg>
-          </span>
-        </a>
-      </li>
-      {% endif %}
-      {% if profile.linkedin_username %}
-      <li class="list-none">
-        <a href="https://www.linkedin.com/in/{{ profile.linkedin_username }}" target="_blank"
-          aria-label="Opens Linkedin profile in new tab">
-          <span class="svg-container inline-block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
-              class="mercado-match" width="24" height="24" focusable="false">
-              <path
-                d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
-              </path>
-            </svg>
-          </span>
-      </li>
-      {% endif %}
-    </ul>
-    {% endif %}
 
-    <div class="mobile-user-details lg:hidden">
-      <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>
-      <p class="user-work_title">{{ profile.work_title }}</p>
-      <a href="#portfolio" class="portfolio-link" aria-label="Scrolls to portfolio section">See my portfolio ></a>
-    </div>
-    {% if profile.display_email %}
-    <div class="email-container">
-      <span class="svg-container"></span>
-      <p class="user-email">{{ profile.email}}</p>
-    </div>
-    {% endif %}
-    {% if profile.website %}
-    <div class="website-container">
-      <span class="svg-container"></span>
-      <a href="{{ profile.website }}" target="_blank" class="user-website">{{ profile.website }}</a>
-    </div>
-    {% endif %}
-    {% if profile.phone_number and profile.display_phone_number %}
-    <div class="website-container">
-      <span class="svg-container"></span>
-      <a href="tel:{{ profile.phone_number }}" class="user-phone">{{ profile.phone_number }}</a>
-    </div>
-    {% endif %}
-    {% if profile.town_city and profile.display_town_city %}
-    <div class="location-container">
-      <span class="town-city">{{ profile.town_city }}</span>
-    </div>
-    {% endif %}
 
-    {% if profile.bio %}
-    <p class="prose">
-      {{ profile.bio }}
-    </p>
-    {% endif %}
 
-    {% if user.tech_profile %}
-    <div class="user-tech">
-      <ul class="user-tech__list">
-        <li class="user-tech__item">HTML</li>
-        <li class="user-tech__item">CSS</li>
-        <li class="user-tech__item">JavaScript</li>
+      {% if profile.is_authenticated and user == profile %}
+      <div class="flex flex-row justify-around mb-5">
+        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
+          aria-label="Edit profile">Edit
+          profile</a>
+        <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
+          {% csrf_token %}
+          <a href="#" class="delete-profile-link link link-hover text-error" aria-label="Delete profile">
+            Delete profile
+          </a>
+        </form>
+      </div>
+      <dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">Are you sure you want to delete your profile? This cannot be undone.</h3>
+          <div class="w-full">
+            <div class="flex pt-4">
+              <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
+              <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+      {% endif %}
+      {% if profile.twitter_handle or profile.tech_profile.github_username or profile.linkedin_username %}
+      <ul class="social-icons flex justify-center">
+        {% if profile.twitter_handle %}
+        <li class="list-none">
+          <a href="https://twitter.com/{{ profile.twitter_handle }}" target="_blank"
+            aria-label="Opens Twitter profile in new tab">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
+                <path
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                  fill="black" />
+              </svg>
+            </span>
+        </li>
+        {% endif %}
+        {% if profile.tech_profile.github_username %}
+        <li class="list-none">
+          <a href="https://github.com/{{ profile.tech_profile.github_username }}" target="_blank"
+            aria-label="Opens Github profile in new tab" class="ml-3">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.707 97.707">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+                  fill="#24292f" /></svg>
+            </span>
+          </a>
+        </li>
+        {% endif %}
+        {% if profile.linkedin_username %}
+        <li class="list-none">
+          <a href="https://www.linkedin.com/in/{{ profile.linkedin_username }}" target="_blank"
+            aria-label="Opens Linkedin profile in new tab" class="ml-3">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
+                class="mercado-match" width="24" height="24" focusable="false">
+                <path
+                  d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                </path>
+              </svg>
+            </span>
+          </a>
+        </li>
+        {% endif %}
       </ul>
-    </div>
-    {% endif %}
+      {% endif %}
 
+      <div class="mobile-user-details lg:hidden">
+        <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ profile.get_full_name }}</h2>
+        <h3 class="user-work_title mt-2">{{ profile.work_title }}</h3>
+        <a href="#portfolio" class="portfolio-link link link-hover text-primary"
+          aria-label="Scrolls to portfolio section">Scroll to my portfolio ></a>
+      </div>
+      {% if profile.display_email %}
+      <div class="email-container mt-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5 inline">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        </svg>
+        <p class="user-email inline">{{ profile.email}}</p>
+      </div>
+      {% endif %}
+      {% if profile.website %}
+      <div class="website-container mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5 inline">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+        </svg>
+        <a href="{{ profile.website }}" target="_blank" class="user-website inline">{{ profile.website }}</a>
+      </div>
+      {% endif %}
+      {% if profile.phone_number and profile.display_phone_number %}
+      <div class="phone-container mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5 inline">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+        </svg>
+        <a href="tel:{{ profile.phone_number }}" class="user-phone inline">{{ profile.phone_number }}</a>
+      </div>
+      {% endif %}
+      {% if profile.town_city and profile.display_town_city %}
+      <div class="location-container mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5 inline">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+        </svg>
+        <span class="town-city inline">{{ profile.town_city }}</span>
+      </div>
+      {% endif %}
+
+      {% if profile.bio %}
+      <p class="prose">
+        {{ profile.bio }}
+      </p>
+      {% endif %}
+
+      {% if user.tech_profile %}
+      <div class="user-tech mt-5">
+        <ul class="user-tech__list flex flex-wrap">
+          {% for tech in user_technologies %}
+          <li class="user-tech__item">
+            <button type="button" class="group">
+              <div
+                class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 group-hover:border-secondary">
+                <div class="cursor-pointer text-sm font-normal flex-initial added-tech">
+                  <strong>{{ tech.tech_name }}</strong></div>
+              </div>
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+    </div>
+    <div class="profile__title-and-portfolio lg:w-3/4">
+      <div class="user-details-desktop hidden lg:block">
+        <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>
+        <p class="user-work_title">{{ profile.work_title }}</p>
+      </div>
+      <div id="portfolio">
+        {% for project in user_projects %}
+        {{ project.project_name }}<br>
+        {% endfor %}
+      </div>
+
+      {% if profile.is_authenticated and user == profile %}
+      <a href="{% url 'project:create_project' slug=request.user.slug %}" class="btn btn-success btn-sm">Add project</a>
+      {% endif %}
+    </div>
   </div>
-  <div class="profile__title-and-portfolio lg:w-3/4">
-    <div class="user-details-desktop hidden lg:block">
-      <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>
-      <p class="user-work_title">{{ profile.work_title }}</p>
-    </div>
-    <div id="portfolio">
-      {% for project in user_projects %}
-      {{ project.project_name }}<br>
-      {% endfor %}
-    </div>
-
-    {% if profile.is_authenticated and user == profile %}
-    <a href="{% url 'project:create_project' slug=request.user.slug %}" class="btn btn-success btn-sm">Add project</a>
-    {% endif %}
-  </div>
-
-</div>
+</section>
 {% endblock %}
