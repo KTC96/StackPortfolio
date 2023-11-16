@@ -1,37 +1,71 @@
 {% extends "base.html" %} {% block content %}
-<h1 class="text-3xl">{{ project.project_name }}</h1>
-<img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" class="mb-3" />
-<p class="text-sm mb-5">Created by {{ project.user.get_full_name }}</p>
-{% if request.user.is_authenticated and request.user == project.user %}
-<div class="flex flex-row flex-start mb-5">
-  <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.project_slug %}"
-    class="edit-project-link btn btn-primary" aria-label="Edit project">Edit
-    project</a>
-  <form method="post" class="delete-project-form ml-5 btn btn-error" action="">
-    {% csrf_token %}
-    <a href="#" class="delete-project-link" aria-label="Delete project">
-      Delete project
-    </a>
-  </form>
-</div>
-<dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Are you sure you want to delete this project? This cannot be undone.</h3>
-    <div class="w-full">
-      <div class="flex pt-4">
-        <button type="submit" class="btn btn-info grow delete-confirm-button">Yes</button>
-        <button type="button" class="btn btn-error grow ms-1 delete-cancel-button">No</button>
+<section id="project-page" class="py-6 pb-12 lg:py-14">
+  <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" class="mb-3 max-h-[650px] mx-auto" />
+  {% if request.user.is_authenticated and request.user == project.user %}
+  <div class="flex flex-row justify-end mb-5 text-xs">
+    <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.project_slug %}"
+      class="edit-project-link link link-hover text-primary" aria-label="Edit project">Edit
+      project</a>
+    <form method="post" class="delete-form ml-5"
+      action="{% url 'project:delete_project' slug=request.user.slug project_slug=project.project_slug %}">
+      {% csrf_token %}
+      <a href="#" class="delete-link link link-hover text-error" aria-label="Delete project">
+        Delete project
+      </a>
+    </form>
+  </div>
+  <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box p-16">
+      <h3 class="font-bold text-lg mb-8">Are you sure you want to delete this project? This cannot be undone.</h3>
+      <div class="w-full">
+        <div class="flex pt-4">
+          <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
+          <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
+        </div>
       </div>
     </div>
+  </dialog>
+  {% endif %}
+  <div class="title-container mt-3 mb-2 flex justify-start items-center">
+    <h1 class="text-xl lg:text-3xl">{{ project.project_name }}</h1>
+    {% if project.github_repo_url %}
+    <a href="{{ project.github_repo_url }}" target="_blank" aria-label="Opens Github repo in new tab" class="ml-3">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-slate-900">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z">
+        </path>
+      </svg>
+    </a>
+    {% endif %}
+    {% if project.deployed_url %}
+    <a href="{{ project.deployed_url }}" target="_blank" class="inline">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6 ml-3">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+      </svg>
+    </a>
+    {% endif %}
   </div>
-</dialog>
-{% endif %}
-<ul>
-  {% for tech in project.technologies.all %}
-  <li>
-    {{ tech.tech_name }}
-  </li>
-  {% endfor %}
-</ul>
-<p class="prose">{{ project.project_description }}</p>
+
+  <p class="text-sm mb-3">Developed by <a class="text-primary link link-hover"
+      href="{% url 'user_profile' project.user.slug %}">{{ project.user.get_full_name }}</a></p>
+
+  {% if project.technologies.all|length > 0 %}
+  <h2 class="text-lg mt-8">Tech used on this project</h2>
+  <ul class="flex flex-wrap justify-start">
+    {% for tech in project.technologies.all %}
+    {% include 'snippets/tech-badge.html' with tech=tech grow="" %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if project.project_description %}
+  <h2 class="text-lg mt-8">About this project</h2>
+  <p class="prose">
+    {{ project.project_description }}
+  </p>
+  {% endif %}
+
+</section>
 {% endblock %}

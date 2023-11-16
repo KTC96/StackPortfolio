@@ -23,16 +23,16 @@
         <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
           aria-label="Edit profile">Edit
           profile</a>
-        <form method="post" class="delete-user-form" action="{% url 'delete_user' slug=user.slug %}">
+        <form method="post" class="delete-form" action="{% url 'delete_user' slug=user.slug %}">
           {% csrf_token %}
-          <a href="#" class="delete-profile-link link link-hover text-error" aria-label="Delete profile">
+          <a href="#" class="delete-link link link-hover text-error" aria-label="Delete profile">
             Delete profile
           </a>
         </form>
       </div>
-      <dialog id="delete-profile-modal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">Are you sure you want to delete your profile? This cannot be undone.</h3>
+      <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-16">
+          <h3 class="font-bold text-lg mb-8">Are you sure you want to delete your profile? This cannot be undone.</h3>
           <div class="w-full">
             <div class="flex pt-4">
               <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
@@ -91,8 +91,10 @@
       <div class="mobile-user-details lg:hidden">
         <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ profile.get_full_name }}</h2>
         <span class="user-work_title mt-2 block">{{ profile.work_title }}</span>
+        {% if user_projects %}
         <a href="#portfolio" class="portfolio-link link link-hover text-primary"
           aria-label="Scrolls to portfolio section">Scroll to my portfolio ></a>
+        {% endif %}
       </div>
       {% if profile.display_email %}
       <div class="email-container mt-5">
@@ -148,13 +150,7 @@
       <div class="user-tech">
         <ul class="user-tech__list flex flex-wrap">
           {% for tech in profile.tech_profile.technologies.all %}
-          <li class="user-tech__item mt-2 grow group">
-            <div
-              class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2">
-              <div class="text-sm font-normal flex-initial added-tech">
-                <strong>{{ tech.tech_name }}</strong></div>
-            </div>
-          </li>
+          {% include 'snippets/tech-badge.html' with tech=tech grow="grow" %}
           {% endfor %}
         </ul>
       </div>
@@ -171,15 +167,19 @@
           <h3 class="text-lg font-bold">My portfolio</h3>
           {% if profile.is_authenticated and user == profile %}
           <a href="{% url 'project:create_project' slug=request.user.slug %}"
-            class="btn btn-primary text-white btn-sm rounded-none">Add
+            class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add
             project</a>
           {% endif %}
         </div>
+        {% if user_projects %}
         {% for project in user_projects %}
         <div class="mt-2 h-64">
           {% include 'snippets/card.html' with post=project type="project" %}
         </div>
         {% endfor %}
+        {% else %}
+        <p class="mt-2">{{ profile.username }} hasn't added any projects yet.</p>
+        {% endif %}
       </div>
     </div>
   </div>

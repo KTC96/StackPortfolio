@@ -4,7 +4,7 @@ import { validateInput, generateErrorSpan } from "./formValidation.js";
 
 // Run functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
-  handleDeleteProfileButton();
+  handleDeleteButton();
   displayToasts();
   runSlider();
 
@@ -46,11 +46,11 @@ const displayToasts = () => {
  * event listener to display modal
  * @returns {void}
  */
-const handleDeleteProfileButton = () => {
-  if (!document.querySelector(".delete-profile-link")) return;
-  const deleteProfileButton = document.querySelector(".delete-profile-link");
-  const deleteProfileModal = document.getElementById("delete-profile-modal");
-  const deleteUserForm = document.querySelector(".delete-user-form");
+const handleDeleteButton = () => {
+  if (!document.querySelector(".delete-link")) return;
+  const deleteProfileButton = document.querySelector(".delete-link");
+  const deleteProfileModal = document.getElementById("delete-modal");
+  const deleteUserForm = document.querySelector(".delete-form");
   const deleteProfileConfirmButton = document.querySelector(
     ".delete-confirm-button"
   );
@@ -60,6 +60,7 @@ const handleDeleteProfileButton = () => {
 
   if (deleteProfileButton && deleteProfileModal) {
     deleteProfileButton.addEventListener("click", (event) => {
+      console.log("clicked");
       event.preventDefault();
       // @ts-ignore
       deleteProfileModal.showModal();

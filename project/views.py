@@ -1,7 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
-from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, reverse
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from .models import Project
 from .forms import ProjectForm
@@ -108,8 +111,8 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = 'edit_project.html'
-    slug_field = 'project_slug'  # Use the correct field name here
-    slug_url_kwarg = 'project_slug'  # And here
+    slug_field = 'project_slug'
+    slug_url_kwarg = 'project_slug'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
@@ -164,3 +167,23 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                 project.technologies.add(tech)
 
         return HttpResponseRedirect(self.get_success_url())
+
+
+@login_required
+@require_POST
+def delete_project(request, slug, project_slug):
+    """
+    Handles project deletion.
+    """
+    user = request.user
+    project = get_object_or_404(Project, project_slug=project_slug)
+
+    if user == project.user:
+        project.delete()
+        messages.success(
+            request, "Your project has been successfully deleted.")
+        return redirect(reverse('user_profile', kwargs={'slug': slug}))
+
+    messages.error(
+        request, "You cannot delete this project.")
+    return redirect(reverse('user_profile', kwargs={'slug': slug}))
