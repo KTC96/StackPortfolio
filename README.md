@@ -344,3 +344,5 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Stackoverflow post on populating objects in template](https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys)
 - [Adapted carousel from Kindacode](https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/)
 - [Heroicons](https://heroicons.com/) - Used for SVGs
+- [Include tag in Django](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#include)
+- [distinct() for querying approved tech](https://docs.djangoproject.com/en/dev/ref/models/querysets/#distinct)
