@@ -125,6 +125,17 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
 
         return context
 
+    def remove_tech_from_project(self, project, tech_id):
+        """
+        Remove a tech from a project.
+        """
+        project.technologies.remove(tech_id)
+
+        # If the tech is not associated with any other projects,
+        # delete it from the database.
+        if not Tech.objects.filter(projects__technologies=tech_id).exists():
+            Tech.objects.filter(id=tech_id).delete()
+
     def form_valid(self, form):
         project = form.save(commit=False)
         project.user = self.request.user

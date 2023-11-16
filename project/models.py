@@ -53,9 +53,19 @@ class Project(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Override the save method to generate a slug
-        if one doesn't already exist.
+        Override the save method to generate a slug if one doesn't already exist
+        and update the user's tech profile with approved technologies.
         """
         if not self.project_slug:
             self.project_slug = slugify(self.project_name)
+
         super(Project, self).save(*args, **kwargs)
+
+        print("Save called: " + str(self.project_slug))
+
+        # This updates the tech on the tech user - requires a signal
+        # to run after many to many update
+        if self.user.tech_profile:
+            print("Updating tech profile" + str(self.user.tech_profile))
+            self.user.tech_profile.update_tech_with_approved()
+            print("Tech profile updated")
