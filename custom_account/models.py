@@ -5,6 +5,7 @@ from django.contrib.auth.models import (AbstractBaseUser,
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 from technology.models import Tech
+from project.models import Project
 
 
 class CustomUserManager(BaseUserManager):
@@ -146,6 +147,29 @@ class TechUserProfile(models.Model):
     technologies = models.ManyToManyField(Tech)
     github_username = models.CharField(max_length=40, blank=True, null=True)
     seeking_employment = models.BooleanField(default=False)
+
+    def update_tech_with_approved(self):
+        """
+        Update the tech profile to include only approved technologies
+        from the user's projects.
+        """
+        approved_project_techs = Tech.objects.filter(
+            projects__user=self.user, is_approved=True).distinct()
+
+        print("Approved techs: " + str(approved_project_techs))
+        # Add new approved techs and remove unapproved or old techs
+        current_techs = set(self.technologies.all())
+
+        print("Current techs: " + str(current_techs))
+        for tech in approved_project_techs:
+            if tech not in current_techs:
+                self.technologies.add(tech)
+
+        for tech in current_techs:
+            if tech not in approved_project_techs:
+                self.technologies.remove(tech)
+
+        print("Updated techs: " + str(self.technologies.all()))
 
 
 class RecruiterUserProfile(models.Model):

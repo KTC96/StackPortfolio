@@ -7,7 +7,7 @@
       <div class="w-full mb-5">
         <div class="w-full">
           {% if profile.profile_image %}
-          <img class="w-full" src="{{ profile.profile_image.url }}"
+          <img class="w-full max-h-64" src="{{ profile.profile_image.url }}"
             alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
           {% else %}
           <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
@@ -90,7 +90,7 @@
 
       <div class="mobile-user-details lg:hidden">
         <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ profile.get_full_name }}</h2>
-        <h3 class="user-work_title mt-2">{{ profile.work_title }}</h3>
+        <span class="user-work_title mt-2 block">{{ profile.work_title }}</span>
         <a href="#portfolio" class="portfolio-link link link-hover text-primary"
           aria-label="Scrolls to portfolio section">Scroll to my portfolio ></a>
       </div>
@@ -101,7 +101,7 @@
           <path stroke-linecap="round" stroke-linejoin="round"
             d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
         </svg>
-        <p class="user-email inline">{{ profile.email}}</p>
+        <a href="mailto:{{ profile.email}}" class="user-email inline" target="_blank">{{ profile.email}}</a>
       </div>
       {% endif %}
       {% if profile.website %}
@@ -137,23 +137,23 @@
       {% endif %}
 
       {% if profile.bio %}
+      <h3 class="mt-5 text-lg font-bold mb-2">About me</h3>
       <p class="prose">
         {{ profile.bio }}
       </p>
       {% endif %}
 
-      {% if user.tech_profile %}
-      <div class="user-tech mt-5">
+      {% if profile.tech_profile.technologies.all %}
+      <h3 class="mt-5 text-lg font-bold">Tech I know</h3>
+      <div class="user-tech">
         <ul class="user-tech__list flex flex-wrap">
-          {% for tech in user_technologies %}
-          <li class="user-tech__item">
-            <button type="button" class="group">
-              <div
-                class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 group-hover:border-secondary">
-                <div class="cursor-pointer text-sm font-normal flex-initial added-tech">
-                  <strong>{{ tech.tech_name }}</strong></div>
-              </div>
-            </button>
+          {% for tech in profile.tech_profile.technologies.all %}
+          <li class="user-tech__item mt-2 grow group">
+            <div
+              class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2">
+              <div class="text-sm font-normal flex-initial added-tech">
+                <strong>{{ tech.tech_name }}</strong></div>
+            </div>
           </li>
           {% endfor %}
         </ul>
@@ -161,20 +161,26 @@
       {% endif %}
 
     </div>
-    <div class="profile__title-and-portfolio lg:w-3/4">
-      <div class="user-details-desktop hidden lg:block">
-        <h2 class="user-name">{{ profile.first_name }} {{ profile.last_name }}</h2>
-        <p class="user-work_title">{{ profile.work_title }}</p>
+    <div class="profile__title-and-portfolio lg:w-3/4 lg:ml-8">
+      <div class="desktop-user-details hidden lg:flex flex-col justify-center h-64 w-full font-bold">
+        <h2 class="user-name text-5xl text-primary ">{{ profile.first_name }} {{ profile.last_name }}</h2>
+        <p class="user-work_title text-xl">{{ profile.work_title }}</p>
       </div>
-      <div id="portfolio">
+      <div id="portfolio" class="mt-10 lg:mt-3">
+        <div class="flex justify-between items-start w-full ">
+          <h3 class="text-lg font-bold">My portfolio</h3>
+          {% if profile.is_authenticated and user == profile %}
+          <a href="{% url 'project:create_project' slug=request.user.slug %}"
+            class="btn btn-primary text-white btn-sm rounded-none">Add
+            project</a>
+          {% endif %}
+        </div>
         {% for project in user_projects %}
-        {{ project.project_name }}<br>
+        <div class="mt-2 h-64">
+          {% include 'snippets/card.html' with post=project type="project" %}
+        </div>
         {% endfor %}
       </div>
-
-      {% if profile.is_authenticated and user == profile %}
-      <a href="{% url 'project:create_project' slug=request.user.slug %}" class="btn btn-success btn-sm">Add project</a>
-      {% endif %}
     </div>
   </div>
 </section>
