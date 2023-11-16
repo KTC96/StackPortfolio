@@ -1,0 +1,8 @@
+{% comment %} Should be used within a <ul> element {% endcomment %}
+  <li class="user-tech__item mt-2 {{ grow }} group">
+    <div
+      class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2">
+      <div class="text-sm font-normal flex-initial added-tech">
+        <strong>{{ tech.tech_name }}</strong></div>
+    </div>
+  </li>
