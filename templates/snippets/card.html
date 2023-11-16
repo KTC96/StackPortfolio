@@ -12,8 +12,11 @@
         class="text-aliceblue underline"> Click to read more</span>{% endif %}</p>
     <div class="techs-used mt-auto overflow-x-scroll no-scrollbar lg:overflow-x-auto">
       <ul class="flex lg:flex-wrap justify-center lg:justify-start list-none">
-        {% for tech in post.technologies.all|slice:":5" %}
-        <li class="text-sm bg-primary text-white px-5 py-1 mb-2 mr-3 rounded-sm">{{ tech }}</li>
+        {% for tech in post.technologies.all|slice:":10" %}
+        <li
+          class="text-sm bordered border-2 {% if tech.is_approved %} border-primary bg-primary {% else %} bg-secondary border-white{% endif %}text-white px-2 py-1 mb-2 mr-3 rounded-sm">
+          {{ tech }}
+        </li>
         {% endfor %}
       </ul>
     </div>
