@@ -34,7 +34,7 @@
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See all projects</a></li>
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
                     <li><a>See job posts</a></li>
                 </ul>
             </div>
@@ -48,6 +48,7 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
+                    {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'user_profile' slug=user.slug %}" aria-label="Navigates to your profile page">My
                             profile</a>
@@ -57,7 +58,8 @@
                             aria-label="Edit profile">Edit profile</a>
                     </li>
                     <hr class="my-2">
-                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See all projects</a></li>
+                    {% endif %}
+                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
                     <li><a>See job posts</a></li>
                     <hr class="my-2">
 
