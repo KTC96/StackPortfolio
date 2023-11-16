@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const techListItems = [...document.querySelectorAll("li.tech-list__item")];
   const addedTechContainer = document.querySelector(".added-tech-container"); // contain on the frontend
   const selectedTechContainer = document.getElementById("selectedTechnologies"); // input field to send tech to backend
-  const form = document.querySelector(".create-project-form");
+  const form = document.querySelector("form");
   const submitButton = document.querySelector("button[type='submit']");
   const selectedTech = [];
   const allActiveTech = [];
