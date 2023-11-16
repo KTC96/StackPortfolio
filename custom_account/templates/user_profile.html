@@ -7,7 +7,7 @@
       <div class="w-full mb-5">
         <div class="w-full">
           {% if profile.profile_image %}
-          <img class="w-full max-h-64" src="{{ profile.profile_image.url }}"
+          <img class="w-full" src="{{ profile.profile_image.url }}"
             alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
           {% else %}
           <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
