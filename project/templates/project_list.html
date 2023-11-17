@@ -2,7 +2,7 @@
 
 <section id="project-list" class="py-12">
   <h1 class="text-3xl my-8">Projects</h1>
-  <div class="flex flex-wrap w-100 gap-1">
+  <div class="flex flex-wrap w-100 gap-5">
     {% for project in projects %}
     {% include 'snippets/card.html' with post=project type="project" %}
     {% endfor %}

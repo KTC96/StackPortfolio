@@ -7,7 +7,7 @@
       <div class="w-full mb-5">
         <div class="w-full">
           {% if profile.profile_image %}
-          <img class="w-full" src="{{ profile.profile_image.url }}"
+          <img class="h-64 mx-auto object-cover max-w-full" src="{{ profile.profile_image.url }}"
             alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
           {% else %}
           <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
@@ -173,8 +173,8 @@
         </div>
         {% if user_projects %}
         {% for project in user_projects %}
-        <div class="mt-2 h-64">
-          {% include 'snippets/card.html' with post=project type="project" %}
+        <div class="mt-2">
+          {% include 'snippets/card.html' with post=project type="project" full=True %}
         </div>
         {% endfor %}
         {% else %}
