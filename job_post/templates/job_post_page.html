@@ -4,9 +4,10 @@
 
 <section id="job-post" class="py-6 pb-12 lg:py-14">
   <div class="flex flex-col lg:flex-row">
-    <div class="profile-area lg:w-1/4 order-2 lg:order-1 p-10 bg-aliceblue">
+    <div class="profile-area lg:w-1/4 order-2 lg:order-1 p-10 bg-aliceblue mt-5 lg:mt-0">
       <div class="w-full mb-5">
         <div class="w-full">
+          <p class="prose my-3">Posted by:</p>
           {% if job_post.user.profile_image %}
           <img class="w-full" src="{{ job_post.user.profile_image.url }}"
             alt="{{ job_post.user.get_full_name }}'s profile image">

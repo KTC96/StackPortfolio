@@ -64,7 +64,7 @@
   <h2 class="text-lg mt-8">Tech used on this project</h2>
   <ul class="flex flex-wrap justify-start">
     {% for tech in project.technologies.all %}
-    {% include 'snippets/tech-badge.html' with tech=tech grow="" %}
+    {% include 'snippets/tech-badge.html' with tech=tech grow="lg:grow-0" %}
     {% endfor %}
   </ul>
   {% endif %}
