@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'custom_account',
     'project',
     'technology',
+    'job_post',
 ]
 SITE_ID = 1
 

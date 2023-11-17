@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<section id="job_post-list" class="py-6 pb-12 lg:py-14">
+  <h1 class="text-3xl my-8">Job Posts</h1>
+  <div class="flex flex-wrap w-100 gap-1">
+    {% for job_post in job_posts %}
+    {{ job_post.name}}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
