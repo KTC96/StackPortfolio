@@ -3,83 +3,99 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+
 {% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
 
 {% block content %}
-<div
-  class="hidden lg:mt-0 bg-aliceblue text-primary input input-bordered input-secondary w-full toggle toggle-secondary block text-sm font-medium text-gray-700 file-input file-input-bordered file-input-secondary file-input-primary w-full mt-3 textarea textarea-bordered textarea-secondary w-full">
-</div>
-<div class="form-container max-w-lg mx-auto h-[calc(100vh-296px)]">
-
-
-  <h1 class="text-3xl mb-5">{% trans "Sign In" %}</h1>
-
-  {% get_providers as socialaccount_providers %}
-
-  {% if socialaccount_providers %}
-  <p>{% blocktrans with site.name as site_name %}Please sign in with one
-    of your existing third party accounts. Or, <a class="link link-hover" href="{{ signup_url }}">sign up</a>
-    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-  <div class="socialaccount_ballot">
-
-    <ul class="socialaccount_providers">
-      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-    </ul>
-
-    <div class="login-or">{% trans 'or' %}</div>
-
+<section id="login-page" class="py-12 lg-py-14 flex place-center">
+  <div
+    class="hidden lg:mt-0 bg-aliceblue text-primary input input-bordered input-secondary w-full toggle toggle-secondary block text-sm font-medium text-gray-700 file-input file-input-bordered file-input-secondary file-input-primary w-full mt-3 textarea textarea-bordered textarea-secondary w-full">
   </div>
+  <div class="form-container max-w-lg mx-auto">
 
-  {% include "socialaccount/snippets/login_extra.html" %}
+    <h1 class="text-3xl mb-5">{% trans "Sign In" %}</h1>
 
-  {% else %}
-  <p class="prose">{% blocktrans %}If you have not created an account yet, then please
-    <a class="link link-hover" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-  {% endif %}
+    {% get_providers as socialaccount_providers %}
 
-  <form class="login pt-5" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {% for field in form.visible_fields %}
-    {% if field.name != "remember" %}
-    <div class="mb-4">
-      {{ field|add_label_class:"block text-sm font-medium text-gray-700 mb-1" }}
-      {% if field.errors %}
-      {% render_field field class="toggle toggle-secondary mt-3 lg:mt-0" %}
+    {% if socialaccount_providers %}
+    <p>{% blocktrans with site.name as site_name %}Please sign in with one
+      of your existing third party accounts. Or, <a class="link link-hover" href="{{ signup_url }}">sign
+        up</a>
+      for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+    <div class="socialaccount_ballot">
+
+      <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
+
+      <div class="login-or">{% trans 'or' %}</div>
+
+    </div>
+
+    {% include "socialaccount/snippets/login_extra.html" %}
+
+    {% else %}
+    <p class="prose">{% blocktrans %}If you have not created an account yet, then please
+      <a class="link link-hover text-primary" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    {% endif %}
+
+    <form class="login pt-5" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
+      {% if field.name != "remember" %}
+      <div class="mb-4">
+        {{ field|add_label_class:"block text-sm font-medium text-gray-700 mb-1" }}
+        {% if field.errors %}
+        {% for error in field.errors %}
+        <span class="flex items-center max-w-xs mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">
+          {{ error }}
+        </span>
+        {% endfor %}
+        {% else %}
+        {% render_field field class="input input-bordered input-secondary w-full" %}
+        {% endif %}
+
+      </div>
       {% else %}
-      {% render_field field class="input input-bordered input-secondary w-full" %}
+      <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
+        <div class="w-50 me-5">
+          <label for="{{ field.id_for_label }}"
+            class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+          <span class="text-xs text-secondary italic mb-1 help-text">{{ field.help_text }}</span>
+        </div>
+        {% render_field field class="toggle toggle-secondary mt-3 lg:mt-0 checked:bg-primary" %}
+
+        {% for error in field.errors %}
+        <span class="flex items-center max-w-xs mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">
+          {{ error }}
+        </span>
+        {% endfor %}
+
+      </div>
+
       {% endif %}
-      {% for error in field.errors %}
+      {% endfor %}
+
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
       <span class="flex items-center max-w-xs mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">
         {{ error }}
       </span>
       {% endfor %}
-    </div>
-    {% else %}
-    <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
-      <div class="w-50 me-5">
-        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
-        <span class="text-xs text-secondary italic mb-1 help-text">{{ field.help_text }}</span>
-      </div>
-      {% render_field field class="toggle toggle-secondary mt-3 lg:mt-0 checked:bg-primary" %}
-      {% if field.errors %}
-      <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
       {% endif %}
-    </div>
-
-    {% endif %}
-    {% endfor %}
 
 
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    {% comment %}
-    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-    {% endcomment %}
-    <button class="primaryAction btn btn-primary block mx-auto lg:mx-0 lg:ml-auto" role="button"
-      type="submit">{% trans "Sign In" %}
-      &raquo;</button>
-  </form>
-</div>
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      {% comment %}
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      {% endcomment %}
+      <button class="primaryAction btn btn-primary block mx-auto lg:mx-0 lg:ml-auto" role="button"
+        type="submit">{% trans "Sign In" %}
+        &raquo;</button>
+    </form>
+  </div>
+</section>
 {% endblock content %}
