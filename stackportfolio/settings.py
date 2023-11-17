@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'custom_account',
     'project',
     'technology',
+    'job_post',
 ]
 SITE_ID = 1
 

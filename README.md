@@ -347,3 +347,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Include tag in Django](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#include)
 - [distinct() for querying approved tech](https://docs.djangoproject.com/en/dev/ref/models/querysets/#distinct)
 - [Canva for creating image placeholders](https://www.canva.com/)
+- [Humanize filter for salary ranges](https://docs.djangoproject.com/en/dev/ref/contrib/humanize/#ref-contrib-humanize)

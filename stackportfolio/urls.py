@@ -24,6 +24,7 @@ from custom_account.views import (
     UserProfileEditView,
     delete_user)
 from project.views import ProjectListView
+from job_post.views import JobPostListView
 
 
 urlpatterns = [
@@ -44,6 +45,8 @@ urlpatterns = [
     path('user/<slug:slug>/delete/', delete_user, name='delete_user'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
     path('user/', include('project.urls')),
+    path('user/', include('job_post.urls')),
     path('projects/', ProjectListView.as_view(), name='view_all_projects'),
+    path('jobs/', JobPostListView.as_view(), name='view_all_job_posts'),
 
 ]
