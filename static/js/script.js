@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href.indexOf("edit") > -1)
   ) {
     handleProjectForm();
+  } else if (
+    window.location.href.indexOf("user/") > -1 &&
+    window.location.href.indexOf("edit") > -1
+  ) {
+    handleUserForm();
   }
 });
 
@@ -186,4 +191,65 @@ const runSlider = () => {
 
   // Initially show the first slide
   showSlide(slideIndex);
+};
+
+/**
+ * Handle the user profile edit form
+ * @returns {void}
+ */
+const handleUserForm = () => {
+  const userFormInputs = [
+    ...document.querySelectorAll(
+      "input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='hidden'], textarea"
+    ),
+  ];
+  const submitButton = document.querySelector("button[type='submit']");
+
+  for (const input of userFormInputs) {
+    input.addEventListener("input", () => {
+      if (input instanceof HTMLInputElement) {
+        input.dataset.touched = "true";
+        if (input.name === "first_name" || input.name === "last_name") {
+          validateInput({
+            input,
+            customMaxLength: 40,
+            customRequired: true,
+          });
+        } else if (input.type === "tel") {
+          validateInput({
+            input,
+            customValidationMessage:
+              "Phone numbers can only be numbers and be between 10 and 15 characters long.",
+          });
+        } else if (input.name === "username") {
+          validateInput({
+            input,
+            customMaxLength: 20,
+            customValidationMessage:
+              "Username must contain 5 characters and it can't contain symbols or spaces.",
+          });
+        }
+        validateInput({ input });
+      }
+      checkAllInputs();
+    });
+  }
+
+  const checkAllInputs = () => {
+    // @ts-ignore
+    if (userFormInputs.every((input) => input.checkValidity())) {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.ariaDisabled = "false";
+        submitButton.classList.remove("opacity-50", "cursor-not-allowed");
+      }
+    } else {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.ariaDisabled = "true";
+        submitButton.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    }
+  };
+  checkAllInputs();
 };

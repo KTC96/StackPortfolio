@@ -170,6 +170,7 @@ const setupInputListeners = (steps, nextButtons) => {
           validateInput({
             input,
             customMaxLength: 40,
+            customRequired: true,
           });
         }
 

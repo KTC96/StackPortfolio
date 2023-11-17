@@ -381,7 +381,7 @@ class CustomUserEditForm(forms.ModelForm):
         ))
     username = (
         forms.CharField(
-            max_length=40,
+            max_length=20,
             min_length=5,
             label='Username',
             required=True,
@@ -441,10 +441,13 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': '',
+                'type': 'tel',
+                'pattern': '^[0-9]{10,15}$',
                 'class': 'input input-bordered input-secondary w-full'
             }
         )
     )
+
     display_phone_number = forms.BooleanField(
         required=False,
         initial=False,
