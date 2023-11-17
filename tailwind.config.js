@@ -5,6 +5,7 @@ module.exports = {
     "./templates/**/*.html",
     "./custom_account/templates/*.html",
     "./project/templates/*.html",
+    "./job_post/templates/*.html",
   ],
   theme: {
     extend: {

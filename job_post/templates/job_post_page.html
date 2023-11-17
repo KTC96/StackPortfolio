@@ -3,8 +3,8 @@
 {% load humanize %}
 
 <section id="job-post" class="py-6 pb-12 lg:py-14">
-  <div class="lg:flex">
-    <div class="profile-area lg:w-1/4">
+  <div class="flex flex-col lg:flex-row">
+    <div class="profile-area lg:w-1/4 order-2 lg:order-1 p-10 bg-aliceblue">
       <div class="w-full mb-5">
         <div class="w-full">
           {% if job_post.user.profile_image %}
@@ -40,38 +40,6 @@
           </div>
         </div>
       </dialog>
-      {% endif %}
-      {% if job_post.user.twitter_handle or job_post.user.linkedin_username %}
-      <ul class="social-icons flex justify-center">
-        {% if job_post.user.twitter_handle %}
-        <li class="list-none">
-          <a href="https://twitter.com/{{ job_post.user.twitter_handle }}" target="_blank"
-            aria-label="Opens Twitter profile in new tab">
-            <span class="svg-container inline-block w-6 h-6">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
-                <path
-                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                  fill="black" />
-              </svg>
-            </span>
-        </li>
-        {% endif %}
-        {% if job_post.user.linkedin_username %}
-        <li class="list-none">
-          <a href="https://www.linkedin.com/in/{{ job_post.user.linkedin_username }}" target="_blank"
-            aria-label="Opens Linkedin profile in new tab" class="ml-3">
-            <span class="svg-container inline-block w-6 h-6">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
-                class="mercado-match" width="24" height="24" focusable="false">
-                <path
-                  d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
-                </path>
-              </svg>
-            </span>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
       {% endif %}
       <div class="mobile-user-details">
         <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ job_post.user.get_full_name }}</h2>
@@ -126,44 +94,105 @@
         {{ job_post.user.bio }}
       </p>
       {% endif %}
+
+      {% if job_post.user.twitter_handle or job_post.user.linkedin_username %}
+      <ul class="social-icons flex justify-center">
+        {% if job_post.user.twitter_handle %}
+        <li class="list-none">
+          <a href="https://twitter.com/{{ job_post.user.twitter_handle }}" target="_blank"
+            aria-label="Opens Twitter profile in new tab">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
+                <path
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                  fill="black" />
+              </svg>
+            </span>
+        </li>
+        {% endif %}
+        {% if job_post.user.linkedin_username %}
+        <li class="list-none">
+          <a href="https://www.linkedin.com/in/{{ job_post.user.linkedin_username }}" target="_blank"
+            aria-label="Opens Linkedin profile in new tab" class="ml-3">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
+                class="mercado-match" width="24" height="24" focusable="false">
+                <path
+                  d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                </path>
+              </svg>
+            </span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
     </div>
-    <div class="job-post-details lg:w-3/4 lg:ml-8">
+    <div class="job-post-details lg:w-1/2 lg:ml-8 order-1 lg:order-2">
       <div class="w-full font-bold">
-        <h2 class="text-lg">Role:</h2>
-        <h1 class="user-name text-5xl text-primary">{{ job_post.name }}</h1>
+        <h2 class="lg:text-lg">Role:</h2>
+        <h1 class="user-name text-2xl lg:text-5xl text-primary">{{ job_post.name }}</h1>
       </div>
-      <div class="job-post-body">
-        <div class="prose">
-          {{ job_post.description }}
+      <div class="job-post-body flex flex-col">
+        {% if job_post.description %}
+        <div class="my-3 lg:my-8 order-2 lg:order-1">
+          <h2 class="font-bold text-lg">Description</h2>
+          <p class="prose">
+            {{ job_post.description }}
+          </p>
         </div>
+        {% endif %}
 
-        <h2 class="font-bold text-lg mt-3">Desirable skills</h2>
-        <ul class="flex flex-wrap justify-start">
-          {% for tech in job_post.technologies.all %}
-          {% include 'snippets/tech-badge.html' with tech=tech grow="" %}
-          {% endfor %}
-        </ul>
+        {% if job_post.technologies.all|length > 0 %}
+        <div class="order-1 lg:order-2 my-5 lg:mt-0">
+          <h2 class="font-bold text-lg">Desirable skills</h2>
+          <ul class="flex flex-wrap justify-start">
+            {% for tech in job_post.technologies.all %}
+            {% include 'snippets/tech-badge.html' with tech=tech grow="" %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
 
-        <div class="flex flex-col lg:flow-row">
+        {% if job_post.company or job_post.location or job_post.salary_from or job_post.salary_to %}
+        <div class="flex flex-col lg:flex-row justify-between mt-5 order-3">
           {% if job_post.company %}
-          <div>
+          <div class="lg:mt-0">
             <h2 class="text-lg font-bold">Company</h2>
             <p class="prose">{{ job_post.company }}</p>
           </div>
           {% endif %}
           {% if job_post.location %}
-          <div>
+          <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Location</h2>
-            <p class="prose"></p>
+            <p class="prose">{{ job_post.location }}</p>
           </div>
           {% endif %}
           {% if job_post.salary_from and job_post.salary_to %}
-          <div>
+          <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Salary</h2>
             <p class="prose">{{ job_post.salary_from|intcomma }} - {{ job_post.salary_to|intcomma }}
               {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
           </div>
+          {% elif job_post.salary_from %}
+          <div class="mt-5 lg:mt-0">
+            <h2 class="text-lg font-bold">Salary</h2>
+            <p class="prose">From {{ job_post.salary_from|intcomma }}
+              {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+          </div>
+          {% else %}
+          <div class="mt-5 lg:mt-0">
+            <h2 class="text-lg font-bold">Salary</h2>
+            <p class="prose">Up to {{ job_post.salary_to|intcomma }}
+              {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+          </div>
           {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="mt-10 lg:mt-24 flex flex-col lg:flex-row justify-between order-4">
+          <p class="prose text-xs text-grey">Created: {{ job_post.date_created|date:"M d, Y" }}</p>
+          <p class="prose text-xs text-grey mt-3 lg:mt-0">Updated: {{ job_post.date_updated|date:"M d, Y" }}</p>
         </div>
       </div>
     </div>
