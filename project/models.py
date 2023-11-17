@@ -17,35 +17,36 @@ class Project(models.Model):
         related_name="projects")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="projects")
-    project_name = models.CharField(max_length=100, blank=False, null=False)
+    name = models.CharField(max_length=100, blank=False, null=True)
     github_repo_url = models.URLField(max_length=255, blank=True, null=True)
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
-    project_active = models.BooleanField(default=True)
-    project_description = models.TextField(blank=True, null=True)
-    project_image = CloudinaryField('image', blank=True, null=True)
-    project_view_count = models.IntegerField(default=0)
-    project_slug = models.SlugField(blank=True, null=True)
-    project_date_created = models.DateTimeField(auto_now_add=True)
-    project_date_updated = models.DateTimeField(auto_now=True)
+
+    active = models.BooleanField(default=True)
+    description = models.TextField(blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
+    view_count = models.IntegerField(default=0)
+    slug = models.SlugField(blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True,  null=True)
+    date_updated = models.DateTimeField(auto_now=True,  null=True)
 
     class Meta:
         """
         Meta class for the project model.
         """
-        ordering = ["-project_date_created"]
-        unique_together = ["user", "project_name"]
+        ordering = ["-date_created"]
+        unique_together = ["user", "name"]
 
     def __str__(self):
         """
         Returns the project name as a string.
         """
-        return str(self.project_name)
+        return str(self.name)
 
     def num_view_count(self):
         """
         Returns the number of views a project has.
         """
-        return self.project_view_count
+        return self.view_count
 
     def get_absolute_url(self):
         """
@@ -55,23 +56,19 @@ class Project(models.Model):
             "project:view_project",
             kwargs={
                 "slug": self.user.slug,
-                "project_slug": self.project_slug})
+                "project_slug": self.slug})
 
     def save(self, *args, **kwargs):
         """
         Override the save method to generate a slug if one doesn't already exist
         and update the user's tech profile with approved technologies.
         """
-        if not self.project_slug:
-            self.project_slug = slugify(self.project_name)
+        if not self.slug:
+            self.slug = slugify(self.name)
 
         super(Project, self).save(*args, **kwargs)
-
-        print("Save called: " + str(self.project_slug))
 
         # This updates the tech on the tech user - requires a signal
         # to run after many to many update
         if self.user.tech_profile:
-            print("Updating tech profile" + str(self.user.tech_profile))
             self.user.tech_profile.update_tech_with_approved()
-            print("Tech profile updated")

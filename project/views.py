@@ -19,8 +19,8 @@ class ProjectDetailView(DetailView):
     """
     model = Project
     template_name = 'project_page.html'
-    slug_field = 'project_slug'
-    slug_url_kwarg = 'project_slug'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
     def get_object(self):
         """
@@ -29,7 +29,7 @@ class ProjectDetailView(DetailView):
         project_slug = self.kwargs['project_slug']
         user_slug = self.kwargs.get('slug')
         user = get_object_or_404(CustomUser, slug=user_slug)
-        return get_object_or_404(Project, project_slug=project_slug, user=user)
+        return get_object_or_404(Project, slug=project_slug, user=user)
 
     def get_context_data(self, **kwargs):
         """
@@ -54,7 +54,7 @@ class ProjectListView(ListView):
         Returns all the projects.
         """
         return Project.objects.filter(
-            project_active=True).order_by('-project_date_created')
+            active=True).order_by('-date_created')
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -114,7 +114,7 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = 'edit_project.html'
-    slug_field = 'project_slug'
+    slug_field = 'slug'
     slug_url_kwarg = 'project_slug'
 
     def dispatch(self, request, *args, **kwargs):
@@ -180,7 +180,7 @@ def delete_project(request, slug, project_slug):
     Handles project deletion.
     """
     user = request.user
-    project = get_object_or_404(Project, project_slug=project_slug)
+    project = get_object_or_404(Project, slug=project_slug)
 
     if user == project.user:
         project.delete()

@@ -2,8 +2,8 @@
 {% load static %}
 
 <section id="project-page" class="py-6 pb-12 lg:py-14">
-  {% if project.project_image %}
-  <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" class="mb-3 max-h-[650px] mx-auto" />
+  {% if project.image %}
+  <img src="{{ project.image.url }}" alt="{{ project.name }}" class="mb-3 max-h-[650px] mx-auto" />
   {% else %}
   <picture class="mb-3 mx-auto w-full">
     <source srcset="{% static 'images/placeholder-banner.webp' %}">
@@ -12,11 +12,11 @@
   {% endif %}
   {% if request.user.is_authenticated and request.user == project.user %}
   <div class="flex flex-row justify-end mt-3 text-xs">
-    <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.project_slug %}"
+    <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.slug %}"
       class="edit-project-link link link-hover text-primary" aria-label="Edit project">Edit
       project</a>
     <form method="post" class="delete-form ml-5"
-      action="{% url 'project:delete_project' slug=request.user.slug project_slug=project.project_slug %}">
+      action="{% url 'project:delete_project' slug=request.user.slug project_slug=project.slug %}">
       {% csrf_token %}
       <a href="#" class="delete-link link link-hover text-error" aria-label="Delete project">
         Delete project
@@ -36,7 +36,7 @@
   </dialog>
   {% endif %}
   <div class="title-container mt-3 mb-2 flex justify-start items-center">
-    <h1 class="text-xl lg:text-3xl">{{ project.project_name }}</h1>
+    <h1 class="text-xl lg:text-3xl">{{ project.name }}</h1>
     {% if project.github_repo_url %}
     <a href="{{ project.github_repo_url }}" target="_blank" aria-label="Opens Github repo in new tab" class="ml-3">
       <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-slate-900">
@@ -69,10 +69,10 @@
   </ul>
   {% endif %}
 
-  {% if project.project_description %}
+  {% if project.description %}
   <h2 class="text-lg mt-8">About this project</h2>
   <p class="prose">
-    {{ project.project_description }}
+    {{ project.description }}
   </p>
   {% endif %}
 
