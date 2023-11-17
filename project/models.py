@@ -12,7 +12,9 @@ class Project(models.Model):
     a project can only have one user (for now).
     """
     user = models.ForeignKey(
-        "custom_account.CustomUser", on_delete=models.CASCADE, related_name="projects")
+        "custom_account.CustomUser",
+        on_delete=models.CASCADE,
+        related_name="projects")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="projects")
     project_name = models.CharField(max_length=100, blank=False, null=False)
@@ -49,7 +51,11 @@ class Project(models.Model):
         """
         Returns the absolute url for a project.
         """
-        return reverse("project:view_project", kwargs={"slug": self.user.slug, "project_slug": self.project_slug})
+        return reverse(
+            "project:view_project",
+            kwargs={
+                "slug": self.user.slug,
+                "project_slug": self.project_slug})
 
     def save(self, *args, **kwargs):
         """

@@ -53,7 +53,8 @@ class ProjectListView(ListView):
         """
         Returns all the projects.
         """
-        return Project.objects.filter(project_active=True).order_by('-project_date_created')
+        return Project.objects.filter(
+            project_active=True).order_by('-project_date_created')
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -101,7 +102,9 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('user_profile', kwargs={'slug': self.request.user.slug})
+        return reverse_lazy(
+            'user_profile', kwargs={
+                'slug': self.request.user.slug})
 
 
 class ProjectEditView(LoginRequiredMixin, UpdateView):
@@ -118,7 +121,8 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
         if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
             return super().dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden("You are not allowed to view this page")
+            return HttpResponseForbidden(
+                "You are not allowed to view this page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

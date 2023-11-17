@@ -42,7 +42,7 @@ class CustomUserForm(SignupForm):
             widget=forms.EmailInput(
                 attrs={
                     'class': 'input input-bordered input-secondary w-full',
-                    'pattern': '^[^@]+@[^@]+\.[^@]+$',
+                    'pattern': '^[^@]+@[^@]+\\.[^@]+$',
                 }
             )))
 
@@ -81,9 +81,8 @@ class CustomUserForm(SignupForm):
                 attrs={
                     'placeholder': '',
                     'class': 'input input-bordered input-secondary w-full',
-                    'pattern': '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
-                }
-            )))
+                    'pattern': '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$',
+                })))
 
     password2 = (
         forms.CharField(
@@ -96,9 +95,8 @@ class CustomUserForm(SignupForm):
                 attrs={
                     'placeholder': '',
                     'class': 'input input-bordered input-secondary w-full',
-                    'pattern': '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
-                }
-            )))
+                    'pattern': '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$',
+                })))
 
     town_city = forms.CharField(
         max_length=85,

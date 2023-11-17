@@ -30,8 +30,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stackportfolio-1340b88e89e7.herokuapp.com', 'stackportfolio.onrender.com',
-                 'localhost', '127.0.0.1', 'stackportfol.io', 'www.stackportfol.io', 'stackportfol.io/']
+ALLOWED_HOSTS = [
+    'stackportfolio-1340b88e89e7.herokuapp.com',
+    'stackportfolio.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    'stackportfol.io',
+    'www.stackportfol.io',
+    'stackportfol.io/']
 
 # Application definition
 

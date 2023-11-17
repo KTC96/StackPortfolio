@@ -25,7 +25,10 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         valid_projects_id_list = Project.objects.filter(
-            project_active=True, project_image__isnull=False).values_list('id', flat=True)
+            project_active=True,
+            project_image__isnull=False).values_list(
+            'id',
+            flat=True)
 
         random_projects_id_list = random.sample(
             list(valid_projects_id_list), min(len(valid_projects_id_list), 6))
@@ -89,7 +92,8 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
         if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
             return super().dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden("You are not allowed to view this page")
+            return HttpResponseForbidden(
+                "You are not allowed to view this page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
