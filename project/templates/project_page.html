@@ -1,8 +1,17 @@
 {% extends "base.html" %} {% block content %}
+{% load static %}
+
 <section id="project-page" class="py-6 pb-12 lg:py-14">
+  {% if project.project_image %}
   <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}" class="mb-3 max-h-[650px] mx-auto" />
+  {% else %}
+  <picture class="mb-3 mx-auto w-full">
+    <source srcset="{% static 'images/placeholder-banner.webp' %}">
+    <img src="{% static 'images/placeholder-banner.png' %}" alt="project placeholder image">
+  </picture>
+  {% endif %}
   {% if request.user.is_authenticated and request.user == project.user %}
-  <div class="flex flex-row justify-end mb-5 text-xs">
+  <div class="flex flex-row justify-end mt-3 text-xs">
     <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.project_slug %}"
       class="edit-project-link link link-hover text-primary" aria-label="Edit project">Edit
       project</a>
