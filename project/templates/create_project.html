@@ -11,7 +11,7 @@
     class="flex flex-col w-full create-project-form" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form.visible_fields %}
-    {% if field.name == "project_active" %}
+    {% if field.name == "active" %}
     <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
       <div class="w-50 me-5">
         <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
@@ -34,7 +34,7 @@
       {% endif %}
     </div>
     {% comment %} Check if type is textarea {% endcomment %}
-    {% elif field.name == "project_description"%}
+    {% elif field.name == "description"%}
     <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
       {{ field.label }}
     </label>

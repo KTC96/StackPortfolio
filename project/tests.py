@@ -33,7 +33,7 @@ class ProjectCreationTests(TestCase):
         try:
             # Create a project with dummy data
             project = Project.objects.create(
-                project_name='Test Project',
+                name='Test Project',
                 user=self.user,
                 github_repo_url=''
             )
@@ -43,7 +43,7 @@ class ProjectCreationTests(TestCase):
     def test_project_without_project_name(self):
         """Test to prevent project creation without a project name."""
         project = Project.objects.create(
-            project_name='',
+            name='',
             user=self.user,
             github_repo_url=''
         )
@@ -55,7 +55,7 @@ class ProjectCreationTests(TestCase):
         """Test to prevent project creation without a user."""
         with self.assertRaises(IntegrityError):
             Project.objects.create(
-                project_name='Test Project',
+                name='Test Project',
                 user=None,
                 github_repo_url=''
             )
@@ -66,7 +66,7 @@ class ProjectCreationTests(TestCase):
         project name longer than 100 characters.
         """
         project = Project.objects.create(
-            project_name='a' * 101,
+            name='a' * 101,
             user=self.user,
             github_repo_url=''
         )
@@ -92,7 +92,7 @@ class ProjectDetailTests(TestCase):
 
         # Create a project with dummy data
         project = Project.objects.create(
-            project_name='Test Project',
+            name='Test Project',
             user=self.user,
             github_repo_url=''
         )
@@ -122,7 +122,7 @@ class ProjectListTests(TestCase):
         )
 
         project = Project.objects.create(
-            project_name='Test Project',
+            name='Test Project',
             user=self.user,
             github_repo_url=''
         )

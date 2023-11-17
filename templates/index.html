@@ -32,11 +32,11 @@
     {% comment %} Carousel Container {% endcomment %}
     <div class="relative w-full mx-auto h-[300px] lg:h-[400px]">
       {% for project in randomProjects %}
-      <a href="{% url 'project:view_project' project_slug=project.project_slug slug=project.user.slug %}">
+      <a href="{% url 'project:view_project' project_slug=project.slug slug=project.user.slug %}">
         <div class="slide relative hidden">
-          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.project_image.url }}">
+          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url }}">
           <div class="absolute bottom-0 w-full px-5 py-3 bg-black/80 text-center text-white">
-            {{ project.project_name }} - {{ project.user.username }}
+            {{ project.name }} - {{ project.user.username }}
           </div>
         </div>
       </a>

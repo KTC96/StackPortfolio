@@ -105,7 +105,7 @@ const handleProjectForm = () => {
     input.addEventListener("input", () => {
       if (input instanceof HTMLInputElement) {
         input.dataset.touched = "true";
-        if (input.name == "project_name") {
+        if (input.name == "name") {
           validateInput({
             input,
             customMinLength: 3,
