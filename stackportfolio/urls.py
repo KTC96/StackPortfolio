@@ -47,6 +47,6 @@ urlpatterns = [
     path('user/', include('project.urls')),
     path('user/', include('job_post.urls')),
     path('projects/', ProjectListView.as_view(), name='view_all_projects'),
-    path('job_posts/', JobPostListView.as_view(), name='view_all_job_posts'),
+    path('jobs/', JobPostListView.as_view(), name='view_all_job_posts'),
 
 ]

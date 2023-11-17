@@ -4,7 +4,8 @@
   <h1 class="text-3xl my-8">Job Posts</h1>
   <div class="flex flex-wrap w-100 gap-1">
     {% for job_post in job_posts %}
-    {{ job_post.name}}
+    <a href="{{ job_post.get_absolute_url }}" class="link link-hover">{{ job_post.name}}</a>
+
     {% endfor %}
   </div>
 </section>

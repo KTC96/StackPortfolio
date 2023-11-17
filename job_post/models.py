@@ -22,6 +22,7 @@ class JobPost(models.Model):
     description = models.TextField(blank=True, null=True)
     view_count = models.IntegerField(default=0)
     company = models.CharField(max_length=80, blank=True, null=True)
+    location = models.CharField(max_length=80, blank=True, null=True)
     salary_from = models.IntegerField(blank=True, null=True)
     salary_to = models.IntegerField(blank=True, null=True)
     salary_currency = models.CharField(max_length=3, blank=True, null=True)
@@ -53,7 +54,8 @@ class JobPost(models.Model):
         return reverse(
             "job_post:view_job_post",
             kwargs={
-                "slug": self.user.slug
+                "slug": self.user.slug,
+                "id": self.id
             })
 
     def save(self, *args, **kwargs):
