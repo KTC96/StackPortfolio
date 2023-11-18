@@ -2,10 +2,14 @@
 
 <section id="job_post-list" class="py-6 pb-12 lg:py-14">
   <h1 class="text-3xl my-8">Job Posts</h1>
-  <div class="flex flex-wrap w-100 gap-1">
+  {% if job_posts|length > 0 %}
+  <div class="flex flex-wrap w-100 gap-5">
     {% for job_post in job_posts %}
-    {% include 'snippets/card.html' with post=job_post type="job post" %}
+    {% include 'snippets/card.html' with post=job_post type="job post" full=False %}
     {% endfor %}
   </div>
+  {% else %}
+  <p class="text-xl">No job posts found.</p>
+  {% endif %}
 </section>
 {% endblock %}

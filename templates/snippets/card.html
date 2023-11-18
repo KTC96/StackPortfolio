@@ -3,80 +3,87 @@
 
 <div
   class="sd-card w-full {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1">
-  {% if post.image.url %}
-  <figure><img src="{{ post.image.url }}" class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover"
-      alt="Screenshot of the {{ post.name }} {{ type }}" /></figure>
-  {% elif type == "project" and not post.image.url %}
-  <figure>
-    <img src="{% static 'images/placeholder-banner.webp'%}"
-      class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover" alt="" />
-  </figure>
-  {% endif %}
-  <div class="sd-card-body flex flex-col px-5 pt-5 pb-1 {% if type == "job post" %}h-72{% endif %} h-64 bg-aliceblue">
-    <h2 class="sd-card-title font-bold text-xl"><strong><a href="{{ post.get_absolute_url }}"
-          class="link link-hover">{{ post.name }}</a></strong>
-    </h2>
-    <p class="prose mt-2 text-sm lg:text-base">
-      {{ post.description|truncatechars:150 }}{% if post.description|length >= 175 %} <a
-        href="{{ post.get_absolute_url }}" class="link link-hover text-primary text-sm lg:text-base"
-        aria-label="Click here to see the {{ post.name }} {{type}}">read more ></a>
-      {% endif %}
-    </p>
-    <div class="techs-used mt-auto mb-2">
-      {% if type == "job post" %}
-      <h3 class="text-sm lg:text-base">
-        <strong>Required tech knowledge</strong></h3>
-      {% endif %}
-      <ul class="flex flex-wrap justify-start list-none">
-        {% for tech in post.technologies.all|slice:":10" %}
-        {% include 'snippets/tech-badge.html' with tech=tech small=True grow="lg:grow-0" %}
-        {% endfor %}
-      </ul>
-    </div>
-    {% if type == "job post" %}
-    <div class="job-post-details mt-3 flex justify-between mb-2">
-      {% if post.company %}
-      <div>
-        <h3 class="text-sm lg:text-base">
-          <strong>Company</strong></h3>
-        <p class="prose text-sm lg:text-base">
-          {{ post.company }}</p>
-      </div>
-      {% endif %}
-      {% if job_post.location %}
-      <div class="mt-5 lg:mt-0">
-        <h3 class="text-sm lg:text-base">Location
-        </h3>
-        <p class="prose text-sm lg:text-base">
-          {{ job_post.location }}</p>
-      </div>
-      {% endif %}
-      {% if job_post.salary_from and job_post.salary_to %}
-      <div class="mt-5 lg:mt-0">
-        <h3 class="text-sm lg:text-base">Salary</h3>
-        <p class="prose text-sm lg:text-base">
-          {{ job_post.salary_from|intcomma }} - {{ job_post.salary_to|intcomma }}
-          {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
-      </div>
-      {% elif job_post.salary_from %}
-      <div class="mt-5 lg:mt-0">
-        <h3 class="text-sm lg:text-base">Salary</h3>
-        <p class="prose text-sm lg:text-base">From
-          {{ job_post.salary_from|intcomma }}
-          {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
-      </div>
-      {% else %}
-      <div class="mt-5 lg:mt-0">
-        <h3 class="text-sm lg:text-base">Salary</h3>
-        <p class="prose text-sm lg:text-base">Up to
-          {{ job_post.salary_to|intcomma }}
-          {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
-      </div>
-      {% endif %}
-    </div>
-
+  <a href="{{ post.get_absolute_url }}" aria-label="Navigates to the {{ post.name }} {{ type }}.">
+    {% if post.image.url %}
+    <figure>
+      <img src="{{ post.image.url }}" class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover"
+        alt="Screenshot of the {{ post.name }} {{ type }}" />
+    </figure>
+    {% elif type == "project" and not post.image.url %}
+    <figure>
+      <img src="{% static 'images/placeholder-banner.webp'%}"
+        class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover" alt="" />
+    </figure>
     {% endif %}
-  </div>
+    <div class="sd-card-body flex flex-col px-5 pt-5 pb-1 {% if type == "job post" %}h-72{% endif %} h-64 bg-aliceblue">
+      <h2 class="sd-card-title font-bold text-xl"><strong><span class="link link-hover">{{ post.name }}</span></strong>
+      </h2>
+      <p class="prose mt-2 text-sm lg:text-base">
+        {{ post.description|truncatechars:150 }}{% if post.description|length >= 175 %} <span
+          class="link link-hover text-primary text-sm lg:text-base">read more ></span>
+        {% endif %}
+      </p>
+      {% if type == "job post" and post.technologies.all|length > 0 %}
+      <div class="techs-used mt-auto mb-2">
+        <h3 class="text-sm lg:text-base">
+          <strong>
+            Required tech knowledge
+          </strong>
+        </h3>
+
+        <ul class="flex flex-wrap justify-start list-none">
+          {% for tech in post.technologies.all|slice:":10" %}
+          {% include 'snippets/tech-badge.html' with tech=tech small=True grow="lg:grow-0" %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% if type == "job post" %}
+      <div
+        class="job-post-details  {% if type == "job post" and not post.technologies.all|length > 0 %}mt-auto{% else %}mt-3{% endif %} flex justify-between mb-2">
+        {% if post.company %}
+        <div>
+          <h3 class="text-sm lg:text-base">
+            <strong>Company</strong></h3>
+          <p class="prose text-sm lg:text-base">
+            {{ post.company }}</p>
+        </div>
+        {% endif %}
+        {% if job_post.location %}
+        <div class="mt-5 lg:mt-0">
+          <h3 class="text-sm lg:text-base">Location
+          </h3>
+          <p class="prose text-sm lg:text-base">
+            {{ job_post.location }}</p>
+        </div>
+        {% endif %}
+        {% if job_post.salary_from and job_post.salary_to %}
+        <div class="mt-5 lg:mt-0">
+          <h3 class="text-sm lg:text-base">Salary</h3>
+          <p class="prose text-sm lg:text-base">
+            {{ job_post.salary_from|intcomma }} - {{ job_post.salary_to|intcomma }}
+            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+        </div>
+        {% elif job_post.salary_from %}
+        <div class="mt-5 lg:mt-0">
+          <h3 class="text-sm lg:text-base">Salary</h3>
+          <p class="prose text-sm lg:text-base">From
+            {{ job_post.salary_from|intcomma }}
+            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+        </div>
+        {% else %}
+        <div class="mt-5 lg:mt-0">
+          <h3 class="text-sm lg:text-base">Salary</h3>
+          <p class="prose text-sm lg:text-base">Up to
+            {{ job_post.salary_to|intcomma }}
+            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+        </div>
+        {% endif %}
+      </div>
+
+      {% endif %}
+    </div>
+  </a>
   {% if type == "job post" %}
   <div class="bottom-card-bar px-5 py-5 flex">
     <div class="avatar">
@@ -85,11 +92,11 @@
       </div>
     </div>
     <div class="recruiter-details ml-4">
-      <h4><a href="{{ post.user.get_absolute_url }}"
+      <h4><a href="{% url 'user_profile' slug=post.user.slug %}"
+          aria-label="Navigates to {{ post.user.get_full_name }}'s profile."
           class="link link-hover text-primary">{{ post.user.get_full_name }}</a></h4>
       <p class="prose text-xs lg:text-sm">{{ post.user.work_title }}</p>
     </div>
   </div>
   {% endif %}
-
 </div>
