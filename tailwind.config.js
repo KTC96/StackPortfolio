@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./templates/*.html",
     "./templates/**/*.html",
+    "./templates/**/**/*.html",
     "./custom_account/templates/*.html",
     "./project/templates/*.html",
     "./job_post/templates/*.html",

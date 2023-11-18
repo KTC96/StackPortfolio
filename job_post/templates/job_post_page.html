@@ -43,7 +43,10 @@
       </dialog>
       {% endif %}
       <div class="mobile-user-details">
-        <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ job_post.user.get_full_name }}</h2>
+        <h2 class="user-name text-2xl text-primary font-bold mt-5"><a
+            href="{% url 'user_profile' slug=job_post.user.slug %}" class="link link-hover"
+            aria-label="Navigates to {{ job_post.user.get_full_name }}'s profile">{{ job_post.user.get_full_name }}</a>
+        </h2>
         <span class="user-work_title mt-2 block">{{ job_post.user.work_title }}</span>
       </div>
       {% if job_post.user.display_email %}
