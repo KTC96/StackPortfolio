@@ -3,10 +3,6 @@
 {% load static %}
 <section id="create-project" class="py-12 lg-py-14">
   <h1 class="text-2xl lg:text-3xl mt-8">Create a project</h1>
-
-  <div class="hidden bg-neutral text-neutral border-neutral justify-center items-center mr-1 py-2 px-5 rounded-md bg-aliceblue bordered border-primary border-2 group-hover:border-secondary cursor-pointer feather feather-x rounded-full w-3 h-3 ml-2
-  ">
-  </div>
   <div class="form-container py-8">
     <form action="{% url 'project:create_project' slug=request.user.slug %}" method="post"
       class="flex flex-col w-full create-project-form" enctype="multipart/form-data">

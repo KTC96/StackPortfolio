@@ -1,23 +1,53 @@
 {% extends "base.html" %} {% block content %}
 {% load cloudinary %}
 {% load humanize %}
-
 <section id="job-post" class="py-6 pb-12 lg:py-14">
+  {% if request.user.is_authenticated and request.user == job_post.user %}
+  <div class="flex flex-row justify-end mt-3 text-xs">
+    <a href="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}"
+      class="edit-job-post-link link link-hover text-primary" aria-label="Edit job post">Edit
+      job post</a>
+    <form method="post" class="delete-form ml-5"
+      action="{% url 'job_post:delete_job_post' slug=request.user.slug id=job_post.id  %}">
+      {% csrf_token %}
+      <a href="#" class="delete-link link link-hover text-error" aria-label="Delete job post">
+        Delete job post
+      </a>
+    </form>
+  </div>
+  <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box p-16">
+      <h3 class="font-bold text-lg mb-8">Are you sure you want to delete this job post? This cannot be undone.</h3>
+      <div class="w-full">
+        <div class="flex pt-4">
+          <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
+          <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+  {% endif %}
   <div class="flex flex-col lg:flex-row">
-    <div class="profile-area lg:w-1/4 order-2 lg:order-1 p-10 bg-aliceblue mt-5 lg:mt-0">
-      <div class="w-full mb-5">
-        <div class="w-full">
-          <p class="prose my-3">Posted by:</p>
+    <div class="profile-area lg:w-1/4 order-2 lg:order-1 mt-8 lg:mt-0">
+      <p class="prose mb-3">Posted by:</p>
+      <div class="w-full mb-5 flex">
+        <div class="w-40">
           {% if job_post.user.profile_image %}
-          <img class="w-full" src="{{ job_post.user.profile_image.url }}"
+          <img class="w-40" src="{{ job_post.user.profile_image.url }}"
             alt="{{ job_post.user.get_full_name }}'s profile image">
           {% else %}
-          <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
+          <div class="text-8xl h-40 flex justify-center bg-secondary text-white items-center">
             {{ job_post.user.first_name|slice:":1" }}{{ job_post.user.last_name|slice:":1" }}</div>
           {% endif %}
         </div>
+        <div class="mobile-user-details ml-5">
+          <h2 class="user-name text-lg text-primary font-bold"><a
+              href="{% url 'user_profile' slug=job_post.user.slug %}" class="link link-hover"
+              aria-label="Navigates to {{ job_post.user.get_full_name }}'s profile">{{ job_post.user.get_full_name }}</a>
+          </h2>
+          <span class="user-work_title mt-2 block">{{ job_post.user.work_title }}</span>
+        </div>
       </div>
-
       {% if job_post.user.is_authenticated and user == job_post.user %}
       <div class="flex flex-row justify-around mb-5">
         <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
@@ -42,13 +72,38 @@
         </div>
       </dialog>
       {% endif %}
-      <div class="mobile-user-details">
-        <h2 class="user-name text-2xl text-primary font-bold mt-5"><a
-            href="{% url 'user_profile' slug=job_post.user.slug %}" class="link link-hover"
-            aria-label="Navigates to {{ job_post.user.get_full_name }}'s profile">{{ job_post.user.get_full_name }}</a>
-        </h2>
-        <span class="user-work_title mt-2 block">{{ job_post.user.work_title }}</span>
-      </div>
+      {% if job_post.user.twitter_handle or job_post.user.linkedin_username %}
+      <ul class="social-icons flex justify-center">
+        {% if job_post.user.twitter_handle %}
+        <li class="list-none">
+          <a href="https://twitter.com/{{ job_post.user.twitter_handle }}" target="_blank"
+            aria-label="Opens Twitter profile in new tab">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
+                <path
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                  fill="black" />
+              </svg>
+            </span>
+        </li>
+        {% endif %}
+        {% if job_post.user.linkedin_username %}
+        <li class="list-none">
+          <a href="https://www.linkedin.com/in/{{ job_post.user.linkedin_username }}" target="_blank"
+            aria-label="Opens Linkedin profile in new tab" class="ml-3">
+            <span class="svg-container inline-block w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
+                class="mercado-match" width="24" height="24" focusable="false">
+                <path
+                  d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                </path>
+              </svg>
+            </span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
       {% if job_post.user.display_email %}
       <div class="email-container mt-5">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -98,39 +153,6 @@
         {{ job_post.user.bio }}
       </p>
       {% endif %}
-
-      {% if job_post.user.twitter_handle or job_post.user.linkedin_username %}
-      <ul class="social-icons flex justify-center">
-        {% if job_post.user.twitter_handle %}
-        <li class="list-none">
-          <a href="https://twitter.com/{{ job_post.user.twitter_handle }}" target="_blank"
-            aria-label="Opens Twitter profile in new tab">
-            <span class="svg-container inline-block w-6 h-6">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="none">
-                <path
-                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                  fill="black" />
-              </svg>
-            </span>
-        </li>
-        {% endif %}
-        {% if job_post.user.linkedin_username %}
-        <li class="list-none">
-          <a href="https://www.linkedin.com/in/{{ job_post.user.linkedin_username }}" target="_blank"
-            aria-label="Opens Linkedin profile in new tab" class="ml-3">
-            <span class="svg-container inline-block w-6 h-6">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor"
-                class="mercado-match" width="24" height="24" focusable="false">
-                <path
-                  d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
-                </path>
-              </svg>
-            </span>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-      {% endif %}
     </div>
     <div class="job-post-details lg:w-1/2 lg:ml-8 order-1 lg:order-2">
       <div class="w-full font-bold">
@@ -152,7 +174,7 @@
           <h2 class="font-bold text-lg">Desirable skills</h2>
           <ul class="flex flex-wrap justify-start">
             {% for tech in job_post.technologies.all %}
-            {% include 'snippets/tech-badge.html' with tech=tech grow="" %}
+            {% include 'snippets/tech-badge.html' with tech=tech grow="lg:grow-0" %}
             {% endfor %}
           </ul>
         </div>

@@ -49,34 +49,34 @@
             {{ post.company }}</p>
         </div>
         {% endif %}
-        {% if job_post.location %}
+        {% if post.location %}
         <div class="mt-5 lg:mt-0">
           <h3 class="text-sm lg:text-base">Location
           </h3>
           <p class="prose text-sm lg:text-base">
-            {{ job_post.location }}</p>
+            {{ post.location }}</p>
         </div>
         {% endif %}
-        {% if job_post.salary_from and job_post.salary_to %}
+        {% if post.salary_from and post.salary_to %}
         <div class="mt-5 lg:mt-0">
           <h3 class="text-sm lg:text-base">Salary</h3>
           <p class="prose text-sm lg:text-base">
-            {{ job_post.salary_from|intcomma }} - {{ job_post.salary_to|intcomma }}
-            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+            {{ post.salary_from|intcomma }} - {{ post.salary_to|intcomma }}
+            {% if post.salary_currency %}({{ post.salary_currency }}){% endif %}</p>
         </div>
-        {% elif job_post.salary_from %}
+        {% elif post.salary_from %}
         <div class="mt-5 lg:mt-0">
           <h3 class="text-sm lg:text-base">Salary</h3>
           <p class="prose text-sm lg:text-base">From
-            {{ job_post.salary_from|intcomma }}
-            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+            {{ post.salary_from|intcomma }}
+            {% if post.salary_currency %}({{ post.salary_currency }}){% endif %}</p>
         </div>
-        {% else %}
+        {% elif post.salary_to %}
         <div class="mt-5 lg:mt-0">
           <h3 class="text-sm lg:text-base">Salary</h3>
           <p class="prose text-sm lg:text-base">Up to
-            {{ job_post.salary_to|intcomma }}
-            {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
+            {{ post.salary_to|intcomma }}
+            {% if post.salary_currency %}({{ post.salary_currency }}){% endif %}</p>
         </div>
         {% endif %}
       </div>
@@ -84,14 +84,16 @@
       {% endif %}
     </div>
   </a>
-  {% if type == "job post" %}
+  {% if show_owner_info %}
   <div class="bottom-card-bar px-5 py-5 flex">
+    {% if post.user.profile_image.url %}
     <div class="avatar">
-      <div class="w-8 rounded-full">
+      <div class="w-8 rounded-full mr-4">
         <img src="{{ post.user.profile_image.url }}" alt="{{ post.user.get_full_name }}'s profile avatar" />
       </div>
     </div>
-    <div class="recruiter-details ml-4">
+    {% endif %}
+    <div class="recruiter-details">
       <h4><a href="{% url 'user_profile' slug=post.user.slug %}"
           aria-label="Navigates to {{ post.user.get_full_name }}'s profile."
           class="link link-hover text-primary">{{ post.user.get_full_name }}</a></h4>

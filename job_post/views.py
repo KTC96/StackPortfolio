@@ -2,6 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from .models import JobPost
 from .forms import JobPostForm
@@ -12,7 +15,7 @@ from technology.models import Tech
 class JobPostDetailView(DetailView):
     """
     This view handles the displaying of a
-    single project on its own page.
+    single job_post on its own page.
     """
     model = JobPost
     template_name = 'job_post_page.html'
@@ -20,7 +23,7 @@ class JobPostDetailView(DetailView):
 
     def get_object(self):
         """
-        Returns the project object based on the project_slug and user slug.
+        Returns the job_post object based on the job_post_id and user slug.
         """
         job_post_id = self.kwargs.get('id')
         user_slug = self.kwargs.get('slug')
@@ -37,8 +40,8 @@ class JobPostDetailView(DetailView):
 
 class JobPostListView(ListView):
     """
-    This view lists all the projects on the
-    a project list page.
+    This view lists all the job posts on the
+    a job post list page.
     """
     model = JobPost
     template_name = 'job_post_list.html'
@@ -47,7 +50,7 @@ class JobPostListView(ListView):
 
     def get_queryset(self):
         """
-        Returns all the projects.
+        Returns all the job posts.
         """
         return JobPost.objects.filter(
             active=True).order_by('-date_created')
@@ -55,25 +58,36 @@ class JobPostListView(ListView):
 
 class JobPostCreateView(LoginRequiredMixin, CreateView):
     """
-    Class to handle project creation.
+    Class to handle job_post creation.
     """
     model = JobPost
     form_class = JobPostForm
     template_name = 'create_job_post.html'
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        Check if the user is logged in and if the user
+        is the same as the user in the url.
+        If not, redirect to the account login page.
+        """
         if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('account_login')
 
     def get_context_data(self, **kwargs):
+        """
+        Passes all the approved technologies to the template.
+        """
         context = super().get_context_data(**kwargs)
         context['all_technologies'] = Tech.objects.all().filter(
             is_approved=True)
         return context
 
     def form_valid(self, form):
+        """
+        Handles the form validation and saving.
+        """
         job_post = form.save(commit=False)
         job_post.user = self.request.user
         job_post.save()
@@ -83,7 +97,7 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
         for tech_id in existing_tech_ids:
             job_post.technologies.add(tech_id)
 
-        # If a tech is submitting and it's not
+        # If a tech is submitted and it's not
         # in the database, add it to the database
         # as unapproved.
         new_tech_names = self.request.POST.get(
@@ -91,13 +105,118 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
         for tech_name in new_tech_names:
             tech_name = tech_name.strip()
             if tech_name:
-                tech = Tech.objects.get_or_create(
+                tech, created = Tech.objects.get_or_create(
                     tech_name=tech_name, defaults={'is_approved': False})
                 job_post.technologies.add(tech)
 
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
+        """
+        Redirect to the user profile page after
+        successful job post creation.
+        """
         return reverse_lazy(
             'user_profile', kwargs={
                 'slug': self.request.user.slug})
+
+
+class JobPostEditView(LoginRequiredMixin, UpdateView):
+    """
+    This class handles making updates to the job_post.
+    """
+    model = JobPost
+    form_class = JobPostForm
+    template_name = 'edit_job_post.html'
+
+    def get_object(self, queryset=None):
+        """
+        Returns the job_post object based on the job_post_id.
+        """
+        id = self.kwargs.get('id')
+        return get_object_or_404(JobPost, id=id)
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Check if the user is logged in and if the user
+        is the same as the user in the url.
+        If not, redirect to the account login page.
+        """
+        job_post = self.get_object()
+        if request.user.is_authenticated and request.user == job_post.user:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(
+                request, "You do not have permission to edit this job post.")
+            return redirect('account_login')
+
+    def get_context_data(self, **kwargs):
+        """
+        Passed the job_post object and all the approved technologies
+        to the template.
+        """
+        context = super().get_context_data(**kwargs)
+        context['job_post'] = self.object
+        context['all_technologies'] = Tech.objects.all().filter(
+            is_approved=True)
+        context['job_post_technologies'] = self.object.technologies.all()
+
+        return context
+
+    def remove_tech_from_job_post(self, job_post, tech_id):
+        """
+        Remove a tech from a job_post.
+        """
+        job_post.technologies.remove(tech_id)
+
+    def form_valid(self, form):
+        """
+        Handles the form validation and saving.
+        """
+        job_post = form.save(commit=False)
+        job_post.user = self.request.user
+        job_post.save()
+
+        # Add existing technologies and remove any that
+        # were removed on the frontend
+        existing_tech_ids = form.cleaned_data.get('technologies')
+        job_post_tech_ids = job_post.technologies.values_list('id', flat=True)
+        tech_to_remove = set(job_post_tech_ids) - set(existing_tech_ids)
+        for tech in tech_to_remove:
+            self.remove_tech_from_job_post(job_post, tech)
+        for tech_id in existing_tech_ids:
+            job_post.technologies.add(tech_id)
+
+        # If a tech is submitted and it's not
+        # in the database, add it to the database
+        # as unapproved.
+        new_tech_names = self.request.POST.get(
+            'new_technologies', '').split(',')
+        for tech_name in new_tech_names:
+            tech_name = tech_name.strip()
+            if tech_name:
+                tech, created = Tech.objects.get_or_create(
+                    tech_name=tech_name, defaults={'is_approved': False})
+                job_post.technologies.add(tech)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+@login_required
+@require_POST
+def delete_job_post(request, slug, id):
+    """
+    Handles job post deletion.
+    """
+    user = request.user
+    job_post = get_object_or_404(JobPost, id=id)
+
+    if user == job_post.user:
+        job_post.delete()
+        messages.success(
+            request, "Your job post has been successfully deleted.")
+        return redirect(reverse('user_profile', kwargs={'slug': slug}))
+
+    messages.error(
+        request, "You cannot delete this job post.")
+    return redirect(reverse('user_profile', kwargs={'slug': slug}))
