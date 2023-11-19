@@ -34,13 +34,6 @@
 
     {% comment %} Signup stepper form pages {% endcomment %}
     <div class="form-container w-full lg:w-4/5">
-      {% comment %}
-      The below div has been added because, for some reason, Tailwind doesn't compile
-      all the CSS on form inputs.
-      {% endcomment %}
-      <div
-        class="hidden lg:mt-0 bg-aliceblue text-primary input input-bordered input-secondary w-full toggle toggle-secondary block text-sm font-medium text-gray-700 file-input file-input-bordered file-input-secondary file-input-primary w-full mt-3 textarea textarea-bordered textarea-secondary w-full">
-      </div>
       <form class="signup" id="signup_form" method="post" action="{% url 'recruiter_user_signup' %}"
         enctype="multipart/form-data" novalidate>
         {% csrf_token %}
@@ -54,7 +47,6 @@
               <label for="{{ form.first_name.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.first_name.label }}</label>
               {{ form.first_name }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.first_name.errors }}</span>
             </div>
 
@@ -63,7 +55,6 @@
               <label for="{{ form.last_name.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.last_name.label }}</label>
               {{ form.last_name }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.last_name.errors }}</span>
             </div>
 
@@ -71,7 +62,6 @@
             <div class="form-control w-full">
               <label for="{{ form.email.id_for_label }}" class="label pl-0 text-sm">{{ form.email.label }}</label>
               {{ form.email }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.email.errors }}</span>
             </div>
 
@@ -94,7 +84,6 @@
               <label for="{{ form.username.id_for_label }}" class="label pl-0 text-sm">{{ form.username.label }}</label>
               <span class="text-xs text-secondary italic mb-1 help-text">{{ form.username.help_text }}</span>
               {{ form.username }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.username.errors }}</span>
             </div>
 
@@ -105,7 +94,6 @@
               <label for="{{ form.password1.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.password1.label }}</label>
               {{ form.password1 }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.password1.errors }}</span>
             </div>
 
@@ -114,8 +102,6 @@
               <label for="{{ form.password2.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.password2.label }}</label>
               {{ form.password2 }}
-              <span class="password-mismatch-error error-span text-error text-sm mt-2 hidden"></span>
-              <span class="password-criteria-error error-span text-error text-sm mt-2 hidden"></span>
               <span class="error-span text-error text-sm mt-2">{{ form.password2.errors }}</span>
             </div>
 
@@ -157,7 +143,6 @@
               <label for="{{ form.phone_number.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.phone_number.label }}</label>
               {{ form.phone_number }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               {% if form.phone_number.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.phone_number.errors }}</span>
               {% endif %}
@@ -182,7 +167,6 @@
               <label for="{{ form.profile_image.id_for_label }}"
                 class="block text-sm font-medium text-gray-700">{{ form.profile_image.label }}</label>
               {{ form.profile_image }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               {% if form.profile_image.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.profile_image.errors }}</span>
               {% endif %}
@@ -194,7 +178,6 @@
                 class="block text-sm font-medium text-gray-700">{{ form.bio.label }}</label>
               <span class="text-xs text-secondary italic mb-1 help-text">{{ form.bio.help_text }}</span>
               {{ form.bio }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               {% if form.bio.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.bio.errors }}</span>
               {% endif %}
@@ -206,7 +189,6 @@
                 <label for="{{ form.work_title.id_for_label }}"
                   class="label pl-0 text-sm">{{ form.work_title.label }}</label>
                 {{ form.work_title }}
-                <span class="error-span text-error text-sm mt-2 hidden"></span>
                 {% if form.town.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.work_title.errors }}</span>
                 {% endif %}
@@ -215,7 +197,6 @@
               <div class="form-control w-full lg:pl-3">
                 <label for="{{ form.company.id_for_label }}" class="label pl-0 text-sm">{{ form.company.label }}</label>
                 {{ form.company }}
-                <span class="error-span text-error text-sm mt-2 hidden"></span>
                 {% if form.town.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.company.errors }}</span>
                 {% endif %}
@@ -227,7 +208,6 @@
               <label for="{{ form.linkedin_username.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.linkedin_username.label }}</label>
               {{ form.linkedin_username }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               {% if form.town.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.linkedin_username.errors }}</span>
               {% endif %}
@@ -238,7 +218,6 @@
               <label for="{{ form.twitter_handle.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.twitter_handle.label }}</label>
               {{ form.twitter_handle }}
-              <span class="error-span text-error text-sm mt-2 hidden"></span>
               {% if form.town.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.twitter_handle.errors }}</span>
               {% endif %}
