@@ -5,7 +5,7 @@
   {% if job_posts|length > 0 %}
   <div class="flex flex-wrap w-100 gap-5">
     {% for job_post in job_posts %}
-    {% include 'snippets/card.html' with post=job_post type="job post" full=False %}
+    {% include 'snippets/card.html' with post=job_post type="job post" full=False show_owner_info=True %}
     {% endfor %}
   </div>
   {% else %}
