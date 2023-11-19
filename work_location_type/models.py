@@ -9,7 +9,7 @@ class WorkLocationType(models.Model):
     and a job post can specify which work location they are
     offering. 
     """
-    work_location_type = models.CharField(max_length=15, unique=True)
+    name = models.CharField(max_length=15, unique=True)
 
     def __str__(self):
-        return self.work_location_type
+        return self.name

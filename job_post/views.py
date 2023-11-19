@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from .models import JobPost
-from .forms import JobPostForm
+from .forms import CustomJobPostForm
 from custom_account.models import CustomUser
 from technology.models import Tech
 
@@ -35,6 +35,8 @@ class JobPostDetailView(DetailView):
         Add additional context to the template.
         """
         context = super().get_context_data(**kwargs)
+        context['selected_work_location_type'] = self.object.work_location_type.all(
+        )[0]
         return context
 
 
@@ -61,7 +63,7 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
     Class to handle job_post creation.
     """
     model = JobPost
-    form_class = JobPostForm
+    form_class = CustomJobPostForm
     template_name = 'create_job_post.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -109,6 +111,11 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
                     tech_name=tech_name, defaults={'is_approved': False})
                 job_post.technologies.add(tech)
 
+        selected_work_location_type_id = form.cleaned_data['work_location_type']
+        job_post.work_location_type.clear()
+        job_post.work_location_type.add(
+            selected_work_location_type_id)
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -126,8 +133,13 @@ class JobPostEditView(LoginRequiredMixin, UpdateView):
     This class handles making updates to the job_post.
     """
     model = JobPost
-    form_class = JobPostForm
+    form_class = CustomJobPostForm
     template_name = 'edit_job_post.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.object
+        return kwargs
 
     def get_object(self, queryset=None):
         """
@@ -160,6 +172,8 @@ class JobPostEditView(LoginRequiredMixin, UpdateView):
         context['all_technologies'] = Tech.objects.all().filter(
             is_approved=True)
         context['job_post_technologies'] = self.object.technologies.all()
+        context['job_post_work_location_type_ids'] = self.object.work_location_type.values_list(
+            'id', flat=True)
 
         return context
 
@@ -198,6 +212,15 @@ class JobPostEditView(LoginRequiredMixin, UpdateView):
                 tech, created = Tech.objects.get_or_create(
                     tech_name=tech_name, defaults={'is_approved': False})
                 job_post.technologies.add(tech)
+
+        # So for the work location type, I needed to do some extra
+        # work to get the radio button to display correctly. I had
+        # to clear the existing selection and then pass in the single
+        # selected work location type.
+        selected_work_location_type_id = form.cleaned_data['work_location_type']
+        job_post.work_location_type.clear()
+        job_post.work_location_type.add(
+            selected_work_location_type_id)
 
         return HttpResponseRedirect(self.get_success_url())
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from technology.models import Tech
+from work_location_type.models import WorkLocationType
 
 
 class JobPost(models.Model):
@@ -16,6 +17,7 @@ class JobPost(models.Model):
         related_name="job_posts")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="job_posts")
+    work_location_type = models.ManyToManyField(WorkLocationType, default=1)
     name = models.CharField(max_length=100, blank=False,
                             null=True)  # Job title
     active = models.BooleanField(default=True)
