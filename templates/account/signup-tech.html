@@ -34,9 +34,6 @@
 
     {% comment %} Signup stepper form pages {% endcomment %}
     <div class="form-container w-full lg:w-4/5">
-      <div
-        class="hidden lg:mt-0 bg-aliceblue text-primary input input-bordered input-secondary w-full toggle toggle-secondary toggle-primary block text-sm font-medium text-gray-700 file-input file-input-bordered file-input-secondary file-input-primary w-full mt-3 textarea textarea-bordered textarea-secondary w-full">
-      </div>
       <form class="signup" id="signup_form" method="post" action="{% url 'tech_user_signup' %}"
         enctype="multipart/form-data" novalidate>
         {% csrf_token %}
