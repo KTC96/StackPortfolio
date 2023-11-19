@@ -5,7 +5,7 @@ from django.contrib.auth.models import (AbstractBaseUser,
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 from technology.models import Tech
-from project.models import Project
+from work_location_type.models import WorkLocationType
 
 
 class CustomUserManager(BaseUserManager):
@@ -145,6 +145,7 @@ class TechUserProfile(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, related_name='tech_profile')
     technologies = models.ManyToManyField(Tech)
+    work_location_type = models.ManyToManyField(WorkLocationType, default=1)
     github_username = models.CharField(max_length=40, blank=True, null=True)
     seeking_employment = models.BooleanField(default=False)
 

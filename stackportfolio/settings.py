@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'project',
     'technology',
     'job_post',
+    'work_location_type',
 ]
 SITE_ID = 1
 
