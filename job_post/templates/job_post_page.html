@@ -2,31 +2,7 @@
 {% load cloudinary %}
 {% load humanize %}
 <section id="job-post" class="py-6 pb-12 lg:py-14">
-  {% if request.user.is_authenticated and request.user == job_post.user %}
-  <div class="flex flex-row justify-end mt-3 text-xs">
-    <a href="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}"
-      class="edit-job-post-link link link-hover text-primary" aria-label="Edit job post">Edit
-      job post</a>
-    <form method="post" class="delete-form ml-5"
-      action="{% url 'job_post:delete_job_post' slug=request.user.slug id=job_post.id  %}">
-      {% csrf_token %}
-      <a href="#" class="delete-link link link-hover text-error" aria-label="Delete job post">
-        Delete job post
-      </a>
-    </form>
-  </div>
-  <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box p-16">
-      <h3 class="font-bold text-lg mb-8">Are you sure you want to delete this job post? This cannot be undone.</h3>
-      <div class="w-full">
-        <div class="flex pt-4">
-          <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
-          <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
-        </div>
-      </div>
-    </div>
-  </dialog>
-  {% endif %}
+
   <div class="flex flex-col lg:flex-row">
     <div class="profile-area lg:w-1/4 order-2 lg:order-1 mt-8 lg:mt-0">
       <p class="prose mb-3">Posted by:</p>
@@ -155,6 +131,31 @@
       {% endif %}
     </div>
     <div class="job-post-details lg:w-1/2 lg:ml-8 order-1 lg:order-2">
+      {% if request.user.is_authenticated and request.user == job_post.user %}
+      <div class="flex flex-row justify-end mt-3 text-xs">
+        <a href="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}"
+          class="edit-job-post-link link link-hover text-primary" aria-label="Edit job post">Edit
+          job post</a>
+        <form method="post" class="delete-form ml-5"
+          action="{% url 'job_post:delete_job_post' slug=request.user.slug id=job_post.id  %}">
+          {% csrf_token %}
+          <a href="#" class="delete-link link link-hover text-error" aria-label="Delete job post">
+            Delete job post
+          </a>
+        </form>
+      </div>
+      <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box p-16">
+          <h3 class="font-bold text-lg mb-8">Are you sure you want to delete this job post? This cannot be undone.</h3>
+          <div class="w-full">
+            <div class="flex pt-4">
+              <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
+              <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+      {% endif %}
       <div class="w-full font-bold">
         <h2 class="lg:text-lg">Role:</h2>
         <h1 class="user-name text-2xl lg:text-5xl text-primary">{{ job_post.name }}</h1>
@@ -191,7 +192,7 @@
           {% if job_post.location %}
           <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Location</h2>
-            <p class="prose">{{ job_post.location }}</p>
+            <p class="prose">{{ job_post.location }} ({{ selected_work_location_type | title }})</p>
           </div>
           {% endif %}
           {% if job_post.salary_from and job_post.salary_to %}
@@ -206,7 +207,7 @@
             <p class="prose">From {{ job_post.salary_from|intcomma }}
               {% if job_post.salary_currency %}({{ job_post.salary_currency }}){% endif %}</p>
           </div>
-          {% else %}
+          {% elif job_post.salary_to %}
           <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Salary</h2>
             <p class="prose">Up to {{ job_post.salary_to|intcomma }}
