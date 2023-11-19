@@ -16,8 +16,16 @@
     </figure>
     {% endif %}
     <div class="sd-card-body flex flex-col px-5 pt-5 pb-1 {% if type == "job post" %}h-72{% endif %} h-64 bg-aliceblue">
-      <h2 class="sd-card-title font-bold text-xl"><strong><span class="link link-hover">{{ post.name }}</span></strong>
-      </h2>
+      <div class="flex justify-between">
+        <h2 class="sd-card-title font-bold text-xl"><strong><span
+              class="link link-hover">{{ post.name }}</span></strong>
+        </h2>
+        {% if type == "job post" %}
+        <div class="badge badge-primary p-3">
+          {{ post.work_location_type.all.first }}
+        </div>
+        {% endif %}
+      </div>
       <p class="prose mt-2 text-sm lg:text-base">
         {{ post.description|truncatechars:150 }}{% if post.description|length >= 175 %} <span
           class="link link-hover text-primary text-sm lg:text-base">read more ></span>

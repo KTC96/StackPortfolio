@@ -348,3 +348,6 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [distinct() for querying approved tech](https://docs.djangoproject.com/en/dev/ref/models/querysets/#distinct)
 - [Canva for creating image placeholders](https://www.canva.com/)
 - [Humanize filter for salary ranges](https://docs.djangoproject.com/en/dev/ref/contrib/humanize/#ref-contrib-humanize)
+- [Stackoverflow post on many to many field checkboxes](https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes)
+- [Django documentation on ManyToManyField](https://docs.djangoproject.com/en/3.2/ref/models/fields/#manytomanyfield)
+- [Django docs on the radio widget](https://docs.djangoproject.com/en/4.2/ref/forms/widgets/#widgets-inheriting-from-the-select-widget)
