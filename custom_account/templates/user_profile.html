@@ -16,8 +16,6 @@
         </div>
       </div>
 
-
-
       {% if profile.is_authenticated and user == profile %}
       <div class="flex flex-row justify-around mb-5">
         <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
@@ -89,7 +87,7 @@
       </ul>
       {% endif %}
 
-      <div class="mobile-user-details lg:hidden">
+      <div class="mobile-user-details {% if profile.tech_profile %}lg:hidden{% endif %}">
         <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ profile.get_full_name }}</h2>
         <span class="user-work_title mt-2 block">{{ profile.work_title }}</span>
         {% if user_projects %}
@@ -158,6 +156,7 @@
       {% endif %}
 
     </div>
+    {% if profile.tech_profile %}
     <div class="profile__title-and-portfolio lg:w-3/4 lg:ml-8">
       <div class="desktop-user-details hidden lg:flex flex-col justify-center h-64 w-full font-bold">
         <h2 class="user-name text-5xl text-primary ">{{ profile.first_name }} {{ profile.last_name }}</h2>
@@ -166,7 +165,7 @@
       <div id="portfolio" class="mt-10 lg:mt-3">
         <div class="flex justify-between items-start w-full ">
           <h3 class="text-lg font-bold">My portfolio</h3>
-          {% if profile.is_authenticated and user == profile %}
+          {% if profile.is_authenticated and profile.tech_profile and user == profile %}
           <a href="{% url 'project:create_project' slug=request.user.slug %}"
             class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add
             project</a>
@@ -183,6 +182,29 @@
         {% endif %}
       </div>
     </div>
+    {% else %}
+    <div class="desktop-user-details w-full font-bold lg:ml-8">
+      <div class="flex justify-between items-start w-full">
+        <h2 class="text-4xl">Open roles</h2>
+        {% if profile.is_authenticated and profile.recruiter_profile and user == profile %}
+        <a href="{% url 'job_post:create_job_post' slug=request.user.slug %}"
+          class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add
+          job post</a>
+        {% endif %}
+      </div>
+      <div class="job-posts mt-10 lg:mt-3 flex gap-5">
+        {% if user_job_posts %}
+        {% for job_post in user_job_posts %}
+        <div class="mt-5 w-50 flex-1">
+          {% include 'snippets/card.html' with post=job_post type="job post" full=True %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="text-xl">{{ profile.get_full_name }} hasn't posted any jobs yet.</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
   </div>
 </section>
 {% endblock %}
