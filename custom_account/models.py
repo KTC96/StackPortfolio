@@ -145,7 +145,8 @@ class TechUserProfile(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, related_name='tech_profile')
     technologies = models.ManyToManyField(Tech)
-    work_location_type = models.ManyToManyField(WorkLocationType, default=1)
+    work_location_type = models.ManyToManyField(
+        WorkLocationType, default=1, blank=False)
     github_username = models.CharField(max_length=40, blank=True, null=True)
     seeking_employment = models.BooleanField(default=False)
 
