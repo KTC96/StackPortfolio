@@ -5,13 +5,17 @@
   <div class="lg:flex">
     <div class="profile-area lg:w-1/4">
       <div class="w-full mb-5">
-        <div class="w-full">
+        <div class="w-full relative">
           {% if profile.profile_image %}
           <img class="h-64 mx-auto object-cover max-w-full" src="{{ profile.profile_image.url }}"
             alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
           {% else %}
           <div class="text-9xl h-64 flex justify-center bg-secondary text-white items-center">
             {{ profile.first_name|slice:":1" }}{{ profile.last_name|slice:":1" }}</div>
+          {% endif %}
+          {% if profile.tech_profile.seeking_employment %}
+          <div class="absolute badge badge-primary badge-xs bottom-3 left-1/2 transform -translate-x-1/2 p-3 mt-2">Open
+            to new roles</div>
           {% endif %}
         </div>
       </div>
@@ -142,6 +146,19 @@
       <p class="prose">
         {{ profile.bio }}
       </p>
+      {% endif %}
+
+      {% if profile.tech_profile.work_location_type.all %}
+      <h3 class="mt-5 text-lg font-bold">Work preferences</h3>
+
+      {% if profile.tech_profile.work_location_type.all %}
+      <ul class="w-full flex flex-col mt-2">
+        {% for type in profile.tech_profile.work_location_type.all %}
+        <li class="badge badge-primary p-3 mt-3">{{ type }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
       {% endif %}
 
       {% if profile.tech_profile.technologies.all %}
