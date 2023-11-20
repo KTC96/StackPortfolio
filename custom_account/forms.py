@@ -298,17 +298,33 @@ class TechUserForm(CustomUserForm):
         )
     )
 
-    def save(self, request):
+    work_location_type = forms.MultipleChoiceField(
+        required=False,
+        label='Work Location Type',
+        choices=[(1, 'Remote'), (2, 'Hybrid'), (3, 'On site')],
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                'class': 'flex w-1/3 justify-between',
 
+            }
+        ),
+    )
+
+    def save(self, request):
         user = super(TechUserForm, self).save(request)
 
-        tech_user_profile = TechUserProfile(
+        tech_user_profile, created = TechUserProfile.objects.get_or_create(
             user=user,
             github_username=self.cleaned_data.get('github_username', ''),
             seeking_employment=self.cleaned_data.get(
                 'seeking_employment', False),
         )
-        tech_user_profile.save()
+
+        # handling the m2m field for work location type
+        work_location_type_ids = self.cleaned_data.get(
+            'work_location_type', [])
+        work_location_type_ids = [int(id) for id in work_location_type_ids]
+        tech_user_profile.work_location_type.set(work_location_type_ids)
 
         return user
 
@@ -424,6 +440,7 @@ class CustomUserEditForm(forms.ModelForm):
             }
         )
     )
+
     website = forms.URLField(
         required=False,
         label='Website',
@@ -590,12 +607,20 @@ class TechUserProfileEditForm(forms.ModelForm):
         )
     )
 
+    work_location_type = forms.MultipleChoiceField(
+        required=False,
+        label='Work Location Type',
+        choices=[(1, 'Remote'), (2, 'Hybrid'), (3, 'On site')],
+        widget=forms.CheckboxSelectMultiple(),
+    )
+
     class Meta:
         """
         Meta to specify the model and fields to be used.
         """
         model = TechUserProfile
-        fields = ['github_username', 'seeking_employment']
+        fields = ['github_username',
+                  'seeking_employment', 'work_location_type']
 
 
 class RecruiterUserProfileEditForm(forms.ModelForm):
