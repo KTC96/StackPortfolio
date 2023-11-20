@@ -43,6 +43,28 @@
       {% for error in field.errors %}
       <p class="text-red-500 text-sm mt-2">{{ error }}</p>
       {% endfor %}
+      {% elif field.name == "work_location_type" %}
+      <div class="w-full my-5">
+        <div class="w-50 me-5">
+          <label for="{{ form.work_location_type.id_for_label }}"
+            class="block text-sm text-gray-700 mb-3">{{ form.work_location_type.label }}</label>
+          <span class="text-xs text-secondary italic mb-1 help-text">{{ form.work_location_type.help_text }}</span>
+        </div>
+        <ul class="flex w-full lg:w-1/4 justify-between">
+          {% for choice in form.work_location_type %}
+          <li>
+            <label for="{{ choice.id_for_label }}" class="flex items-center cursor-pointer text-sm text-gray-700">
+              <input type="radio" name="work_location_type" id="{{ choice.id_for_label }}" value="{{ forloop.counter }}"
+                class="radio radio-xs radio-secondary checked:radio-primary">
+              <span class="ml-2">{{ choice.choice_label }}</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if form.work_location_type.errors %}
+        <span class="error-span block text-error text-sm mt-3">{{ form.work_location_type.errors }}</span>
+        {% endif %}
+      </div>
       {% elif field.name == "technologies" %}
 
       <div class="w-full flex flex-col items-center mx-auto my-5">
