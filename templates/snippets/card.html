@@ -31,11 +31,11 @@
           class="link link-hover text-primary text-sm lg:text-base">read more ></span>
         {% endif %}
       </p>
-      {% if type == "job post" and post.technologies.all|length > 0 %}
+      {% if post.technologies.all|length > 0 %}
       <div class="techs-used mt-auto mb-2">
         <h3 class="text-sm lg:text-base">
           <strong>
-            Required tech knowledge
+            {% if type == "job post" %}Required tech knowledge{% else %}Tech used on this {{ type }}{% endif %}
           </strong>
         </h3>
 

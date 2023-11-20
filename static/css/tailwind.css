@@ -3409,14 +3409,6 @@ html {
   padding-right: 0.313rem;
 }
 
-.badge-sm {
-  height: 1rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  padding-left: 0.438rem;
-  padding-right: 0.438rem;
-}
-
 .btm-nav-xs > *:where(.active) {
   border-top-width: 1px;
 }
@@ -3515,11 +3507,6 @@ html {
 .radio-xs {
   height: 1rem;
   width: 1rem;
-}
-
-.radio-sm {
-  height: 1.25rem;
-  width: 1.25rem;
 }
 
 .steps-horizontal .step {
@@ -3932,6 +3919,10 @@ html {
   bottom: 0px;
 }
 
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -3954,10 +3945,6 @@ html {
 
 .top-14 {
   top: 3.5rem;
-}
-
-.bottom-3 {
-  bottom: 0.75rem;
 }
 
 .z-40 {
@@ -4131,14 +4118,6 @@ html {
   margin-top: auto;
 }
 
-.mr-5 {
-  margin-right: 1.25rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
 .block {
   display: block;
 }
@@ -4257,10 +4236,6 @@ html {
 
 .w-full {
   width: 100%;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .max-w-full {
@@ -4519,10 +4494,6 @@ html {
   padding: 1.25rem;
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -4640,6 +4611,11 @@ html {
   line-height: 1;
 }
 
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
 .text-9xl {
   font-size: 8rem;
   line-height: 1;
@@ -4663,16 +4639,6 @@ html {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-8xl {
-  font-size: 6rem;
-  line-height: 1;
 }
 
 .font-black {
@@ -5095,28 +5061,16 @@ html {
     width: 80%;
   }
 
+  .lg\:w-\[150px\] {
+    width: 150px;
+  }
+
   .lg\:w-\[calc\(32\%-2px\)\] {
     width: calc(32% - 2px);
   }
 
   .lg\:w-full {
     width: 100%;
-  }
-
-  .lg\:w-\[300px\] {
-    width: 300px;
-  }
-
-  .lg\:w-\[200px\] {
-    width: 200px;
-  }
-
-  .lg\:w-\[150px\] {
-    width: 150px;
-  }
-
-  .lg\:w-2\/3 {
-    width: 66.666667%;
   }
 
   .lg\:grow-0 {

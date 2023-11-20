@@ -17,7 +17,7 @@ class Project(models.Model):
         related_name="projects")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="projects")
-    name = models.CharField(max_length=100, blank=False, null=True)
+    name = models.CharField(max_length=100, blank=False, null=False)
     github_repo_url = models.URLField(max_length=255, blank=True, null=True)
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
 
