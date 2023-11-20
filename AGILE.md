@@ -84,3 +84,18 @@ I enabled three of the set workflows on the project (two were already enabled):
 - I finished the sprint today (Sunday 12th Nov, 2023) and will be using today to plan the next sprint, and potentially get started.
 
 ![Screenshot of Sprint 1 closed issues](./documentation/sprints/sprint1.png)
+
+### Sprint 2 notes
+
+> "This task also focuses on doing the must have tasks, as well as also taking on some should have tasks if possible."
+
+- I started this sprint when I finished the first sprint, on Sunday 12th Nov, 2023.
+- I found myself held up in this sprint by my own form validation code. I had mixed it with the stepper code, so I spent some times pulling that out and making it work. It made me realise that I should have mapped out what the form validation would look like when I was planning.
+- In this sprint, I also applied the fonts from my planning, but I found that I actually preferred the base font from the Tailwind framework. I applied my heading styles but kept the base font for the body.
+- I encountered some bugs in this sprint. I managed to address one, but I have added the others to the backlog to address later.
+- I started using `include` for code snippets. I didn't realise it was something that I would be able to use before starting, so I spent some time refactoring my code so that I could use it for cards and badges.
+- I was able to complete all but one of my planned issues for this sprint, but it is also that I was focusing on core code and not automated testing. For the next sprint, I will be doing mostly `could have` issues.
+- Something I wish I had done is use story points for planning the tasks. I will apply those retroactively to my issues to gauge the difficulty level, and apply them to future issues. I plan to use them in the next sprint.
+- I finished the sprint today (Sunday 19th Nov, 2023).
+
+![Screenshot of Sprint 2 closed issues](./documentation/sprints/sprint2.png)
