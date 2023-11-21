@@ -331,6 +331,14 @@ const runSignupStepper = () => {
         // validates inputs before moving to the next step
         if (!isStepValid(steps, index)) return;
         event.preventDefault();
+        // loop through inputs and save to local storage
+        for (const input of steps[index].querySelectorAll(
+          "input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='hidden']):not([type='password']), textarea"
+        )) {
+          // @ts-ignore
+          formData[input.name] = input.value.trim();
+          saveFormDataToLocalStorage(formData);
+        }
         showStep(steps, index + 1);
         updateStepCounter(index + 1);
       }
