@@ -26,8 +26,8 @@ class Project(models.Model):
     image = CloudinaryField('image', blank=True, null=True)
     view_count = models.IntegerField(default=0)
     slug = models.SlugField(blank=True, null=True)
-    date_created = models.DateTimeField(auto_now_add=True,  null=True)
-    date_updated = models.DateTimeField(auto_now=True,  null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_updated = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         """

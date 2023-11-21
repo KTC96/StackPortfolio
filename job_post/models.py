@@ -28,8 +28,8 @@ class JobPost(models.Model):
     salary_from = models.IntegerField(blank=True, null=True)
     salary_to = models.IntegerField(blank=True, null=True)
     salary_currency = models.CharField(max_length=3, blank=True, null=True)
-    date_created = models.DateTimeField(auto_now_add=True,  null=True)
-    date_updated = models.DateTimeField(auto_now=True,  null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_updated = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         """
