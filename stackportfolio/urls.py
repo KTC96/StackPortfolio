@@ -22,7 +22,8 @@ from custom_account.views import (
     UserProfileDetailView,
     IndexView,
     UserProfileEditView,
-    delete_user)
+    delete_user,
+)
 from project.views import ProjectListView
 from job_post.views import JobPostListView
 

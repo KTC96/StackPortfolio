@@ -2,18 +2,19 @@
 import random
 from allauth.account.views import SignupView
 from django.http import HttpResponseForbidden
-from django.views.generic import TemplateView, UpdateView
-from django.shortcuts import render, reverse, redirect
-from django.views.generic import DetailView
+from django.views.generic import TemplateView, UpdateView, DetailView
+from django.shortcuts import reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from allauth.socialaccount.models import SocialAccount
 from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
                     RecruiterUserProfileEditForm)
-from .models import CustomUser
+from .models import CustomUser, TechUserProfile, RecruiterUserProfile
 from project.models import Project
+from work_location_type.models import WorkLocationType
 
 
 class IndexView(TemplateView):
@@ -91,7 +92,8 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'slug'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+        if (request.user.is_authenticated and
+                request.user.slug == self.kwargs['slug']):
             return super().dispatch(request, *args, **kwargs)
         else:
             return HttpResponseForbidden(
@@ -103,8 +105,9 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             context['tech_profile_form'] = TechUserProfileEditForm(
                 instance=self.object.tech_profile
             )
-            context['job_post_work_location_type_ids'] = self.object.tech_profile.work_location_type.values_list(
-                'id', flat=True)
+            context['job_post_work_location_type_ids'] = (
+                self.object.tech_profile.work_location_type.values_list(
+                    'id', flat=True))
         elif hasattr(self.object, 'recruiter_profile'):
             context['recruiter_profile_form'] = RecruiterUserProfileEditForm(
                 instance=self.object.recruiter_profile

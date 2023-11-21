@@ -17,7 +17,7 @@ class Project(models.Model):
         related_name="projects")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="projects")
-    name = models.CharField(max_length=100, blank=False, null=True)
+    name = models.CharField(max_length=100, blank=False, null=False)
     github_repo_url = models.URLField(max_length=255, blank=True, null=True)
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
 
@@ -26,8 +26,8 @@ class Project(models.Model):
     image = CloudinaryField('image', blank=True, null=True)
     view_count = models.IntegerField(default=0)
     slug = models.SlugField(blank=True, null=True)
-    date_created = models.DateTimeField(auto_now_add=True,  null=True)
-    date_updated = models.DateTimeField(auto_now=True,  null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_updated = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         """

@@ -351,3 +351,8 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Stackoverflow post on many to many field checkboxes](https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes)
 - [Django documentation on ManyToManyField](https://docs.djangoproject.com/en/3.2/ref/models/fields/#manytomanyfield)
 - [Django docs on the radio widget](https://docs.djangoproject.com/en/4.2/ref/forms/widgets/#widgets-inheriting-from-the-select-widget)
+- [Allauth docs about LinkedIn](https://docs.allauth.org/en/latest/socialaccount/providers/linkedin.html)
+- [LinkedIn API docs](https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/migration-faq?context=linkedin%2Fconsumer%2Fcontext)
+- [Medium article on adding GitHub for social login using allauth](https://python.plainenglish.io/django-allauth-a-guide-to-enabling-social-logins-with-github-f820239fb73f)
+- [Issue with AllAuth and LinkedIn](https://github.com/pennersr/django-allauth/issues/1641)
+- [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html) - Used to override the default behaviour of AllAuth Social Signup/Signin

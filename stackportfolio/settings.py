@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    "allauth.socialaccount.providers.github",
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
@@ -62,6 +63,12 @@ INSTALLED_APPS = [
     'job_post',
     'work_location_type',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
@@ -141,13 +148,32 @@ ACCOUNT_FORMS = {
 }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-# ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_USERNAME_MIN_LENGTH = 5
 ACCOUNT_LOGOUT_ON_GET = True
+
+SOCIALACCOUNT_ADAPTER = 'custom_account.adapters.MySocialAccountAdapter'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo'
+        ],
+        'PROFILE_FIELDS': [
+            'id',
+            'login',
+            'name',
+            'email',
+            'avatar_url',
+            'html_url'
+        ]
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
