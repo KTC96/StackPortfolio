@@ -1,4 +1,6 @@
 from allauth.account.forms import SignupForm
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django import forms
 from .models import TechUserProfile, RecruiterUserProfile, CustomUser
 
@@ -7,6 +9,7 @@ class CustomUserForm(SignupForm):
     """
     Create a custom signup form that extends SignupForm.
     """
+
     first_name = (
         forms.CharField(
             max_length=40,
@@ -244,6 +247,20 @@ class CustomUserForm(SignupForm):
             }
         )
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        User = get_user_model()
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("That email is already in use.")
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        User = get_user_model()
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("That username is already in use.")
+        return username
 
     def save(self, request):
         user = super(CustomUserForm, self).save(request)
