@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 <section id="account-type-selector" class="py-14">
-  <h1 class="text-3xl  account-type">
+  <h1 class="text-3xl account-type">
     Account Type
   </h1>
-
-  <p class="prose my-8">Please select whether you want to sign up as a developer or a recruiter.</p>
+  <p class="prose my-8">Please select whether you want to sign up as a tech user or a recruiter.</p>
   <div class="flex flex-col w-full lg:flex-row">
-    <a href="{% url 'tech_user_signup' %}"
-      class="grid flex-grow h-32 lg:h-96 card bg-primary text-xl text-white rounded-box place-items-center">Developer</a>
+    <div class="w-full lg:w-1/2">
+      <a class="btn btn-primary text-white w-full" href="{% url 'tech_user_signup' %}">Sign up as
+        a
+        Tech user using email</a>
+      <a href="" class="btn text-white btn-neutral w-full mt-3">Sign up as a Tech user with GitHub</a>
+    </div>
     <div class="divider lg:divider-horizontal">OR</div>
-    <a href="{% url 'recruiter_user_signup' %}"
-      class="grid flex-grow h-32 lg:h-96 card bg-primary text-xl text-white rounded-box place-items-center">Recruiter</a>
+    <div class="w-full lg:w-1/2 flex items-center">
+      <a href="{% url 'recruiter_user_signup' %}" class="btn btn-primary text-white w-full">Sign up
+        as a recruiter using email</a>
+    </div>
   </div>
 </section>
 
