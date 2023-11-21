@@ -152,7 +152,7 @@
       <h3 class="mt-5 text-lg font-bold">Work preferences</h3>
 
       {% if profile.tech_profile.work_location_type.all %}
-      <ul class="w-full flex flex-col mt-2">
+      <ul class="w-full flex flex-col">
         {% for type in profile.tech_profile.work_location_type.all %}
         <li class="badge badge-primary p-3 mt-3">{{ type }}</li>
         {% endfor %}
