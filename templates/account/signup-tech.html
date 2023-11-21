@@ -35,7 +35,7 @@
     {% comment %} Signup stepper form pages {% endcomment %}
     <div class="form-container w-full lg:w-4/5">
       <form class="signup" id="signup_form" method="post" action="{% url 'tech_user_signup' %}"
-        enctype="multipart/form-data" novalidate>
+        enctype="multipart/form-data">
         {% csrf_token %}
         <div class="flex overflow-hidden w-full" id="form-steps-container">
           {% comment %} Page 1 - Details {% endcomment %}
