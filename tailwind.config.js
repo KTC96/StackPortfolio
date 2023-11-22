@@ -7,6 +7,8 @@ module.exports = {
     "./custom_account/templates/*.html",
     "./project/templates/*.html",
     "./job_post/templates/*.html",
+    "./search_and_filter/templates/*.html",
+    "./search_and_filter/templates/**/*.html",
   ],
   theme: {
     extend: {
