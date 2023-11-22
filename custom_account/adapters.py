@@ -17,11 +17,19 @@ class MySocialAccountAdapter(DefaultSocialAccountAdapter):
         try:
             user = User.objects.get(email=email)
             sociallogin.connect(request, user)
+            sociallogin.user = user
+            sociallogin.is_existing = True
         except User.DoesNotExist:
-            pass
+            sociallogin.is_existing = False
 
     def save_user(self, request, sociallogin, form=None):
         user = super().save_user(request, sociallogin, form)
-        if sociallogin.is_new:
-            TechUserProfile.objects.create(user=user)
+        if not sociallogin.is_existing:
+            github_username = sociallogin.account.extra_data.get('login', '')
+            # Create a new tech user profile for the new user
+            TechUserProfile.objects.create(
+                user=user,
+                github_username=github_username,
+                seeking_employment=False
+            )
         return user
