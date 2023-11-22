@@ -1,16 +1,43 @@
 {% extends "base.html" %} {% block content %}
 
 <section class="py-12 lg-py-14" id="search-results-page">
-  <form class="join w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
-    <input class="input input-bordered join-item w-full" name="q" type="text" placeholder="Search...">
-    <button type="submit" class="btn btn-primary join-item">Search</button>
+  <form class="w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
+    <div class="join w-full">
+      <input class="input input-bordered join-item w-full" name="q" type="text" placeholder="Search...">
+      <button type="submit" class="btn btn-primary join-item">Search</button>
+    </div>
+
+    <div class="join mt-3 w-full">
+      <div>
+        <input class="join-item btn grow md:grow-0" type="radio" name="type" value="users" id="users" aria-label="Users"
+          checked />
+        <label for="users" class="sr-only">Users</label>
+      </div>
+      <div>
+        <label for="projects" class="sr-only">Projects</label>
+        <input class="join-item btn grow md:grow-0" type="radio" name="type" value="projects" id="projects"
+          aria-label="Projects" />
+      </div>
+      <div>
+        <label for="job_posts" class="sr-only">Job Posts</label>
+        <input class="join-item btn grow md:grow-0" type="radio" name="type" value="job_posts" id="job_posts"
+          aria-label="Job Posts" />
+      </div>
+    </div>
+
   </form>
 
   <h1 class="text-3xl mb-8">Search</h1>
 
   <div class="flex flex-wrap w-full gap-5">
-    {% for project in object_list %}
-    {% include 'snippets/card.html' with post=project type="project" %}
+    {% for item in object_list %}
+    {% if search_type == 'projects' %}
+    {% include 'snippets/card.html' with post=item type="project" show_owner_info=False %}
+    {% elif search_type == 'job_posts' %}
+    {% include 'snippets/card.html' with post=item type="job post" full=False show_owner_info=False %}
+    {% else %}
+    {{ item.first_name }}
+    {% endif %}
     {% endfor %}
   </div>
 </section>
