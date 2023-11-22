@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="py-12 lg-py-14" id="search-results-page">
+  <h1 class="text-3xl">Search</h1>
+  <div>
+    {% for project in object_list %}
+    <p>{{ project.name }}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
