@@ -1,10 +1,16 @@
 {% extends "base.html" %} {% block content %}
 
 <section class="py-12 lg-py-14" id="search-results-page">
-  <h1 class="text-3xl">Search</h1>
-  <div>
+  <form class="join w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
+    <input class="input input-bordered join-item w-full" name="q" type="text" placeholder="Search...">
+    <button type="submit" class="btn btn-primary join-item">Search</button>
+  </form>
+
+  <h1 class="text-3xl mb-8">Search</h1>
+
+  <div class="flex flex-wrap w-full gap-5">
     {% for project in object_list %}
-    <p>{{ project.name }}</p>
+    {% include 'snippets/card.html' with post=project type="project" %}
     {% endfor %}
   </div>
 </section>
