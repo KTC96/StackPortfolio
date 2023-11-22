@@ -273,6 +273,22 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 
 </details>
 
+<br>
+
+<details>
+  <summary>Search - Desktop (click to expand)</summary>
+
+![Search - Desktop](./documentation/wireframes/search-desktop.png)
+
+</details>
+
+<details>
+  <summary>Search - Mobile (click to expand)</summary>
+
+![Search - Mobile](./documentation/wireframes/search-mobile.png)
+
+</details>
+
 ### User flowchart
 
 The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
@@ -357,3 +373,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Issue with AllAuth and LinkedIn](https://github.com/pennersr/django-allauth/issues/1641)
 - [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html) - Used to override the default behaviour of AllAuth Social Signup/Signin
 - [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
+- [Figma for designing the Favicon](https://www.figma.com/)
