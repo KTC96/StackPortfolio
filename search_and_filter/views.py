@@ -9,15 +9,19 @@ class SearchResultsView(ListView):
     Handles the display of search results.
     """
     template_name = 'search_results_page.html'
-
     model = Project
 
     def get_queryset(self):
         """
         Returns the queryset of projects that match the search term.
         """
-        query = "test"
-        object_list = Project.objects.filter(
-            Q(name__icontains=query) | Q(description__icontains=query)
-        )
+        query = self.request.GET.get('q', '')
+
+        if query:
+            object_list = Project.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        else:
+            object_list = Project.objects.all()
+
         return object_list
