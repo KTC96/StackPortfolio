@@ -36,7 +36,7 @@
     {% elif search_type == 'job_posts' %}
     {% include 'snippets/card.html' with post=item type="job post" full=False show_owner_info=False %}
     {% else %}
-    {{ item.first_name }}
+    {% include 'snippets/profile-card.html' with post=item type="profile" full=False %}
     {% endif %}
     {% endfor %}
   </div>
