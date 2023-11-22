@@ -356,3 +356,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Medium article on adding GitHub for social login using allauth](https://python.plainenglish.io/django-allauth-a-guide-to-enabling-social-logins-with-github-f820239fb73f)
 - [Issue with AllAuth and LinkedIn](https://github.com/pennersr/django-allauth/issues/1641)
 - [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html) - Used to override the default behaviour of AllAuth Social Signup/Signin
+- [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
