@@ -23,6 +23,7 @@ from custom_account.views import (
     IndexView,
     UserProfileEditView,
     delete_user,
+    AccountTypeView
 )
 from project.views import ProjectListView
 from job_post.views import JobPostListView
@@ -31,7 +32,7 @@ from job_post.views import JobPostListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/signup/',
-         TemplateView.as_view(template_name="account/account_type.html"), name='account_type'),
+         AccountTypeView.as_view(), name='account_type'),
     path('accounts/', include('allauth.urls')),
     path('', IndexView.as_view(), name='homepage'),
     path('contact/', TemplateView.as_view(template_name="contact.html"), name='contact'),
