@@ -8,13 +8,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from allauth.socialaccount.models import SocialAccount
+from allauth.socialaccount import providers
 from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
                     RecruiterUserProfileEditForm)
-from .models import CustomUser, TechUserProfile, RecruiterUserProfile
+from .models import CustomUser
 from project.models import Project
-from work_location_type.models import WorkLocationType
 
 
 class IndexView(TemplateView):
@@ -145,3 +144,17 @@ def delete_user(request, slug):
 
     messages.error(request, "You cannot delete this profile.")
     return redirect(reverse('user_profile', kwargs={'slug': slug}))
+
+
+class AccountTypeView(TemplateView):
+    """
+    Used to give the user signing up the option to choose.
+    View is required to pass allauth social auth variables
+    to the template.
+    """
+    template_name = 'account/account_type.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['socialaccount_providers'] = providers.registry.provider_map
+        return context

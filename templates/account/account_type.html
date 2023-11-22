@@ -10,7 +10,13 @@
       <a class="btn btn-primary text-white w-full" href="{% url 'tech_user_signup' %}">Sign up as
         a
         Tech user using email</a>
-      <a href="" class="btn text-white btn-neutral w-full mt-3">Sign up as a Tech user with GitHub</a>
+      {% if socialaccount_providers %}
+      <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers">
+          {% include "socialaccount/snippets/provider_list.html" with process="signup" additional_text="Sign up with" %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
     <div class="divider lg:divider-horizontal">OR</div>
     <div class="w-full lg:w-1/2 flex items-center">
