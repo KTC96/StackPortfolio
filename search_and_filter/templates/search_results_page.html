@@ -10,18 +10,18 @@
     <div class="join mt-3 w-full">
       <div>
         <input class="join-item btn grow md:grow-0" type="radio" name="type" value="users" id="users" aria-label="Users"
-          checked />
+          {% if search_type == 'users' %}checked{% endif %} />
         <label for="users" class="sr-only">Users</label>
       </div>
       <div>
         <label for="projects" class="sr-only">Projects</label>
         <input class="join-item btn grow md:grow-0" type="radio" name="type" value="projects" id="projects"
-          aria-label="Projects" />
+          aria-label="Projects" {% if search_type == 'projects' %}checked{% endif %} />
       </div>
       <div>
         <label for="job_posts" class="sr-only">Job Posts</label>
         <input class="join-item btn grow md:grow-0" type="radio" name="type" value="job_posts" id="job_posts"
-          aria-label="Job Posts" />
+          aria-label="Job Posts" {% if search_type == 'job_posts' %}checked{% endif %} />
       </div>
     </div>
 

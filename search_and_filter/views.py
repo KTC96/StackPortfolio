@@ -34,4 +34,5 @@ class SearchResultsView(ListView):
         context = super().get_context_data(**kwargs)
         search_type = self.request.GET.get('type', 'users')
         context['search_type'] = search_type
+        context['current_query'] = self.request.GET.get('q', '')
         return context
