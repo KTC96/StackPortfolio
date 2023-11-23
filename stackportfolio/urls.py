@@ -48,7 +48,9 @@ urlpatterns = [
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
     path('user/', include('project.urls')),
     path('user/', include('job_post.urls')),
+    path('search/', include('search_and_filter.urls')),
     path('projects/', ProjectListView.as_view(), name='view_all_projects'),
     path('jobs/', JobPostListView.as_view(), name='view_all_job_posts'),
+
 
 ]

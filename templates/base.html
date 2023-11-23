@@ -47,50 +47,73 @@
                     <li><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job posts</a></li>
                 </ul>
             </nav>
-            <div class="dropdown z-50">
-                <label tabindex="0" class="btn btn-ghost md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h8m-8 6h16" />
+            <div>
+
+                <a class="lg:hidden" href="{% url 'search_and_filter:search_results' %}"
+                    aria-label="Navigates to the search page">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                </label>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
-                    {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'user_profile' slug=user.slug %}" aria-label="Navigates to your profile page">My
-                            profile</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
-                            aria-label="Edit profile">Edit profile</a>
-                    </li>
-                    <hr class="my-2">
-                    {% endif %}
-                    <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
-                    <li><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job posts</a></li>
-                    <hr class="my-2">
+                </a>
+
+                <div class="dropdown z-50">
+                    <label tabindex="0" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </label>
+                    <ul tabindex="0"
+                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'user_profile' slug=user.slug %}"
+                                aria-label="Navigates to your profile page">My
+                                profile</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
+                                aria-label="Edit profile">Edit profile</a>
+                        </li>
+                        <hr class="my-2">
+                        {% endif %}
+                        <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
+                        <li><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job posts</a></li>
+                        <hr class="my-2">
 
 
-                    {% if user.is_authenticated %}
-                    <li>
-                        <a href=" {% url 'account_logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="{% url 'account_signup' %}">Sign up</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account_login' %}">Sign in</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href=" {% url 'account_logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'account_signup' %}">Sign up</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'account_login' %}">Sign in</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <ul class="navbar-end menu menu-horizontal px-1 hidden md:flex">
+            <ul class="navbar-end menu menu-horizontal px-1 hidden lg:flex">
                 {% if user.is_authenticated %}
                 <div class="flex-none">
                     <ul class="menu menu-horizontal px-1">
+                        <li>
+                            <a class="hidden lg:block" href="{% url 'search_and_filter:search_results' %}"
+                                aria-label="Navigates to the search page">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </a>
+                        </li>
                         <li>
                             <details>
                                 <summary>
@@ -142,16 +165,18 @@
         <div class="pagination mb-8">
             <div class="join w-full justify-center">
                 {% if page_obj.has_previous %}
-                <a href="?page=1" class="join-item btn">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if current_query %}&q={{ current_query|urlencode }}{% endif %}{% if search_type %}&type={{ search_type }}{% endif %}"
+                    class="join-item btn">&laquo; First</a>
                 {% endif %}
 
                 {% for page_num in page_obj.paginator.page_range %}
-                <a href="?page={{ page_num }}"
+                <a href="?page={{ page_num }}{% if current_query %}&q={{ current_query|urlencode }}{% endif %}{% if search_type %}&type={{ search_type }}{% endif %}"
                     class="join-item btn {% if page_num == page_obj.number %}btn-active{% endif %}">{{ page_num }}</a>
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.paginator.num_pages }}" class="join-item btn">Last &raquo;</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if current_query %}&q={{ current_query|urlencode }}{% endif %}{% if search_type %}&type={{ search_type }}{% endif %}"
+                    class="join-item btn">Last &raquo;</a>
                 {% endif %}
             </div>
         </div>

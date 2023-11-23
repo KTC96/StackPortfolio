@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'technology',
     'job_post',
     'work_location_type',
+    'search_and_filter',
 ]
 
 AUTHENTICATION_BACKENDS = [
