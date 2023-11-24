@@ -148,13 +148,9 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
         project.user = self.request.user
         project.save()
 
-        # Add existing technologies and remove any that
-        # were removed on the frontend
-        existing_tech_ids = form.cleaned_data.get('technologies')
-        project_tech_ids = project.technologies.values_list('id', flat=True)
-        tech_to_remove = set(project_tech_ids) - set(existing_tech_ids)
-        for tech in tech_to_remove:
-            self.remove_tech_from_project(project, tech)
+        project.technologies.clear()
+
+        existing_tech_ids = form.cleaned_data.get('technologies', [])
         for tech_id in existing_tech_ids:
             project.technologies.add(tech_id)
 
