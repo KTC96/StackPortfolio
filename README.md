@@ -374,3 +374,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html) - Used to override the default behaviour of AllAuth Social Signup/Signin
 - [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
 - [Figma for designing the Favicon](https://www.figma.com/)
+- [TestDriven.io on using the post_delete receiver](https://testdriven.io/tips/59a2752f-cdf3-4ba1-806d-15f29811037a/)
