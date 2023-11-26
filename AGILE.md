@@ -110,3 +110,5 @@ I enabled three of the set workflows on the project (two were already enabled):
 - The issue regarding social authentication took a lot more time than I had originally anticipated, but the issues for search and filtering didn't take as long, so it more or less balanced out.
 - All planned issues were completed, plus the other search and filtering issues, which I had originally thought would be in the next sprint.
 - I finished the sprint today (Sunday 26th Nov, 2023). For the next sprint, I will evaluate the remaining `could have` issues and focus on resolving the remaining bugs. I also want to run through the application and see if there are any other issues that I can add to the backlog.
+
+![Screenshot of Sprint 3 closed issues](./documentation/sprints/sprint3.png)
