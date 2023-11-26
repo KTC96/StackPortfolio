@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load widget_tweaks %}
 {% block head_title %}{% trans "Signup" %}{% endblock head_title %}
 
 {% block content %}
@@ -95,7 +96,7 @@
             <div class="form-control w-full">
               <label for="{{ form.password1.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.password1.label }}</label>
-              {{ form.password1 }}
+              {% render_field form.password1 class="input input-bordered input-secondary w-full"%}
               <span class="error-span text-error text-sm mt-2">{{ form.password1.errors }}</span>
             </div>
 
@@ -103,7 +104,7 @@
             <div class="form-control w-full">
               <label for="{{ form.password2.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.password2.label }}</label>
-              {{ form.password2 }}
+              {% render_field form.password2 class="input input-bordered input-secondary w-full"%}
               <span class="error-span text-error text-sm mt-2">{{ form.password2.errors }}</span>
             </div>
 
