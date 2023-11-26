@@ -99,3 +99,14 @@ I enabled three of the set workflows on the project (two were already enabled):
 - I finished the sprint today (Sunday 19th Nov, 2023).
 
 ![Screenshot of Sprint 2 closed issues](./documentation/sprints/sprint2.png)
+
+### Sprint 3 notes
+
+> "Sprint 3 will focus on coding, but it will be used to finishing up and must haves or should haves from previous sprints, while also tackling could haves if time allows."
+
+- I started this sprint when I finished the second sprint, on Sunday 19th Nov, 2023.
+- I used story points in this sprint and also retroactively assigned values to issues from the previous sprints. That allowed me to see how much work I was able to get done in the allotted time and plan accordingly.
+- I had less time to dedicate to this sprint, so I had fewer issues overall.
+- The issue regarding social authentication took a lot more time than I had originally anticipated, but the issues for search and filtering didn't take as long, so it more or less balanced out.
+- All planned issues were completed, plus the other search and filtering issues, which I had originally thought would be in the next sprint.
+- I finished the sprint today (Sunday 26th Nov, 2023). For the next sprint, I will evaluate the remaining `could have` issues and focus on resolving the remaining bugs. I also want to run through the application and see if there are any other issues that I can add to the backlog.
