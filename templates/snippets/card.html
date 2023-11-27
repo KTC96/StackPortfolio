@@ -15,7 +15,8 @@
         class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover" alt="" />
     </figure>
     {% endif %}
-    <div class="sd-card-body flex flex-col px-5 pt-5 pb-1 {% if type == "job post" %}h-72{% endif %} h-64 bg-aliceblue">
+    <div
+      class="sd-card-body flex flex-col px-5 pt-5 pb-1 {% if type == "job post" %}min-h-[18rem]{% else %}min-h-[16rem]{% endif %} bg-aliceblue">
       <div class="flex justify-between">
         <h2 class="sd-card-title font-bold text-xl"><strong><span
               class="link link-hover">{{ post.name }}</span></strong>
