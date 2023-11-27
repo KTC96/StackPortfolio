@@ -2,9 +2,6 @@
 {% block content %}
 <section id="edit-profile" class="py-12 lg-py-14">
   <h1 class="text-3xl mb-5">Edit Profile</h1>
-  <div
-    class="hidden lg:mt-0 bg-aliceblue text-primary input input-bordered input-secondary w-full toggle toggle-secondary block text-sm font-medium text-gray-700 file-input file-input-bordered file-input-secondary file-input-primary w-full mt-3 textarea textarea-bordered textarea-secondary w-full">
-  </div>
   <form class="signup" id="signup_form" method="post" action="{% url 'profile_edit' user.slug %}"
     enctype="multipart/form-data">
     {% csrf_token %}
