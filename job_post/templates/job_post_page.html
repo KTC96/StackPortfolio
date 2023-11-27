@@ -18,7 +18,7 @@
         </div>
         <div class="mobile-user-details ml-5">
           <h2 class="user-name text-lg text-primary font-bold"><a
-              href="{% url 'user_profile' slug=job_post.user.slug %}" class="link link-hover"
+              href="{% url 'custom_account:user_profile' slug=job_post.user.slug %}" class="link link-hover"
               aria-label="Navigates to {{ job_post.user.get_full_name }}'s profile">{{ job_post.user.get_full_name }}</a>
           </h2>
           <span class="user-work_title mt-2 block">{{ job_post.user.work_title }}</span>

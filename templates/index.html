@@ -6,17 +6,18 @@
           class="text-primary">Impact</span></strong>. 🚀</h1>
     {% if user.is_authenticated %}
     <a class="btn btn-primary text-white mx-auto my-3 lg:my-5 mt-5 lg:mt-7 flex lg:w-3/5 lg:ml-0"
-      href="{% url 'user_profile' user.slug %}" role="button">
+      href="{% url 'custom_account:user_profile' user.slug %}" role="button">
       Go to your profile ></a>
     {% else %}
     <a class="btn btn-primary text-white mx-auto my-3 lg:my-5 mt-5 lg:mt-7 flex lg:w-3/5 lg:ml-0"
-      href="{% url 'tech_user_signup' %}" role="button">Start stacking your success</a>
+      href="{% url 'custom_account:tech_user_signup' %}" role="button">Start stacking your success</a>
     {% endif %}
 
     {% if not user.is_authenticated %}
     <p class="text-sm prose inline-block">Searching for proven talent?</p>
     <a class="link text-sm link-primary block lg:inline" {% if user.is_authenticated %}
-      href="{% url 'user_profile' user.slug %}" {% else %} href="{% url 'recruiter_user_signup' %}" {% endif %}>
+      href="{% url 'custom_account:user_profile' user.slug %}" {% else %}
+      href="{% url 'custom_account:recruiter_user_signup' %}" {% endif %}>
       Sign up as a recruiter
     </a>
     {% endif %}
@@ -34,7 +35,8 @@
       {% for project in randomProjects %}
       <a href="{% url 'project:view_project' project_slug=project.slug slug=project.user.slug %}">
         <div class="slide relative hidden">
-          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url }}">
+          {% comment %} Alt tag is blank as images are decorative {% endcomment %}
+          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url }}" alt="">
           <div class="absolute bottom-0 w-full px-5 py-3 bg-black/80 text-center text-white">
             {{ project.name }} - {{ project.user.username }}
           </div>
@@ -57,7 +59,7 @@
     <div class="flex justify-center items-center space-x-3 py-5 px-2">
       {% for project in randomProjects %}
       <button class="dot w-4 h-4 rounded-full cursor-pointer bg-secondary" data-slide="{{ forloop.counter }}"
-        role="button" aria-label="Switches to slide {{forloop.counter}}"></button>
+        aria-label="Switches to slide {{forloop.counter}}"></button>
       {% endfor %}
     </div>
 

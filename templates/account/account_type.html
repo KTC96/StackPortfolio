@@ -7,7 +7,7 @@
   <p class="prose my-8">Please select whether you want to sign up as a tech user or a recruiter.</p>
   <div class="flex flex-col w-full lg:flex-row">
     <div class="w-full lg:w-1/2">
-      <a class="btn btn-primary text-white w-full" href="{% url 'tech_user_signup' %}">Sign up as
+      <a class="btn btn-primary text-white w-full" href="{% url 'custom_account:tech_user_signup' %}">Sign up as
         a
         Tech user using email</a>
       {% if socialaccount_providers %}
@@ -20,7 +20,7 @@
     </div>
     <div class="divider lg:divider-horizontal">OR</div>
     <div class="w-full lg:w-1/2 flex items-center">
-      <a href="{% url 'recruiter_user_signup' %}" class="btn btn-primary text-white w-full">Sign up
+      <a href="{% url 'custom_account:recruiter_user_signup' %}" class="btn btn-primary text-white w-full">Sign up
         as a recruiter using email</a>
     </div>
   </div>

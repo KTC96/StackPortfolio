@@ -26,11 +26,11 @@
 
       {% if profile.is_authenticated and user == profile %}
       <div class="flex flex-row justify-around mb-5">
-        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
-          aria-label="Edit profile">Edit
+        <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
+          class="edit-profile-link link link-hover text-primary" aria-label="Edit profile">Edit
           profile</a>
         <form id="profile-delete-form-{{ user.id }}" method="post" class="delete-form"
-          action="{% url 'delete_user' slug=user.slug %}">
+          action="{% url 'custom_account:delete_user' slug=user.slug %}">
           {% csrf_token %}
           <a href="#" class="delete-link link link-hover text-error" aria-label="Delete profile">
             Delete profile

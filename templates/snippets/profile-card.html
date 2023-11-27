@@ -1,6 +1,6 @@
 {% load static %}
 
-<a href="{% url 'user_profile' post.slug %}"
+<a href="{% url 'custom_account:user_profile' post.slug %}"
   class="sd-card w-full {% if not full %}lg:w-[calc(32%-2px)]{% endif %} h-64 shadow-xl transition-transform hover:-translate-y-1 p-3">
   <div class="flex h-full">
     <div class="left-column flex flex-col w-1/3">
