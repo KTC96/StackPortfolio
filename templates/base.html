@@ -1,16 +1,22 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html data-theme="stackportfolio-default-theme">
+<html data-theme="stackportfolio-default-theme" lang="en">
+
+
+{% comment %} Head {% endcomment %}
 
 <head>
+    {% comment %} Meta tags {% endcomment %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'images/stackportfolio-icon.svg' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Stackportfol.io</title>
 </head>
+
+{% comment %} Body {% endcomment %}
 
 <body class="flex flex-col min-h-screen">
     {% comment %} Toast messages {% endcomment %}
@@ -27,7 +33,6 @@
 
     {% comment %} Header {% endcomment %}
     <header>
-        <!-- Navigation -->
         <div class="navbar bg-base-100 container mx-auto justify-between">
             <div class="navbar-start">
                 <a class="text-lg font-bold text-primary" href="{% url 'homepage' %}">Stackportfol.io</a>
@@ -40,6 +45,7 @@
             </nav>
             <div>
 
+                {% comment %} Search {% endcomment %}
                 <a class="lg:hidden" href="{% url 'search_and_filter:search_results' %}"
                     aria-label="Navigates to the search page">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -49,6 +55,7 @@
                     </svg>
                 </a>
 
+                {% comment %} Mobile Navigation {% endcomment %}
                 <div class="dropdown z-50">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -61,21 +68,26 @@
                         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
                         {% if user.is_authenticated %}
                         <li class="my-3">
-                            <a href="{% url 'user_profile' slug=user.slug %}"
+                            <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
                                 aria-label="Navigates to your profile page">My
                                 profile</a>
                         </li>
+                        <span class="divider my-2"></span>
                         <li class="my-3">
-                            <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
+                            <a href="{% url 'custom_account:user_settings' slug=user.slug %}" class="edit-settings-link"
+                                aria-label="Edit settings">Edit account details</a>
+                        </li>
+                        <li class="my-3">
+                            <a href="{% url 'custom_account:profile_edit' slug=user.slug %}" class="edit-profile-link"
                                 aria-label="Edit profile">Edit profile</a>
                         </li>
-                        <hr class="my-2">
+                        <span class="divider my-2"></span>
                         {% endif %}
                         <li class="my-3"><a class="link link-hover" href="{% url 'view_all_projects' %}">See
                                 projects</a></li>
                         <li class="my-3"><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job
                                 posts</a></li>
-                        <hr class="my-2">
+                        <span class="divider my-2"></span>
 
 
                         {% if user.is_authenticated %}
@@ -84,7 +96,7 @@
                         </li>
                         {% else %}
                         <li class="my-3">
-                            <a href="{% url 'account_signup' %}">Sign up</a>
+                            <a href="{% url 'custom_account:account_type' %}">Sign up</a>
                         </li>
                         <li class="my-3">
                             <a href="{% url 'account_login' %}">Sign in</a>
@@ -112,16 +124,22 @@
                                 <summary>
                                     Account
                                 </summary>
-                                <ul class="p-2 bg-base-100 z-50 lg:w-[150px] right-0">
+                                <ul class="p-2 bg-base-100 z-50 lg:w-[180px] right-0">
                                     <li class="my-3">
-                                        <a href="{% url 'user_profile' slug=user.slug %}"
+                                        <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
                                             aria-label="Navigates to your profile page">My profile</a>
                                     </li>
+                                    <span class="divider my-2"></span>
                                     <li class="my-3">
-                                        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
-                                            aria-label="Edit profile">Edit profile</a>
+                                        <a href="{% url 'custom_account:user_settings' slug=user.slug %}"
+                                            class="edit-settings-link" aria-label="Edit settings">Edit account
+                                            details</a>
                                     </li>
-                                    <hr class="my-2">
+                                    <li class="my-3">
+                                        <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
+                                            class="edit-profile-link" aria-label="Edit profile">Edit profile</a>
+                                    </li>
+                                    <span class="divider my-2"></span>
                                     <li class="my-3">
                                         <a href="{% url 'account_logout' %}">Logout</a>
                                     </li>
@@ -133,7 +151,17 @@
                 </div>
                 {% else %}
                 <li>
-                    <a href="{% url 'account_signup' %}">Sign up</a>
+                    <a class="hidden lg:block" href="{% url 'search_and_filter:search_results' %}"
+                        aria-label="Navigates to the search page">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'custom_account:account_type' %}">Sign up</a>
                 </li>
                 <li>
                     <a href="{% url 'account_login' %}">Sign in</a>
@@ -177,17 +205,17 @@
         <div class="footer-menus md:p-10 bg-secondary text-base-100 ">
             <div class="container mx-auto footer py-8">
                 <div>
-                    <header class="footer-title">Company</header>
-                    <a href="{% url 'about' %}" class="link link-hover">About us</a>
-                    <a href="{% url 'careers' %}" class="link link-hover">Work with us</a>
+                    <h3 class="footer-title">Company</header>
+                        <a href="{% url 'about' %}" class="link link-hover">About us</a>
+                        <a href="{% url 'careers' %}" class="link link-hover">Work with us</a>
                 </div>
                 <div>
-                    <header class="footer-title">Offerings</header>
+                    <h3 class="footer-title">Offerings</h3>
                     <a class="link link-hover">Developer Portfolio</a>
                     <a class="link link-hover">Job board</a>
                 </div>
                 <div>
-                    <header class="footer-title">Support</header>
+                    <h3 class="footer-title">Support</h3>
                     <a href="{% url 'contact' %}" class="link link-hover">Contact</a>
                 </div>
             </div>

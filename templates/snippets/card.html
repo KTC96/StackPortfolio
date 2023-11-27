@@ -103,7 +103,7 @@
     </div>
     {% endif %}
     <div class="recruiter-details">
-      <h4><a href="{% url 'user_profile' slug=post.user.slug %}"
+      <h4><a href="{% url 'custom_account:user_profile' slug=post.user.slug %}"
           aria-label="Navigates to {{ post.user.get_full_name }}'s profile."
           class="link link-hover text-primary">{{ post.user.get_full_name }}</a></h4>
       <p class="prose text-xs lg:text-sm">{{ post.user.work_title }}</p>

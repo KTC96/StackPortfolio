@@ -8,10 +8,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.utils.text import slugify
 from allauth.socialaccount import providers
 from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
-                    RecruiterUserProfileEditForm)
+                    RecruiterUserProfileEditForm, UserSettingsForm
+                    )
 from .models import CustomUser
 from project.models import Project
 
@@ -126,7 +128,43 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
         return response
 
     def get_success_url(self):
-        return reverse('user_profile', kwargs={'slug': self.object.slug})
+        return reverse('custom_account:user_profile', kwargs={'slug': self.object.slug})
+
+
+class UserSettingsView(LoginRequiredMixin, UpdateView):
+    """
+    This class handles updating the user settings.
+    """
+    model = CustomUser
+    form_class = UserSettingsForm
+    template_name = 'user_settings.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        if (request.user.is_authenticated and
+                request.user.slug == self.kwargs['slug']):
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden(
+                "You are not allowed to view this page")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def form_valid(self, form):
+        user = self.object
+        user.first_name = form.cleaned_data['first_name']
+        user.last_name = form.cleaned_data['last_name']
+        user.email = form.cleaned_data['email']
+        user.username = form.cleaned_data['username']
+        user.slug = slugify(user.username)
+        user.save()
+        return super(UserSettingsView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('custom_account:user_profile', kwargs={'slug': self.object.slug})
 
 
 @login_required
@@ -143,7 +181,7 @@ def delete_user(request, slug):
         return redirect(reverse('homepage'))
 
     messages.error(request, "You cannot delete this profile.")
-    return redirect(reverse('user_profile', kwargs={'slug': slug}))
+    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
 
 
 class AccountTypeView(TemplateView):
@@ -152,7 +190,7 @@ class AccountTypeView(TemplateView):
     View is required to pass allauth social auth variables
     to the template.
     """
-    template_name = 'account/account_type.html'
+    template_name = 'account_type.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

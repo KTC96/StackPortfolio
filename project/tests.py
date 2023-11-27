@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.apps import apps
-from custom_account.models import CustomUser
+from custom_account.models import CustomUser, TechUserProfile
 from project.models import Project
 
 
@@ -20,6 +20,8 @@ class ProjectCreationTests(TestCase):
             email='testuser@example.com',
             password='password',
         )
+
+        TechUserProfile.objects.create(user=self.user)
 
     def test_check_model_is_not_none(self):
         """Test case to check if model is not none"""
@@ -90,6 +92,8 @@ class ProjectDetailTests(TestCase):
             password='testingpassword123!',
         )
 
+        TechUserProfile.objects.create(user=self.user)
+
         # Create a project with dummy data
         project = Project.objects.create(
             name='Test Project',
@@ -120,6 +124,8 @@ class ProjectListTests(TestCase):
             email='testuser@example.com',
             password='password',
         )
+
+        TechUserProfile.objects.create(user=self.user)
 
         project = Project.objects.create(
             name='Test Project',

@@ -5033,6 +5033,18 @@ html {
     width: 100%;
   }
 
+  .lg\:w-\[160px\] {
+    width: 160px;
+  }
+
+  .lg\:w-\[170px\] {
+    width: 170px;
+  }
+
+  .lg\:w-\[180px\] {
+    width: 180px;
+  }
+
   .lg\:grow-0 {
     flex-grow: 0;
   }

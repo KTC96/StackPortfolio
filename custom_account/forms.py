@@ -364,44 +364,7 @@ class CustomUserEditForm(forms.ModelForm):
     """
     This form is required to edit the user profile.
     """
-    first_name = (
-        forms.CharField(
-            max_length=40,
-            min_length=2,
-            label='First Name',
-            required=True,
-            help_text='Required',
-            widget=forms.TextInput(
-                attrs={
-                    'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
-    last_name = (
-        forms.CharField(
-            max_length=40,
-            min_length=2,
-            label='Last Name',
-            required=True,
-            help_text='Required',
-            widget=forms.TextInput(
-                attrs={
-                    'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
-    email = (
-        forms.EmailField(
-            max_length=60,
-            label='Email',
-            required=True,
-            help_text='Required',
 
-            widget=forms.EmailInput(
-                attrs={
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
     display_email = forms.BooleanField(
         required=False,
         label='Display Email',
@@ -412,19 +375,6 @@ class CustomUserEditForm(forms.ModelForm):
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
             }
         ))
-    username = (
-        forms.CharField(
-            max_length=20,
-            min_length=5,
-            label='Username',
-            required=True,
-            help_text='This will be for your profile URL',
-            widget=forms.TextInput(
-                attrs={
-                    'placeholder': '',
-                    'class': 'input input-bordered input-secondary w-full'
-                }
-            )))
 
     town_city = forms.CharField(
         max_length=85,
@@ -575,10 +525,6 @@ class CustomUserEditForm(forms.ModelForm):
         """
         model = CustomUser
         fields = [
-            'first_name',
-            'last_name',
-            'email',
-            'username',
             'town_city',
             'display_town_city',
             'country',
@@ -592,6 +538,75 @@ class CustomUserEditForm(forms.ModelForm):
             'company',
             'linkedin_username',
             'twitter_handle'
+        ]
+
+
+class UserSettingsForm(forms.ModelForm):
+    """
+    Form to update user settings.
+    """
+    first_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='First Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    last_name = (
+        forms.CharField(
+            max_length=40,
+            min_length=2,
+            label='Last Name',
+            required=True,
+            help_text='Required',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    email = (
+        forms.EmailField(
+            max_length=60,
+            label='Email',
+            required=True,
+            help_text='Required',
+
+            widget=forms.EmailInput(
+                attrs={
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+    username = (
+        forms.CharField(
+            max_length=20,
+            min_length=5,
+            label='Username',
+            required=True,
+            help_text='This will be for your profile URL',
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': '',
+                    'class': 'input input-bordered input-secondary w-full'
+                }
+            )))
+
+    class Meta:
+        """
+        Meta to specify the model and fields to be used.
+        """
+        model = CustomUser
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'username',
         ]
 
 

@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ) {
     handleCreateEditForm();
   } else if (
-    window.location.href.indexOf("user/") > -1 &&
-    window.location.href.indexOf("edit") > -1
+    (window.location.href.indexOf("user/") > -1 &&
+      window.location.href.indexOf("edit") > -1) ||
+    (window.location.href.indexOf("user/") > -1 &&
+      window.location.href.indexOf("settings") > -1)
   ) {
     handleUserForm();
   }
