@@ -24,30 +24,6 @@
           <span class="user-work_title mt-2 block">{{ job_post.user.work_title }}</span>
         </div>
       </div>
-      {% if job_post.user.is_authenticated and user == job_post.user %}
-      <div class="flex flex-row justify-around mb-5">
-        <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link link link-hover text-primary"
-          aria-label="Edit profile">Edit
-          profile</a>
-        <form method="post" class="delete-form" action="{% url 'delete_user' slug=user.slug %}">
-          {% csrf_token %}
-          <a href="#" class="delete-link link link-hover text-error" aria-label="Delete profile">
-            Delete profile
-          </a>
-        </form>
-      </div>
-      <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box p-16">
-          <h3 class="font-bold text-lg mb-8">Are you sure you want to delete your profile? This cannot be undone.</h3>
-          <div class="w-full">
-            <div class="flex pt-4">
-              <button type="submit" class="btn btn-primary grow delete-confirm-button">Yes</button>
-              <button type="button" class="btn btn-error text-white grow ms-1 delete-cancel-button">No</button>
-            </div>
-          </div>
-        </div>
-      </dialog>
-      {% endif %}
       {% if job_post.user.twitter_handle or job_post.user.linkedin_username %}
       <ul class="social-icons flex justify-center">
         {% if job_post.user.twitter_handle %}
@@ -136,7 +112,7 @@
         <a href="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}"
           class="edit-job-post-link link link-hover text-primary" aria-label="Edit job post">Edit
           job post</a>
-        <form method="post" class="delete-form ml-5"
+        <form id="delete-form-{{ job_post.id }}" method="post" class="delete-form ml-5"
           action="{% url 'job_post:delete_job_post' slug=request.user.slug id=job_post.id  %}">
           {% csrf_token %}
           <a href="#" class="delete-link link link-hover text-error" aria-label="Delete job post">

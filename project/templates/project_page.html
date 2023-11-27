@@ -15,7 +15,7 @@
     <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.slug %}"
       class="edit-project-link link link-hover text-primary" aria-label="Edit project">Edit
       project</a>
-    <form method="post" class="delete-form ml-5"
+    <form id="delete-form-{{ project.id }}" method="post" class="delete-form ml-5"
       action="{% url 'project:delete_project' slug=request.user.slug project_slug=project.slug %}">
       {% csrf_token %}
       <a href="#" class="delete-link link link-hover text-error" aria-label="Delete project">

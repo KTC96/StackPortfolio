@@ -28,8 +28,7 @@ class ProjectDetailView(DetailView):
         """
         project_slug = self.kwargs['project_slug']
         user_slug = self.kwargs.get('slug')
-        user = get_object_or_404(CustomUser, slug=user_slug)
-        return get_object_or_404(Project, slug=project_slug, user=user)
+        return get_object_or_404(Project, slug=project_slug, user__slug=user_slug)
 
     def get_context_data(self, **kwargs):
         """
@@ -117,6 +116,11 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
     slug_field = 'slug'
     slug_url_kwarg = 'project_slug'
 
+    def get_object(self):
+        project_slug = self.kwargs['project_slug']
+        user_slug = self.kwargs['slug']
+        return get_object_or_404(Project, slug=project_slug, user__slug=user_slug)
+
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
             return super().dispatch(request, *args, **kwargs)
@@ -176,7 +180,7 @@ def delete_project(request, slug, project_slug):
     Handles project deletion.
     """
     user = request.user
-    project = get_object_or_404(Project, slug=project_slug)
+    project = get_object_or_404(Project, slug=project_slug, user__slug=slug)
 
     if user == project.user:
         project.delete()

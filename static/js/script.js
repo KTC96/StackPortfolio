@@ -56,37 +56,46 @@ const displayToasts = () => {
  */
 const handleDeleteButton = () => {
   if (!document.querySelector(".delete-link")) return;
-  const deleteProfileButton = document.querySelector(".delete-link");
-  const deleteProfileModal = document.getElementById("delete-modal");
-  const deleteUserForm = document.querySelector(".delete-form");
-  const deleteProfileConfirmButton = document.querySelector(
-    ".delete-confirm-button"
-  );
-  const deleteProfileCancelButton = document.querySelector(
-    ".delete-cancel-button"
-  );
+  const deleteButtons = document.querySelectorAll(".delete-link");
+  const deleteModal = document.getElementById("delete-modal");
+  const deleteConfirmButton = document.querySelector(".delete-confirm-button");
+  const deleteCancelButton = document.querySelector(".delete-cancel-button");
+  let currentDeleteForm = null;
 
-  if (deleteProfileButton && deleteProfileModal) {
-    deleteProfileButton.addEventListener("click", (event) => {
-      console.log("clicked");
+  if (deleteButtons.length === 0 || !deleteModal) return;
+
+  for (const deleteButton of deleteButtons) {
+    deleteButton.addEventListener("click", (event) => {
       event.preventDefault();
-      // @ts-ignore
-      deleteProfileModal.showModal();
-    });
-  }
-  if (deleteProfileConfirmButton && deleteUserForm) {
-    deleteProfileConfirmButton.addEventListener("click", () => {
-      if (deleteUserForm instanceof HTMLFormElement) {
-        deleteUserForm.submit();
+      try {
+        if (!(deleteButton.parentElement instanceof HTMLFormElement)) return;
+        const formId = deleteButton.parentElement.getAttribute("id");
+        if (formId) {
+          currentDeleteForm = document.getElementById(formId);
+        }
+
+        // @ts-ignore
+        deleteModal.showModal();
+      } catch (error) {
+        console.error(error);
       }
     });
   }
 
-  if (deleteProfileCancelButton && deleteProfileModal) {
-    deleteProfileCancelButton.addEventListener("click", (event) => {
+  if (deleteConfirmButton) {
+    deleteConfirmButton.addEventListener("click", () => {
+      console.log(currentDeleteForm);
+      if (currentDeleteForm instanceof HTMLFormElement) {
+        currentDeleteForm.submit();
+      }
+    });
+  }
+
+  if (deleteCancelButton && deleteModal) {
+    deleteCancelButton.addEventListener("click", (event) => {
       event.preventDefault();
       // @ts-ignore
-      deleteProfileModal.close();
+      deleteModal.close();
     });
   }
 };
