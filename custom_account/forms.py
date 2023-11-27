@@ -56,7 +56,7 @@ class CustomUserForm(SignupForm):
         help_text='Email will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
             }
         ))
     username = (
@@ -118,7 +118,7 @@ class CustomUserForm(SignupForm):
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         ))
@@ -167,7 +167,7 @@ class CustomUserForm(SignupForm):
         label='Display Phone Number',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         )
@@ -309,7 +309,7 @@ class TechUserForm(CustomUserForm):
         label='Seeking Employment',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         )
@@ -409,7 +409,7 @@ class CustomUserEditForm(forms.ModelForm):
         help_text='Email will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0 w-50',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
             }
         ))
     username = (
@@ -442,7 +442,7 @@ class CustomUserEditForm(forms.ModelForm):
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         ))
@@ -488,7 +488,7 @@ class CustomUserEditForm(forms.ModelForm):
         label='Display Phone Number',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         )
@@ -618,7 +618,7 @@ class TechUserProfileEditForm(forms.ModelForm):
         help_text='Are you currently seeking a new role?',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary mt-3 lg:mt-0',
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
 
             }
         )
