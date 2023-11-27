@@ -3,8 +3,10 @@ from .views import (TechUserSignupView,
                     RecruiterUserSignupView,
                     UserProfileDetailView,
                     UserProfileEditView,
+                    UserSettingsView,
+                    AccountTypeView,
                     delete_user,
-                    AccountTypeView)
+                    )
 
 app_name = 'custom_account'
 
@@ -17,6 +19,8 @@ urlpatterns = [
          RecruiterUserSignupView.as_view(), name='recruiter_user_signup'),
     path('user/<slug:slug>/edit/',
          UserProfileEditView.as_view(), name='profile_edit'),
+    path('user/<slug:slug>/settings/',
+         UserSettingsView.as_view(), name='user_settings'),
     path('user/<slug:slug>/delete/', delete_user, name='delete_user'),
     path('user/<slug:slug>/', UserProfileDetailView.as_view(), name='user_profile'),
 ]

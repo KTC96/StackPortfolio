@@ -72,6 +72,11 @@
                                 aria-label="Navigates to your profile page">My
                                 profile</a>
                         </li>
+                        <span class="divider my-2"></span>
+                        <li class="my-3">
+                            <a href="{% url 'custom_account:user_settings' slug=user.slug %}" class="edit-settings-link"
+                                aria-label="Edit settings">Edit account details</a>
+                        </li>
                         <li class="my-3">
                             <a href="{% url 'custom_account:profile_edit' slug=user.slug %}" class="edit-profile-link"
                                 aria-label="Edit profile">Edit profile</a>
@@ -91,7 +96,7 @@
                         </li>
                         {% else %}
                         <li class="my-3">
-                            <a href="{% url 'account_signup' %}">Sign up</a>
+                            <a href="{% url 'custom_account:account_type' %}">Sign up</a>
                         </li>
                         <li class="my-3">
                             <a href="{% url 'account_login' %}">Sign in</a>
@@ -119,10 +124,16 @@
                                 <summary>
                                     Account
                                 </summary>
-                                <ul class="p-2 bg-base-100 z-50 lg:w-[150px] right-0">
+                                <ul class="p-2 bg-base-100 z-50 lg:w-[180px] right-0">
                                     <li class="my-3">
                                         <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
                                             aria-label="Navigates to your profile page">My profile</a>
+                                    </li>
+                                    <span class="divider my-2"></span>
+                                    <li class="my-3">
+                                        <a href="{% url 'custom_account:user_settings' slug=user.slug %}"
+                                            class="edit-settings-link" aria-label="Edit settings">Edit account
+                                            details</a>
                                     </li>
                                     <li class="my-3">
                                         <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
@@ -150,7 +161,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'account_signup' %}">Sign up</a>
+                    <a href="{% url 'custom_account:account_type' %}">Sign up</a>
                 </li>
                 <li>
                     <a href="{% url 'account_login' %}">Sign in</a>
