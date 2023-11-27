@@ -238,8 +238,8 @@ def delete_job_post(request, slug, id):
         job_post.delete()
         messages.success(
             request, "Your job post has been successfully deleted.")
-        return redirect(reverse('user_profile', kwargs={'slug': slug}))
+        return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
 
     messages.error(
         request, "You cannot delete this job post.")
-    return redirect(reverse('user_profile', kwargs={'slug': slug}))
+    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))

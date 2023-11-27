@@ -102,7 +102,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            'user_profile', kwargs={
+            'custom_account:user_profile', kwargs={
                 'slug': self.request.user.slug})
 
 
@@ -186,8 +186,8 @@ def delete_project(request, slug, project_slug):
         project.delete()
         messages.success(
             request, "Your project has been successfully deleted.")
-        return redirect(reverse('user_profile', kwargs={'slug': slug}))
+        return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
 
     messages.error(
         request, "You cannot delete this project.")
-    return redirect(reverse('user_profile', kwargs={'slug': slug}))
+    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
