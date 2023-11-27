@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import (AbstractBaseUser,
                                         PermissionsMixin,
                                         BaseUserManager)
@@ -39,14 +41,25 @@ class CustomUserManager(BaseUserManager):
         Create and return a `CustomUser` with an email, username,
         first name, last name, and password.
         """
-        if email is None:
-            raise TypeError('Users must have an email address.')
-        if username is None:
-            raise TypeError('Users must have a username.')
-        if first_name is None:
-            raise TypeError('Users must have a first name.')
-        if last_name is None:
-            raise TypeError('Users must have a last name.')
+        if not email:
+            raise ValueError('Users must have an email address.')
+
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValueError('Invalid email format.')
+
+        if not 5 <= len(username) <= 20:
+            raise ValueError('Username must be between 5 and 20 characters.')
+
+        if not username.isalnum():
+            raise ValueError('Username should not contain symbols.')
+
+        if not 2 <= len(first_name) <= 40:
+            raise TypeError('First name must be between 2 and 40 characters.')
+
+        if not 2 <= len(last_name) <= 40:
+            raise TypeError('Last name must be between 2 and 40 characters.')
 
         user = self.model(
             # normalize_email() is used to lowercase

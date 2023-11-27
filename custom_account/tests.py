@@ -96,6 +96,134 @@ class AccountTests(TestCase):
         self.assertEqual(existing_user.linkedin_username, 'testuser22')
         self.assertEqual(existing_user.twitter_handle, 'testuser22')
 
+    def test_create_user_with_empty_email(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid email address.
+        """
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_invalid_email(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid email address.
+        """
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='test@test',
+                username='testuser',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_empty_username(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid username.
+        """
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username='',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_short_username(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid username.
+        """
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username='hi',
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_long_username(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid username.
+        """
+        forty_one_char_username = 'a' * 41
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username=forty_one_char_username,
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_symbols_in_username(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid username.
+        """
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username="testuser123!",
+                first_name='Test',
+                last_name='User',
+                password='testpassword123',
+            )
+
+    def test_create_user_with_empty_first_name(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid first name.
+        """
+        with self.assertRaises(TypeError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username="testuser",
+                first_name='',
+                last_name='User',
+                password='testpassword123'
+            )
+
+    def test_create_user_with_short_first_name(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid first name.
+        """
+        with self.assertRaises(TypeError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username="testuser",
+                first_name='A',
+                last_name='User',
+                password='testpassword123'
+            )
+
+    def test_create_user_with_long_first_name(self):
+        """
+        Test to ensure a user cannot be created
+        with an invalid first name.
+        """
+        forty_one_char_first_name = 'a' * 41
+        with self.assertRaises(TypeError):
+            CustomUser.objects.create_user(
+                email='test@test.com',
+                username="testuser",
+                first_name=forty_one_char_first_name,
+                last_name='User',
+                password='testpassword123'
+            )
+
 
 class AccountUpdateTests(TestCase):
     """
