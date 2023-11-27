@@ -60,31 +60,33 @@
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
                         {% if user.is_authenticated %}
-                        <li>
+                        <li class="my-3">
                             <a href="{% url 'user_profile' slug=user.slug %}"
                                 aria-label="Navigates to your profile page">My
                                 profile</a>
                         </li>
-                        <li>
+                        <li class="my-3">
                             <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
                                 aria-label="Edit profile">Edit profile</a>
                         </li>
                         <hr class="my-2">
                         {% endif %}
-                        <li><a class="link link-hover" href="{% url 'view_all_projects' %}">See projects</a></li>
-                        <li><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job posts</a></li>
+                        <li class="my-3"><a class="link link-hover" href="{% url 'view_all_projects' %}">See
+                                projects</a></li>
+                        <li class="my-3"><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job
+                                posts</a></li>
                         <hr class="my-2">
 
 
                         {% if user.is_authenticated %}
-                        <li>
+                        <li class="my-3">
                             <a href=" {% url 'account_logout' %}">Logout</a>
                         </li>
                         {% else %}
-                        <li>
+                        <li class="my-3">
                             <a href="{% url 'account_signup' %}">Sign up</a>
                         </li>
-                        <li>
+                        <li class="my-3">
                             <a href="{% url 'account_login' %}">Sign in</a>
                         </li>
                         {% endif %}
@@ -111,16 +113,16 @@
                                     Account
                                 </summary>
                                 <ul class="p-2 bg-base-100 z-50 lg:w-[150px] right-0">
-                                    <li>
+                                    <li class="my-3">
                                         <a href="{% url 'user_profile' slug=user.slug %}"
                                             aria-label="Navigates to your profile page">My profile</a>
                                     </li>
-                                    <li>
+                                    <li class="my-3">
                                         <a href="{% url 'profile_edit' slug=user.slug %}" class="edit-profile-link"
                                             aria-label="Edit profile">Edit profile</a>
                                     </li>
                                     <hr class="my-2">
-                                    <li>
+                                    <li class="my-3">
                                         <a href="{% url 'account_logout' %}">Logout</a>
                                     </li>
                                 </ul>
