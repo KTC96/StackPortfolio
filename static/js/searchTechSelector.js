@@ -123,7 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "bg-white",
       "border-primary",
       "border-2",
-      "group-hover:border-secondary"
+      "group-hover:border-secondary",
+      "mt-2"
     );
     techNameContainer.classList.add(
       "group-hover:text-secondary",
