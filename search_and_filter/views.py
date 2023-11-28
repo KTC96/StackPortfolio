@@ -48,16 +48,16 @@ class SearchResultsView(ListView):
         if search_type == 'projects':
             queryset = Project.objects.filter(
                 Q(name__icontains=query) | Q(description__icontains=query)
-            )
+            ).filter(active=True)
         elif search_type == 'job_posts':
             queryset = JobPost.objects.filter(
                 Q(name__icontains=query) | Q(description__icontains=query)
-            )
+            ).filter(active=True)
         else:
             queryset = CustomUser.objects.filter(
                 Q(first_name__icontains=query) | Q(last_name__icontains=query) |
                 Q(email__icontains=query) | Q(bio__icontains=query)
-            )
+            ).filter(is_active=True)
 
         return self.filter_by_technologies(queryset, selected_tech_names, tech_match_type, CustomUser if search_type == 'users' else Project)
 
