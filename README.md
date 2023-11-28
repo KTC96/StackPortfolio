@@ -375,3 +375,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
 - [Figma for designing the Favicon](https://www.figma.com/)
 - [TestDriven.io on using the post_delete receiver](https://testdriven.io/tips/59a2752f-cdf3-4ba1-806d-15f29811037a/)
+- [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
