@@ -1,9 +1,14 @@
 {% load static %}
 {% load humanize %}
 
+{% if post.active or post.user == user %}
 <div
-  class="sd-card w-full {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1">
-  <a href="{{ post.get_absolute_url }}" aria-label="Navigates to the {{ post.name }} {{ type }}.">
+  class="sd-card w-full relative {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1">
+  {% if not post.active %}<div class="tooltip absolute top-5 right-5 z-50"
+    data-tip="Inactive {{ type }}s will not show up for other users."><span
+      class="badge badge-error py-3 px-5">Inactive</span> </div>{% endif %}
+  <a class="{% if not post.active %}opacity-25{% endif %}" href="{{ post.get_absolute_url }}"
+    aria-label="Navigates to the {{ post.name }} {{ type }}.">
     {% if post.image.url %}
     <figure>
       <img src="{{ post.image.url }}" class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover"
@@ -111,3 +116,4 @@
   </div>
   {% endif %}
 </div>
+{% endif %}
