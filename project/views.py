@@ -29,7 +29,10 @@ class ProjectDetailView(DetailView):
         """
         project_slug = self.kwargs['project_slug']
         user_slug = self.kwargs.get('slug')
-        return get_object_or_404(Project, slug=project_slug, user__slug=user_slug)
+        return get_object_or_404(
+            Project,
+            slug=project_slug,
+            user__slug=user_slug)
 
     def get_context_data(self, **kwargs):
         """
@@ -120,10 +123,14 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         project_slug = self.kwargs['project_slug']
         user_slug = self.kwargs['slug']
-        return get_object_or_404(Project, slug=project_slug, user__slug=user_slug)
+        return get_object_or_404(
+            Project,
+            slug=project_slug,
+            user__slug=user_slug)
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+        if (request.user.is_authenticated and
+                request.user.slug == self.kwargs['slug']):
             return super().dispatch(request, *args, **kwargs)
         else:
             return HttpResponseForbidden(
@@ -187,7 +194,8 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
             except Exception as e:
                 print(e)
                 messages.error(
-                    self.request, "There was an error deleting the old image. Please try again later.")
+                    self.request,
+                    "There was an error deleting the old image.")
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -202,11 +210,34 @@ def delete_project(request, slug, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user__slug=slug)
 
     if user == project.user:
+        # Get the previous image id before deleting the project
+        image_public_id = project.image.public_id
+
         project.delete()
+
+        try:
+            cloudinary.uploader.destroy(image_public_id, invalidate=True)
+            messages.success(
+                request, "Project image has been successfully deleted.")
+        except Exception as e:
+            print(e)
+            messages.warning(
+                request,
+                "Project deleted, but there was an error deleting\n",
+                "the image from Cloudinary. Please check manually.")
+
         messages.success(
             request, "Your project has been successfully deleted.")
-        return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
+        return redirect(
+            reverse(
+                'custom_account:user_profile',
+                kwargs={
+                    'slug': slug}))
 
     messages.error(
         request, "You cannot delete this project.")
-    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
+    return redirect(
+        reverse(
+            'custom_account:user_profile',
+            kwargs={
+                'slug': slug}))
