@@ -124,7 +124,7 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
         successful job post creation.
         """
         return reverse_lazy(
-            'user_profile', kwargs={
+            'custom_account:user_profile', kwargs={
                 'slug': self.request.user.slug})
 
 
