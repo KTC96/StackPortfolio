@@ -376,3 +376,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Figma for designing the Favicon](https://www.figma.com/)
 - [TestDriven.io on using the post_delete receiver](https://testdriven.io/tips/59a2752f-cdf3-4ba1-806d-15f29811037a/)
 - [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
+- [Reason to not convert my M2M tables to a through table](https://forum.djangoproject.com/t/changing-a-manytomanyfield-to-use-a-through-model/10581)
