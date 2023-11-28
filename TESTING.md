@@ -17,6 +17,16 @@ Unittest
 1. Test that the User model is not none with `test_check_create_user_view_exists`.
 2. Test for creating and retrieving a user from the database with `test_create_and_retrieve_user`.
 3. Test that additional user fields exist with `test_additional_user_fields_exist`.
+4. Test that the user cannot sign up with an email with `test_create_user_with_empty_email`.
+5. Test that the user cannot sign up with an invalid email with `test_create_user_with_invalid_email`.
+6. Test that the user cannot sign up with an email that already exists with `test_email_already_exists`.
+7. Test that the user cannot sign up with an empty username with `test_create_user_with_empty_username`.
+8. Test that the user cannot sign up with a username with fewer than 2 characters with `test_create_user_with_short_username`.
+9. Test that the user cannot sign up with a username with more than 20 characters with `test_create_user_with_long_username`.
+10. Test that the user cannot sign up with a username with symbols with `test_create_user_with_symbols_in_username`.
+11. Test that the user cannot sign up with an empty first name with `test_create_user_with_empty_first_name`.
+12. Test that the user cannot sign up with a first name with fewer than 2 characters with `test_create_user_with_short_first_name`.
+13. Test that the user cannot sign up with a first name with more than 20 characters with `test_create_user_with_long_first_name`.
 
 Jest
 

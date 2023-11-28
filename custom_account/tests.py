@@ -124,6 +124,28 @@ class AccountTests(TestCase):
                 password='testpassword123',
             )
 
+    def test_email_already_exists(self):
+        """
+        Test to ensure a user cannot be created
+        with an email address that already exists.
+        """
+        user = CustomUser.objects.create_user(
+            email='user1@test.com',
+            username='user1',
+            first_name='Test1',
+            last_name='User1',
+            password='testpassword123'
+        )
+
+        with self.assertRaises(IntegrityError):
+            CustomUser.objects.create_user(
+                email='user1@test.com',
+                username='user2',
+                first_name='Test1',
+                last_name='User1',
+                password='testpassword123'
+            )
+
     def test_create_user_with_empty_username(self):
         """
         Test to ensure a user cannot be created
