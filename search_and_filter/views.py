@@ -59,7 +59,11 @@ class SearchResultsView(ListView):
                 Q(email__icontains=query) | Q(bio__icontains=query)
             ).filter(is_active=True)
 
-        return self.filter_by_technologies(queryset, selected_tech_names, tech_match_type, CustomUser if search_type == 'users' else Project)
+        return self.filter_by_technologies(
+            queryset,
+            selected_tech_names,
+            tech_match_type,
+            CustomUser if search_type == 'users' else Project)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

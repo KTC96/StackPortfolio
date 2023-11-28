@@ -57,8 +57,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
-            }
-        ))
+            }))
     username = (
         forms.CharField(
             max_length=20,
@@ -113,15 +112,14 @@ class CustomUserForm(SignupForm):
         ))
 
     display_town_city = forms.BooleanField(
-        required=False, label='Display Town/City',
+        required=False,
+        label='Display Town/City',
         initial=False,
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        ))
+            }))
 
     country = forms.CharField(
         max_length=60,
@@ -168,10 +166,7 @@ class CustomUserForm(SignupForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        )
-    )
+            }))
 
     profile_image = forms.ImageField(
         required=False,
@@ -310,10 +305,7 @@ class TechUserForm(CustomUserForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        )
-    )
+            }))
 
     work_location_type = forms.MultipleChoiceField(
         required=False,
@@ -373,8 +365,7 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
-            }
-        ))
+            }))
 
     town_city = forms.CharField(
         max_length=85,
@@ -387,15 +378,14 @@ class CustomUserEditForm(forms.ModelForm):
             }
         ))
     display_town_city = forms.BooleanField(
-        required=False, label='Display Town/City',
+        required=False,
+        label='Display Town/City',
         initial=False,
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        ))
+            }))
     country = forms.CharField(
         max_length=60,
         label='Country',
@@ -439,10 +429,7 @@ class CustomUserEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        )
-    )
+            }))
 
     profile_image = forms.ImageField(
         required=False,
@@ -634,10 +621,7 @@ class TechUserProfileEditForm(forms.ModelForm):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
-
-            }
-        )
-    )
+            }))
 
     work_location_type = forms.MultipleChoiceField(
         required=False,

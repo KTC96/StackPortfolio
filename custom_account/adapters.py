@@ -6,7 +6,7 @@ from .models import TechUserProfile
 class MySocialAccountAdapter(DefaultSocialAccountAdapter):
     """
     This class overrides the default social login functionality
-    of all auth so I can associate an existing record with a 
+    of all auth so I can associate an existing record with a
     social account. It also adds the tech user profile to the
     user if they are a new user.
     """

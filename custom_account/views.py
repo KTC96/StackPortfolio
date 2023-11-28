@@ -128,7 +128,9 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
         return response
 
     def get_success_url(self):
-        return reverse('custom_account:user_profile', kwargs={'slug': self.object.slug})
+        return reverse(
+            'custom_account:user_profile', kwargs={
+                'slug': self.object.slug})
 
 
 class UserSettingsView(LoginRequiredMixin, UpdateView):
@@ -164,7 +166,9 @@ class UserSettingsView(LoginRequiredMixin, UpdateView):
         return super(UserSettingsView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('custom_account:user_profile', kwargs={'slug': self.object.slug})
+        return reverse(
+            'custom_account:user_profile', kwargs={
+                'slug': self.object.slug})
 
 
 @login_required
@@ -181,7 +185,11 @@ def delete_user(request, slug):
         return redirect(reverse('homepage'))
 
     messages.error(request, "You cannot delete this profile.")
-    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
+    return redirect(
+        reverse(
+            'custom_account:user_profile',
+            kwargs={
+                'slug': slug}))
 
 
 class AccountTypeView(TemplateView):
