@@ -4,7 +4,8 @@
   <search>
     <form class="w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
       <div class="join w-full">
-        <input class="input input-bordered join-item w-full" name="q" type="text" placeholder="Search...">
+        <input class="input input-bordered join-item w-full" name="q" type="text" value="{{ current_query }}"
+          placeholder="Search...">
         <button type="submit" class="btn btn-primary join-item">Search</button>
       </div>
 
