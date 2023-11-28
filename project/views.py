@@ -6,9 +6,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
+import cloudinary.uploader
+import cloudinary
 from .models import Project
 from .forms import ProjectForm
-from custom_account.models import CustomUser
 from technology.models import Tech
 
 
@@ -148,6 +149,14 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
             Tech.objects.filter(id=tech_id).delete()
 
     def form_valid(self, form):
+        # Get the current project instance from the database
+        current_project = Project.objects.get(pk=self.object.pk)
+
+        # Get the old image public ID before it gets updated
+        old_image_public_id = None
+        if 'image' in form.changed_data:
+            old_image_public_id = current_project.image.public_id
+
         project = form.save(commit=False)
         project.user = self.request.user
         project.save()
@@ -158,7 +167,7 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
         for tech_id in existing_tech_ids:
             project.technologies.add(tech_id)
 
-        # If a tech is submitting and it's not
+        # If a tech is submitted and it's not
         # in the database, add it to the database
         # as unapproved.
         new_tech_names = self.request.POST.get(
@@ -169,6 +178,16 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                 tech, created = Tech.objects.get_or_create(
                     tech_name=tech_name, defaults={'is_approved': False})
                 project.technologies.add(tech)
+
+        # if project image has changed, delete the old image
+        if old_image_public_id:
+            try:
+                cloudinary.uploader.destroy(
+                    old_image_public_id, invalidate=True)
+            except Exception as e:
+                print(e)
+                messages.error(
+                    self.request, "There was an error deleting the old image. Please try again later.")
 
         return HttpResponseRedirect(self.get_success_url())
 
