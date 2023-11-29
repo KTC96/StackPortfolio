@@ -584,6 +584,16 @@ class UserSettingsForm(forms.ModelForm):
                 }
             )))
 
+    display_email = forms.BooleanField(
+        required=False,
+        label='Display Email',
+        initial=False,
+        help_text='Email will be displayed on your profile',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
+            }))
+
     class Meta:
         """
         Meta to specify the model and fields to be used.
@@ -594,6 +604,7 @@ class UserSettingsForm(forms.ModelForm):
             'last_name',
             'email',
             'username',
+            'display_email'
         ]
 
 
