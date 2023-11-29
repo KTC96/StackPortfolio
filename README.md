@@ -378,3 +378,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
 - [Reason to not convert my M2M tables to a through table](https://forum.djangoproject.com/t/changing-a-manytomanyfield-to-use-a-through-model/10581)
 - [Django docs on overriding delete for bulk methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-model-methods)
+- [Django docs on messages levels for toasts](https://docs.djangoproject.com/en/4.2/ref/contrib/messages/#message-levels)

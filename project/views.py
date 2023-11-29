@@ -69,10 +69,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'create_project.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
-            return super().dispatch(request, *args, **kwargs)
-        else:
+        if not (request.user.is_authenticated and request.user.slug == self.kwargs['slug']):
+            messages.error(
+                request, "You are not authorised to view this page.")
             return redirect('account_login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -102,7 +103,15 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
                     tech_name=tech_name, defaults={'is_approved': False})
                 project.technologies.add(tech)
 
+        messages.success(
+            self.request, "New project successfully added.")
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "Project creation failed. Please check your inputs.")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy(
@@ -129,12 +138,12 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
             user__slug=user_slug)
 
     def dispatch(self, request, *args, **kwargs):
-        if (request.user.is_authenticated and
+        if not (request.user.is_authenticated and
                 request.user.slug == self.kwargs['slug']):
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden(
-                "You are not allowed to view this page")
+            messages.error(
+                request, "You are not authorized to view this page.")
+            return redirect('account_login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -197,7 +206,15 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                     self.request,
                     "There was an error deleting the old image.")
 
+        messages.success(
+            self.request, "Project successfully updated.")
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "Project update failed. Please check your inputs.")
+        return super().form_invalid(form)
 
 
 @login_required
@@ -210,21 +227,24 @@ def delete_project(request, slug, project_slug):
     project = get_object_or_404(Project, slug=project_slug, user__slug=slug)
 
     if user == project.user:
-        # Get the previous image id before deleting the project
-        image_public_id = project.image.public_id
+
+        if project.image:
+            # Get the previous image id before deleting the project
+            image_public_id = project.image.public_id
 
         project.delete()
 
-        try:
-            cloudinary.uploader.destroy(image_public_id, invalidate=True)
-            messages.success(
-                request, "Project image has been successfully deleted.")
-        except Exception as e:
-            print(e)
-            messages.warning(
-                request,
-                "Project deleted, but there was an error deleting\n",
-                "the image from Cloudinary. Please check manually.")
+        if project.image:
+            try:
+                cloudinary.uploader.destroy(image_public_id, invalidate=True)
+                messages.success(
+                    request, "Project image has been successfully deleted.")
+            except Exception as e:
+                print(e)
+                messages.warning(
+                    request,
+                    "Project deleted, but there was an error deleting\n",
+                    "the image from Cloudinary. Please check manually.")
 
         messages.success(
             request, "Your project has been successfully deleted.")

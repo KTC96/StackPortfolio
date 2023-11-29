@@ -59,6 +59,11 @@ module.exports = {
     "h-72",
     "badge",
     "badge-primary",
+    "alert-info",
+    "alert-info",
+    "alert-success",
+    "alert-warning",
+    "alert-error",
   ],
   theme: {
     extend: {
