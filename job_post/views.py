@@ -111,12 +111,22 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
                     tech_name=tech_name, defaults={'is_approved': False})
                 job_post.technologies.add(tech)
 
-        selected_work_location_type_id = form.cleaned_data['work_location_type']
+        selected_work_location_type_id = (
+            form.cleaned_data['work_location_type']
+        )
         job_post.work_location_type.clear()
         job_post.work_location_type.add(
             selected_work_location_type_id)
 
+        messages.success(
+            self.request, "Job post successfully created.")
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "There was an error creating the job post.")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         """
@@ -217,12 +227,21 @@ class JobPostEditView(LoginRequiredMixin, UpdateView):
         # work to get the radio button to display correctly. I had
         # to clear the existing selection and then pass in the single
         # selected work location type.
-        selected_work_location_type_id = form.cleaned_data['work_location_type']
+        selected_work_location_type_id = (
+            form.cleaned_data['work_location_type'])
         job_post.work_location_type.clear()
         job_post.work_location_type.add(
             selected_work_location_type_id)
 
+        messages.success(
+            self.request, "Job post successfully updated.")
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "There was an error updating the job post.")
+        return super().form_invalid(form)
 
 
 @login_required
@@ -237,7 +256,7 @@ def delete_job_post(request, slug, id):
     if user == job_post.user:
         job_post.delete()
         messages.success(
-            request, "Your job post has been successfully deleted.")
+            request, "Job post successfully deleted.")
         return redirect(
             reverse(
                 'custom_account:user_profile',
