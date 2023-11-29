@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.utils.text import slugify
+import cloudinary.uploader
+import cloudinary
 from allauth.socialaccount import providers
 from .forms import (CustomUserEditForm, TechUserForm,
                     RecruiterUserForm, TechUserProfileEditForm,
@@ -118,12 +120,32 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
+        current_profile = CustomUser.objects.get(pk=self.object.pk)
+        old_image_public_id = None
+        if 'profile_image' in form.changed_data:
+            old_image_public_id = current_profile.profile_image.public_id
+
         response = super(UserProfileEditView, self).form_valid(form)
 
-        tech_profile_form = TechUserProfileEditForm(
-            self.request.POST, instance=self.object.tech_profile)
-        if tech_profile_form.is_valid():
-            tech_profile_form.save()
+        if hasattr(self.object, 'tech_profile'):
+            tech_profile_form = TechUserProfileEditForm(
+                self.request.POST, instance=self.object.tech_profile)
+            if tech_profile_form.is_valid():
+                tech_profile_form.save()
+
+        # Handle recruiter_profile_form only if the user has a recruiter_profile
+        elif hasattr(self.object, 'recruiter_profile'):
+            recruiter_profile_form = RecruiterUserProfileEditForm(
+                self.request.POST, instance=self.object.recruiter_profile)
+            if recruiter_profile_form.is_valid():
+                recruiter_profile_form.save()
+
+        if old_image_public_id:
+            try:
+                cloudinary.uploader.destroy(
+                    old_image_public_id, invalidate=True)
+            except Exception as e:
+                print(f"Error deleting old photo: {e}")
 
         return response
 
@@ -174,22 +196,34 @@ class UserSettingsView(LoginRequiredMixin, UpdateView):
 @login_required
 @require_POST
 def delete_user(request, slug):
-    """
-    Handles user deletion.
-    """
     user = request.user
     if user.slug == slug:
+        if user.profile_image:
+            photo_public_id = user.profile_image.public_id
+            try:
+                cloudinary.uploader.destroy(photo_public_id, invalidate=True)
+            except Exception as e:
+                print(f"Error deleting profile photo: {e}")
+
+        try:
+            if hasattr(user, 'tech_profile'):
+                pass
+        except CustomUser.tech_profile.RelatedObjectDoesNotExist:
+            print("Tech profile not found or inaccessible.")
+
+        try:
+            if hasattr(user, 'recruiter_profile'):
+                pass
+        except CustomUser.recruiter_profile.RelatedObjectDoesNotExist:
+            print("Recruiter profile not found or inaccessible.")
+
         user.delete()
         messages.success(
             request, "Your profile has been successfully deleted.")
         return redirect(reverse('homepage'))
 
     messages.error(request, "You cannot delete this profile.")
-    return redirect(
-        reverse(
-            'custom_account:user_profile',
-            kwargs={
-                'slug': slug}))
+    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
 
 
 class AccountTypeView(TemplateView):
