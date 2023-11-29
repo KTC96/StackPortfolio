@@ -377,3 +377,4 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [TestDriven.io on using the post_delete receiver](https://testdriven.io/tips/59a2752f-cdf3-4ba1-806d-15f29811037a/)
 - [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
 - [Reason to not convert my M2M tables to a through table](https://forum.djangoproject.com/t/changing-a-manytomanyfield-to-use-a-through-model/10581)
+- [Django docs on overriding delete for bulk methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-model-methods)
