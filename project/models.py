@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
+import cloudinary.uploader
 from technology.models import Tech
 
 
@@ -58,10 +59,25 @@ class Project(models.Model):
                 "slug": self.user.slug,
                 "project_slug": self.slug})
 
+    def delete(self, *args, **kwargs):
+        """
+        Override the delete method to delete the project's image from 
+        Cloudinary before deleting the project from the database.
+        """
+        if self.image:
+            try:
+                cloudinary.uploader.destroy(
+                    self.image.public_id, invalidate=True)
+            except Exception as e:
+                print(f"Error deleting image from Cloudinary: {e}")
+
+        super().delete(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         """
-        Override the save method to generate a slug if one doesn't already exist
-        and update the user's tech profile with approved technologies.
+        Override the save method to generate a slug if one doesn't
+        already exist and update the user's tech profile with approved
+        technologies.
         """
         if not self.slug:
             self.slug = slugify(self.name)

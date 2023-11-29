@@ -1,4 +1,5 @@
 from django.db.models.signals import m2m_changed, post_delete
+import cloudinary.uploader
 from django.dispatch import receiver
 from project.models import Project
 
@@ -16,3 +17,12 @@ def update_user_tech_on_project_delete(sender, instance, **kwargs):
     user = instance.user
     if hasattr(user, 'tech_profile') and user.tech_profile:
         user.tech_profile.update_tech_with_approved()
+
+    if instance.image:
+        try:
+            cloudinary.uploader.destroy(
+                instance.image.public_id, invalidate=True)
+            print(f"Deleted image for project: {instance.name}")
+        except Exception as e:
+            print(
+                f"Error deleting image from Cloudinary for project {instance.name}: {e}")
