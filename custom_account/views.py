@@ -95,12 +95,12 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'slug'
 
     def dispatch(self, request, *args, **kwargs):
-        if (request.user.is_authenticated and
+        if not (request.user.is_authenticated and
                 request.user.slug == self.kwargs['slug']):
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden(
-                "You are not allowed to view this page")
+            messages.error(
+                request, "You are not authorised to view this page.")
+            return redirect('account_login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,7 +147,15 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             except Exception as e:
                 print(f"Error deleting old photo: {e}")
 
+        messages.success(
+            self.request, "Profile successfully updated.")
+
         return response
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "There was an error updating your profile.")
+        return super(UserProfileEditView, self).form_invalid(form)
 
     def get_success_url(self):
         return reverse(
@@ -166,12 +174,12 @@ class UserSettingsView(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'slug'
 
     def dispatch(self, request, *args, **kwargs):
-        if (request.user.is_authenticated and
+        if not (request.user.is_authenticated and
                 request.user.slug == self.kwargs['slug']):
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden(
-                "You are not allowed to view this page")
+            messages.error(
+                request, "You are not authorised to view this page.")
+            return redirect('account_login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -185,7 +193,16 @@ class UserSettingsView(LoginRequiredMixin, UpdateView):
         user.username = form.cleaned_data['username']
         user.slug = slugify(user.username)
         user.save()
+
+        messages.success(
+            self.request, "Details successfully updated.")
+
         return super(UserSettingsView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "There was an error updating your details.")
+        return super(UserSettingsView, self).form_invalid(form)
 
     def get_success_url(self):
         return reverse(
@@ -219,7 +236,7 @@ def delete_user(request, slug):
 
         user.delete()
         messages.success(
-            request, "Your profile has been successfully deleted.")
+            request, "Your profile has been deleted.")
         return redirect(reverse('homepage'))
 
     messages.error(request, "You cannot delete this profile.")
