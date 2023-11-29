@@ -13,5 +13,6 @@ def update_user_tech_on_project_tech_change(
 
 @receiver(post_delete, sender=Project)
 def update_user_tech_on_project_delete(sender, instance, **kwargs):
-    if instance.user.tech_profile:
-        instance.user.tech_profile.update_tech_with_approved()
+    user = instance.user
+    if hasattr(user, 'tech_profile') and user.tech_profile:
+        user.tech_profile.update_tech_with_approved()
