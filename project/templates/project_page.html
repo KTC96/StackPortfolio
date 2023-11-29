@@ -3,7 +3,7 @@
 
 <section id="project-page" class="py-6 pb-12 lg:py-14">
   {% if project.image %}
-  <img src="{{ project.image.url }}" alt="{{ project.name }}" class="mb-3 max-h-[650px] mx-auto" />
+  <img src="{{ project.image.url }}" alt="{{ project.name }}" class="mb-3 max-h-[650px] mx-auto">
   {% else %}
   <picture class="mb-3 mx-auto w-full">
     <source srcset="{% static 'images/placeholder-banner.webp' %}">
