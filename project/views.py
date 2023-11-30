@@ -69,11 +69,16 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'create_project.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not (request.user.is_authenticated and request.user.slug == self.kwargs['slug']):
+        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+            if hasattr(request.user, 'tech_profile'):
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                messages.error(request, "Only tech users can create projects.")
+                return redirect('account_login')
+        else:
             messages.error(
-                request, "You are not authorised to view this page.")
+                request, "You need to be logged in to create projects.")
             return redirect('account_login')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -57,6 +57,16 @@ Unittest
 3. Test that a project cannot be created without a project name with `test_project_without_project_name`.
 4. Test that a project cannot be created without a user with `test_project_without_user`.
 5. Test that a project cannot be created with a project name with more than 100 characters with `test_project_name_fewer_than_100_characters`.
+6. Test that a project cannot be created without a tech user profile with `test_project_without_tech_user_profile`.
+7. Test that a user's project has a unique name from their other projects with `test_unique_project_name`.
+
+#### Update Project
+
+1. Test that a project can be updated with `test_project_update`.
+2. Test that a project cannot be updated with an existing project name with `test_update_project_with_existing_name`.
+3. Test that a project cannot be updated with an invalid URL with `test_update_project_with_invalid_url`.
+4. Test that a project cannot be updated with a description with more than 500 characters with `test_update_project_description_length`.
+5. Test that a project cannot be updated without changes with `test_update_project_without_changes`.
 
 #### Project Detail
 
