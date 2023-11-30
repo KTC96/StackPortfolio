@@ -216,16 +216,16 @@
       </div>
     </div>
     {% else %}
-    <div class="desktop-user-details w-full font-bold lg:ml-8">
+    <div class="desktop-user-details w-full font-bold mt-8 lg:mt-0 lg:ml-8">
       <div class="flex justify-between items-start w-full">
-        <h2 class="text-4xl">Open roles</h2>
+        <h2 class="text-lg font-bold lg:text-4xl">Open roles</h2>
         {% if profile.is_authenticated and profile.recruiter_profile and user == profile %}
         <a href="{% url 'job_post:create_job_post' slug=request.user.slug %}"
           class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add
           job post</a>
         {% endif %}
       </div>
-      <div class="job-posts mt-10 lg:mt-3 flex gap-5">
+      <div class="job-posts mt-5 lg:mt-3 flex gap-5">
         {% if user_job_posts %}
         {% for job_post in user_job_posts %}
 
@@ -233,7 +233,7 @@
 
         {% endfor %}
         {% else %}
-        <p class="text-xl">{{ profile.get_full_name }} hasn't posted any jobs yet.</p>
+        <p class="text-base">{{ profile.get_full_name }} hasn't posted any jobs yet.</p>
         {% endif %}
       </div>
     </div>
