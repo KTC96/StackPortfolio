@@ -112,3 +112,17 @@ I enabled three of the set workflows on the project (two were already enabled):
 - I finished the sprint today (Sunday 26th Nov, 2023). For the next sprint, I will evaluate the remaining `could have` issues and focus on resolving the remaining bugs. I also want to run through the application and see if there are any other issues that I can add to the backlog.
 
 ![Screenshot of Sprint 3 closed issues](./documentation/sprints/sprint3.png)
+
+### Sprint 4 notes
+
+> Sprint 4 focuses on ensuring any final must have and should have issues are completed, or marked as won't have. If they are completed, this will also be used as the opportunity to work on a could have issue.
+
+- I started this sprint the day after I finished the third sprint, on Monday 27th Nov, 2023.
+- I had less time available for this sprint, but I was able to plan accordingly thanks to my previous work with story points.
+- I completed all but one of my planned issues in this sprint. The issue I didn't complete turned out to have a lot of unexpected complexity. It is [issue #41](https://github.com/stephendawsondev/StackPortfolio/issues/41) - I marked it as `won't have` for now, but I will revisit it in the future.
+- I also added another user story because I felt that the admin was lacking in functionality. I completed the issue and the admin now looks much better.
+- In this sprint, I had the opportunity to tackle a few bugs that had come up throughout the project and added in some more automated testing.
+- I was considering adding a testing step in my build workflow, but I decided against it as it might be too time consuming.
+- I finished the sprint today (Thursday 30th Nov, 2023). For the testing and documentation phase, I will no longer be working on features. I will instead be focusing on manual testing and finishing up the documentation.
+
+![Screenshot of Sprint 4 closed issues](./documentation/sprints/sprint4.png)
