@@ -1,7 +1,6 @@
 
 import random
 from allauth.account.views import SignupView
-from django.http import HttpResponseForbidden
 from django.views.generic import TemplateView, UpdateView, DetailView
 from django.shortcuts import reverse, redirect
 from django.contrib import messages
@@ -9,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.utils.text import slugify
+from stackportfolio.utils import upload_to_cloudinary
 import cloudinary.uploader
 import cloudinary
 from allauth.socialaccount import providers
@@ -122,9 +122,26 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         current_profile = CustomUser.objects.get(pk=self.object.pk)
         old_image_public_id = None
-        if 'profile_image' in form.changed_data:
-            old_image_public_id = current_profile.profile_image.public_id
 
+        # Capture the public_id of the existing image
+        if hasattr(current_profile.profile_image, 'public_id'):
+            if ("http://res.cloudinary.com/nvmind/image/upload/" in
+                    current_profile.profile_image.public_id):
+                old_image_public_id = current_profile.profile_image.public_id.split(
+                    '/')[-1]
+            else:
+                old_image_public_id = current_profile.profile_image.public_id
+
+        # Process new image upload
+        if 'profile_image' in form.changed_data:
+            new_image = form.cleaned_data['profile_image']
+            if new_image:
+                new_image_url, new_public_id = upload_to_cloudinary(new_image)
+                self.object.profile_image = new_image_url
+            else:
+                self.object.profile_image = None
+
+        # Save the form and the model
         response = super(UserProfileEditView, self).form_valid(form)
 
         if hasattr(self.object, 'tech_profile'):
@@ -133,7 +150,6 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             if tech_profile_form.is_valid():
                 tech_profile_form.save()
 
-        # Handle recruiter_profile_form only if the user has a recruiter_profile
         elif hasattr(self.object, 'recruiter_profile'):
             recruiter_profile_form = RecruiterUserProfileEditForm(
                 self.request.POST, instance=self.object.recruiter_profile)
@@ -141,14 +157,18 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
                 recruiter_profile_form.save()
 
         if old_image_public_id:
-            try:
-                cloudinary.uploader.destroy(
-                    old_image_public_id, invalidate=True)
-            except Exception as e:
-                print(f"Error deleting old photo: {e}")
+            current_public_id = None
+            if hasattr(self.object.profile_image, 'public_id'):
+                current_public_id = self.object.profile_image.public_id
 
-        messages.success(
-            self.request, "Profile successfully updated.")
+            if old_image_public_id != current_public_id:
+                try:
+                    cloudinary.uploader.destroy(
+                        old_image_public_id, invalidate=True)
+                except Exception as e:
+                    print(f"Error deleting old photo: {e}")
+
+        messages.success(self.request, "Profile successfully updated.")
 
         return response
 
@@ -216,7 +236,13 @@ def delete_user(request, slug):
     user = request.user
     if user.slug == slug:
         if user.profile_image:
-            photo_public_id = user.profile_image.public_id
+            if ("http://res.cloudinary.com/nvmind/image/upload/" in
+                    user.profile_image.public_id):
+                photo_public_id = user.profile_image.public_id.split(
+                    '/')[-1]
+            else:
+                photo_public_id = user.profile_image.public_id
+
             try:
                 cloudinary.uploader.destroy(photo_public_id, invalidate=True)
             except Exception as e:

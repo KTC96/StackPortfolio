@@ -4396,6 +4396,10 @@ html {
   overflow-y: auto;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }

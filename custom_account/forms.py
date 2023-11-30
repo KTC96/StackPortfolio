@@ -1,6 +1,7 @@
 from allauth.account.forms import SignupForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from stackportfolio.utils import upload_to_cloudinary
 from django import forms
 from .models import TechUserProfile, RecruiterUserProfile, CustomUser
 
@@ -277,6 +278,11 @@ class CustomUserForm(SignupForm):
         user.company = self.cleaned_data['company']
         user.linkedin_username = self.cleaned_data['linkedin_username']
         user.twitter_handle = self.cleaned_data['twitter_handle']
+
+        profile_image = self.cleaned_data.get('profile_image')
+        if profile_image:
+            profile_image_url, _ = upload_to_cloudinary(profile_image)
+            user.profile_image = profile_image_url
 
         user.save()
         return user
