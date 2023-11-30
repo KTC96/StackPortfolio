@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.db import IntegrityError
 from technology.models import Tech
 from work_location_type.models import WorkLocationType
 
@@ -64,4 +65,8 @@ class JobPost(models.Model):
         """
         Saves the job post.
         """
+        if not hasattr(self.user, 'recruiter_profile'):
+            raise IntegrityError(
+                "Only Recruiters can create projects.")
+
         super(JobPost, self).save(*args, **kwargs)
