@@ -1,9 +1,12 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 from cloudinary.models import CloudinaryField
 import cloudinary.uploader
 from technology.models import Tech
+from custom_account.models import CustomUser
 
 
 class Project(models.Model):
@@ -23,7 +26,7 @@ class Project(models.Model):
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
 
     active = models.BooleanField(default=True)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, max_length=1000)
     image = CloudinaryField('image', blank=True, null=True)
     view_count = models.IntegerField(default=0)
     slug = models.SlugField(blank=True, null=True)
@@ -73,12 +76,31 @@ class Project(models.Model):
 
         super().delete(*args, **kwargs)
 
+    def clean(self):
+        if self.description and len(self.description) > 1000:
+            raise ValidationError(
+                {
+                    'description':
+                    'Description must be fewer than 1000 characters.'
+                })
+
     def save(self, *args, **kwargs):
         """
         Override the save method to generate a slug if one doesn't
         already exist and update the user's tech profile with approved
         technologies.
         """
+        try:
+            if self.user:
+                pass
+        except CustomUser.DoesNotExist:
+            raise IntegrityError(
+                "Only registered users can create projects.")
+
+        if not hasattr(self.user, 'tech_profile'):
+            raise IntegrityError(
+                "Only Tech Users can create projects.")
+
         if not self.slug:
             self.slug = slugify(self.name)
 
