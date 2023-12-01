@@ -94,8 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   const addedTechHtml = (techName, isCustom) => {
     const button = document.createElement("button");
-    const buttonContent = document.createElement("div");
-    const techNameContainer = document.createElement("div");
     const strongElement = document.createElement("strong");
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
@@ -106,8 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // from triggering when the button is clicked
     button.setAttribute("type", "button");
 
-    button.classList.add("group", "added-tech-button");
-    buttonContent.classList.add(
+    button.classList.add(
+      "group",
+      "added-tech-button",
       "flex",
       "justify-center",
       "text-primary",
@@ -123,11 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "bg-white",
       "border-primary",
       "border-2",
-      "group-hover:border-secondary",
-      "mt-2"
-    );
-    techNameContainer.classList.add(
-      "group-hover:text-secondary",
+      "hover:border-secondary",
+      "mt-2",
+      "hover:text-secondary",
       "cursor-pointer",
       "text-sm",
       "font-normal",
@@ -169,19 +166,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (!isCustom) {
-      buttonContent.classList.remove(
-        "text-neutral",
-        "border-neutral",
-        "bg-white"
-      );
+      button.classList.remove("text-neutral", "border-neutral", "bg-white");
 
       svg.classList.remove("text-neutral");
     } else {
-      buttonContent.classList.remove(
-        "border-primary",
-        "bg-aliceblue",
-        "text-primary"
-      );
+      button.classList.remove("border-primary", "bg-aliceblue", "text-primary");
       svg.classList.remove("text-primary");
     }
 
@@ -189,12 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
     svg.appendChild(createLine("6", "6", "18", "18"));
 
     strongElement.textContent = techName;
-    techNameContainer.appendChild(strongElement);
-    buttonContent.appendChild(techNameContainer);
-    button.appendChild(buttonContent);
+    button.appendChild(strongElement);
+    button.appendChild(svg);
     svg.appendChild(line1);
     svg.appendChild(line2);
-    buttonContent.appendChild(svg);
 
     return button;
   };

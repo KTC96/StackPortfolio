@@ -39,19 +39,17 @@
             <div class="my-2 py-1 flex">
               <div class="flex flex-auto flex-wrap added-tech-container">
                 {% for tech in selected_technologies %}
-                <button type="button" class="group added-tech-button">
-                  <div
-                    class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 group-hover:border-secondary mt-2">
-                    <div class="group-hover:text-secondary cursor-pointer text-sm font-normal flex-initial added-tech">
-                      <strong>{{ tech.tech_name }}</strong></div><svg xmlns="http://www.w3.org/2000/svg" width="3"
-                      height="3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                      class="feather feather-x text-primary group-hover:text-secondary rounded-full w-3 h-3 ml-2">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                      <line></line>
-                      <line></line>
-                    </svg>
-                  </div>
+                <button type="button"
+                  class="group added-tech-button flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 hover:border-secondary mt-2 hover:text-secondary cursor-pointer text-sm font-normal added-tech">
+                  <strong>{{ tech.tech_name }}</strong>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="feather feather-x text-primary group-hover:text-secondary rounded-full w-3 h-3 ml-2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                    <line></line>
+                    <line></line>
+                  </svg>
                 </button>
                 {% endfor %}
               </div>
@@ -70,9 +68,7 @@
                     data-techid="{{ tech.id }}">
                     <button type="button"
                       class="flex w-full items-center p-3 border-transparent border-l-2 relative focus:bg-primary focus:text-white ">
-                      <div class="w-full items-center flex">
-                        <span class="mx-2 leading-6">{{ tech.tech_name }}</span>
-                      </div>
+                      <span class="mx-2 leading-6">{{ tech.tech_name }}</span>
                     </button>
                   </li>
                   {% endfor %}
