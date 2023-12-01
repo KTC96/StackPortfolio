@@ -1,28 +1,31 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
-<search class="pt-12 lg-pt-14">
+<search class="pt-12 lg:pt-14 container">
   <form class="w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
     <div class="join w-full">
       <input class="input input-bordered join-item w-full" name="q" type="text" value="{{ current_query }}"
         placeholder="Search...">
-      <button type="submit" class="btn btn-primary join-item">Search</button>
+      <button type="submit" class="btn btn-primary text-white join-item">Search</button>
     </div>
 
     <div class="join mt-3 w-full">
       <div>
-        <input class="join-item btn grow md:grow-0 btn-sm" type="radio" name="type" value="users" id="users"
-          aria-label="Users" {% if search_type == 'users' %}checked{% endif %}>
+        <input class="join-item btn checked:after:btn-primary checked:after:text-white grow md:grow-0 btn-sm"
+          type="radio" name="type" value="users" id="users" aria-label="Users"
+          {% if search_type == 'users' %}checked{% endif %}>
         <label for="users" class="sr-only">Users</label>
       </div>
       <div>
         <label for="projects" class="sr-only">Projects</label>
-        <input class="join-item btn grow md:grow-0 btn-sm" type="radio" name="type" value="projects" id="projects"
-          aria-label="Projects" {% if search_type == 'projects' %}checked{% endif %}>
+        <input class="join-item btn checked:after:btn-primary checked:after:text-white grow md:grow-0 btn-sm"
+          type="radio" name="type" value="projects" id="projects" aria-label="Projects"
+          {% if search_type == 'projects' %}checked{% endif %}>
       </div>
       <div>
         <label for="job_posts" class="sr-only">Job Posts</label>
-        <input class="join-item btn grow md:grow-0 btn-sm" type="radio" name="type" value="job_posts" id="job_posts"
-          aria-label="Job Posts" {% if search_type == 'job_posts' %}checked{% endif %}>
+        <input class="join-item btn checked:after:btn-primary checked:after:text-white grow md:grow-0 btn-sm"
+          type="radio" name="type" value="job_posts" id="job_posts" aria-label="Job Posts"
+          {% if search_type == 'job_posts' %}checked{% endif %}>
       </div>
     </div>
     <div class="w-full flex flex-col items-center mx-auto my-5">
@@ -81,17 +84,19 @@
       </div>
     </div>
     <div class="join">
-      <input class="join-item btn btn-sm" type="radio" name="tech_match_type" value="any" id="tech_match_any"
-        aria-label="Must include tech" {% if tech_match_type == 'any' %}checked{% endif %}>
+      <input class="join-item btn checked:after:btn-primary checked:after:text-white btn-sm" type="radio"
+        name="tech_match_type" value="any" id="tech_match_any" aria-label="Must include tech"
+        {% if tech_match_type == 'any' %}checked{% endif %}>
       <label class="sr-only" for="tech_match_any">At least one of the selected techs</label>
       <label class="sr-only" for="tech_match_all">All selected techs</label>
-      <input class="join-item btn btn-sm" type="radio" name="tech_match_type" value="all" id="tech_match_all"
-        aria-label="Must match tech" {% if tech_match_type == 'all' %}checked{% endif %}>
+      <input class="join-item btn checked:after:btn-primary checked:after:text-white btn-sm" type="radio"
+        name="tech_match_type" value="all" id="tech_match_all" aria-label="Must match tech"
+        {% if tech_match_type == 'all' %}checked{% endif %}>
 
     </div>
   </form>
 </search>
-<section id="search-results-page">
+<section class="container pb-12 lg:pb-14" id="search-results-page">
 
   <h1 class="text-3xl mb-8">Search</h1>
 
