@@ -109,8 +109,7 @@
             </div>
 
             <hr class="mx-auto w-1/3 lg:w-full lg:w-full my-8">
-            <button class="btn btn-disabled block mx-auto lg:mx-0 lg:ml-auto next-button" role="button"
-              aria-disabled="true">Profile
+            <button class="btn btn-disabled block mx-auto lg:mx-0 lg:ml-auto next-button" aria-disabled="true">Profile
               &raquo;</button>
           </div>
 
@@ -292,8 +291,8 @@
             <hr class="my-5 w-1/3">
 
             <div class="flex w-50 justify-between">
-              <button class="btn btn-primary block prev-button w-50" role="button">&laquo; Details</button>
-              <button class="btn btn-disabled block next-button w-50 ml-1" role="button" aria-disabled="true">Summary
+              <button class="btn btn-primary block prev-button w-50">&laquo; Details</button>
+              <button class="btn btn-disabled block next-button w-50 ml-1" aria-disabled="true">Summary
                 &raquo;</button>
             </div>
           </div>
@@ -326,11 +325,11 @@
             </div>
 
             <div class="flex w-50 justify-between">
-              <button class="btn btn-primary block prev-button" role="button">&laquo; Profile</button>
+              <button class="btn btn-primary block prev-button">&laquo; Profile</button>
               {% if redirect_field_value %}
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               {% endif %}
-              <button class="btn btn-disabled block next-button" role="button" aria-disabled="true"
+              <button class="btn btn-disabled block next-button" aria-disabled="true"
                 type="submit">{% trans "Sign Up" %}
                 &raquo;</button>
             </div>
