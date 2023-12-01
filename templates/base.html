@@ -14,8 +14,7 @@
     <meta name="description"
         content="Stackportfol.io gives developers a platform to showcase their projects and the skills associated with those projects.">
     {% comment %} Meta keywords {% endcomment %}
-    <meta name="keywords"
-        content="developer, portfolio, projects, skills, tech, showcase, job, job board, job search" />
+    <meta name="keywords" content="developer, portfolio, projects, skills, tech, showcase, job, job board, job search">
 
     {% comment %} Favicon {% endcomment %}
     <link rel="shortcut icon" href="{% static 'images/stackportfolio-icon.svg' %}" type="image/x-icon">
@@ -75,48 +74,54 @@
                                 d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </label>
-                    <ul tabindex="0"
+                    <div tabindex="0"
                         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-0">
                         {% if user.is_authenticated %}
-                        <li class="my-3">
-                            <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
-                                aria-label="Navigates to your profile page">My
-                                profile</a>
-                        </li>
+                        <ul>
+                            <li class="my-3">
+                                <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
+                                    aria-label="Navigates to your profile page">My
+                                    profile</a>
+                            </li>
+                        </ul>
                         <span class="divider my-2"></span>
-                        <li class="my-3">
-                            <a href="{% url 'custom_account:user_settings' slug=user.slug %}" class="edit-settings-link"
-                                aria-label="Edit settings">Edit account details</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="{% url 'custom_account:profile_edit' slug=user.slug %}" class="edit-profile-link"
-                                aria-label="Edit profile">Edit profile</a>
-                        </li>
+                        <ul>
+                            <li class="my-3">
+                                <a href="{% url 'custom_account:user_settings' slug=user.slug %}"
+                                    class="edit-settings-link" aria-label="Edit settings">Edit account details</a>
+                            </li>
+                            <li class="my-3">
+                                <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
+                                    class="edit-profile-link" aria-label="Edit profile">Edit profile</a>
+                            </li>
+                        </ul>
                         <span class="divider my-2"></span>
                         {% endif %}
-                        <li class="my-3"><a class="link link-hover" href="{% url 'view_all_projects' %}">See
-                                projects</a></li>
-                        <li class="my-3"><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job
-                                posts</a></li>
+                        <ul>
+                            <li class="my-3"><a class="link link-hover" href="{% url 'view_all_projects' %}">See
+                                    projects</a></li>
+                            <li class="my-3"><a class="link link-hover" href="{% url 'view_all_job_posts' %}">See job
+                                    posts</a></li>
+                        </ul>
                         <span class="divider my-2"></span>
-
-
-                        {% if user.is_authenticated %}
-                        <li class="my-3">
-                            <a href=" {% url 'account_logout' %}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="my-3">
-                            <a href="{% url 'custom_account:account_type' %}">Sign up</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="{% url 'account_login' %}">Sign in</a>
-                        </li>
-                        {% endif %}
-                    </ul>
+                        <ul>
+                            {% if user.is_authenticated %}
+                            <li class="my-3">
+                                <a href=" {% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="my-3">
+                                <a href="{% url 'custom_account:account_type' %}">Sign up</a>
+                            </li>
+                            <li class="my-3">
+                                <a href="{% url 'account_login' %}">Sign in</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <ul class="navbar-end menu menu-horizontal px-1 hidden lg:flex">
+            <div class="navbar-end menu menu-horizontal px-1 hidden lg:flex">
                 {% if user.is_authenticated %}
                 <div class="flex-none">
                     <ul class="menu menu-horizontal px-1">
@@ -139,25 +144,25 @@
                                     <li class="my-3">
                                         <a href="{% url 'custom_account:user_profile' slug=user.slug %}"
                                             aria-label="Navigates to your profile page">My profile</a>
+                                        <span class="divider px-1 my-2"></span>
                                     </li>
-                                    <span class="divider my-2"></span>
                                     <li class="my-3">
                                         <a href="{% url 'custom_account:user_settings' slug=user.slug %}"
-                                            class="edit-settings-link" aria-label="Edit settings">Edit account
-                                            details</a>
+                                            class="edit-settings-link" aria-label="Edit settings">
+                                            Edit account details
+                                        </a>
                                     </li>
                                     <li class="my-3">
                                         <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
                                             class="edit-profile-link" aria-label="Edit profile">Edit profile</a>
+                                        <span class="divider px-1 my-2"></span>
                                     </li>
-                                    <span class="divider my-2"></span>
                                     <li class="my-3">
                                         <a href="{% url 'account_logout' %}">Logout</a>
                                     </li>
                                 </ul>
                             </details>
                         </li>
-
                     </ul>
                 </div>
                 {% else %}
@@ -178,7 +183,7 @@
                     <a href="{% url 'account_login' %}">Sign in</a>
                 </li>
                 {% endif %}
-            </ul>
+            </div>
         </div>
     </header>
 
