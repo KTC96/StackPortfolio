@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
 
-<section id="project-page" class="py-6 pb-12 lg:py-14">
+<section class="py-12 lg:py-14 container" id="project-page">
   {% if project.image %}
   <img src="{{ project.image.url }}" alt="{{ project.name }}" class="mb-3 max-h-[650px] mx-auto">
   {% else %}
@@ -71,7 +71,7 @@
 
   {% if project.description %}
   <h2 class="text-lg mt-8">About this project</h2>
-  <p class="prose">
+  <p class="prose break-words">
     {{ project.description }}
   </p>
   {% endif %}

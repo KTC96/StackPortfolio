@@ -4,7 +4,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
 
 {% block content %}
-<section id="account-type-selector" class="py-14">
+<section class="py-12 lg:py-14 container" id="account-type-selector">
   {% if process == "connect" %}
   <h1 class="text-3xl">{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="edit-profile" class="py-12 lg-py-14">
+<section class="py-12 lg:py-14 container" id="edit-profile">
   <h1 class="text-3xl mb-5">Account settings</h1>
   <form class="signup" id="signup_form" method="post" action="{% url 'custom_account:user_settings' user.slug %}">
     {% csrf_token %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load widget_tweaks %}
 {% load static %}
-<section id="edit-job-post" class="py-12 lg-py-14">
+<section class="py-12 lg:py-14 container" id="edit-job-post">
   <h1 class="text-2xl lg:text-3xl mt-8">Edit {{ job_post.name }}</h1>
   <div class="form-container py-8">
     <form action="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}" method="post"

@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load widget_tweaks %}
 {% load static %}
-<section id="create-job-post" class="py-12 lg-py-14">
+<section class="py-12 lg:py-14 container" id="create-job-post">
   <h1 class="text-2xl lg:text-3xl mt-8">Create a job post</h1>
   <div class="form-container py-8">
     <form action="{% url 'job_post:create_job_post' slug=request.user.slug %}" method="post"
@@ -55,7 +55,7 @@
           <li>
             <label for="{{ choice.id_for_label }}" class="flex items-center cursor-pointer text-sm text-gray-700">
               <input type="radio" name="work_location_type" id="{{ choice.id_for_label }}" value="{{ forloop.counter }}"
-                class="radio radio-xs radio-secondary checked:radio-primary">
+                class="radio radio-xs radio-secondary checked:radio-primary" {% if forloop.first%}checked{% endif %}>
               <span class="ml-2">{{ choice.choice_label }}</span>
             </label>
           </li>

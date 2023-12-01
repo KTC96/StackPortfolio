@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load cloudinary %}
 
-<section id="user-profile" class="py-6 pb-12 lg:py-14">
+<section class="py-12 lg:py-14 container" id="user-profile">
   <div class="lg:flex">
     <div class="profile-area lg:w-1/4">
       <div class="w-full mb-5 flex justify-center">
@@ -168,7 +168,7 @@
       {% if profile.tech_profile.work_location_type.all %}
       <ul class="w-full flex flex-col">
         {% for type in profile.tech_profile.work_location_type.all %}
-        <li class="badge badge-primary p-3 mt-3">{{ type }}</li>
+        <li class="badge badge-primary text-white p-3 mt-3">{{ type }}</li>
         {% endfor %}
       </ul>
       {% endif %}
