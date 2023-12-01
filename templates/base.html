@@ -166,22 +166,24 @@
                     </ul>
                 </div>
                 {% else %}
-                <li>
-                    <a class="hidden lg:block" href="{% url 'search_and_filter:search_results' %}"
-                        aria-label="Navigates to the search page">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'custom_account:account_type' %}">Sign up</a>
-                </li>
-                <li>
-                    <a href="{% url 'account_login' %}">Sign in</a>
-                </li>
+                <ul class="flex">
+                    <li>
+                        <a class="hidden lg:block" href="{% url 'search_and_filter:search_results' %}"
+                            aria-label="Navigates to the search page">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'custom_account:account_type' %}">Sign up</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_login' %}">Sign in</a>
+                    </li>
+                </ul>
                 {% endif %}
             </div>
         </div>
@@ -189,11 +191,9 @@
 
     {% comment %} Main content {% endcomment %}
     <main>
-        <div class="container mx-auto">
-            {% block content %}
+        {% block content %}
 
-            {% endblock content %}
-        </div>
+        {% endblock content %}
     </main>
 
     {% comment %} Footer {% endcomment %}
@@ -224,15 +224,6 @@
                     <h3 class="footer-title">Company</h3>
                     <a href="{% url 'about' %}" class="link link-hover">About us</a>
                     <a href="{% url 'careers' %}" class="link link-hover">Work with us</a>
-                </div>
-                <div>
-                    <h3 class="footer-title">Offerings</h3>
-                    <a class="link link-hover">Developer Portfolio</a>
-                    <a class="link link-hover">Job board</a>
-                </div>
-                <div>
-                    <h3 class="footer-title">Support</h3>
-                    <a href="{% url 'contact' %}" class="link link-hover">Contact</a>
                 </div>
             </div>
         </div>
