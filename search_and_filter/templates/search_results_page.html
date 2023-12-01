@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
-<search class="pt-12 lg:pt-14 container">
+<div class="pt-12 lg:pt-14 container">
   <form class="w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
     <div class="join w-full">
       <input class="input input-bordered join-item w-full" name="q" type="text" value="{{ current_query }}"
@@ -95,7 +95,7 @@
 
     </div>
   </form>
-</search>
+</div>
 <section class="container pb-12 lg:pb-14" id="search-results-page">
 
   <h1 class="text-3xl mb-8">Search</h1>
