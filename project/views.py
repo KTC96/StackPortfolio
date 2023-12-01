@@ -70,7 +70,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'create_project.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+        if (request.user.is_authenticated and request.user.slug ==
+                self.kwargs['slug']):
             if hasattr(request.user, 'tech_profile'):
                 return super().dispatch(request, *args, **kwargs)
             else:
@@ -183,20 +184,21 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
 
         # Get the old image public ID before it gets updated
         old_image_public_id = None
-        if 'image' in form.changed_data:
-            if ("http://res.cloudinary.com/nvmind/image/upload/" in
+        if current_project.image:
+            if "http://res.cloudinary.com/" in str(
                     current_project.image.public_id):
                 old_image_public_id = current_project.image.public_id.split(
-                    '/')[-1]
+                    '/')[-1].split('.')[0]
             else:
                 old_image_public_id = current_project.image.public_id
 
-        new_image = form.cleaned_data['image']
-
-        if new_image:
+        new_image = form.cleaned_data.get('image')
+        if new_image and hasattr(new_image, 'file'):
+            # Upload the new image to Cloudinary and get the URL
             new_image_url, _ = upload_project_to_cloudinary(new_image)
             self.object.image = new_image_url
-        else:
+        elif 'image-clear' in self.request.POST:
+            # Clear the image if 'clear' checkbox is ticked
             self.object.image = None
 
         project = form.save(commit=False)
@@ -204,7 +206,6 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
         project.save()
 
         project.technologies.clear()
-
         existing_tech_ids = form.cleaned_data.get('technologies', [])
         for tech_id in existing_tech_ids:
             project.technologies.add(tech_id)
@@ -221,7 +222,9 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                     tech_name=tech_name, defaults={'is_approved': False})
                 project.technologies.add(tech)
 
-        if old_image_public_id:
+        # Delete old image from Cloudinary
+        new_public_id = getattr(self.object.image, 'public_id', None)
+        if old_image_public_id and old_image_public_id != new_public_id:
             try:
                 cloudinary.uploader.destroy(
                     old_image_public_id, invalidate=True)
@@ -230,9 +233,7 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
                 messages.error(
                     self.request, "There was an error deleting the old image.")
 
-        messages.success(
-            self.request, "Project successfully updated.")
-
+        messages.success(self.request, "Project successfully updated.")
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
