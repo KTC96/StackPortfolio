@@ -8,13 +8,13 @@ register = template.Library()
 @stringfilter
 def replace(value, arg):
     """
-    Replacing filter
-    Use `{{ "aaa"|replace:"a|b" }}`
+    Replacing filter.
+    Use `{{ "aaa"|replace:"a|b" }}`.
     """
-    if not arg.split('|')[1] in value:
-        if len(arg.split('|')) != 2:
-            return value
+    if '|' not in arg:
+        return value
 
-        if value:
-            what, to = arg.split('|')
-            return value.replace(what, to)
+    what, to = arg.split('|', 1)
+    if to not in value:
+        return value.replace(what, to)
+    return value
