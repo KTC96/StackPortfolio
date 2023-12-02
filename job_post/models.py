@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.db import IntegrityError
 from technology.models import Tech
 from work_location_type.models import WorkLocationType
+from custom_account.models import CustomUser
 
 
 class JobPost(models.Model):
@@ -65,6 +66,13 @@ class JobPost(models.Model):
         """
         Saves the job post.
         """
+        try:
+            if self.user:
+                pass
+        except CustomUser.DoesNotExist:
+            raise IntegrityError(
+                "Only registered users can create job posts.")
+
         if not hasattr(self.user, 'recruiter_profile'):
             raise IntegrityError(
                 "Only Recruiters can create projects.")

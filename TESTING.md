@@ -10,7 +10,7 @@ I am using a combination of automated and manual testing in my project.
 
 #### Create Account
 
-##### Unittest
+##### Create Account Unittest
 
 | Test Name                                   | Description                                                         | Status |
 | ------------------------------------------- | ------------------------------------------------------------------- | ------ |
@@ -28,7 +28,7 @@ I am using a combination of automated and manual testing in my project.
 | `test_create_user_with_short_first_name`    | Test that the user cannot sign up with a short first name           | Pass   |
 | `test_create_user_with_long_first_name`     | Test that the user cannot sign up with a long first name            | Pass   |
 
-##### Jest
+##### Create Account Jest
 
 | Test Name                                             | Description                                                 | Status |
 | ----------------------------------------------------- | ----------------------------------------------------------- | ------ |
@@ -39,6 +39,8 @@ I am using a combination of automated and manual testing in my project.
 
 #### Update Account
 
+##### Update Account Unittest
+
 | Test Name                        | Description                              | Status |
 | -------------------------------- | ---------------------------------------- | ------ |
 | `test_update_user_email`         | Test that the email gets updated         | Pass   |
@@ -47,6 +49,8 @@ I am using a combination of automated and manual testing in my project.
 | `test_update_multiple_fields`    | Test that multiple fields get updated    | Pass   |
 
 #### Delete Account
+
+##### Delete Account Unittest
 
 | Test Name          | Description                     | Status |
 | ------------------ | ------------------------------- | ------ |
@@ -58,7 +62,7 @@ I am using a combination of automated and manual testing in my project.
 
 #### Create Project
 
-##### Unittest
+##### Project Unittest
 
 | Test Name                                     | Description                                                       | Status |
 | --------------------------------------------- | ----------------------------------------------------------------- | ------ |
@@ -72,6 +76,8 @@ I am using a combination of automated and manual testing in my project.
 
 #### Update Project
 
+##### Update Project Unittest
+
 | Test Name                                | Description                                                   | Status |
 | ---------------------------------------- | ------------------------------------------------------------- | ------ |
 | `test_project_update`                    | Test that a project can be updated                            | Pass   |
@@ -82,11 +88,15 @@ I am using a combination of automated and manual testing in my project.
 
 #### Project Detail
 
+##### Project Detail Unittest
+
 | Test Name                         | Description                              | Status |
 | --------------------------------- | ---------------------------------------- | ------ |
 | `test_project_detail_view_exists` | Test that the Project Detail view exists | Pass   |
 
 #### Project List
+
+##### Project List Unittest
 
 | Test Name                       | Description                            | Status |
 | ------------------------------- | -------------------------------------- | ------ |
@@ -97,6 +107,8 @@ I am using a combination of automated and manual testing in my project.
 ### Job Post
 
 #### Create Job Post
+
+##### Create Job Post Unittest
 
 | Test Name                                      | Description                                                        | Status |
 | ---------------------------------------------- | ------------------------------------------------------------------ | ------ |
