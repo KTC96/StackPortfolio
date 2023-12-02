@@ -11,9 +11,10 @@ def replace(value, arg):
     Replacing filter
     Use `{{ "aaa"|replace:"a|b" }}`
     """
-    if len(arg.split('|')) != 2:
-        return value
+    if not arg.split('|')[1] in value:
+        if len(arg.split('|')) != 2:
+            return value
 
-    if value:
-        what, to = arg.split('|')
-        return value.replace(what, to)
+        if value:
+            what, to = arg.split('|')
+            return value.replace(what, to)
