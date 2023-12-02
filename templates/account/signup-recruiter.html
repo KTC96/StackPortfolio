@@ -120,7 +120,7 @@
                 class="label pl-0 text-sm">{{ form.town_city.label }}</label>
               {{ form.town_city }}
               <span class="error-span text-error text-sm mt-2 hidden"></span>
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.town_city.errors }}</span>
               {% endif %}
             </div>
@@ -189,7 +189,7 @@
                 <label for="{{ form.work_title.id_for_label }}"
                   class="label pl-0 text-sm">{{ form.work_title.label }}</label>
                 {{ form.work_title }}
-                {% if form.town.errors %}
+                {% if form.town_city.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.work_title.errors }}</span>
                 {% endif %}
               </div>
@@ -197,7 +197,7 @@
               <div class="form-control w-full lg:pl-3">
                 <label for="{{ form.company.id_for_label }}" class="label pl-0 text-sm">{{ form.company.label }}</label>
                 {{ form.company }}
-                {% if form.town.errors %}
+                {% if form.town_city.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.company.errors }}</span>
                 {% endif %}
               </div>
@@ -208,7 +208,7 @@
               <label for="{{ form.linkedin_username.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.linkedin_username.label }}</label>
               {{ form.linkedin_username }}
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.linkedin_username.errors }}</span>
               {% endif %}
             </div>
@@ -218,7 +218,7 @@
               <label for="{{ form.twitter_handle.id_for_label }}"
                 class="label pl-0 text-sm">{{ form.twitter_handle.label }}</label>
               {{ form.twitter_handle }}
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.twitter_handle.errors }}</span>
               {% endif %}
             </div>

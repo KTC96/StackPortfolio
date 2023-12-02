@@ -122,7 +122,7 @@
                 class="label pl-0 text-sm">{{ form.town_city.label }}</label>
               {{ form.town_city }}
 
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.town_city.errors }}</span>
               {% endif %}
             </div>
@@ -145,7 +145,7 @@
               <label for="{{ form.country.id_for_label }}" class="label pl-0 text-sm">{{ form.country.label }}</label>
               {{ form.country }}
 
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.country.errors }}</span>
               {% endif %}
             </div>
@@ -167,8 +167,8 @@
                   </li>
                   {% endfor %}
                 </ul>
-                {% if form.work_location_type.errors %}
               </fieldset>
+              {% if form.work_location_type.errors %}
               <span class="error-span block text-error text-sm mt-3">{{ form.work_location_type.errors }}</span>
               {% endif %}
             </div>
@@ -228,7 +228,7 @@
                   class="label pl-0 text-sm">{{ form.work_title.label }}</label>
                 {{ form.work_title }}
 
-                {% if form.town.errors %}
+                {% if form.town_city.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.work_title.errors }}</span>
                 {% endif %}
               </div>
@@ -237,7 +237,7 @@
                 <label for="{{ form.company.id_for_label }}" class="label pl-0 text-sm">{{ form.company.label }}</label>
                 {{ form.company }}
 
-                {% if form.town.errors %}
+                {% if form.town_city.errors %}
                 <span class="error-span text-error text-sm mt-2">{{ form.company.errors }}</span>
                 {% endif %}
               </div>
@@ -261,7 +261,7 @@
                 class="label pl-0 text-sm">{{ form.github_username.label }}</label>
               {{ form.github_username }}
 
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.github_username.errors }}</span>
               {% endif %}
             </div>
@@ -272,7 +272,7 @@
                 class="label pl-0 text-sm">{{ form.linkedin_username.label }}</label>
               {{ form.linkedin_username }}
 
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.linkedin_username.errors }}</span>
               {% endif %}
             </div>
@@ -283,7 +283,7 @@
                 class="label pl-0 text-sm">{{ form.twitter_handle.label }}</label>
               {{ form.twitter_handle }}
 
-              {% if form.town.errors %}
+              {% if form.town_city.errors %}
               <span class="error-span text-error text-sm mt-2">{{ form.twitter_handle.errors }}</span>
               {% endif %}
             </div>
