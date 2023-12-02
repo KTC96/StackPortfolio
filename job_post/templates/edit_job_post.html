@@ -66,28 +66,26 @@
             <div class="w-full">
               <div class="my-2 py-1 flex">
                 <div class="flex flex-auto flex-wrap added-tech-container">
-                  {% for job_post_tech in job_post_technologies %}
-                  <button type="button" class="group added-tech-button">
-                    <div
-                      class="flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if job_post_tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 group-hover:border-secondary mt-2">
-                      <div
-                        class="group-hover:text-secondary cursor-pointer text-sm font-normal flex-initial added-tech">
-                        <strong>{{ job_post_tech.tech_name }}</strong></div><svg xmlns="http://www.w3.org/2000/svg"
-                        width="3" height="3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="feather feather-x text-primary group-hover:text-secondary rounded-full w-3 h-3 ml-2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                        <line></line>
-                        <line></line>
-                      </svg>
-                    </div>
+                  {% for tech in job_post_technologies %}
+                  <button type="button"
+                    class="group added-tech-button flex justify-center items-center mr-1 py-2 px-5 rounded-md {% if tech.is_approved %}bg-aliceblue border-primary text-primary {% else %}bg-white border-secondary text-secondary{% endif %} bordered border-2 hover:border-secondary mt-2 hover:text-secondary cursor-pointer text-sm font-normal added-tech">
+                    <strong>{{ tech.tech_name }}</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      class="feather feather-x text-primary group-hover:text-secondary rounded-full w-3 h-3 ml-2">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                      <line></line>
+                      <line></line>
+                    </svg>
                   </button>
                   {% endfor %}
                 </div>
               </div>
               <div class="relative">
                 <div class="flex-1">
-                  <input type="text" name="tech_input" placeholder="The tech that is used on this job post"
+                  <input type="text" id="id_technologies" name="tech_input"
+                    placeholder="The tech that is used on this job post"
                     class="input input-bordered input-secondary w-full tech-input">
                 </div>
                 <div
