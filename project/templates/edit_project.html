@@ -26,7 +26,7 @@
         {% if form.image.value %}
         <div class="image-container">
           <div class="current-image md:w-1/2 lg:w-1/3">
-            <label class="block text-sm font-medium text-gray-700">Current image</label>
+            <label class="block text-sm mb-2 font-medium text-gray-700">Current image</label>
             <img src="{{ form.image.value.url | replace:'http|https' }}" alt="Current Image">
           </div>
           <div class="clear-checkbox flex my-3">
@@ -36,12 +36,17 @@
               image</label>
           </div>
         </div>
+
         {% endif %}
 
         <label class="block text-sm font-medium text-gray-700" for="{{ form.image.id_for_label }}">Change:</label>
         <input type="file" class="file-input file-input-bordered file-input-primary w-full mt-3"
           name="{{ form.image.html_name }}" id="{{ form.image.auto_id }}">
-
+        {% if form.image.errors %}
+        <div class="error-span text-error text-sm mt-2">
+          {{ form.image.errors }}
+        </div>
+        {% endif %}
       </div>
 
 
