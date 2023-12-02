@@ -24,7 +24,6 @@ class Project(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     github_repo_url = models.URLField(max_length=255, blank=True, null=True)
     deployed_url = models.URLField(max_length=255, blank=True, null=True)
-
     active = models.BooleanField(default=True)
     description = models.TextField(blank=True, null=True, max_length=1000)
     image = CloudinaryField('image', blank=True, null=True)

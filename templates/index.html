@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-
+{% load helper_tags %}
 <section class="py-14 container" id="hero">
   <div class="text-center lg:text-left lg:w-1/3 mx-auto hero-container lg:py-28">
     <h1 class="text-3xl lg:text-5xl">Showcase your <strong>code</strong>, elevate your <strong><span
@@ -36,7 +36,8 @@
       <a href="{% url 'project:view_project' project_slug=project.slug slug=project.user.slug %}">
         <div class="slide relative hidden">
           {% comment %} Alt tag is blank as images are decorative {% endcomment %}
-          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url }}" alt="">
+          <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url | replace:"http|https" }}"
+            alt="">
           <div class="absolute bottom-0 w-full px-5 py-3 bg-black/80 text-center text-white">
             {{ project.name }} - {{ project.user.username }}
           </div>

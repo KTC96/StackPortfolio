@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block content %}
 {% load cloudinary %}
+{% load helper_tags %}
 
 <section class="py-12 lg:py-14 container" id="user-profile">
   <div class="lg:flex">
@@ -8,7 +9,7 @@
         <div class="relative">
           {% if profile.profile_image %}
           <div class="avatar w-64 h-64 mx-auto">
-            <img src="{{ profile.profile_image.url }}"
+            <img src="{{ profile.profile_image.url | replace:"http|https" }}"
               alt="{{ profile.first_name }} {{ profile.last_name }}'s profile image">
           </div>
           {% else %}

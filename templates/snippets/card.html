@@ -1,5 +1,6 @@
 {% load static %}
 {% load humanize %}
+{% load helper_tags %}
 
 {% if post.active or post.user == user %}
 <div
@@ -11,7 +12,8 @@
     aria-label="Navigates to the {{ post.name }} {{ type }}.">
     {% if post.image.url %}
     <figure>
-      <img src="{{ post.image.url }}" class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover"
+      <img src="{{ post.image.url | replace:"http|https" }}"
+        class="w-full {% if not full %}h-48 {% else %} h-64{% endif %} object-cover"
         alt="Screenshot of the {{ post.name }} {{ type }}">
     </figure>
     {% elif type == "project" and not post.image.url %}
@@ -103,7 +105,8 @@
     {% if post.user.profile_image.url %}
     <div class="avatar">
       <div class="w-8 rounded-full mr-4">
-        <img src="{{ post.user.profile_image.url }}" alt="{{ post.user.get_full_name }}'s profile avatar">
+        <img src="{{ post.user.profile_image.url | replace:"http|https" }}"
+          alt="{{ post.user.get_full_name }}'s profile avatar">
       </div>
     </div>
     {% endif %}
