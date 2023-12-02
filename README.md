@@ -380,3 +380,8 @@ The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.di
 - [Django docs on overriding delete for bulk methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-model-methods)
 - [Django docs on messages levels for toasts](https://docs.djangoproject.com/en/4.2/ref/contrib/messages/#message-levels)
 - [Stackoverflow post on custom replace filter](https://stackoverflow.com/questions/21483003/replacing-a-character-in-django-template)
+
+Known bugs:
+
+1. When the page refreshes on the signup page, the fields are not autofilled.
+2. When the page refreshes or form submits on the project or job post create or edit forms, the tech that was added before submission is not re-added.
