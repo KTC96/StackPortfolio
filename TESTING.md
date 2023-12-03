@@ -1,12 +1,51 @@
 # Testing
 
+[Click here to go back to the README.md file](README.md)
+
 ## Overview
 
-I am using a combination of automated and manual testing in my project.
+I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, JavaScript and Python code.
 
-## Automated Testing
+## HTML
 
-### Account
+I use the [W3C Markup Validation Service](https://validator.w3.org/) to validate my HTML code.
+
+With Django, theres a lot of syntax that doesn't play well with the HTML Validator, such as `{% url 'homepage' %}` or `{{ variable|filter }}`.
+
+Normally, I validate by using [validate by uri](https://validator.w3.org/#validate_by_uri) by passing in my deployed URL. However, many pages on this site require a user to be logged-in and authenticated, and will not work using this method, due to the fact that the HTML Validator (W3C) doesn't have access to login to the pages.
+
+In order to properly validate my HTML pages for authenticated pages, I followed these steps:
+
+- Navigate to the deployed pages that require authentication
+- Right-click anywhere on the page, and select **View Page Source** (usually `CTRL+U` or `⌘+U` on Mac).
+- This will display the entire compiled code.
+- Copy everything, and use the [validate by input](https://validator.w3.org/#validate_by_input) method.
+- Repeat this process for every page that requires a user to be logged-in/authenticated.
+
+| Page                  | W3C URL                                                                                                                                        | Screenshot                                                                                                     | Notes |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----- |
+| Homepage              | [W3C Homepage](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2F)                                                          | ![homepage validation screenshot](documentation/validation-images/html/homepage.png)                           | Pass  |
+| Signup Type           | [W3C Signup type](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Faccounts%2Fsignup%2F)                                   | ![account type validation screenshot](documentation/validation-images/html/signup-type.png)                    | Pass  |
+| Tech Signup           | [W3C Tech user Signup](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Faccounts%2Fsignup%2Ftech%2F)                       | ![tech validation screenshot](documentation/validation-images/html/signup-tech.png)                            | Pass  |
+| Recruiter Signup      | [W3C Recruiter Signup](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Faccounts%2Fsignup%2Frecruiter%2F)                  | ![recruiter validation screenshot](documentation/validation-images/html/signup-recruiter.png)                  | Pass  |
+| Github Signup         | [W3C Github Signup](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Faccounts%2Fgithub%2Flogin%2F%3Fprocess%3Dsignup)      | ![github validation screenshot](documentation/validation-images/html/signup-github.png)                        | Pass  |
+| Login                 | [W3C Login Signup](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Faccounts%2Flogin%2F)                                   | ![login validation screenshot](documentation/validation-images/html/login.png)                                 | Pass  |
+| About page            | [W3C About page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fabout%2F)                                                | ![about validation screenshot](documentation/validation-images/html/about-page.png)                            | Pass  |
+| Careers page          | [W3C Careers page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%careers%2F)                                              | ![careers validation screenshot](documentation/validation-images/html/careers-page.png)                        | Pass  |
+| Search page           | [W3C Search page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fsearch)                                                 | ![search validation screenshot](documentation/validation-images/html/search-page.png)                          | Pass  |
+| Projects page         | [W3C Projects List page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fprojects%2F)                                     | ![project list validation screenshot](documentation/validation-images/html/projects-page.png)                  | Pass  |
+| Project page          | [W3C Project detail page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fuser%2Fstephendawson%2Fproject%2Fjudgement-day) | ![project page validation screenshot ](documentation/validation-images/html/project-page.png)                  | Pass  |
+| Profile page          | [W3C Profile page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fuser%2Fstephendawson%2F)                               | ![profile validation screenshot](documentation/validation-images/html/profile-page.png)                        | Pass  |
+| Jobs page             | [W3C Jobs List page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fjobs%2F)                                             | ![jobs validation screenshot](documentation/validation-images/html/jobs-page.png)                              | Pass  |
+| Job page              | [W3C Job detail page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.stackportfol.io%2Fuser%2Fstephendawson%2Fjob%2F2%2F)                  | ![job page validation screenshot ](documentation/validation-images/html/job-page.png)                          | Pass  |
+| Edit Account Settings | N/A                                                                                                                                            | ![edit account settings validation screenshot](documentation/validation-images/html/edit-account-settings.png) | Pass  |
+| Edit Profile          | N/A                                                                                                                                            | ![edit profile validation screenshot](documentation/validation-images/html/edit-profile.png)                   | Pass  |
+| Create Project        | N/A                                                                                                                                            | ![create project validation screenshot](documentation/validation-images/html/create-project.png)               | Pass  |
+| Edit Project          | N/A                                                                                                                                            | ![edit project validation screenshot](documentation/validation-images/html/edit-project.png)                   | Pass  |
+| Create Job Post       | N/A                                                                                                                                            | ![create job post validation screenshot](documentation/validation-images/html/create-job-post.png)             | Pass  |
+| Edit Job Post         | N/A                                                                                                                                            | ![edit job validation screenshot](documentation/validation-images/html/edit-job-post.png)                      | Pass  |
+
+## Account
 
 #### Create Account
 
