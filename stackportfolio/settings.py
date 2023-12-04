@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_extensions',
     'widget_tweaks',
     'custom_account',
     'project',
@@ -88,6 +89,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'graph_models': True,
+}
 
 ROOT_URLCONF = 'stackportfolio.urls'
 
