@@ -86,7 +86,6 @@ const handleDeleteButton = () => {
 
   if (deleteConfirmButton) {
     deleteConfirmButton.addEventListener("click", () => {
-      console.log(currentDeleteForm);
       if (currentDeleteForm instanceof HTMLFormElement) {
         currentDeleteForm.submit();
       }

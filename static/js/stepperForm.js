@@ -285,8 +285,6 @@ const displaySummaryDetails = () => {
   // Retrieve the form data from localStorage
   const storedFormData = JSON.parse(localStorage.getItem("formData") || "");
 
-  console.log(storedFormData);
-
   for (const [key, value] of Object.entries(storedFormData)) {
     const element = document.querySelector(
       // @ts-ignore
