@@ -4,9 +4,11 @@
 
 ## Overview
 
-I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, JavaScript and Python code.
+I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, CSS, JavaScript and Python code.
 
-## HTML
+##  Manual Testing
+
+### HTML
 
 I use the [W3C Markup Validation Service](https://validator.w3.org/) to validate my HTML code.
 
@@ -45,7 +47,27 @@ In order to properly validate my HTML pages for authenticated pages, I followed 
 | Create Job Post       | N/A                                                                                                                                            | ![create job post validation screenshot](documentation/validation-images/html/create-job-post.png)             | Pass  |
 | Edit Job Post         | N/A                                                                                                                                            | ![edit job validation screenshot](documentation/validation-images/html/edit-job-post.png)                      | Pass  |
 
-## Account
+### CSS
+
+I use the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) to validate my CSS code. However, there are a number of errors due to using Tailwind CSS on my project. The Jigsaw CSS Validator cannot handle some of the Tailwind Syntax and it throws errors whenever it sees a pseudoelement such as `::before` or `::after`, or a wildcard selector such as `*`. You can [click here to go to the Jigsaw CSS Validation for the site](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww.stackportfol.io%2F&profile=css3svg&usermedium=all&warning=0&vextwarning=&lang=en). It turns out that the parsing of CSS variables is the cause. Here is a table of the errors (the repeated and some similar errors have been removed to avoid repetition):
+
+| CSS                                                                            | Error                                                 | Description                                                                               | Reference                                                                                                |
+| ------------------------------------------------------------------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `*, ::before, ::after`                                                         | `Parse Error`                                         | This error is actually about the CSS Variables that Jigsaw cannot support                 | <https://forum.freecodecamp.org/t/css-custom-property-or-variable-gives-validation-error-but-why/234744> |
+| `::backdrop`                                                                   | `Parse Error`                                         | This error is also about the CSS Variables that Jigsaw cannot support                     |                                                                                                          |
+| `.alert`                                                                       | `Parse Error )`                                       | In this case, it is also a CSS referenced as a hsl value                                  |                                                                                                          |
+| `selector(:has(*)) { :where(.join *) { border-radius: inherit; } }`            | `Parse Error`                                         | This error is caused by the `@supports` CSS Declaration, which isn't recognised by Jigsaw | <https://developer.mozilla.org/en-US/docs/Web/CSS/@supports>                                             |
+| `])) { overflow: hidden; }`                                                    | `Parse Error`                                         | To investigate more in depth                                                              |                                                                                                          |
+| `.checkbox:checked, .checkbox[checked="true"], .checkbox[aria-checked="true"]` | `Value Error : background-image Parse Error`          | This CSS also contains CSS Variables, which appear to cause the parsing issue             |                                                                                                          |
+| `.checkbox:indeterminate`                                                      | `Value Error : background-image Parse Error`          | Same as above, this contains CSS Variables and Jigsaw cannot parse it                     |                                                                                                          |
+| `.menu :where(li:not(.menu-title) >...` (shorted long selector)                | `Property text-wrap doesn't exist : balance`          | This may be caused by DaisyUI - need to investigate more                                  |                                                                                                          |
+| `.radio:checked, .radio[aria-checked="true"]`                                  | `Parse Error ) inset, 0 0 0 4px hsl(var(--b1)) inset` | This error is caused by Jigsaw's inability to parse CSS variables                         |                                                                                                          |
+| `:root .prose`                                                                 | `Parse Error )`                                       | This is also where CSS variables are being declared and can't be parsed by Jigsaw         |                                                                                                          |
+| `.tooltip                                                                      | `Parse Error [has(:focus-visible):after]`             | It looks like Jigsaw also has difficulty parsing `:has` or other newer pseudoselectors    |                                                                                                          |
+
+## Automated Testing
+
+### Account
 
 #### Create Account
 
