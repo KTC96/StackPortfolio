@@ -1,5 +1,5 @@
 // @ts-check
-import { validateInput } from "./formValidation.js";
+import { validateInput, generateErrorSpan } from "./formValidation.js";
 
 const formData = {};
 
@@ -206,12 +206,8 @@ const setupInputListeners = (steps, nextButtons) => {
           const password1 = document?.getElementById("id_password1");
           // @ts-ignore
           if (password1.value !== input.value) {
-            validateInput({
-              input,
-              customValidationMessage: "Passwords do not match.",
-              // @ts-ignore
-              customPattern: `${password1.value}{${password1.value.length},}`,
-            });
+            input.setCustomValidity("Passwords do not match");
+            generateErrorSpan(input);
           }
         }
       }
