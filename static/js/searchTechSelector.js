@@ -66,18 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  /**
-   * Get the ID from the tech name.
-   * If there's an id, use that, otherwise return null.
-   * @param {string} techName The name of the tech
-   * @returns {number|null} The ID of the tech, or null if not found
-   *
-   */
-  const getTechIdByName = (techName) => {
-    const tech = allActiveTech.find((tech) => tech.name === techName);
-    return tech ? tech.id : null;
-  };
-
   // if addedTechContainer has children, add them to the selectedTech array
   if (addedTechContainer.children.length > 0) {
     for (const child of addedTechContainer.children) {
