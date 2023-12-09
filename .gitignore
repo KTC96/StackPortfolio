@@ -7,5 +7,5 @@ __pycache__/
 node_modules/
 cloudinary_python.txt
 db.sqlite3
-staticfiles
+staticfiles/admin
 erd.dot
