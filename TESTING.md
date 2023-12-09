@@ -4,9 +4,9 @@
 
 ## Overview
 
-I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, CSS, JavaScript and Python code.
+I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, CSS, JavaScript and Python code. In this testing file, I have also included the performance checks from Google Lighthouse.
 
-##  Manual Testing
+## Validation
 
 ### HTML
 
@@ -57,13 +57,53 @@ I use the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) to 
 | `::backdrop`                                                                   | `Parse Error`                                         | This error is also about the CSS Variables that Jigsaw cannot support                     |                                                                                                          |
 | `.alert`                                                                       | `Parse Error )`                                       | In this case, it is also a CSS referenced as a hsl value                                  |                                                                                                          |
 | `selector(:has(*)) { :where(.join *) { border-radius: inherit; } }`            | `Parse Error`                                         | This error is caused by the `@supports` CSS Declaration, which isn't recognised by Jigsaw | <https://developer.mozilla.org/en-US/docs/Web/CSS/@supports>                                             |
-| `])) { overflow: hidden; }`                                                    | `Parse Error`                                         | To investigate more in depth                                                              |                                                                                                          |
+| `])) { overflow: hidden; }`                                                    | `Parse Error`                                         | This error is caused by Jigsaw not being able to parse the `:has` selector                |                                                                                                          |
 | `.checkbox:checked, .checkbox[checked="true"], .checkbox[aria-checked="true"]` | `Value Error : background-image Parse Error`          | This CSS also contains CSS Variables, which appear to cause the parsing issue             |                                                                                                          |
 | `.checkbox:indeterminate`                                                      | `Value Error : background-image Parse Error`          | Same as above, this contains CSS Variables and Jigsaw cannot parse it                     |                                                                                                          |
-| `.menu :where(li:not(.menu-title) >...` (shorted long selector)                | `Property text-wrap doesn't exist : balance`          | This may be caused by DaisyUI - need to investigate more                                  |                                                                                                          |
+| `.menu :where(li:not(.menu-title) >...` (shorted long selector)                | `Property text-wrap doesn't exist : balance`          | This is caused Jigsaw not being able to parse the `:where` selector                       |                                                                                                          |
 | `.radio:checked, .radio[aria-checked="true"]`                                  | `Parse Error ) inset, 0 0 0 4px hsl(var(--b1)) inset` | This error is caused by Jigsaw's inability to parse CSS variables                         |                                                                                                          |
 | `:root .prose`                                                                 | `Parse Error )`                                       | This is also where CSS variables are being declared and can't be parsed by Jigsaw         |                                                                                                          |
-| `.tooltip                                                                      | `Parse Error [has(:focus-visible):after]`             | It looks like Jigsaw also has difficulty parsing `:has` or other newer pseudoselectors    |                                                                                                          |
+| `.tooltip`                                                                     | `Parse Error [has(:focus-visible):after]`             | It looks like Jigsaw also has difficulty parsing `:has` or other newer pseudoselectors    |                                                                                                          |
+
+The above shows that Jigsaw has trouble parsing CSS Variable, but also newer pdeudoselectors such as `:has`, `:where` and `:is`, which are all now fully supported in modern browsers:
+
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/:has>
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/:where>
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/:is>
+
+While these newer psudeoselectors have only received support recently, since my main target audience is developers, I am not too concerned about this. I will continue to use these newer selectors. I also saw that Firefox has mixed reports on whether this is fully supported, but when I tested the functionality where these selectors are used, it worked as expected.
+
+### JavaScript
+
+I used [JSHint](https://jshint.com/) to validate my JavaScript code. Here is a table of the validated code, which shows the file validated, a screenshot and a descriptionany warnings:
+
+| File                    | Screenshot                                                                                                                     | Description                                                                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `script.js`             | ![script js validaton screenshot on js hint](documentation/validation-images/js/jshint-scriptjs.png)                           | Three warnings about functions declared in loops leading to confusing syntax. I reviewed and I feel the syntax is not difficult to comprehend.                                                       |
+| `stepperForm.js`        | ![stepper form js validaton screenshot on js hint](documentation/validation-images/js/jshint-stepperjs.png)                    | One warning about a function declared in a loop and one warning about refering outer variables. I reviewed and I feel the syntax is not difficult to comprehend.                                     |
+| `fromValidation.js`     | ![form validation js validaton screenshot on js hint](documentation/validation-images/js/jshint-formvalidationjs.png)          | Warning about confusing linebreak before `?` being confusing, but I think it makes it easier to read. Also warning about unused HTMLSpanElement, but that is just used to typechecking.              |
+| `techSelector.js`       | ![tech selector js validaton screenshot on js hint](documentation/validation-images/js/jshint-techselectorjs.png)              | Warning about confusing linebreak before `?` being confusing, but I think it makes it easier to read. A expected assignment, but got an expression - I am using this to toggle a class on an element |
+| `searchtechselector.js` | ![search tech selector js validaton screenshot on js hint](documentation/validation-images/js/jshint-searchtechselectorjs.png) | Same as warnings `techselector.js`                                                                                                                                                                   |
+
+### Python and Django (Pep 8)
+
+## Performance
+
+I used the Google Chrome Lighthouse tool to test the performance of my app.
+
+## Manual Testing
+
+I carried out manual testing according to my user stories. I carried the tests out on Google Chrome, Mozilla Firefox and Safari on Macbook.
+
+| User story - As a user, I can...                                                                                                         | Notes                                    | Chrome | Firefox | Safari |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------ | ------- | ------ |
+| **create an account** so that I can **have my preferences saved**.                                                                       | Creates a recruiter or tech user profile | Pass   | Pass    | Pass   |
+| **update my personal details** so that I can **ensure my data is accurate and displayed correctly**.                                     |
+| **delete my account** so that I can **have peace of mind that my data is no longer being retained unncessarily**.                        |
+| **sign up as a tech user or a recruiter** so that I can **use the platform based on my role**.                                           |
+| **log out of my account** so that I can **feel secure when not using my account**.                                                       |
+| **choose update by account preferences** so that I can **have more control into how my profile is view and what information is shared**. |
+| **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**.                        |
 
 ## Automated Testing
 
