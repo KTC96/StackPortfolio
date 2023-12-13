@@ -108,7 +108,7 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             context['tech_profile_form'] = TechUserProfileEditForm(
                 instance=self.object.tech_profile
             )
-            context['job_post_work_location_type_ids'] = (
+            context['work_location_type_ids'] = (
                 self.object.tech_profile.work_location_type.values_list(
                     'id', flat=True))
         elif hasattr(self.object, 'recruiter_profile'):
