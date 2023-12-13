@@ -38,7 +38,7 @@
         <div class="slide relative hidden">
           {% comment %} Alt tag is blank as images are decorative {% endcomment %}
           <img class="w-full h-[300px] lg:h-[400px] object-cover" src="{{ project.image.url | replace:"http|https" }}"
-            alt="">
+            alt="" {% if forloop.counter != 1 %}loading="lazy" {% endif %}>
           <div class="absolute bottom-0 w-full px-5 py-3 bg-black/80 text-center text-white">
             {{ project.name }} - {{ project.user.username }}
           </div>
@@ -48,11 +48,12 @@
 
       {% comment %} Previous button {% endcomment %}
       <button class=" carousel-prev absolute left-0 lg:text-2xl top-1/2 p-5 -translate-y-1/2 bg-secondary/50
-        hover:bg-primary/80 text-white hover:text-white cursor-pointer">❮</button>
+        hover:bg-primary/80 text-white hover:text-white cursor-pointer" aria-label="Previous project">❮</button>
 
       {% comment %} Next button {% endcomment %}
       <button
-        class="carousel-next absolute right-0 lg:text-2xl top-1/2 p-5 -translate-y-1/2 bg-secondary/50 hover:bg-primary/80 text-white hover:text-white cursor-pointer">
+        class="carousel-next absolute right-0 lg:text-2xl top-1/2 p-5 -translate-y-1/2 bg-secondary/50 hover:bg-primary/80 text-white hover:text-white cursor-pointer"
+        aria-label="Next project">
         ❯
       </button>
     </div>
