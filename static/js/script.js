@@ -176,7 +176,7 @@ const runSlider = () => {
   }
 
   dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => currentSlide(index + 1));
+    dot.parentElement.addEventListener("click", () => currentSlide(index + 1));
   });
 
   function moveSlide(moveStep) {

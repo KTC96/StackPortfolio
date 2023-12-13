@@ -47,12 +47,12 @@
       {% endfor %}
 
       {% comment %} Previous button {% endcomment %}
-      <button class=" carousel-prev absolute left-0 lg:text-2xl top-1/2 p-4 -translate-y-1/2 bg-secondary/50
+      <button class=" carousel-prev absolute left-0 lg:text-2xl top-1/2 p-5 -translate-y-1/2 bg-secondary/50
         hover:bg-primary/80 text-white hover:text-white cursor-pointer">❮</button>
 
       {% comment %} Next button {% endcomment %}
       <button
-        class="carousel-next absolute right-0 lg:text-2xl top-1/2 p-4 -translate-y-1/2 bg-secondary/50 hover:bg-primary/80 text-white hover:text-white cursor-pointer">
+        class="carousel-next absolute right-0 lg:text-2xl top-1/2 p-5 -translate-y-1/2 bg-secondary/50 hover:bg-primary/80 text-white hover:text-white cursor-pointer">
         ❯
       </button>
     </div>
@@ -60,8 +60,8 @@
     {% comment %} Dots {% endcomment %}
     <div class="flex justify-center items-center space-x-3 py-5 px-2">
       {% for project in randomProjects %}
-      <button class="dot w-4 h-4 rounded-full cursor-pointer bg-secondary" data-slide="{{ forloop.counter }}"
-        aria-label="Switches to slide {{forloop.counter}}"></button>
+      <button class="p-4" data-slide="{{ forloop.counter }}" aria-label="Switches to slide {{forloop.counter}}"><span
+          class="dot block w-4 h-4 rounded-full cursor-pointer bg-secondary"></span></button>
       {% endfor %}
     </div>
 
