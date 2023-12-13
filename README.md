@@ -289,6 +289,171 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 
 </details>
 
+### Site Features
+
+The site has a number of standard features, plus some which are specific features that are important for the site's purpose. Here is a list of the features on the site, along with screenshots:
+
+- **Header**
+  - The header is a standard header and is responsive so that the menu is collapsed into a hamburger toggle on mobile. I would also like to make this a sticky header in future, but I haven't implemented that yet.
+
+![Header](./documentation/features/header.png)
+
+- **Hompeage hero section**
+  - The hero section provides a tagline for the site and a sign up call-to-action button and link for developers and recruiters. When logged in, the links change so that it redirects the user to their profile instead.
+
+![Homepage hero section](./documentation/features/hero-section.png)
+
+- **Homepage featured projects slider**
+  - The featured slider selects 6 projects randomly and displays them on the homepage. The user can go through the projects and click on the project to go to the project page. There is also a call-to-action button for the user to go to the projects list page.
+
+![Homepage featured projects slider](./documentation/features/featured-projects-slider.png)
+
+- **Footer**
+  - The final footer is much more minimalistic than my original wireframe. I decided to not add anything that would distract from the primary purpose of the site. I only have one column of links, which lead to the **About** and **Careers** pages. The **Careers** page is a placeholder for now, but I plan to add a page that lists the current job openings at StackPortfol.io. It currerently still allows for the user to email `contact@stackportfol.io` so that expression of interest can be received. In future, I plan to add more items to the footer.
+
+![Footer](./documentation/features/footer.png)
+
+- **Account type**
+  - The Account type page allows the user to choose whether they are signing up as a tech user or a recruiter. Tech users can also sign up using GitHub, but recruiters may only sign up using the standard form.
+
+![Signup type](./documentation/features/signup-type.png)
+
+- **Tech signup - Details**
+  - The tech signup form is for tech users (developer, testers, etc.) to sign up. The details page collects the user's first name, last name, username, email and password. The username and email must be unique - I validate this serverside, so it doesn't do any async call to check if the user already exists, but I hope to add that in the future. This page asks for the same details on the recruiter signup form.
+
+![Tech signup - Details](./documentation/features/tech-user-signup-details.png)
+
+- **Tech signup - Profile**
+  - The profile page collects the user's profile image, bio, location, and website. The user can leave any of these details blank and still complete the signup. This step differs from a recruiter signup as it also asks for a GitHub username, their work location preference and if the user is currently looking for work.
+
+![Tech signup - Profile](./documentation/features/tech-user-signup-profile.png)
+
+- **Tech signup - Summary**
+  - The summary page shows the user a summary of the details they have entered. The user can go back to the previous pages to edit the details if they wish. The user can also submit the form to create their account.
+
+![Tech signup - Summary](./documentation/features/signup-summary.png)
+
+- **Recruiter signup**
+  - The recruiter signup is pretty similar to the tech user signup, but it doesn't have as many profile fields. For this reason, this is screenshot is just to show the fact there is a different form.
+
+![Recruiter signup](./documentation/features/recruiter-signup.png)
+
+- **Form validation**
+  - There is frontend validation on forms that require it. In this example, I am using the signup form, but other forms on the site also have validation. The validation is also done serverside, so that if the user bypasses the frontend validation, the form will still be validated.
+
+![Form validation](./documentation/features/form-validation.png)
+
+- **Sign in page**
+  - The sign in page allows the user to sign in using their username or email and password. The user can also click on the link to go to the sign up page. If it is a tech user, they can also use GitHub to log in. If the email is already in use, it will associate that GitHub account with the existing account. If it doesn't exist, it will create a new account and use the GitHub credentials.
+
+![Sign in page](./documentation/features/sign-in-page.png)
+
+- **User Search**
+  - The search page allows the user to search using a query, which searches the user's name. The user can also filter users by their tech skills, whether they have the tech listed or if they have the specific combination of tech queried.
+
+![User Search](./documentation/features/user-search.png)
+
+- **Project Search**
+  - The project search searches projects by their titles or descriptions. Like with the user search, the user can also filter by tech skills. Only active projects are shown in the search results.
+
+![Project Search](./documentation/features/projects-search.png)
+
+- **Job Post Search**
+  - Like the project search, job posts are searched by title or description. The user can also filter by tech skills, but in this case, it will be the required tech skills. Only active job posts are shown in the search results.
+
+![Job Post Search](./documentation/features/job-post-search.png)
+
+- **Search include tech**
+  - The include tech functionality allows users to search for any user, project or job post, which contain any of the tech listed.
+
+![Search include tech](./documentation/features/search-include-tech.png)
+
+- **Search match tech**
+  - The match tech functionality allows users to search for any user, project or job post, which contain all of the tech listed.
+
+![Search match tech](./documentation/features/search-match-tech.png)
+
+- **Project list**
+  - The project list page shows all the projects on the site, with the most recent project shown first. The project page is also paginated so that a max of 12 projects are shown for performance reasons. The user can click on the project to go to the project's detail page.
+
+![Project list](./documentation/features/projects-list.png)
+
+- **Project detail**
+  - The project detail page shows the project's details, including the project's title, description, tech and creator. If the user is the creator of the project, they can also edit or delete the project.
+
+![Project detail](./documentation/features/project-detail-page.png)
+
+- **Job Posts list**
+  - Like the projects list, the jobs list shows all the jobs on the site, with the most recent job shown first. The jobs are also paginated so that a max of 12 jobs are shown for performance reasons. The user can click on the job to go to the job's detail page.
+
+![Jobs list](./documentation/features/job-posts-list.png)
+
+- **Job detail**
+  - The job detail page shows the job's details, including the job's title, description, tech and creator. If the user is the creator of the job, they can also edit or delete the job. The job detail page also has a side panel with the poster's details, so they can easily be found or contacted. Job posts can only be posted by users with a recruiter profile, but for the sake of demonstration, my user has both a tech and recruiter profile. For this reason, the poster details in the screenshot has my tech user details, but this would normally be a recruiter's details.
+
+![Job detail](./documentation/features/job-post-detail-page.png)
+
+- **Tech user profile**
+  - The tech user profile shows the user's details, including their profile image, bio, location, website, GitHub username, work location preference and if they are looking for work. We can also see the user's projects and the tech that they have listed on their profile. If the user is the owner of the profile, they can also edit or delete the profile. The "Add project" button will also only show for the profile owner. To edit the account settings (such as the email or username), the user must access it from the dropdown menu.
+
+![Tech user profile](./documentation/features/tech-user-profile.png)
+
+- **Recruiter user profile**
+  - The recruiter user profile shows the user's details, including their profile image, bio, location and company. We can also see the user's job posts. If the user is the owner of the profile, they can also edit or delete the profile. The "Add job post" button will also only show for the profile owner.
+
+![Recruiter user profile](./documentation/features/recruiter-user-profile.png)
+
+- **Edit profile**
+  - If the user owns a profile, they can access the **Edit profile** page. This page contains the optional details of the profile, such as profile image, location or telephone number.
+
+![Edit profile](./documentation/features/edit-profile.png)
+
+- **Edit account settings**
+  - The account settings page allows the user to change their username, email or name. The user currently cannot update their password, but it is a feature that will be added in the future. When the username is updated, it also updates the user's profile URL (slug).
+
+![Edit account settings](./documentation/features/account-settings-edit.png)
+
+- **Confirmation modal**
+  - When a user opts to delete their profile, project or job post, there is a modal popup to confirm that they want to delete the item. This is to prevent accidental deletion. Since this also causes a casade deletion of projects or job posts, I would also like to include more information on the reprecussions in the future.
+
+![Confirmation modal](./documentation/features/confirmation-modal.png)
+
+- **Create Project Form**
+  - The create project form is only accessible to users with a tech user profile. They can add the project's title, description, the deployed link, the GitHub repo link, featured image and any tech used on the project. They can also either set it to active or draft. If it is set to draft, it will not be shown on the project list or search.
+
+![Create Project Form](./documentation/features/create-project-form.png)
+
+- **Edit Project Form**
+  - The edit project form is only accessible to users with a tech user profile. They can update the same details as the create project form, but also have the current featured image displayed. They can either clear or update the featured image.
+
+![Edit Project Form](./documentation/features/project-edit.png)
+
+- **Inactive project**
+
+  - If a job post or project is set to inactive, it will not show up on the search or project list. However, if a user owns the project or job post, they will see it listed with an "Inactive" badge. This way, they can still access it to edit or delete it.
+
+![Inactive project](./documentation/features/inactive-project.png)
+
+- **Associated tech**
+  - On projects and job posts, the user can add the associated tech. The tech can be added the name and then clicking on the dropdown, or by pressing enter. If the tech is already approved on the backend, the tech badge shows up with the site's primary colour. If is not approved, it will still be added, but show up with the site's secondary colour and have a tooltip showing that it is pending admin approval. Approved tech that is added to a project is automatically added to a user's profile. The user can also remove the tech by clicking on the tech.
+
+![Associated tech](./documentation/features/associated-tech.png)
+
+- **Create Job Post Form**
+  - The create job post form is only accessible to users with a recruiter user profile. They can add the job's title, description, the job's location type, the job's salary range, the location work type, the job's tech requirements and the company. They can also either set it to active or draft. If it is set to draft, it will not be shown on the job list or search.
+
+![Create Job Post Form](./documentation/features/create-job-post-form.png)
+
+- **Edit Job Post Form**
+  - The edit job post form is only accessible to users with a recruiter user profile. They can update the same details as the create job post form.
+
+![Edit Job Post Form](./documentation/features/edit-job-post.png)
+
+- **Domain and SSL**
+  - The site is hosted on Render, which provides a free SSL certificate. The site is also hosted on a custom domain, which is `https://stackportfol.io`.
+
+![Domain and SSL](./documentation/features/domain-and-ssl.png)
+
 ### User flowchart
 
 The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
@@ -393,3 +558,7 @@ Known bugs:
 
 1. When the page refreshes on the signup page, the fields are not autofilled.
 2. When the page refreshes or form submits on the project or job post create or edit forms, the tech that was added before submission is not re-added.
+3. Some fields are missing from the signup summary, e.g. the country and the toggle values.
+4. On the search page, unknown tech is not shown in the results, and the tech is removed from the search query. I need to handle unknown tech in the future.
+5. Project detail page and job post page can still be accessed when set to draft.
+6. Project slugs are not updated when the user updates the project title.
