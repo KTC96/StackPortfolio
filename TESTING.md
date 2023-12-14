@@ -89,7 +89,71 @@ I used [JSHint](https://jshint.com/) to validate my JavaScript code. Here is a t
 
 ## Performance
 
-I used the Google Chrome Lighthouse tool to test the performance of my app.
+I used the Google Chrome Lighthouse tool to test the performance of my app. On both mobile and desktop, there were some common issues that I want to address here. These issues are largely related to Tailwind and Images, which I will be addressing in future. It was expected that I would have issues with user-provided images as I had less control over the size and format they provided. In the below table, I call these "standard issues":
+
+1. `Eliminate render-blocking resources`, `Reduce initial server response time`, `Reduce unused CSS` and `Minify CSS` - These warnings are all related to the use of Tailwind on this project. Since this is my first project with Tailwind, I came up against some issues that I hadn't anticipated. One issue of these is that Tailwind does not add a class to the `tailwind.css` file if it is dynamically rendered or if it is "injected" from the `form.py` file. For this reason, I had to force-add some of the Tailwind classes so that the site appears as expected. This leads to a largeer CSS file, which is why I am getting these warnings. I am not too concerned about this, as I am using Tailwind for the first time and I am still learning how to use it. I will be able to optimise this further in the future, and apply another approach I learned on the project where I am able to use `widget_tweaks` to add the classes in the template file instead of the `forms.py` file. I also do not currently have a way to minify the CSS on the fly, which means the file being used in unminified. In the future, I will be adding a minification step to the deployment process.
+
+2. `Largest Contentful Paint element` and `Properly size images` - These warnings are related to the images on the site. While I have been able to convert images to Webp, I did not have time to resize all the images so that the correct size is being used. I would like to do this in the future, but I am also considering changing from Cloudinary to AWS, so this is something that I will address in the future.
+
+3. `Serve static assets with an efficient cache policy` - This warning is related to the fact that I am using Cloudinary to serve my static assets. This is handled by Cloudinary and I don't currently know how to change this. I will be looking into this in the future.
+
+4. `Elements with visible text labels do not have matching accessible names.` - I get this error for accessibility for any of my cards with images and an `aria-label`. The error indicates that screen readers will have a confusing experience as the aria label does not match the inner text. However, I tested this with a screen reader and it works as expected, and even provides a better experience than if there were no aria label.
+
+5. `Issues were logged in the Issues panel in Chrome Devtools` - This is a warning regarding the [phasing out of third-party cookies](https://developers.google.com/privacy-sandbox/3pcd). I will not be addressing this as a part of this project's sprints, but I will be looking into this in the future.
+
+6. `Image elements do not have explicit width and height` - This is due to some issues with responsiveness, but I will be addressing these in the future. I understand this is good to have to prevent Cumulative Layout Shift (CLS).
+
+7. `Heading elements are not in a sequentially-descending order` is occurring on pages where there are no h2s, but there are always h3s in the footer.
+
+Here are the results:
+
+### Mobile performance
+
+| Page URL                                                                                       | Lighthouse Screenshot                                                                                          | Comments               |
+| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [Homepage mobile](https://stackportfol.io)                                                     | ![homepage lighthouse screenshot](documentation/performance/mobile-homepage.png)                               | Pass - Standard issues |
+| [Projects List mobile](https://stackportfol.io/projects)                                       | ![projects lighthouse screenshot](documentation/performance/mobile-projects-list.png)                          | Pass - Standard issues |
+| [Project Detail mobile](https://www.stackportfol.io/user/stephendawson/project/stackportfolio) | ![project lighthouse screenshot](documentation/performance/mobile-project-detail.png)                          | Pass - Standard issues |
+| [Jobs List mobile](https://stackportfol.io/jobs)                                               | ![jobs lighthouse screenshot](documentation/performance/mobile-job-post-list.png)                              | Pass - Standard issues |
+| [Job Detail mobile](https://www.stackportfol.io/user/stephendawson/job/2/)                     | ![job lighthouse screenshot](documentation/performance/mobile-job-post-detail.png)                             | Pass - Standard issues |
+| [Search page](https://www.stackportfol.io/search/?q=project)                                   | ![search lighthouse screenshot](documentation/performance/mobile-search.png)                                   | Pass - Standard issues |
+| [Account type](https://www.stackportfol.io/accounts/signup/)                                   | ![account type lighthouse screenshot](documentation/performance/mobile-account-type.png)                       | Pass - Standard issues |
+| [Tech Signup](https://www.stackportfol.io/accounts/signup/tech/)                               | ![tech signup lighthouse screenshot](documentation/performance/mobile-signup-tech.png)                         | Pass - Standard issues |
+| [Recruiter Signup](https://www.stackportfol.io/accounts/signup/recruiter/)                     | ![recruiter signup lighthouse screenshot](documentation/performance/mobile-signup-recruiter.png)               | Pass - Standard issues |
+| [Signin](https://www.stackportfol.io/accounts/login/)                                          | ![signin lighthouse screenshot](documentation/performance/mobile-signin.png)                                   | Pass - Standard issues |
+| [Profile page](https://www.stackportfol.io/user/stephendawson/)                                | ![profile lighthouse screenshot](documentation/performance/mobile-profile-page.png)                            | Pass - Standard issues |
+| [Profile Edit Form](https://www.stackportfol.io/user/stephendawson/edit/)                      | ![profile edit lighthouse screenshot](documentation/performance/mobile-profile-edit-form.png)                  | Pass - Standard issues |
+| [Account Settings Edit Form](https://www.stackportfol.io/user/stephendawson/settings/)         | ![account settings edit lighthouse screenshot](documentation/performance/mobile-account-details-edit-form.png) | Pass - Standard issues |
+| [Create Project](https://www.stackportfol.io/user/stephendawson/project/create)                | ![create project lighthouse screenshot](documentation/performance/mobile-create-project.png)                   | Pass - Standard issues |
+| [Edit Project](https://www.stackportfol.io/user/stephendawson/project/stackportfolio/edit/)    | ![edit project lighthouse screenshot](documentation/performance/mobile-edit-project.png)                       | Pass - Standard issues |
+| [Create Job Post](https://www.stackportfol.io/user/stephendawson/job/create)                   | ![create job post lighthouse screenshot](documentation/performance/mobile-create-job-post.png)                 | Pass - Standard issues |
+| [Edit Job Post](https://www.stackportfol.io/user/stephendawson/job/2/edit/)                    | ![edit job post lighthouse screenshot](documentation/performance/mobile-edit-job-post.png)                     | Pass - Standard issues |
+| [About page](https://www.stackportfol.io/about/)                                               | ![about lighthouse screenshot](documentation/performance/mobile-about.png)                                     | Pass - Standard issues |
+| [Careers page](https://www.stackportfol.io/careers/)                                           | ![careers lighthouse screenshot](documentation/performance/mobile-careers.png)                                 | Pass - Standard issues |
+
+### Desktop performance
+
+| Page URL                                                                                        | Lighthouse Screenshot                                                                                           | Comments               |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [Homepage desktop](https://stackportfol.io)                                                     | ![homepage lighthouse screenshot](documentation/performance/desktop-homepage.png)                               | Pass - Standard issues |
+| [Projects List desktop](https://stackportfol.io/projects)                                       | ![projects lighthouse screenshot](documentation/performance/desktop-projects-list.png)                          | Pass - Standard issues |
+| [Project Detail desktop](https://www.stackportfol.io/user/stephendawson/project/stackportfolio) | ![project lighthouse screenshot](documentation/performance/desktop-project-detail.png)                          | Pass - Standard issues |
+| [Jobs List desktop](https://stackportfol.io/jobs)                                               | ![jobs lighthouse screenshot](documentation/performance/desktop-job-post-list.png)                              | Pass - Standard issues |
+| [Job Detail desktop](https://www.stackportfol.io/user/stephendawson/job/2/)                     | ![job lighthouse screenshot](documentation/performance/desktop-job-post-detail.png)                             | Pass - Standard issues |
+| [Search page](https://www.stackportfol.io/search/?q=project)                                    | ![search lighthouse screenshot](documentation/performance/desktop-search.png)                                   | Pass - Standard issues |
+| [Account type](https://www.stackportfol.io/accounts/signup/)                                    | ![account type lighthouse screenshot](documentation/performance/desktop-account-type.png)                       | Pass - Standard issues |
+| [Tech Signup](https://www.stackportfol.io/accounts/signup/tech/)                                | ![tech signup lighthouse screenshot](documentation/performance/desktop-signup-tech.png)                         | Pass - Standard issues |
+| [Recruiter Signup](https://www.stackportfol.io/accounts/signup/recruiter/)                      | ![recruiter signup lighthouse screenshot](documentation/performance/desktop-signup-recruiter.png)               | Pass - Standard issues |
+| [Signin](https://www.stackportfol.io/accounts/login/)                                           | ![signin lighthouse screenshot](documentation/performance/desktop-signin.png)                                   | Pass - Standard issues |
+| [Profile page](https://www.stackportfol.io/user/stephendawson/)                                 | ![profile lighthouse screenshot](documentation/performance/desktop-profile-page.png)                            | Pass - Standard issues |
+| [Profile Edit Form](https://www.stackportfol.io/user/stephendawson/edit/)                       | ![profile edit lighthouse screenshot](documentation/performance/desktop-profile-edit-form.png)                  | Pass - Standard issues |
+| [Account Settings Edit Form](https://www.stackportfol.io/user/stephendawson/settings/)          | ![account settings edit lighthouse screenshot](documentation/performance/desktop-account-details-edit-form.png) | Pass - Standard issues |
+| [Create Project](https://www.stackportfol.io/user/stephendawson/project/create)                 | ![create project lighthouse screenshot](documentation/performance/desktop-create-project.png)                   | Pass - Standard issues |
+| [Edit Project](https://www.stackportfol.io/user/stephendawson/project/stackportfolio/edit/)     | ![edit project lighthouse screenshot](documentation/performance/desktop-edit-project.png)                       | Pass - Standard issues |
+| [Create Job Post](https://www.stackportfol.io/user/stephendawson/job/create)                    | ![create job post lighthouse screenshot](documentation/performance/desktop-create-job-post.png)                 | Pass - Standard issues |
+| [Edit Job Post](https://www.stackportfol.io/user/stephendawson/job/2/edit/)                     | ![edit job post lighthouse screenshot](documentation/performance/desktop-edit-job-post.png)                     | Pass - Standard issues |
+| [About page](https://www.stackportfol.io/about/)                                                | ![about lighthouse screenshot](documentation/performance/desktop-about.png)                                     | Pass - Standard issues |
+| [Careers page](https://www.stackportfol.io/careers/)                                            | ![careers lighthouse screenshot](documentation/performance/desktop-careers.png)                                 | Pass - Standard issues |
 
 ## Manual Testing
 
