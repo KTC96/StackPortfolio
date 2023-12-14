@@ -374,7 +374,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Search match tech](./documentation/features/search-match-tech.png)
 
 - **Project list**
-  - The project list page shows all the projects on the site, with the most recent project shown first. The project page is also paginated so that a max of 12 projects are shown for performance reasons. The user can click on the project to go to the project's detail page.
+  - The project list page shows all the projects on the site, with the most recent project shown first. The project page is also paginated so that a max of 9 projects are shown for performance reasons. The user can click on the project to go to the project's detail page.
 
 ![Project list](./documentation/features/projects-list.png)
 
@@ -384,7 +384,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Project detail](./documentation/features/project-detail-page.png)
 
 - **Job Posts list**
-  - Like the projects list, the jobs list shows all the jobs on the site, with the most recent job shown first. The jobs are also paginated so that a max of 12 jobs are shown for performance reasons. The user can click on the job to go to the job's detail page.
+  - Like the projects list, the jobs list shows all the jobs on the site, with the most recent job shown first. The jobs are also paginated so that a max of 9 jobs are shown for performance reasons. The user can click on the job to go to the job's detail page.
 
 ![Jobs list](./documentation/features/job-posts-list.png)
 
@@ -562,3 +562,4 @@ Known bugs:
 4. On the search page, unknown tech is not shown in the results, and the tech is removed from the search query. I need to handle unknown tech in the future.
 5. Project detail page and job post page can still be accessed when set to draft.
 6. Project slugs are not updated when the user updates the project title.
+7. Issue in console about the [phasing out of third-party cookies](https://developers.google.com/privacy-sandbox/3pcd#report-issues) - will not address in this project's sprints, but will address later on.
