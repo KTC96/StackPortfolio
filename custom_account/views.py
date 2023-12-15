@@ -134,14 +134,17 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             else:
                 old_image_public_id = current_profile.profile_image.public_id
 
+        image_updated = False
         # Process new image upload
         if 'profile_image' in form.changed_data:
             new_image = form.cleaned_data['profile_image']
             if new_image:
                 new_image_url, new_public_id = upload_to_cloudinary(new_image)
                 self.object.profile_image = new_image_url
+                image_updated = True
             else:
                 self.object.profile_image = None
+                image_updated = True
 
         # Save the form and the model
         response = super(UserProfileEditView, self).form_valid(form)
@@ -158,7 +161,7 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
             if recruiter_profile_form.is_valid():
                 recruiter_profile_form.save()
 
-        if old_image_public_id:
+        if image_updated and old_image_public_id:
             current_public_id = None
             if hasattr(self.object.profile_image, 'public_id'):
                 current_public_id = self.object.profile_image.public_id

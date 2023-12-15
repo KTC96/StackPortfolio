@@ -192,14 +192,21 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
             else:
                 old_image_public_id = current_project.image.public_id
 
+        image_updated = False
         new_image = form.cleaned_data.get('image')
         if new_image and hasattr(new_image, 'file'):
             # Upload the new image to Cloudinary and get the URL
             new_image_url, _ = upload_project_to_cloudinary(new_image)
             self.object.image = new_image_url
+            image_updated = True
         elif 'image-clear' in self.request.POST:
             # Clear the image if 'clear' checkbox is ticked
             self.object.image = None
+            image_updated = True
+        else:
+            # No image was uploaded, so keep the old image
+            self.object.image = current_project.image
+            image_updated = False
 
         project = form.save(commit=False)
         project.user = self.request.user
@@ -224,7 +231,7 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
 
         # Delete old image from Cloudinary
         new_public_id = getattr(self.object.image, 'public_id', None)
-        if old_image_public_id and old_image_public_id != new_public_id:
+        if image_updated and old_image_public_id and old_image_public_id != new_public_id:
             try:
                 cloudinary.uploader.destroy(
                     old_image_public_id, invalidate=True)
