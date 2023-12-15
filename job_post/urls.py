@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import JobPostDetailView, JobPostCreateView, JobPostEditView, delete_job_post
+from .views import (JobPostDetailView,
+                    JobPostCreateView,
+                    JobPostEditView,
+                    delete_job_post
+                    )
 
 app_name = 'job_post'
 

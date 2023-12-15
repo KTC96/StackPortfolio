@@ -57,7 +57,10 @@ class CustomUserForm(SignupForm):
         help_text='Email will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
+                'class': """
+                toggle toggle-secondary
+                checked:bg-primary mt-3 lg:mt-0 w-50'
+                """
             }))
     username = (
         forms.CharField(
@@ -84,7 +87,6 @@ class CustomUserForm(SignupForm):
                 attrs={
                     'placeholder': '',
                     'class': 'input input-bordered input-secondary w-full',
-                    'pattern': '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$',
                 })))
 
     password2 = (
@@ -98,7 +100,6 @@ class CustomUserForm(SignupForm):
                 attrs={
                     'placeholder': '',
                     'class': 'input input-bordered input-secondary w-full',
-                    'pattern': '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$',
                 })))
 
     town_city = forms.CharField(
@@ -119,7 +120,9 @@ class CustomUserForm(SignupForm):
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                """,
             }))
 
     country = forms.CharField(
@@ -166,7 +169,9 @@ class CustomUserForm(SignupForm):
         label='Display Phone Number',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                    toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                    """,
             }))
 
     profile_image = forms.ImageField(
@@ -310,7 +315,9 @@ class TechUserForm(CustomUserForm):
         label='Seeking Employment',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                    toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                    """,
             }))
 
     work_location_type = forms.MultipleChoiceField(
@@ -370,7 +377,9 @@ class CustomUserEditForm(forms.ModelForm):
         help_text='Email will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
+                'class': """
+                toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50
+                """,
             }))
 
     town_city = forms.CharField(
@@ -390,7 +399,9 @@ class CustomUserEditForm(forms.ModelForm):
         help_text='Town/City will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                    toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                    """,
             }))
     country = forms.CharField(
         max_length=60,
@@ -434,7 +445,9 @@ class CustomUserEditForm(forms.ModelForm):
         label='Display Phone Number',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                    toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                    """,
             }))
 
     profile_image = forms.ImageField(
@@ -597,7 +610,9 @@ class UserSettingsForm(forms.ModelForm):
         help_text='Email will be displayed on your profile',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50',
+                'class': """
+                toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0 w-50
+                """,
             }))
 
     class Meta:
@@ -637,7 +652,9 @@ class TechUserProfileEditForm(forms.ModelForm):
         help_text='Are you currently seeking a new role?',
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0',
+                'class': """
+                    toggle toggle-secondary checked:bg-primary mt-3 lg:mt-0
+                    """,
             }))
 
     work_location_type = forms.MultipleChoiceField(

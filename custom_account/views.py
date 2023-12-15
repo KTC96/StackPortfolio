@@ -127,8 +127,10 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
         if hasattr(current_profile.profile_image, 'public_id'):
             if ("http://res.cloudinary.com/nvmind/image/upload/" in
                     current_profile.profile_image.public_id):
-                old_image_public_id = current_profile.profile_image.public_id.split(
-                    '/')[-1]
+                old_image_public_id = (
+                    current_profile.profile_image.public_id.split(
+                        '/')[-1]
+                )
             else:
                 old_image_public_id = current_profile.profile_image.public_id
 

@@ -55,7 +55,8 @@ class SearchResultsView(ListView):
             ).filter(active=True)
         else:
             queryset = CustomUser.objects.filter(
-                Q(first_name__icontains=query) | Q(last_name__icontains=query) |
+                Q(first_name__icontains=query) |
+                Q(last_name__icontains=query) |
                 Q(email__icontains=query) | Q(bio__icontains=query)
             ).filter(is_active=True)
 

@@ -35,8 +35,9 @@ class JobPostDetailView(DetailView):
         Add additional context to the template.
         """
         context = super().get_context_data(**kwargs)
-        context['selected_work_location_type'] = self.object.work_location_type.all(
-        )[0]
+        context['selected_work_location_type'] = (
+            self.object.work_location_type.all(
+            )[0])
         return context
 
 
@@ -72,7 +73,8 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
         is the same as the user in the url.
         If not, redirect to the account login page.
         """
-        if request.user.is_authenticated and request.user.slug == self.kwargs['slug']:
+        if (request.user.is_authenticated and
+                request.user.slug == self.kwargs['slug']):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('account_login')
@@ -182,8 +184,9 @@ class JobPostEditView(LoginRequiredMixin, UpdateView):
         context['all_technologies'] = Tech.objects.all().filter(
             is_approved=True)
         context['job_post_technologies'] = self.object.technologies.all()
-        context['job_post_work_location_type_ids'] = self.object.work_location_type.values_list(
-            'id', flat=True)
+        context['job_post_work_location_type_ids'] = (
+            self.object.work_location_type.values_list(
+                'id', flat=True))
 
         return context
 

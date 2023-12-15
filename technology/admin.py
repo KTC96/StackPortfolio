@@ -25,11 +25,15 @@ class TechAdmin(admin.ModelAdmin):
             tech.tech_name = tech.tech_name.upper()
             tech.save()
 
-    uppercase_tech_name.short_description = 'Uppercase tech names of selected technologies'
+    uppercase_tech_name.short_description = (
+        'Uppercase tech names of selected technologies'
+    )
 
     def capitalise_tech_name(self, request, queryset):
         for tech in queryset:
             tech.tech_name = tech.tech_name.capitalize()
             tech.save()
 
-    capitalise_tech_name.short_description = 'Capitalise tech names of selected technologies'
+    capitalise_tech_name.short_description = (
+        'Capitalise tech names of selected technologies'
+    )

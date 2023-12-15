@@ -32,4 +32,7 @@ def update_user_tech_on_project_delete(sender, instance, **kwargs):
             print(f"Deleted image for project: {instance.name}")
         except Exception as e:
             print(
-                f"Error deleting image from Cloudinary for project {instance.name}: {e}")
+                f"""
+                Error deleting image from Cloudinary for project: {e}
+                """
+            )
