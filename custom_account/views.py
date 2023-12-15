@@ -266,7 +266,11 @@ def delete_user(request, slug):
         return redirect(reverse('homepage'))
 
     messages.error(request, "You cannot delete this profile.")
-    return redirect(reverse('custom_account:user_profile', kwargs={'slug': slug}))
+    return redirect(
+        reverse(
+            'custom_account:user_profile',
+            kwargs={
+                'slug': slug}))
 
 
 class AccountTypeView(TemplateView):

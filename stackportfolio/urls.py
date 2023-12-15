@@ -22,15 +22,44 @@ from job_post.views import JobPostListView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='homepage'),
-    path('careers/', TemplateView.as_view(template_name="careers.html"), name='careers'),
-    path('about/', TemplateView.as_view(template_name="about_us.html"), name='about'),
-    path('', include('custom_account.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('user/', include('project.urls')),
-    path('user/', include('job_post.urls')),
-    path('search/', include('search_and_filter.urls')),
-    path('projects/', ProjectListView.as_view(), name='view_all_projects'),
-    path('jobs/', JobPostListView.as_view(), name='view_all_job_posts'),
+    path(
+        'admin/',
+        admin.site.urls),
+    path(
+        '',
+        IndexView.as_view(),
+        name='homepage'),
+    path(
+        'careers/',
+        TemplateView.as_view(
+            template_name="careers.html"),
+        name='careers'),
+    path(
+        'about/',
+        TemplateView.as_view(
+            template_name="about_us.html"),
+        name='about'),
+    path(
+        '',
+        include('custom_account.urls')),
+    path(
+        'accounts/',
+        include('allauth.urls')),
+    path(
+        'user/',
+        include('project.urls')),
+    path(
+        'user/',
+        include('job_post.urls')),
+    path(
+        'search/',
+        include('search_and_filter.urls')),
+    path(
+        'projects/',
+        ProjectListView.as_view(),
+        name='view_all_projects'),
+    path(
+        'jobs/',
+        JobPostListView.as_view(),
+        name='view_all_job_posts'),
 ]

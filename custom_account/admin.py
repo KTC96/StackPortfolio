@@ -20,7 +20,9 @@ class UserProfileTypeFilter(admin.SimpleListFilter):
         if self.value() == 'recruiter':
             return queryset.filter(recruiter_profile__isnull=False)
         if self.value() == 'none':
-            return queryset.filter(tech_profile__isnull=True, recruiter_profile__isnull=True)
+            return queryset.filter(
+                tech_profile__isnull=True,
+                recruiter_profile__isnull=True)
         return queryset
 
 

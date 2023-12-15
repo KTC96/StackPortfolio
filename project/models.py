@@ -63,7 +63,7 @@ class Project(models.Model):
 
     def delete(self, *args, **kwargs):
         """
-        Override the delete method to delete the project's image from 
+        Override the delete method to delete the project's image from
         Cloudinary before deleting the project from the database.
         """
         if self.image:
