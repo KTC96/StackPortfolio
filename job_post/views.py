@@ -75,7 +75,12 @@ class JobPostCreateView(LoginRequiredMixin, CreateView):
         """
         if (request.user.is_authenticated and
                 request.user.slug == self.kwargs['slug']):
-            return super().dispatch(request, *args, **kwargs)
+            if hasattr(request.user, 'recruiter_profile'):
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                messages.error(
+                    request, "Only Recruiters can create job posts.")
+                return redirect('account_login')
         else:
             return redirect('account_login')
 
