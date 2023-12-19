@@ -4,7 +4,7 @@
 
 {% if post.active or post.user == user %}
 <div
-  class="sd-card w-full relative {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1">
+  class="sd-card w-full relative {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1 border border-secondary border-opacity-10 rounded">
   {% if not post.active %}<div class="tooltip absolute bottom-5 right-5 z-30"
     data-tip="Inactive {{ type }}s will not show up for other users."><span
       class="badge badge-error text-white py-3 px-5">Inactive</span> </div>{% endif %}
