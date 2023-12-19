@@ -1,14 +1,55 @@
-#  StackPortfol.io
+#  Stackportfol.io
 
-StackPortfol.io is a platform that allows Developers to add showcase their projects and associate them with the skills that they used to create them. Since the skills are linked to projects, Recruiters have peace of mind that the Developers they are contacting have the skills that they say they have.
+You can view the live site at [https://stackportfol.io](https://stackportfol.io).
 
-## Planning Phase
+![Stackportfol.io](./documentation/stackportfolio.png)
+
+Stackportfol.io is a platform that allows Developers to add showcase their projects and associate them with the skills that they used to create them. Since the skills are linked to projects, Recruiters have peace of mind that the Developers they are contacting have the skills that they say they have.
+
+## Table of Contents
+
+- [Planning and Design](#planning-and-design)
+  - [Site objective](#site-objective)
+  - [Opportunities](#opportunities)
+  - [Scope](#scope)
+  - [User stories and Epics](#user-stories-and-epics)
+    - [Account management](#account-management)
+    - [User profiles](#user-profiles)
+    - [Project management](#project-management)
+    - [Job post management](#job-post-management)
+    - [Technology management](#technology-management)
+    - [Miscellaneous](#miscellaneous)
+  - [Wireframes](#wireframes)
+  - [Colours and Fonts](#colours-and-fonts)
+    - [Colours](#colours)
+    - [Fonts](#fonts)
+  - [User flowchart](#user-flowchart)
+- [Development](#development)
+  - [Site Features](#site-features)
+  - [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Deployment](#deployment)
+  - [ElephantSQL Database](#elephantsql-database)
+  - [Cloudinary API](#cloudinary-api)
+  - [Heroku Deployment](#heroku-deployment)
+  - [Local Deployment](#local-deployment)
+    - [Cloning](#cloning)
+    - [Forking](#forking)
+- [Future Features](#future-features)
+- [Testing and Agile Notes](#testing-and-agile-notes)
+  - [Testing](#testing-documentation)
+  - [Agile](#agile-notes)
+- [Technologies used](#technologies-used)
+- [Credits](#credits)
+  - [Resources](#resources-used)
+  - [Acknowledgements](#acknowledgements)
+
+## Planning and Design
 
 ###  Site objective
 
 While Developers can use a site such as LinkedIn to add projects, the architecture is set to to serve the needs of a number of different job functions. Due to the fact that the site us not focused on Developers, the project showcase lacks many features that Developers need. Recruiters who are searching for Developers for role lack the evidence that a Developer has the skills for which they are searching. In many cases, a skill might be added to a professional profile just because someone has heard or watched a video about it.
 
-StackPortfol.io allows Developers to showcase their projects, which then allows Recruiters to find Developers who have proven skills for their job postings. It's a win-win for both parties.
+Stackportfol.io allows Developers to showcase their projects, which then allows Recruiters to find Developers who have proven skills for their job postings. It's a win-win for both parties.
 
 ###  Opportunities
 
@@ -288,9 +329,41 @@ I have created wireframes for the main pages of the site. I have used [Balsamiqu
 
 </details>
 
+### Colours and Fonts
+
+#### Colours
+
+The colours used on the site are:
+
+[#0166ff] (Primary)
+[#333333] (Base text)
+[#fff7ff] (Base background and light text)
+[#eff7ff] (Accent background)
+[#131e32] (Dark background)
+
+Here is a screenshot of the palette from Cooolors:
+
+![Colour palette](./documentation/stackportfolio-palette.png)
+
+#### Fonts
+
+Here is a screenshot of the fonts I intended to use on the site:
+
+![Fonts](./documentation/stackportfolio-fonts.png)
+
+After using Tailwind, I realised that I liked the body font from Tailwind more, so I ended up leaving that instead. The headings still use my originally intended font.
+
+### User flowchart
+
+The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
+
+![User flowchart](./documentation/diagrams/user-flowchart.png)
+
+## Development
+
 ### Site Features
 
-The site has a number of standard features, plus some which are specific features that are important for the site's purpose. Here is a list of the features on the site, along with screenshots:
+The site has a number of standard features, plus some which are specific features that are important for the site's purpose. The site us fully responsive and has been tested on Firefox, Safari and Google Chrome. Here is a list of the features on the site, along with screenshots:
 
 - **Header**
   - The header is a standard header and is responsive so that the menu is collapsed into a hamburger toggle on mobile. I would also like to make this a sticky header in future, but I haven't implemented that yet.
@@ -308,7 +381,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Homepage featured projects slider](./documentation/features/featured-projects-slider.png)
 
 - **Footer**
-  - The final footer is much more minimalistic than my original wireframe. I decided to not add anything that would distract from the primary purpose of the site. I only have one column of links, which lead to the **About** and **Careers** pages. The **Careers** page is a placeholder for now, but I plan to add a page that lists the current job openings at StackPortfol.io. It currerently still allows for the user to email `contact@stackportfol.io` so that expression of interest can be received. In future, I plan to add more items to the footer.
+  - The final footer is much more minimalistic than my original wireframe. I decided to not add anything that would distract from the primary purpose of the site. I only have one column of links, which lead to the **About** and **Careers** pages. The **Careers** page is a placeholder for now, but I plan to add a page that lists the current job openings at Stackportfol.io. It currerently still allows for the user to email `contact@stackportfol.io` so that expression of interest can be received. In future, I plan to add more items to the footer.
 
 ![Footer](./documentation/features/footer.png)
 
@@ -453,12 +526,6 @@ The site has a number of standard features, plus some which are specific feature
 
 ![Domain and SSL](./documentation/features/domain-and-ssl.png)
 
-### User flowchart
-
-The user flowchart was created using [Draw.io](https://app.diagrams.net/). The flowchart shows the different paths that a user can take through the site.
-
-![User flowchart](./documentation/diagrams/user-flowchart.png)
-
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using [Draw.io](https://app.diagrams.net/). The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables. Here is the ERD from my planning:
@@ -483,72 +550,284 @@ Here is the final ERD generated by using Graphviz and Django Extensions:
 
 </details>
 
-## Resources
+### Technologies used
+
+- [Django](https://www.djangoproject.com/)
+  - Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+- [JavaScript](https://www.javascript.com/)
+  - JavaScript is a programming language that adds interactivity to your website.
+- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+  - Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML.
+- [HTML](https://html.spec.whatwg.org/)
+  - HTML is the standard markup language for documents designed to be displayed in a web browser.
+- [Python](https://www.python.org/)
+  - Python is an interpreted, high-level and general-purpose programming language.
+- [PostgreSQL](https://www.postgresql.org/)
+  - PostgreSQL is a powerful, open source object-relational database system.
+- [Cloudinary](https://cloudinary.com/)
+  - Cloudinary is a cloud service that offers a solution to a web application's entire image management pipeline.
+- [Heroku](https://www.heroku.com/)
+  - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+- [Render](https://render.com/)
+  - Render is a cloud platform that makes it easy for developers and teams to deploy and manage their applications and websites.
+- [Tailwind CSS](https://tailwindcss.com/)
+  - Tailwind CSS is a utility-first CSS framework for rapidly building custom user interfaces.
+- [DaisyUI](https://daisyui.com/)
+  - DaisyUI is a component library for Tailwind CSS.
+- [Jest JS](https://jestjs.io/)
+  - Jest is a JavaScript Testing Framework with a focus on simplicity.
+- [UnitTest](https://docs.python.org/3/library/unittest.html)
+  - The unittest comes standard with Python and is a testing framework.
+
+As a way to "dogfood" the project, you can also see the project and it's technologies here: <https://www.stackportfol.io/user/stephendawson/project/stackportfolio>
+
+## Deployment
+
+The live deployed application can be found at [https://stackportfol.io](https://stackportfol.io), which is hosted on **Render**. I chose to host on **Render** as they provide a fully-free tier and a free SSL Certificate. However, the site can also be found at [https://stackportfolio-1340b88e89e7.herokuapp.com/](https://stackportfolio-1340b88e89e7.herokuapp.com/), which is hosted on **Heroku**. For simplicity, I will provide instructions on how to deploy to **Heroku**, since this is what many people are familiar with.
+
+### ElephantSQL Database
+
+This project uses [ElephantSQL](https://www.elephantsql.com) for the PostgreSQL Database. ElephantSQL has previously offered the TinyTurtle plan, but it is being deprecated. In order to use it, you will first need to create an account and select it, but the below steps will be the same.
+
+To obtain your own Postgres Database, sign-up with your GitHub account, then follow these steps:
+
+- Click **Create New Instance** to start a new database.
+- Provide a name (this is commonly the name of the project, e.g. `stackportfolio`).
+- Select the **Tiny Turtle (Free)** plan.
+- You can leave the **Tags** blank.
+- Select the **Region** and **Data Center** closest to you.
+- Once created, click on the new database name, where you can view the database URL and Password.
+
+### Cloudinary API
+
+This project uses the [Cloudinary API](https://cloudinary.com) to store media assets online, due to the fact that Heroku doesn't persist this type of data.
+
+To obtain your own Cloudinary API key, create an account and log in.
+
+- For _Primary interest_, you can choose _Programmable Media for image and video API_.
+- Optional: _edit your assigned cloud name to something more memorable_.
+- On your Cloudinary Dashboard, you can copy your **API Environment Variable**.
+- Be sure to remove the `CLOUDINARY_URL=` as part of the API **value**; this is the **key**.
+
+### Heroku Deployment
+
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+
+Deployment steps are as follows, after account setup:
+
+- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
+- From the new app **Settings**, click **Reveal Config Vars**, and set your environment variables.
+
+| Key                     | Value                                                                |
+| ----------------------- | -------------------------------------------------------------------- |
+| `CLOUDINARY_URL`        | insert your own Cloudinary API key here                              |
+| `DATABASE_URL`          | insert your own ElephantSQL database URL here                        |
+| `DISABLE_COLLECTSTATIC` | 1 (_this is temporary, and can be removed for the final deployment_) |
+| `SECRET_KEY`            | this can be any random secret key                                    |
+
+Heroku needs two additional files in order to deploy properly.
+
+- requirements.txt
+- Procfile
+
+You can install this project's **requirements** (where applicable) using:
+
+- `pip3 install -r requirements.txt`
+
+If you have your own packages that have been installed, then the requirements file needs updated using:
+
+- `pip3 freeze --local > requirements.txt`
+
+The **Procfile** can be created with the following command:
+
+- `web: gunicorn app_name.wsgi > Procfile`
+- _replace **app_name** with the name of your primary Django app name; the folder where settings.py is located_. In this case, that is `stackportfolio`.
+
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
+
+Either:
+
+- Select **Automatic Deployment** from the Heroku app.
+
+Or:
+
+- In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
+- Set the remote for Heroku: `heroku git:remote -a app_name` (replace _app_name_ with your app name)
+- After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
+  - `git push heroku main`
+
+The project should now be connected and deployed to Heroku!
+
+### Local Deployment
+
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the _requirements.txt_ file.
+
+- `pip3 install -r requirements.txt`.
+
+You will need to create a new file called `env.py` at the root-level,
+and include the same environment variables listed above from the Heroku deployment steps.
+
+Sample `env.py` file:
+
+```python
+import os
+
+os.environ.setdefault("CLOUDINARY_URL", "insert your own Cloudinary API key here")
+os.environ.setdefault("DATABASE_URL", "insert your own ElephantSQL database URL here")
+os.environ.setdefault("SECRET_KEY", "this can be any random secret key")
+
+# local environment only (do not include these in production/deployment!)
+os.environ.setdefault("DEBUG", "True")
+```
+
+Once the project is cloned or forked, in order to run it locally, you'll need to follow these steps:
+
+- Start the Django app: `python3 manage.py runserver`
+- Stop the app once it's loaded: `CTRL+C` or `⌘+C` (Mac)
+- Make any necessary migrations: `python3 manage.py makemigrations`
+- Migrate the data to the database: `python3 manage.py migrate`
+- Create a superuser: `python3 manage.py createsuperuser`
+- Load fixtures (if applicable): `python3 manage.py loaddata file-name.json` (repeat for each file)
+- Everything should be ready now, so run the Django app again: `python3 manage.py runserver`
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/stephendawsondev/stackportfolio)
+2. Locate the Code button above the list of files and click it
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+
+- `git clone https://github.com/stephendawsondev/stackportfolio.git`
+
+7. Press Enter to create your local clone.
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/stephendawsondev/stackportfolio)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+## Future Features
+
+Any User stories that I was not able to fit into the scope of this project was added as a future feature. Since these features are dynamic (can either be added in the meantime or more can be added), you can [click here to go to the project board and see them in the Future Features column](https://github.com/users/stephendawsondev/projects/5/views/1?filterQuery=label%3A%22user+story%22). Broadly, I aim to first add features to attract Tech Users, then later to attract Recruiter Users.
+
+## Testing and Agile notes
+
+### Testing documentation
+
+I documented all automated and manual tests in the [TESTING.md](./TESTING.md) file.
+
+### Agile notes
+
+I documented each Sprint and the notes on Agile in the [AGILE.md](./AGILE.md) file.
+
+## Credits
+
+### Resources Used
+
+#### Project Management and GitHub Resources
 
 - [Creating issue templates on GitHub](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository)
 - [GitHub Docs on issue templates](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
-- [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) - Project planning board to track progress and issues
+- [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
+
+#### Design and Wireframing
+
+- [Balsamiq](https://balsamiq.com/)
+- [Figma for designing the Favicon](https://www.figma.com/)
+- [Draw.io](https://app.diagrams.net/)
 - [ER 4 Inheritance video on Entity Relationship Diagrams](https://www.youtube.com/watch?v=ATgYkVTZBiI)
 - [Database Design playlist by Caleb Curry](https://www.youtube.com/playlist?list=PL_c9BZzLwBRK0Pc28IdvPQizD2mJlgoID)
-- [Draw.io](https://app.diagrams.net/) - Creation of the database Entity Relationship Diagram
-- [MoSCoW method - P3 Mastery](https://www.youtube.com/watch?v=j2Fpx1Yj9EQ)
-- [Gunicorn documentation](https://docs.gunicorn.org/en/stable/) - Used to deploy the application to Heroku
-- [Heroku](https://www.heroku.com/) - Hosting for deployed application
-- [dj_database_url](https://pypi.org/project/dj-database-url/0.4.2/)
-- [Balsamique](https://balsamiq.com/) - Used to create wireframes
-- [Ssali Jonathan playlist on test-driven development with Django](https://www.youtube.com/playlist?list=PLEt8Tae2spYlWWMN5azuYjvoItXDkQ1DQ)
-- [Django documentation](https://docs.djangoproject.com/en/3.2/)
-- [Geeks for Geeks docs for Python testing](https://www.geeksforgeeks.org/python-unittest-assertisnotnone-function/)
-- [Autopep8](https://pypi.org/project/autopep8/) - Used to format Python code
-- [Django Allauth](https://docs.allauth.org/en/latest/) - Used for authentication and additional form templates
-- [Tailwind CSS](https://tailwindcss.com/) - Used for styling
-- [DaisyUI Plugin](https://daisyui.com/) - Used for styling on top of Tailwind
-- [Whitenoise](http://whitenoise.evans.io/en/stable/) - Used to serve static files reliably
-- [Documentation on extending allauth forms](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/)
-- [Slugify Django username](https://www.fullstackpython.com/django-utils-text-slugify-examples.html)
-- [LoginRequiredMixin](https://docs.djangoproject.com/en/4.2/topics/auth/default/) - Ensures that the view is only accessible to logged in users
-- [Django decorators](https://docs.djangoproject.com/en/4.2/topics/http/decorators/) - using decorators such as `@login_required` and `@require_POST`
-- [Issue with Tailwind Styles not applying to form elements on Stackoverflow](https://stackoverflow.com/questions/76729480/django-tailwind-styling-not-applied-to-template-variables-with-widget-attribut)
-- [django-cloundinary-storage for working with Cloudinary](https://pypi.org/project/django-cloudinary-storage/)
-- [Cloudinary](https://cloudinary.com/) - Used to store and transform images
-- [TailwindCSS Form Validation tutorial](https://dev.to/deyemiobaa/adding-custom-validation-to-a-form-with-tailwindcss-1e7d) - Referenced as part of research, but I ended up not using it because of the Pep8 requirements
-- [Jest Documentation](https://jestjs.io/docs/getting-started) - Used for testing JavaScript forms
-- [404 Page template code from HyperUI Components](https://www.hyperui.dev/components/application-ui/error-pages#component-2) - Used for 404 and 500 error pages
-- [Django documentation on custom error pages](https://docs.djangoproject.com/en/3.2/topics/http/views/#customizing-error-views)
-- [Contact form component from Tailwind components](https://tailwindcomponents.com/component/basic-contact-form)
-- [Disabling intermediate logout step in allauth](https://stackoverflow.com/questions/18134807/how-to-disable-intermediate-signout-page-in-django-allauth)
-- [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
-- [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
-- [Django documentation on the testing client](https://docs.djangoproject.com/en/4.2/topics/testing/tools/#the-test-client)
-- [Render - potentially used for hosting](https://render.com)
+- [Graphviz for creating the ERD](https://graphviz.org/)
 - [FontJoy for Font pairings](https://fontjoy.com/)
 - [Cooolors for colour palette](https://coolors.co/)
-- [Tailwind Multiselect component from Tailwind Components](https://tailwindcomponents.com/component/multi-select)
-- [Form Input Validity Docs on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) - Getting a better understanding of form validation and error messages
-- [Stackoverflow post on populating objects in template](https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys)
-- [Adapted carousel from Kindacode](https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/)
-- [Heroicons](https://heroicons.com/) - Used for SVGs
-- [Include tag in Django](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#include)
-- [distinct() for querying approved tech](https://docs.djangoproject.com/en/dev/ref/models/querysets/#distinct)
 - [Canva for creating image placeholders](https://www.canva.com/)
-- [Humanize filter for salary ranges](https://docs.djangoproject.com/en/dev/ref/contrib/humanize/#ref-contrib-humanize)
-- [Stackoverflow post on many to many field checkboxes](https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes)
+- [MoSCoW method - P3 Mastery](https://www.youtube.com/watch?v=j2Fpx1Yj9EQ)
+- [Techsini](https://techsini.com/) for the mockup image used in my readme.
+
+#### Database and ERD Tools
+
+- [Django extensions for generating the ERD](https://django-extensions.readthedocs.io/en/latest/graph_models.html)
+- [Pyparsing for generating the ERD](https://pypi.org/project/pyparsing/)
+
+#### Development Tools, Libraries and Resources
+
+- [Gunicorn documentation](https://docs.gunicorn.org/en/stable/)
+- [dj_database_url](https://pypi.org/project/dj-database-url/0.4.2/)
+- [Autopep8](https://pypi.org/project/autopep8/)
+- [Django Allauth](https://docs.allauth.org/en/latest/)
+- [Whitenoise](http://whitenoise.evans.io/en/stable/)
+- [django-cloudinary-storage](https://pypi.org/project/django-cloudinary-storage/)
+- [Pylint-Django for better linting](https://pypi.org/project/pylint-django/)
+- [Widget Tweaks for styling allauth forms](https://pypi.org/project/django-widget-tweaks/)
+- [Django documentation](https://docs.djangoproject.com/en/3.2/)
+- [Documentation on extending allauth forms](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/)
+- [Slugify Django username](https://www.fullstackpython.com/django-utils-text-slugify-examples.html)
+- [LoginRequiredMixin](https://docs.djangoproject.com/en/4.2/topics/auth/default/)
+- [Django decorators](https://docs.djangoproject.com/en/4.2/topics/http/decorators/)
+- [Django documentation on custom error pages](https://docs.djangoproject.com/en/3.2/topics/http/views/#customizing-error-views)
 - [Django documentation on ManyToManyField](https://docs.djangoproject.com/en/3.2/ref/models/fields/#manytomanyfield)
 - [Django docs on the radio widget](https://docs.djangoproject.com/en/4.2/ref/forms/widgets/#widgets-inheriting-from-the-select-widget)
+- [Django docs on overriding delete for bulk methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-model-methods)
+- [Django documentation on the testing client](https://docs.djangoproject.com/en/4.2/topics/testing/tools/#the-test-client)
+- [Django docs on messages levels for toasts](https://docs.djangoproject.com/en/4.2/ref/contrib/messages/#message-levels)
+- [Disabling intermediate logout step in allauth](https://stackoverflow.com/questions/18134807/how-to-disable-intermediate-signout-page-in-django-allauth)
+- [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
+- [TailwindCSS Form Validation tutorial](https://dev.to/deyemiobaa/adding-custom-validation-to-a-form-with-tailwindcss-1e7d)
+- [Stackoverflow post on populating objects in template](https://stackoverflow.com/questions/32389519/django-get-10-random-instances-from-a-queryset-and-order-them-into-a-new-querys)
+- [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
+- [Reason to not convert my M2M tables to a through table](https://forum.djangoproject.com/t/changing-a-manytomanyfield-to-use-a-through-model/10581)
+- [Stackoverflow post on custom replace filter](https://stackoverflow.com/questions/21483003/replacing-a-character-in-django-template)
+- [Stackoverflow Post for fix on why some js files were not loading](https://stackoverflow.com/questions/64171461/collectstatic-whitenoise-cant-see-my-existing-file-on-deployment-to-heroku/64172052#64172052)
+- [Issue with Tailwind Styles not applying to form elements on Stackoverflow](https://stackoverflow.com/questions/76729480/django-tailwind-styling-not-applied-to-template-variables-with-widget-attribut)
+
+#### Styling and UI Components
+
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI Plugin](https://daisyui.com/)
+- [Contact form component from Tailwind components](https://tailwindcomponents.com/component/basic-contact-form)
+- [Tailwind Multiselect component from Tailwind Components](https://tailwindcomponents.com/component/multi-select)
+- [Adapted carousel from Kindacode](https://www.kindacode.com/article/tailwind-css-create-an-image-carousel-slideshow/)
+- [Heroicons](https://heroicons.com/)
+- [404 Page template code from HyperUI Components](https://www.hyperui.dev/components/application-ui/error-pages#component-2)
+
+#### Social Media and API Integration
+
 - [Allauth docs about LinkedIn](https://docs.allauth.org/en/latest/socialaccount/providers/linkedin.html)
 - [LinkedIn API docs](https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/migration-faq?context=linkedin%2Fconsumer%2Fcontext)
 - [Medium article on adding GitHub for social login using allauth](https://python.plainenglish.io/django-allauth-a-guide-to-enabling-social-logins-with-github-f820239fb73f)
 - [Issue with AllAuth and LinkedIn](https://github.com/pennersr/django-allauth/issues/1641)
-- [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html) - Used to override the default behaviour of AllAuth Social Signup/Signin
-- [LearnDjango tutorial on implementing Search](https://learndjango.com/tutorials/django-search-tutorial)
-- [Figma for designing the Favicon](https://www.figma.com/)
+- [Social Account Adapter Documentation on AllAuth](https://docs.allauth.org/en/latest/socialaccount/configuration.html)
+
+#### Testing resources
+
+- [Jest Documentation](https://jestjs.io/docs/getting-started)
+- [Form Input Validity Docs on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState)
+- [Geeks for Geeks docs for Python testing](https://www.geeksforgeeks.org/python-unittest-assertisnotnone-function/)
 - [TestDriven.io on using the post_delete receiver](https://testdriven.io/tips/59a2752f-cdf3-4ba1-806d-15f29811037a/)
-- [MDN Article on the search element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search)
-- [Reason to not convert my M2M tables to a through table](https://forum.djangoproject.com/t/changing-a-manytomanyfield-to-use-a-through-model/10581)
-- [Django docs on overriding delete for bulk methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-model-methods)
-- [Django docs on messages levels for toasts](https://docs.djangoproject.com/en/4.2/ref/contrib/messages/#message-levels)
-- [Stackoverflow post on custom replace filter](https://stackoverflow.com/questions/21483003/replacing-a-character-in-django-template)
-- [Graphiz for creating the ERD](https://graphviz.org/)
-- [Django extensions for generating the ERD](https://django-extensions.readthedocs.io/en/latest/graph_models.html)
-- [Pyparsing for generating the ERD](https://pypi.org/project/pyparsing/)
-- [Stackoverflow Post for fix on why some js files were not loading](https://stackoverflow.com/questions/64171461/collectstatic-whitenoise-cant-see-my-existing-file-on-deployment-to-heroku/)
+- [Ssali Jonathan playlist on test-driven development with Django](https://www.youtube.com/playlist?list=PLEt8Tae2spYlWWMN5azuYjvoItXDkQ1DQ)
+
+#### Hosting and Deployment
+
+- [Heroku](https://www.heroku.com/)
+- [Render - used for hosting in the end](https://render.com/)
+- [Cloudinary for asset hosting](https://cloudinary.com/)
+
+### Acknowledgements
+
+This was a tough project and there is still so much more I would love to add on in the future. I couldn't have gotten so much done without the feedback and advice from mentors, colleagues and friends. I would like to thank the following people for their help and support:
+
+- My mentor, **[David Bowers](https://github.com/dnlbowers)** for his consistently great feedback. Each session I have had with him have been invaluable and I come away with a fresh perspective and ideas each time.
+- My cohort lead [Alan Bushell](https://github.com/alan-bushell) who has provided some great support through the weekly cohort sessions, where he provided feedback on project ideas, and even thought up the name "Stackportfolio" on the spot when I told him what I was doing.
+- My partner Tae who somehow managed to put up with me talking about this project for the past 2 months, as well as providing feedback on the design and user experience.
+- My colleagues at [The Code Institute](https://codeinstitute.net/) who have provided some great feedback and support.
