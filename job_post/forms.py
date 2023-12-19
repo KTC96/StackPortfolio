@@ -41,6 +41,11 @@ class CustomJobPostForm(forms.ModelForm):
         required=True
     )
 
+    salary_currency = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'e.g. GBP, EUR, USD'}),
+        required=False
+    )
+
     class Meta:
         model = JobPost
         fields = ('name',
