@@ -3995,6 +3995,10 @@ html {
   top: 1.25rem;
 }
 
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
 .z-40 {
   z-index: 40;
 }
@@ -4005,6 +4009,10 @@ html {
 
 .z-\[1\] {
   z-index: 1;
+}
+
+.z-30 {
+  z-index: 30;
 }
 
 .order-1 {
@@ -4169,6 +4177,14 @@ html {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
+.mr-12 {
+  margin-right: 3rem;
 }
 
 .block {
@@ -4814,6 +4830,10 @@ html {
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .shadow {

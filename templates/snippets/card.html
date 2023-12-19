@@ -5,9 +5,14 @@
 {% if post.active or post.user == user %}
 <div
   class="sd-card w-full relative {% if not full %}lg:w-[calc(32%-2px)]{% endif %} shadow-xl transition-transform hover:-translate-y-1">
-  {% if not post.active %}<div class="tooltip absolute top-5 right-5 z-50"
+  {% if not post.active %}<div class="tooltip absolute bottom-5 right-5 z-30"
     data-tip="Inactive {{ type }}s will not show up for other users."><span
-      class="badge badge-error py-3 px-5">Inactive</span> </div>{% endif %}
+      class="badge badge-error text-white py-3 px-5">Inactive</span> </div>{% endif %}
+  {% if type == "job post" %}
+  <div class="badge badge-primary text-white p-3 absolute top-5 right-5 opacity-100 z-30">
+    {{ post.work_location_type.all.first }}
+  </div>
+  {% endif %}
   <a class="{% if not post.active %}opacity-25{% endif %}" href="{{ post.get_absolute_url }}"
     aria-label="Navigates to the {{ post.name }} {{ type }}.">
     {% if post.image.url %}
@@ -28,11 +33,6 @@
         <h2 class="sd-card-title font-bold text-xl"><strong><span
               class="link link-hover">{{ post.name }}</span></strong>
         </h2>
-        {% if type == "job post" %}
-        <div class="badge badge-primary text-white p-3">
-          {{ post.work_location_type.all.first }}
-        </div>
-        {% endif %}
       </div>
       <p class="prose my-3 text-sm lg:text-base break-words">
         {{ post.description|truncatechars:150 }}{% if post.description|length >= 175 %} <span
