@@ -252,6 +252,12 @@ I carried out manual testing according to my user stories. I carried the tests o
 
 ## Automated Testing
 
+While I aim to add more automated tests in the future, I have achieved a coverage of 64% with my current automated tests. Here is a screenshot of the report percentage:
+
+![coverage percentage image](documentation/coverage.png)
+
+Here are the parts of the application that use automated testing:
+
 ### Account
 
 #### Create Account
