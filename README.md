@@ -107,11 +107,11 @@ I have created Epics for each of the core features mentioned in my scope. Here a
 
 - As a **user**, I can **create an account** so that I can **have my preferences saved**.
 - As a **user**, I can **update my personal details** so that I can **ensure my data is accurate and displayed correctly**.
-- As a **user**, I can **delete my account** so that I can **have peace of mind that my data is no longer being retained unncessarily**.
+- As a **user**, I can **delete my account** so that I can **have peace of mind that my data is no longer being retained unnecessarily**.
 - As a **user**, I can **sign up as a tech user or a recruiter** so that I can **use the platform based on my role**.
 - As a **user**, I can **log out of my account** so that I can **feel secure when not using my account**.
 - As a **user**, I can **choose update by account preferences** so that I can **have more control into how my profile is view and what information is shared**.
-- As a **user**, I can **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**.
+- As a **tech user**, I can **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**.
 
 #### User profiles
 
@@ -126,7 +126,6 @@ I have created Epics for each of the core features mentioned in my scope. Here a
 - As a **tech user**, I can **delete a project** so that I can **keep focus on my most relevant projects**.
 - As a **user**, I can **add different technologies to my job posts, projects or profile (tech user)** so that I can **use them for postings or to be associated with those skills**.
 - As a **user**, I can **search for projects** so that I can **find a project relevant to my interest or job post**.
-- As a **user**, I can **search for projects** so that I can **find a project relevant to my interest or job post**.
 
 #### Job post management
 
@@ -140,12 +139,12 @@ I have created Epics for each of the core features mentioned in my scope. Here a
 
 #### Technology management
 
-- As a **user**, I can **search for specific technologies** so that I can **see associated job posts or projects with those technologies**.
-- As a **tech user**, I can **order the tech on my projects** so that I can **give importance to that tech**.
+- As a **user**, I can **search for specific technologies such as a 404 page** so that I can **see associated job posts or projects with those technologies**.
 
 #### Miscellaneous
 
 - As a **user**, I can **see pages that I expect on a website** so that I can **have a familiar user experience**.
+- As an **admin**, I can **have a good user interface and experience, including different filters or functions** so that I can **easily manage different data effectively**.
 
 ###  Wireframes
 
@@ -561,5 +560,7 @@ Known bugs:
 3. Some fields are missing from the signup summary, e.g. the country and the toggle values.
 4. On the search page, unknown tech is not shown in the results, and the tech is removed from the search query. I need to handle unknown tech in the future.
 5. Project detail page and job post page can still be accessed when set to draft.
-6. Project slugs are not updated when the user updates the project title.
+6. Project slugs are not updated when the user updates the project title. This was originally intended behaviour, but I think since I update the user's slug, it also makes sense to update a project slug instead of having the user recreate the project.
 7. Issue in console about the [phasing out of third-party cookies](https://developers.google.com/privacy-sandbox/3pcd#report-issues) - will not address in this project's sprints, but will address later on.
+8. On older versions of Safari (15.3 or earlier), the dialog element does not work, which prevents the delete functionality from working. This is a known issue with Safari and is fixed in Safari 15.4. I will not address this issue in this project's sprints, but will address later on.
+9. When adding a job post, it is currently possible to add a higher minimum salary than max salary. In the future, I will need to add validation to check if one or the other is added, and if it is, then I'll need to ensure that the user cannot add it.
