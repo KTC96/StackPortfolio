@@ -1,13 +1,16 @@
 {% extends "base.html" %} {% block content %}
 {% load widget_tweaks %}
 {% load static %}
+{% comment %} Job post Creation form {% endcomment %}
 <section class="py-12 lg:py-14 container" id="create-job-post">
   <h1 class="text-2xl lg:text-3xl mt-8">Create a job post</h1>
   <div class="form-container py-8">
     <form action="{% url 'job_post:create_job_post' slug=request.user.slug %}" method="post"
       class="flex flex-col w-full create-job-post-form" enctype="multipart/form-data">
       {% csrf_token %}
+      {% comment %} Loop through form fields and output {% endcomment %}
       {% for field in form.visible_fields %}
+      {% comment %} Handle active toggle {% endcomment %}
       {% if field.name == "active" %}
       <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
         <div class="w-50 me-5">
@@ -20,6 +23,7 @@
         <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
         {% endif %}
       </div>
+      {% comment %} Handle image input toggle {% endcomment %}
       {% elif field.field.widget.input_type == "file" %}
       <div class="form-control w-full my-3">
         <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
@@ -31,7 +35,7 @@
         <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
         {% endif %}
       </div>
-      {% comment %} Check if type is textarea {% endcomment %}
+      {% comment %} Handle textarea input {% endcomment %}
       {% elif field.name == "description"%}
       <label for="{{ field.id_for_label }}" class="label pl-0 text-sm">
         {{ field.label }}
@@ -43,6 +47,7 @@
       {% for error in field.errors %}
       <p class="text-red-500 text-sm mt-2">{{ error }}</p>
       {% endfor %}
+      {% comment %} Handle Work Location type radio {% endcomment %}
       {% elif field.name == "work_location_type" %}
       <div class="w-full my-5">
         <div class="w-50 me-5">
@@ -65,6 +70,7 @@
         <span class="error-span block text-error text-sm mt-3">{{ form.work_location_type.errors }}</span>
         {% endif %}
       </div>
+      {% comment %} Handle job post tech input {% endcomment %}
       {% elif field.name == "technologies" %}
 
       <div class="w-full flex flex-col items-center mx-auto my-5">
@@ -123,6 +129,7 @@
       {% endif %}
 
       {% endfor %}
+      {% comment %} Submit Button {% endcomment %}
       <button disabled aria-disabled="true"
         class="primaryAction btn btn-primary text-white block mx-auto lg:mx-0 lg:ml-auto mt-8 cursor-not-allowed opacity-50"
         type="submit">Create

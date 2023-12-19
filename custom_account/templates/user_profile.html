@@ -2,11 +2,13 @@
 {% load cloudinary %}
 {% load helper_tags %}
 
+{% comment %} The user profile section {% endcomment %}
 <section class="py-12 lg:py-14 container" id="user-profile">
   <div class="lg:flex">
     <div class="profile-area lg:w-1/4">
       <div class="w-full mb-5 flex justify-center">
         <div class="relative">
+          {% comment %} Profile image is displayed or user's intiials if no profile image is added {% endcomment %}
           {% if profile.profile_image %}
           <div class="avatar w-64 h-64 mx-auto">
             <img src="{{ profile.profile_image.url | replace:"http|https" }}"
@@ -25,6 +27,7 @@
         </div>
       </div>
 
+      {% comment %} Display edit/delete profile buttons if authenticted and profile owner {% endcomment %}
       {% if profile.is_authenticated and user == profile %}
       <div class="flex flex-row justify-around mb-5">
         <a href="{% url 'custom_account:profile_edit' slug=user.slug %}"
@@ -38,6 +41,7 @@
           </a>
         </form>
       </div>
+      {% comment %} Delete confirmation modal {% endcomment %}
       <dialog id="delete-modal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box p-16">
           <h3 class="font-bold text-lg mb-8">Are you sure you want to delete your profile? This cannot be undone.</h3>
@@ -50,6 +54,7 @@
         </div>
       </dialog>
       {% endif %}
+      {% comment %} Display social links if added {% endcomment %}
       {% if profile.twitter_handle or profile.tech_profile.github_username or profile.linkedin_username %}
       <ul class="social-icons flex justify-center">
         {% if profile.twitter_handle %}
@@ -66,6 +71,7 @@
           </a>
         </li>
         {% endif %}
+        {% comment %} Display Github link is added and a tech profile {% endcomment %}
         {% if profile.tech_profile.github_username %}
         <li class="list-none">
           <a href="https://github.com/{{ profile.tech_profile.github_username }}" target="_blank"
@@ -97,6 +103,7 @@
       </ul>
       {% endif %}
 
+      {% comment %} User details for mobile {% endcomment %}
       <div class="mobile-user-details {% if profile.tech_profile %}lg:hidden{% endif %}">
         <h2 class="user-name text-2xl text-primary font-bold mt-5">{{ profile.get_full_name }}</h2>
         <p class="user-work_title mt-1 block">{{ profile.work_title }}</p>
@@ -176,6 +183,7 @@
 
       {% endif %}
 
+      {% comment %} Display tech user's tech if any {% endcomment %}
       {% if profile.tech_profile.technologies.all %}
       <h3 class="mt-5 text-lg font-bold">Tech I know</h3>
       <div class="user-tech">
@@ -186,8 +194,9 @@
         </ul>
       </div>
       {% endif %}
-
     </div>
+
+    {% comment %} Layout for tech user {% endcomment %}
     {% if profile.tech_profile %}
     <div class="profile__title-and-portfolio lg:w-3/4 lg:ml-8">
       <div class="desktop-user-details hidden lg:flex flex-col justify-center h-64 w-full font-bold">
@@ -199,12 +208,14 @@
       <div id="portfolio" class="mt-10 lg:mt-3">
         <div class="flex justify-between items-start w-full ">
           <h3 class="text-lg font-bold">My portfolio</h3>
+          {% comment %} If tech user, add "add project" button {% endcomment %}
           {% if profile.is_authenticated and profile.tech_profile and user == profile %}
           <a href="{% url 'project:create_project' slug=request.user.slug %}"
             class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add
             project</a>
           {% endif %}
         </div>
+        {% comment %} Display projects if any {% endcomment %}
         {% if user_projects %}
         {% for project in user_projects %}
         <div class="mt-2">
@@ -220,6 +231,7 @@
     <div class="desktop-user-details w-full font-bold mt-8 lg:mt-0 lg:ml-8">
       <div class="flex justify-between items-start w-full">
         <h2 class="text-lg font-bold lg:text-4xl">Open roles</h2>
+        {% comment %} If recruiter, add create job post button {% endcomment %}
         {% if profile.is_authenticated and profile.recruiter_profile and user == profile %}
         <a href="{% url 'job_post:create_job_post' slug=request.user.slug %}"
           class="btn btn-primary text-white btn-xs lg:btn-sm rounded-none">Add

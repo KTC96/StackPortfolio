@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+{% comment %} Section to let the user choose their signup type {% endcomment %}
 <section class="py-12 lg:py-14 container" id="account-type-selector">
   <h1 class="text-3xl account-type">
     Account Type
   </h1>
   <p class="prose my-8">Please select whether you want to sign up as a tech user or a recruiter.</p>
   <div class="flex flex-col w-full lg:flex-row">
+    {% comment %} Tech user signup {% endcomment %}
     <div class="w-full lg:w-1/2">
       <a class="btn btn-primary text-white w-full" href="{% url 'custom_account:tech_user_signup' %}">Sign up as
         a
         Tech user using email</a>
+      {% comment %} Currently only GitHub is availble for social signup {% endcomment %}
       {% if socialaccount_providers %}
       <div class="socialaccount_ballot">
         <ul class="socialaccount_providers">
@@ -20,6 +23,7 @@
     </div>
     <div class="divider lg:divider-horizontal">OR</div>
     <div class="w-full lg:w-1/2 flex items-center">
+      {% comment %} Recruiter user signup {% endcomment %}
       <a href="{% url 'custom_account:recruiter_user_signup' %}" class="btn btn-primary text-white w-full">Sign up
         as a recruiter using email</a>
     </div>

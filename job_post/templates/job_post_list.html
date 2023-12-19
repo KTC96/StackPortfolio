@@ -1,10 +1,13 @@
 {% extends "base.html" %} {% block content %}
 
+{% comment %} Job post list {% endcomment %}
 <section class="py-12 lg:py-14 container" id="job_post-list">
   <h1 class="text-3xl my-8">Job Posts</h1>
+  {% comment %} Check if there are any job posts and loop through if there are {% endcomment %}
   {% if job_posts|length > 0 %}
   <div class="flex flex-wrap w-100 gap-5">
     {% for job_post in job_posts %}
+    {% comment %} Output card snippet and pass variables {% endcomment %}
     {% include 'snippets/card.html' with post=job_post type="job post" full=False show_owner_info=True %}
     {% endfor %}
   </div>

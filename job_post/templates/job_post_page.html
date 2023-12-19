@@ -2,9 +2,11 @@
 {% load cloudinary %}
 {% load humanize %}
 {% load helper_tags %}
+{% comment %} Job post detail page {% endcomment %}
 <section class="py-12 lg:py-14 container" id="job-post">
 
   <div class="flex flex-col lg:flex-row">
+    {% comment %} Add recruiter/poster details sidebar {% endcomment %}
     <div class="profile-area lg:w-1/4 order-2 lg:order-1 mt-8 lg:mt-0">
       <p class="prose mb-3">Posted by:</p>
       <div class="w-full mb-5 flex">
@@ -107,7 +109,9 @@
       </p>
       {% endif %}
     </div>
+    {% comment %} Job post details {% endcomment %}
     <div class="job-post-details lg:w-1/2 lg:ml-8 order-1 lg:order-2">
+      {% comment %} Add edit/delete buttons if authenticated and owner {% endcomment %}
       {% if request.user.is_authenticated and request.user == job_post.user %}
       <div class="flex flex-row justify-end mt-3 text-xs">
         <a href="{% url 'job_post:edit_job_post' slug=request.user.slug id=job_post.id %}"
@@ -134,10 +138,12 @@
       </dialog>
       {% endif %}
       <div class="w-full font-bold">
+        {% comment %} Role name {% endcomment %}
         <h2 class="lg:text-lg">Role:</h2>
         <h1 class="user-name text-2xl lg:text-5xl text-primary">{{ job_post.name }}</h1>
       </div>
       <div class="job-post-body flex flex-col">
+        {% comment %} Description {% endcomment %}
         {% if job_post.description %}
         <div class="my-3 lg:my-8 order-2 lg:order-1">
           <h2 class="font-bold text-lg">Description</h2>
@@ -147,6 +153,7 @@
         </div>
         {% endif %}
 
+        {% comment %} Job post skills {% endcomment %}
         {% if job_post.technologies.all|length > 0 %}
         <div class="order-1 lg:order-2 my-5 lg:mt-0">
           <h2 class="font-bold text-lg">Desirable skills</h2>
@@ -161,17 +168,20 @@
         {% if job_post.company or job_post.location or job_post.salary_from or job_post.salary_to %}
         <div class="flex flex-col lg:flex-row justify-between mt-5 order-3">
           {% if job_post.company %}
+          {% comment %} Company {% endcomment %}
           <div class="lg:mt-0">
             <h2 class="text-lg font-bold">Company</h2>
             <p class="prose">{{ job_post.company }}</p>
           </div>
           {% endif %}
+          {% comment %} Location {% endcomment %}
           {% if job_post.location %}
           <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Location</h2>
             <p class="prose">{{ job_post.location }} ({{ selected_work_location_type | title }})</p>
           </div>
           {% endif %}
+          {% comment %} Salary {% endcomment %}
           {% if job_post.salary_from and job_post.salary_to %}
           <div class="mt-5 lg:mt-0">
             <h2 class="text-lg font-bold">Salary</h2>
@@ -194,6 +204,7 @@
         </div>
         {% endif %}
 
+        {% comment %} Created/updated dates {% endcomment %}
         <div class="mt-10 lg:mt-24 flex flex-col lg:flex-row justify-between order-4">
           <p class="prose text-xs text-grey">Created: {{ job_post.date_created|date:"M d, Y" }}</p>
           <p class="prose text-xs text-grey mt-3 lg:mt-0">Updated: {{ job_post.date_updated|date:"M d, Y" }}</p>

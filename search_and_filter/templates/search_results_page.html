@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
+{% comment %} Search box {% endcomment %}
 <div class="pt-12 lg:pt-14 container">
   <form class="w-full pb-12 lg-pb-14" action="{% url 'search_and_filter:search_results' %}" method="get">
     <div class="join w-full">
@@ -8,6 +9,7 @@
       <button type="submit" class="btn btn-primary text-white join-item">Search</button>
     </div>
 
+    {% comment %} Radios to select users,projects or job posts {% endcomment %}
     <div class="join mt-3 w-full">
       <div>
         <input class="join-item btn checked:after:btn-primary checked:after:text-white grow md:grow-0 btn-sm"
@@ -29,6 +31,7 @@
       </div>
     </div>
     <div class="w-full flex flex-col items-center mx-auto my-5">
+      {% comment %} Filtering by tech {% endcomment %}
       <input type="hidden" name="selectedTechnologies" id="selectedTechnologies">
       <label for="tech_input" class="block w-full text-sm font-medium text-gray-700">
         Filter by Technologies
@@ -79,6 +82,7 @@
         </div>
       </div>
     </div>
+    {% comment %} Mixed or exact tech match {% endcomment %}
     <div class="join">
       <input class="join-item btn checked:after:btn-primary checked:after:text-white btn-sm" type="radio"
         name="tech_match_type" value="any" id="tech_match_any" aria-label="Must include tech"
@@ -92,10 +96,12 @@
     </div>
   </form>
 </div>
+{% comment %} Search results {% endcomment %}
 <section class="container pb-12 lg:pb-14" id="search-results-page">
 
   <h1 class="text-3xl mb-8">Search</h1>
 
+  {% comment %} Output cards for either users, projects or job posts {% endcomment %}
   <div class="flex flex-wrap w-full gap-5">
     {% for item in object_list %}
     {% if search_type == 'projects' %}
@@ -108,5 +114,6 @@
     {% endfor %}
   </div>
 </section>
+{% comment %} Tech selector for search page {% endcomment %}
 <script src="{% static 'js/searchTechSelector.js' %}"></script>
 {% endblock %}

@@ -1,8 +1,10 @@
 {% extends "base.html" %} {% block content %}
 
+{% comment %} Project list {% endcomment %}
 <section class="py-12 lg:py-14 container" id="project-list">
   <h1 class="text-3xl my-8">Projects</h1>
   <div class="flex flex-wrap w-100 gap-5">
+    {% comment %} Loop through projects and output card {% endcomment %}
     {% for project in projects %}
     {% include 'snippets/card.html' with post=project type="project" full=False show_owner_info=False %}
     {% endfor %}

@@ -2,13 +2,16 @@
 {% load widget_tweaks %}
 {% load static %}
 {% load helper_tags %}
+{% comment %} Edit project form {% endcomment %}
 <section class="py-12 lg:py-14 container" id="edit-project">
   <h1 class="text-2xl lg:text-3xl mt-8">Edit {{ project.name }}</h1>
   <div class="form-container py-8">
     <form action="{% url 'project:edit_project' slug=request.user.slug project_slug=project.slug %}" method="post"
       class="flex flex-col w-full edit-project-form" enctype="multipart/form-data">
       {% csrf_token %}
+      {% comment %} Loop through fields and output {% endcomment %}
       {% for field in form.visible_fields %}
+      {% comment %} Handle project active toggle {% endcomment %}
       {% if field.name == "active" %}
       <div class="form-control w-full my-3 flex-row justify-between lg:justify-start">
         <div class="w-50 me-5">
@@ -21,6 +24,7 @@
         <span class="error-span text-error text-sm mt-2">{{ field.errors }}</span>
         {% endif %}
       </div>
+      {% comment %} Handle project image input {% endcomment %}
       {% elif field.field.widget.input_type == "file" %}
       <div class="form-control w-full my-3">
         {% if form.image.value %}
@@ -62,6 +66,7 @@
       {% for error in field.errors %}
       <p class="text-red-500 text-sm mt-2">{{ error }}</p>
       {% endfor %}
+      {% comment %} Handle project tech input {% endcomment %}
       {% elif field.name == "technologies" %}
       <div class="w-full flex flex-col items-center mx-auto my-5">
         <input type="hidden" name="selectedTechnologies" id="selectedTechnologies">
@@ -134,6 +139,7 @@
       {% endif %}
 
       {% endfor %}
+      {% comment %} Edit project submit button {% endcomment %}
       <button disabled aria-disabled="true"
         class="primaryAction btn btn-primary text-white block mx-auto lg:mx-0 lg:ml-auto mt-8 cursor-not-allowed opacity-50 "
         type="submit">Update

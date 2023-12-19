@@ -2,7 +2,9 @@
 {% load static %}
 {% load helper_tags %}
 
+{% comment %} Project detail page {% endcomment %}
 <section class="py-12 lg:py-14 container" id="project-page">
+  {% comment %} Display image if present, else display placeholder {% endcomment %}
   {% if project.image %}
   <img src="{{ project.image.url | replace:"http|https" }}" alt="{{ project.name }}" class="mb-3 max-h-[650px] mx-auto">
   {% else %}
@@ -11,6 +13,7 @@
     <img src="{% static 'images/placeholder-banner.png' %}" alt="project placeholder image">
   </picture>
   {% endif %}
+  {% comment %} Display project edit and delete buttons {% endcomment %}
   {% if request.user.is_authenticated and request.user == project.user %}
   <div class="flex flex-row justify-end mt-3 text-xs">
     <a href="{% url 'project:edit_project' slug=request.user.slug project_slug=project.slug %}"
@@ -38,6 +41,7 @@
   {% endif %}
   <div class="title-container mt-3 mb-2 flex justify-start items-center">
     <h1 class="text-xl lg:text-3xl">{{ project.name }}</h1>
+    {% comment %} Github repo link if any {% endcomment %}
     {% if project.github_repo_url %}
     <a href="{{ project.github_repo_url }}" target="_blank" aria-label="Opens Github repo in new tab" class="ml-3">
       <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-slate-900">
@@ -47,6 +51,7 @@
       </svg>
     </a>
     {% endif %}
+    {% comment %} Deployed link if present {% endcomment %}
     {% if project.deployed_url %}
     <a href="{{ project.deployed_url }}" target="_blank" class="inline" aria-label="Opens deployed project in new tab">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -58,9 +63,11 @@
     {% endif %}
   </div>
 
+  {% comment %} Project owner name and link {% endcomment %}
   <p class="text-sm mb-3">Developed by <a class="text-primary link link-hover"
       href="{% url 'custom_account:user_profile' project.user.slug %}">{{ project.user.get_full_name }}</a></p>
 
+  {% comment %} Tech on project if any {% endcomment %}
   {% if project.technologies.all|length > 0 %}
   <h2 class="text-lg mt-8">Tech used on this project</h2>
   <ul class="flex flex-wrap justify-start">
@@ -70,6 +77,7 @@
   </ul>
   {% endif %}
 
+  {% comment %} Project description {% endcomment %}
   {% if project.description %}
   <h2 class="text-lg mt-8">About this project</h2>
   <p class="prose break-words">

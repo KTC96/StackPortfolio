@@ -7,6 +7,10 @@ from project.models import Project
 @receiver(m2m_changed, sender=Project.technologies.through)
 def update_user_tech_on_project_tech_change(
         sender, instance, action, **kwargs):
+    """
+    When tech on a project is updated, update the user's
+    tech on their profile to reflect the change.
+    """
     if action in ["post_add", "post_remove", "post_clear"]:
         if instance.user.tech_profile:
             instance.user.tech_profile.update_tech_with_approved()
@@ -14,6 +18,11 @@ def update_user_tech_on_project_tech_change(
 
 @receiver(post_delete, sender=Project)
 def update_user_tech_on_project_delete(sender, instance, **kwargs):
+    """
+    When a project is deleted, update the user's tech profile
+    to remove any tech that was only approved because of the
+    project.
+    """
     user = instance.user
     if hasattr(user, 'tech_profile') and user.tech_profile:
         user.tech_profile.update_tech_with_approved()
