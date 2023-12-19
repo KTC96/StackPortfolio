@@ -62,11 +62,11 @@ I utilised some existing labels and created a few labels to help me organise my 
 
 I enabled three of the set workflows on the project (two were already enabled):
 
-- [Automatically add project cards to the backlog column](https://github.com/users/stephendawsondev/projects/5/workflows/13073386)
+- [Automatically add project cards to the backlog column](./documentation/workflows/workflow1.png)
 
-- [Automatically move project cards to the done column when issues are closed](https://github.com/users/stephendawsondev/projects/5/workflows/13068501)
+- [Automatically move project cards to the done column when issues are closed](./documentation/workflows/workflow2.png)
 
-- [Automatically add any reopened issues to the Todo column](https://github.com/users/stephendawsondev/projects/5/workflows/13073840)
+- [Automatically add any reopened issues to the Todo column](./documentation/workflows/workflow3.png)
 
 ## Sprints - Notes and learnings
 
@@ -126,3 +126,16 @@ I enabled three of the set workflows on the project (two were already enabled):
 - I finished the sprint today (Thursday 30th Nov, 2023). For the testing and documentation phase, I will no longer be working on features. I will instead be focusing on manual testing and finishing up the documentation.
 
 ![Screenshot of Sprint 4 closed issues](./documentation/sprints/sprint4.png)
+
+### Testing and Documentation phase notes
+
+> While testing and documenting should be done throughout the project, this phase focuses on carrying out final manual tests and fixing up the documentation.
+
+- I started this phase the day after I finished the fourth sprint, on Friday 1st Dec, 2023.
+- I had holidays planned that fell during the project submission, so the testing and documentation was done over some weeks.
+- Most of the automated testing had been done before this phase, so I focused on manual testing. I would like to add more automated tests in the future, but I was able to do a lot of manual testing, which compensated for it somewhat.
+- I came across some bugs and UX improvements during this phase. I only came across one bug that was severe enough to require me to go out of my way to fix it, which can be seen in the below screenshot.
+- I also added some more documentation, particularly to the main README.md and TESTING.md files.
+- I finished the phase today (Tuesday 19th Dec, 2023) and I will be submitting the project today or tomorrow.
+
+![Screenshot of Testing and Documentation phase closed issue](./documentation/sprints/testing-phase.png)
