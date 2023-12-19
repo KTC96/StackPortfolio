@@ -2,6 +2,23 @@
 
 [Click here to go back to the README.md file](README.md)
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Validation](#validation)
+  - [HTML](#html)
+  - [CSS](#css)
+  - [JavaScript](#javascript)
+  - [Python and Django (Pep 8)](#python-and-django-pep-8)
+- [Performance](#performance)
+  - [Mobile performance](#mobile-performance)
+  - [Desktop performance](#desktop-performance)
+- [Manual Testing](#manual-testing)
+- [Automated Testing](#automated-testing)
+  - [Account](#account)
+  - [Project](#project)
+  - [Job Post](#job-post)
+
 ## Overview
 
 I am using a combination of automated and manual testing in my project. I also use different tools for validating the HTML, CSS, JavaScript and Python code. In this testing file, I have also included the performance checks from Google Lighthouse.
@@ -195,15 +212,42 @@ Here are the results:
 
 I carried out manual testing according to my user stories. I carried the tests out on Google Chrome, Mozilla Firefox and Safari on Macbook.
 
-| User story - As a user, I can...                                                                                                         | Notes                                    | Chrome | Firefox | Safari |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------ | ------- | ------ |
-| **create an account** so that I can **have my preferences saved**.                                                                       | Creates a recruiter or tech user profile | Pass   | Pass    | Pass   |
-| **update my personal details** so that I can **ensure my data is accurate and displayed correctly**.                                     |
-| **delete my account** so that I can **have peace of mind that my data is no longer being retained unncessarily**.                        |
-| **sign up as a tech user or a recruiter** so that I can **use the platform based on my role**.                                           |
-| **log out of my account** so that I can **feel secure when not using my account**.                                                       |
-| **choose update by account preferences** so that I can **have more control into how my profile is view and what information is shared**. |
-| **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**.                        |
+| User story - As a user, I can...                                                                                                                               | Notes                                                            | Chrome | Firefox | Safari |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------ | ------- | ------ |
+| **create an account** so that I can **have my preferences saved**.                                                                                             | Sign up and start using the platform                             | Pass   | Pass    | Pass   |
+| **update my personal details** so that I can **ensure my data is accurate and displayed correctly**.                                                           | Profile details updated as expected, toast message displayed     | Pass   |         | Pass   |
+| **delete my account** so that I can **have peace of mind that my data is no longer being retained unnecessarily**.                                             | Successfully deletes on modern browsers (Safari 15.3 has issue)  | Pass   | Pass    | Pass   |
+| **sign up as a tech user or a recruiter** so that I can **use the platform based on my role**.                                                                 | Signs up as a tech user and can only create projects as expected | Pass   |         | Pass   |
+| **log out of my account** so that I can **feel secure when not using my account**.                                                                             | Logs out and displays toast message as expected                  | Pass   |         | Pass   |
+| **choose update by account preferences** so that I can **have more control into how my profile is view and what information is shared**.                       | Account details update as expected, toast message displayed      | Pass   |         | Pass   |
+| **have a profile page** so that I can **display my details and projects/jobs**.                                                                                | Profile page displays as expected                                | Pass   |         | Pass   |
+| **create a unique profile URL** so that I can **easily share my profile with others**.                                                                         | Unique URL is created from username - usernames must be unique   | Pass   |         | Pass   |
+| **search user profiles** so that I can **find friends, colleagues or potential candidates to connect with**.                                                   | Can search user by name, username or email                       | Pass   |         | Pass   |
+| **add different technologies to my job posts, projects or profile (tech user)** so that I can **use them for postings or to be associated with those skills**. | Can be added to projects and job posts                           | Pass   |         | Pass   |
+| **search for projects** so that I can **find a project relevant to my interest or job post**.                                                                  | Can search a project title or description and filter by tech     | Pass   |         | Pass   |
+| **see a job position's salary range** so that I can **decide whether to apply or not**.                                                                        | If provided, job post salary is displayed                        | Pass   |         | Pass   |
+| **view a list of created job posts** so that I can **view open positions**.                                                                                    | Job posts are displayed as expected                              | Pass   |         | Pass   |
+| **search jobs** so that I can **find the most relevant job to me**.                                                                                            | Can search a job title or description and filter by tech         | Pass   |         | Pass   |
+| **search for specific technologies** so that I can **see associated job posts or projects with those technologies**.                                           | Can filter by tech for projects, users and job posts             | Pass   |         | Pass   |
+| **see pages that I expect on a website such as a 404 page** so that I can **have a familiar user experience**.                                                 | Displays 404 page as expected                                    | Pass   | Pass    | Pass   |
+
+| User story - As a tech user, I can...                                                                             | Notes                                                     | Chrome | Firefox | Safari |
+| ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------ | ------- | ------ |
+| **create a project** so that I can **display it in my portfolio**.                                                | Project is successfully created and displayed as expected | Pass   |         | Pass   |
+| **update my project details** so that I can **keep my project relevant to views**.                                | Project us updated successfully and changes reflected     | Pass   |         | Pass   |
+| **delete a project** so that I can **keep focus on my most relevant projects**.                                   | Project deleted and toast displayed                       | Pass   |         | Pass   |
+| **do sign up or log in using a social account** so that I can **easily signup and have my details prepopulated**. | Signed up with Github Account as expected                 | Pass   |         | Pass   |
+
+| User story - As a recruiter user, I can...                                                                                                                    | Notes                                                                                         | Chrome | Firefox | Safari |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------ | ------- | ------ |
+| **create a job post** so that I can **to attract the attention of potential applicants**.                                                                     | Job post created as expected                                                                  | Pass   |         | Pass   |
+| **update the details of my job post** so that I can **ensure the most up-to-date information about the post is provided**.                                    | Job post updated as expected - I found fields that will need more validation in the future    | Pass   |         | Pass   |
+| **delete a job post** so that I can **remove out-of-date posts**.                                                                                             | Job post deleted as expected                                                                  | Pass   |         | Pass   |
+| **specify the job location type** so that I can **ensure only those who match the job location, such as on-site, hybrid or remote show interest in the job**. | Job location added as expected via radio button choice - field error if missing and submitted | Pass   |         | Pass   |
+
+| User story - As an admin, I can...                                                                                                                 | Notes                                                              | Chrome | Firefox | Safari |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------ | ------- | ------ |
+| **have a good user interface and experience, including different filters or functions** so that I can **easily manage different data effectively** | The admin can be access from all browsers and displays as expected | Pass   | Pass    | Pass   |
 
 ## Automated Testing
 
