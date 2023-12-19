@@ -47,7 +47,7 @@ Stackportfol.io is a platform that allows Developers to add showcase their proje
 
 ###  Site objective
 
-While Developers can use a site such as LinkedIn to add projects, the architecture is set to to serve the needs of a number of different job functions. Due to the fact that the site us not focused on Developers, the project showcase lacks many features that Developers need. Recruiters who are searching for Developers for role lack the evidence that a Developer has the skills for which they are searching. In many cases, a skill might be added to a professional profile just because someone has heard or watched a video about it.
+While Developers can use a site such as LinkedIn to add projects, the architecture is set to serve the needs of a number of different job functions. Due to the fact that the site us not focused on Developers, the project showcase lacks many features that Developers need. Recruiters who are searching for Developers for role lack the evidence that a Developer has the skills for which they are searching. In many cases, a skill might be added to a professional profile just because someone has heard or watched a video about it.
 
 Stackportfol.io allows Developers to showcase their projects, which then allows Recruiters to find Developers who have proven skills for their job postings. It's a win-win for both parties.
 
@@ -381,7 +381,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Homepage featured projects slider](./documentation/features/featured-projects-slider.png)
 
 - **Footer**
-  - The final footer is much more minimalistic than my original wireframe. I decided to not add anything that would distract from the primary purpose of the site. I only have one column of links, which lead to the **About** and **Careers** pages. The **Careers** page is a placeholder for now, but I plan to add a page that lists the current job openings at Stackportfol.io. It currerently still allows for the user to email `contact@stackportfol.io` so that expression of interest can be received. In future, I plan to add more items to the footer.
+  - The final footer is much more minimalistic than my original wireframe. I decided to not add anything that would distract from the primary purpose of the site. I only have one column of links, which lead to the **About** and **Careers** pages. The **Careers** page is a placeholder for now, but I plan to add a page that lists the current job openings at Stackportfol.io. It currently still allows for the user to email `contact@stackportfol.io` so that expression of interest can be received. In future, I plan to add more items to the footer.
 
 ![Footer](./documentation/features/footer.png)
 
@@ -391,7 +391,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Signup type](./documentation/features/signup-type.png)
 
 - **Tech signup - Details**
-  - The tech signup form is for tech users (developer, testers, etc.) to sign up. The details page collects the user's first name, last name, username, email and password. The username and email must be unique - I validate this serverside, so it doesn't do any async call to check if the user already exists, but I hope to add that in the future. This page asks for the same details on the recruiter signup form.
+  - The tech signup form is for tech users (developer, testers, etc.) to sign up. The details page collects the user's first name, last name, username, email and password. The username and email must be unique - I validate this server side, so it doesn't do any async call to check if the user already exists, but I hope to add that in the future. This page asks for the same details on the recruiter signup form.
 
 ![Tech signup - Details](./documentation/features/tech-user-signup-details.png)
 
@@ -411,7 +411,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Recruiter signup](./documentation/features/recruiter-signup.png)
 
 - **Form validation**
-  - There is frontend validation on forms that require it. In this example, I am using the signup form, but other forms on the site also have validation. The validation is also done serverside, so that if the user bypasses the frontend validation, the form will still be validated.
+  - There is frontend validation on forms that require it. In this example, I am using the signup form, but other forms on the site also have validation. The validation is also done server side, so that if the user bypasses the frontend validation, the form will still be validated.
 
 ![Form validation](./documentation/features/form-validation.png)
 
@@ -486,7 +486,7 @@ The site has a number of standard features, plus some which are specific feature
 ![Edit account settings](./documentation/features/account-settings-edit.png)
 
 - **Confirmation modal**
-  - When a user opts to delete their profile, project or job post, there is a modal popup to confirm that they want to delete the item. This is to prevent accidental deletion. Since this also causes a casade deletion of projects or job posts, I would also like to include more information on the reprecussions in the future.
+  - When a user opts to delete their profile, project or job post, there is a modal popup to confirm that they want to delete the item. This is to prevent accidental deletion. Since this also causes a cascade deletion of projects or job posts, I would also like to include more information on the repercussions in the future.
 
 ![Confirmation modal](./documentation/features/confirmation-modal.png)
 

@@ -81,7 +81,7 @@ I enabled three of the set workflows on the project (two were already enabled):
 - My first sprint was actually 9 days long. I had done my project planning and initial deployment beforehand so that I could start development with the first sprint.
 - The first sprint was a success in the sense that I was able to complete the issues that I had planned to complete for the MVP (minimum viable product).
 - I overestimated the time it would take to complete the combination of issues. I wanted the sprint to finish on the day I set, so I added some more issues to the sprint and worked on them.
-- I underestimated how difficult it would be to create custom accounts, so that took more time than I anticipated. I also encounted some bugs for which I created new issues. However, I had created issues for a profile page, which I found was so tightly linked to the account issue that most of the work was already done.
+- I underestimated how difficult it would be to create custom accounts, so that took more time than I anticipated. I also encountered some bugs for which I created new issues. However, I had created issues for a profile page, which I found was so tightly linked to the account issue that most of the work was already done.
 - During the sprint, I also had an issue getting Tailwind CSS and DaisyUI to work with my project. In hindsight, I wish I had spent more time researching the setup of those frameworks. I ended up figuring most issues out, but I also had to create a couple of bug issues for them.
 - I finished the sprint today (Sunday 12th Nov, 2023) and will be using today to plan the next sprint, and potentially get started.
 
