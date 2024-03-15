@@ -12,3 +12,4 @@ erd.dot
 htmlcov/
 *.pyc
 .coverage
+.venv/
