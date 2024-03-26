@@ -1,8 +1,8 @@
 name: User story issue template
 description: The standard user story issue template for the project
-title: "User story - <Brief description of story>"
+title: "📖 USER STORY: <Brief description of story>"
 labels: ["user story"]
-projects: ["stephendawsondev/5"]
+projects: ["stephendawsondev/7"]
 assignees:
   - stephendawsondev
 body:
@@ -38,11 +38,7 @@ body:
       value: |
         - [ ] Reviewed the user story for clarity and completeness.
         - [ ] Identified and linked related issues or epics.
-        - [ ] Created or updated the necessary documentation.
-        - [ ] Written unit and/or integration tests for functionality.
-        - [ ] All code changes have been manually tested to ensure they meet the acceptance criteria.
         - [ ] Updated the issue with any relevant notes or feedback (to date).
-        - [ ] Merged into the main branch and deployed to production (if applicable).
   - type: markdown
     attributes:
       value: |

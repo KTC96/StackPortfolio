@@ -9,4 +9,8 @@ cloudinary_python.txt
 db.sqlite3
 staticfiles/admin
 erd.dot
-.venv
+htmlcov/
+*.pyc
+.coverage
+.venv/
+
