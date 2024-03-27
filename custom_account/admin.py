@@ -39,6 +39,9 @@ class CustomUserAdmin(admin.ModelAdmin):
     ordering = ('email', 'first_name', 'last_name')
     actions = ['toggle_active_users', 'toggle_staff_users']
 
+    @admin.display(
+        description='Profile Type'
+    )
     def user_profile_type(self, obj):
         if hasattr(obj, 'tech_profile') and hasattr(obj, 'recruiter_profile'):
             return "Tech and Recruiter User"
@@ -48,8 +51,10 @@ class CustomUserAdmin(admin.ModelAdmin):
             return "Recruiter User"
         return "None"
 
-    user_profile_type.short_description = 'Profile Type'
 
+    @admin.action(
+        description='Toggle Active Status'
+    )
     def toggle_active_users(self, request, queryset):
         """
         Toggle the active status of users.
@@ -58,8 +63,10 @@ class CustomUserAdmin(admin.ModelAdmin):
             user.is_active = not user.is_active
             user.save()
 
-    toggle_active_users.short_description = 'Toggle Active Status'
 
+    @admin.action(
+        description='Toggle Staff Status'
+    )
     def toggle_staff_users(self, request, queryset):
         """
         Toggle the staff status of users.
@@ -68,7 +75,6 @@ class CustomUserAdmin(admin.ModelAdmin):
             user.is_staff = not user.is_staff
             user.save()
 
-    toggle_staff_users.short_description = 'Toggle Staff Status'
 
 
 @admin.register(TechUserProfile)
@@ -79,22 +85,30 @@ class TechUserProfileAdmin(admin.ModelAdmin):
                      'user__last_name', 'github_username')
     list_filter = ('seeking_employment',)
 
+    @admin.display(
+        description='Email'
+    )
     def user_email(self, obj):
         return obj.user.email
 
+    @admin.display(
+        description='First Name'
+    )
     def user_first_name(self, obj):
         return obj.user.first_name
 
+    @admin.display(
+        description='Last Name'
+    )
     def user_last_name(self, obj):
         return obj.user.last_name
 
+    @admin.display(
+        description='Number of Projects'
+    )
     def num_projects(self, obj):
         return obj.user.projects.count()
 
-    user_email.short_description = 'Email'
-    user_first_name.short_description = 'First Name'
-    user_last_name.short_description = 'Last Name'
-    num_projects.short_description = 'Number of Projects'
 
 
 @admin.register(RecruiterUserProfile)
@@ -103,19 +117,27 @@ class RecruiterUserProfileAdmin(admin.ModelAdmin):
                     'user_last_name', 'num_job_posts')
     search_fields = ('user__email', 'user__first_name', 'user__last_name')
 
+    @admin.display(
+        description='Email'
+    )
     def user_email(self, obj):
         return obj.user.email
 
+    @admin.display(
+        description='First Name'
+    )
     def user_first_name(self, obj):
         return obj.user.first_name
 
+    @admin.display(
+        description='Last Name'
+    )
     def user_last_name(self, obj):
         return obj.user.last_name
 
+    @admin.display(
+        description='Number of Job Posts'
+    )
     def num_job_posts(self, obj):
         return obj.user.job_posts.count()
 
-    user_email.short_description = 'Email'
-    user_first_name.short_description = 'First Name'
-    user_last_name.short_description = 'Last Name'
-    num_job_posts.short_description = 'Number of Job Posts'

@@ -13,14 +13,18 @@ class ProjectAdmin(admin.ModelAdmin):
     ordering = ('-date_created', 'name')
     actions = ['toggle_active']
 
+    @admin.display(
+        description='User Email'
+    )
     def user_email(self, obj):
         return obj.user.email
 
+    @admin.display(
+        description='View Count'
+    )
     def view_count(self, obj):
         return obj.num_view_count()
 
-    user_email.short_description = 'User Email'
-    view_count.short_description = 'View Count'
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
@@ -32,7 +36,9 @@ class ProjectAdmin(admin.ModelAdmin):
             kwargs["queryset"] = Tech.objects.filter(is_approved=True)
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
+    @admin.action(
+        description='Toggle Active'
+    )
     def toggle_active(self, request, queryset):
         queryset.update(active=not queryset.first().active)
 
-    toggle_active.short_description = 'Toggle Active'
