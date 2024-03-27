@@ -638,6 +638,7 @@ You can install this project's **requirements** (where applicable) using:
 If you have your own packages that have been installed, then the requirements file needs updated using:
 
 - `pip3 freeze --local > requirements.txt`
+- `npm install` (for Node packages)
 
 The **Procfile** can be created with the following command:
 

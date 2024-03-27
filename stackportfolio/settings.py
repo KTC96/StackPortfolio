@@ -30,10 +30,12 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DEBUG = os.environ.get('DEBUG_MODE')
 
 ALLOWED_HOSTS = [
     'stackportfolio-1340b88e89e7.herokuapp.com',
+    'stackportfolio-staging-0c320e35b19f.herokuapp.com',
     'stackportfolio.onrender.com',
     'localhost',
     '127.0.0.1',
@@ -58,7 +60,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
-    'django_extensions',
     'widget_tweaks',
     'custom_account',
     'project',
