@@ -100,6 +100,13 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
         project.save()
 
+        # Clear existing contributors
+        project.contributors.clear()
+
+        # Add new contributors
+        contributors = form.cleaned_data.get('contributors', [])
+        project.contributors.add(*contributors)
+
         # Add existing technologies
         existing_tech_ids = form.cleaned_data.get('technologies')
         for tech_id in existing_tech_ids:
@@ -211,6 +218,13 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
         project = form.save(commit=False)
         project.user = self.request.user
         project.save()
+
+        # Clear existing contributors
+        project.contributors.clear()
+
+        # Add new contributors
+        contributors = form.cleaned_data.get('contributors', [])
+        project.contributors.add(*contributors)
 
         project.technologies.clear()
         existing_tech_ids = form.cleaned_data.get('technologies', [])

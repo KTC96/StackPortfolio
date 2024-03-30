@@ -19,6 +19,7 @@ class Project(models.Model):
         "custom_account.CustomUser",
         on_delete=models.CASCADE,
         related_name="projects")
+    contributors = models.ManyToManyField("custom_account.CustomUser")
     technologies = models.ManyToManyField(
         Tech, blank=True, related_name="projects")
     name = models.CharField(max_length=100, blank=False, null=False)
